@@ -32,7 +32,7 @@ always_ff @(posedge clk)
         case(ResultSrc)
             1'b01 : Result <= RD;
             1'b00 : Result <= A;
-            0'b10 : Result <= 
+            1'b10 : Result <= A + 4
     end 
 
 
