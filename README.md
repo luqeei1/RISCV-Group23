@@ -2,8 +2,10 @@
 
 | Task       | Akarsh | Sid | Theo | Lucas |
 |------------|--------|-----|------|-------|
-| Task 1     |        |     |      |       |
-| Task 2     |        |     |      |       |
-| Task 3     |        |     |      |       |
-| Task 4     |        |     |      |       |
-| Task 5     |        |     |      |       |
+| alu.sv     |        |  X   |      |       |
+| DataPath.sv     |        |     |      |       |
+| program_counter.sv   |        |     |      |       |
+| regfile.sv     |        |     |      |       |
+| ALUDecoder.sv     |        |     |      |       |
+| controlUnit.sv     |        |     |      |       |
+| signExtend.sv     |        |     |      |       |
