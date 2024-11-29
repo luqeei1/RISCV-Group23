@@ -1,5 +1,7 @@
 # RISCV-Group23
 
+[See the single-cycle processor here](./rtl_single_cycle)
+
 | Task       | Akarsh | Sid | Theo | Lucas |
 |------------|--------|-----|------|-------|
 | alu.sv     |        |  x   |      |       |
@@ -9,3 +11,4 @@
 | ALUDecoder.sv     |        |     |      |       |
 | controlUnit.sv     |        |     |      |       |
 | signExtend.sv     |        |     |      |       |
+
