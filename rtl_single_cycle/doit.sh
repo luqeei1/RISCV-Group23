@@ -2,8 +2,8 @@
 
 # Translate Verilog -> C++ including testbench
 verilator   -Wall --trace \
-            -cc DataPath.sv \
-            --exe DataPathTest.cpp \
+            -cc alu.sv \
+            --exe alu_tb.cpp \
             --prefix "Valu" \
             -o Valu \
             -LDFLAGS "-lgtest -lgtest_main -lpthread"
@@ -12,4 +12,4 @@ verilator   -Wall --trace \
 make -j -C obj_dir/ -f Valu.mk
 
 # Run executable simulation file
-./obj_dir/VDataPath
+./obj_dir/Valu

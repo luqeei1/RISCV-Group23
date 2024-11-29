@@ -1,28 +1,18 @@
 #include "gtest/gtest.h"
 #include "Valu.h"
 #include "verilated.h"
-#include "verilated_vcd_c.h"
 #include <iostream>
 #include <memory>
 
 class AluTest : public ::testing::Test {
 protected:
     Valu* dut;
-    VerilatedVcdC* tfp;
 
     virtual void SetUp() override {
         dut = new Valu;
-        
-        // Optional: Trace generation
-        Verilated::traceEverOn(true);
-        tfp = new VerilatedVcdC;
-        dut->trace(tfp, 99);
-        tfp->open("alu.vcd");
     }
 
     virtual void TearDown() override {
-        tfp->close();
-        delete tfp;
         delete dut;
     }
 
