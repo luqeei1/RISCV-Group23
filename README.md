@@ -2,8 +2,8 @@
 
 | Task       | Akarsh | Sid | Theo | Lucas |
 |------------|--------|-----|------|-------|
-| alu.sv     |        |  X   |      |       |
-| DataPath.sv     |        |     |      |       |
+| alu.sv     |        |  x   |      |       |
+| DataPath.sv     |   x       |     |      |       |
 | program_counter.sv   |        |     |      |       |
 | regfile.sv     |        |     |      |       |
 | ALUDecoder.sv     |        |     |      |       |
