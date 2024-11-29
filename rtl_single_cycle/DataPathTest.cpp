@@ -5,7 +5,7 @@
 #include <iostream>
 #include <memory>
 
-class DataMemWriteTest : public ::testing::Test
+class DataPathTest : public ::testing::Test
 {
 public:
 
