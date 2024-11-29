@@ -25,12 +25,13 @@ protected:
     }
 };
 
-TEST_F(DataMemWriteTest, WriteEnableIsZeroAndResultSrcIsZero) {
+TEST_F(DataPathTest, WriteEnableIsZeroAndResultSrcIsZero) {
     dut->ResultSrc = 0b0;   
     dut->A = 0x00000020;
     dut->WE = 0b0;
     evaluate();
-    EXPECT_EQ(dut->Result, 0x0000000A); 
+    EXPECT_EQ(dut->Result, 0x000000020); 
+}
 
 int main(int argc, char **argv)
 {
