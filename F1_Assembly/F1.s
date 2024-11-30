@@ -1,23 +1,25 @@
-# calculates the sum of all numbers from 0 to 255
+.text
+.globl main
+
+main:
+    JAL ra, init            # jump to init and save return address in ra
+    j   main                # unconditional jump back to main
 
 init:
-    addi t0, x0, 0
-    addi a0, x0, 0xFF
-    addi t3, x3, 0
-    
-main:
-    beq t0, a0, end
-    addi t0, t0, 1
-    add t3, t3, t0
-    
-    # Vbuddy output
-    addi a0, t0, 0      # Copy counter to a0
-    li a7, 0x07         # Vbuddy function code for plotting
-    ecall               # Call Vbuddy to display/plot value
-    
-    j main
+    li s0, 0x0        # s0 holds the current state
+    li s1, 0xff       # s1 holds the target value
+    li s2, 0x0       # s2 outputs the current state
+    li s3, 0x4       # s3 controls the delay counter
 
-end:
-    add a0, t3, x0
+loopi:
+    slli s0, s0, 1
+    addi s0, s0, 1
+    and  s2, s1, s0 
+
+wait:
+    addi s3, s3, -1
+    bne s3, zero, wait
+    addi s3, zero, 0x4
+    bne s1, s0, loopi       # if s1 != s0, jump to loopi and keep turning lights on
+    addi s2, zero, 0        # if s1 == s0, turn off all lights
     ret
-    
