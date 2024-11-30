@@ -28,7 +28,7 @@ VL_INLINE_OPT void VDataPath___024root___sequent__TOP__0(VDataPath___024root* vl
         __Vdlyvset__DataMemory__DOT__ram_array__v0 = 1U;
         __Vdlyvdim0__DataMemory__DOT__ram_array__v0 
             = (0x1ffffU & vlSelf->A);
-    } else if ((1U & (~ (IData)(vlSelf->WE)))) {
+    } else if (vlSelf->WE) {
         __Vdlyvval__DataMemory__DOT__ram_array__v1 
             = vlSelf->DataMemory__DOT__ram_array[(0x1ffffU 
                                                   & vlSelf->A)];
