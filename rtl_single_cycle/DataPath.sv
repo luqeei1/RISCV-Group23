@@ -33,6 +33,7 @@ always_ff @(posedge clk)
             1'b01 : Result <= RD;
             1'b00 : Result <= A;
             1'b10 : Result <= A + 4
+        endcase
     end 
 
 

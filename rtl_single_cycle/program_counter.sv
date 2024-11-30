@@ -32,7 +32,7 @@ always_comb begin
             else
                 out = PCTarget;
         end
-        3'b010: begin   // JALR
+        3'b010:  // JALR
             out = ALUResult;
     endcase
 end     
