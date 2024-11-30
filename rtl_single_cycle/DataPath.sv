@@ -39,7 +39,7 @@ always_ff @(posedge clk)
                 ram_array[A] <= WD;    // CHANGE TO single byte addressing
                 RD = ram_array[A];
                 end
-            0'b1:
+            0'b0:
             begin
             ram_array[A] <= ram_array[A];
             RD = ram_array[A];
