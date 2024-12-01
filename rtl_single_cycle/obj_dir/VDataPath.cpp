@@ -12,8 +12,8 @@ VDataPath::VDataPath(VerilatedContext* _vcontextp__, const char* _vcname__)
     : VerilatedModel{*_vcontextp__}
     , vlSymsp{new VDataPath__Syms(contextp(), _vcname__, this)}
     , clk{vlSymsp->TOP.clk}
-    , address_mode{vlSymsp->TOP.address_mode}
     , ResultSrc{vlSymsp->TOP.ResultSrc}
+    , modeBU{vlSymsp->TOP.modeBU}
     , WE{vlSymsp->TOP.WE}
     , A{vlSymsp->TOP.A}
     , WD{vlSymsp->TOP.WD}

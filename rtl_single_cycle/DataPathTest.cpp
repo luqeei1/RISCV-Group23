@@ -19,6 +19,13 @@ protected:
     virtual void TearDown() override {
         delete dut;
     }
+    
+    void clockTick() {
+        dut->clk = 1;
+        evaluate();
+        dut->clk = 0;
+        evaluate();
+    }
 
     void evaluate() {
         dut->eval(); 
@@ -28,17 +35,24 @@ protected:
 TEST_F(DataPathTest, WriteEnableIsZeroAndResultSrcIsZero) {
     dut->ResultSrc = 0;   
     dut->A = 0x00000020;
-    dut->WE = 0b0;
+    dut->WE = 0;
+    dut->modeBU = 1;
+    evaluate();
+    clockTick();
     evaluate();
     EXPECT_EQ(dut->Result, 0x000000020); 
 }
 
-TEST_F(DataPathTest, WriteEnableIsZeroAndResultSrcIsOne) {
+TEST_F(DataPathTest, WriteEnableIsOneAndResultSrcIsOne) {
     dut->ResultSrc = 1;   
-    dut->A = 0x00000020;
-    dut->WE = 0b0;
+    dut->A = 0x000000;
+    dut->WE = 1;
+    dut->WD = 0x0002;
+    dut->modeBU = 1;
     evaluate();
-    EXPECT_EQ(dut->Result, 0x000000003); 
+    clockTick();
+    evaluate();
+    EXPECT_EQ(dut->Result, 0x0002); 
 }
 
 int main(int argc, char **argv)

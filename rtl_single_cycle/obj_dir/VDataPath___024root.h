@@ -14,15 +14,15 @@ class VDataPath___024root final : public VerilatedModule {
 
     // DESIGN SPECIFIC STATE
     VL_IN8(clk,0,0);
-    VL_IN8(address_mode,1,0);
     VL_IN8(ResultSrc,1,0);
+    VL_IN8(modeBU,1,0);
     VL_IN8(WE,0,0);
     CData/*0:0*/ __Vclklast__TOP__clk;
     VL_IN(A,31,0);
     VL_IN(WD,31,0);
     VL_OUT(Result,31,0);
-    IData/*31:0*/ DataMemory__DOT__RD;
-    VlUnpacked<CData/*7:0*/, 131072> DataMemory__DOT__ram_array;
+    IData/*31:0*/ DataPath__DOT__RD;
+    VlUnpacked<CData/*7:0*/, 131072> DataPath__DOT__ram_array;
 
     // INTERNAL VARIABLES
     VDataPath__Syms* const vlSymsp;

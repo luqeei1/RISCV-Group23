@@ -26,8 +26,8 @@ class VDataPath VL_NOT_FINAL : public VerilatedModel {
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
     VL_IN8(&clk,0,0);
-    VL_IN8(&address_mode,1,0);
     VL_IN8(&ResultSrc,1,0);
+    VL_IN8(&modeBU,1,0);
     VL_IN8(&WE,0,0);
     VL_IN(&A,31,0);
     VL_IN(&WD,31,0);

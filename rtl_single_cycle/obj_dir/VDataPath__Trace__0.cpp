@@ -23,14 +23,14 @@ void VDataPath___024root__trace_chg_sub_0(VDataPath___024root* vlSelf, Verilated
     // Init
     uint32_t* const oldp VL_ATTR_UNUSED = bufp->oldp(vlSymsp->__Vm_baseCode + 1);
     // Body
-    bufp->chgCData(oldp+0,(vlSelf->address_mode),2);
-    bufp->chgCData(oldp+1,(vlSelf->ResultSrc),2);
+    bufp->chgCData(oldp+0,(vlSelf->ResultSrc),2);
+    bufp->chgCData(oldp+1,(vlSelf->modeBU),2);
     bufp->chgBit(oldp+2,(vlSelf->clk));
     bufp->chgIData(oldp+3,(vlSelf->A),32);
     bufp->chgIData(oldp+4,(vlSelf->WD),32);
     bufp->chgBit(oldp+5,(vlSelf->WE));
     bufp->chgIData(oldp+6,(vlSelf->Result),32);
-    bufp->chgIData(oldp+7,(vlSelf->DataMemory__DOT__RD),32);
+    bufp->chgIData(oldp+7,(vlSelf->DataPath__DOT__RD),32);
 }
 
 void VDataPath___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {
