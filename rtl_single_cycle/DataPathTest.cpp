@@ -55,12 +55,12 @@ TEST_F(DataPathTest, WriteEnableIsOneAndResultSrcIsOne) {
     EXPECT_EQ(dut->Result, 0x0002); 
 }
 
-TEST_F(DataPathTest, WriteEnableIsOneAndResultSrcIsOneAndModeBUIsTwo) {
+TEST_F(DataPathTest, WriteEnableIsOneAndResultSrcIsOneAndModeBUIsFour) {
     dut->ResultSrc = 1;   
     dut->A = 0x000040;
     dut->WE = 1;
     dut->WD = 0x0004;
-    dut->modeBU = 2;
+    dut->modeBU = 4;
     evaluate();
     clockTick();
     evaluate();
@@ -71,12 +71,24 @@ TEST_F(DataPathTest, WriteEnableIsOneAndResultSrcIsOneAndModeBUIsThree) {
     dut->ResultSrc = 1;   
     dut->A = 0x000050;
     dut->WE = 1;
-    dut->WD = 0x0005;
+    dut->WD = 0x00FF;
     dut->modeBU = 3;
     evaluate();
     clockTick();
     evaluate();
-    EXPECT_EQ(dut->Result, 0x0005); 
+    EXPECT_EQ(dut->Result, 0xFFFFFFFF); 
+}
+
+TEST_F(DataPathTest, WriteEnableIsOneAndResultSrcIsOneAndModeBUIsFive) {
+    dut->ResultSrc = 1;   
+    dut->A = 0x000000;
+    dut->WE = 1;
+    dut->WD = 0x0004;
+    dut->modeBU = 5;
+    evaluate();
+    clockTick();
+    evaluate();
+    EXPECT_EQ(dut->Result, 0x0004); 
 }
 
 

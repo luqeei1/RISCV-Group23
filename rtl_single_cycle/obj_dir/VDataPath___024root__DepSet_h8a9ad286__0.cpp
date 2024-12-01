@@ -128,19 +128,37 @@ VL_INLINE_OPT void VDataPath___024root___combo__TOP__0(VDataPath___024root* vlSe
                                                      & vlSelf->A)))])));
             vlSelf->Result = vlSelf->DataPath__DOT__RD;
         } else if ((2U == (IData)(vlSelf->modeBU))) {
-            vlSelf->DataPath__DOT__RD = ((vlSelf->DataPath__DOT__ram_array
-                                          [(0x1fffcU 
-                                            & vlSelf->A)] 
-                                          << 8U) | 
-                                         vlSelf->DataPath__DOT__ram_array
-                                         [(0x1ffffU 
-                                           & ((IData)(1U) 
-                                              + (0x1fffcU 
-                                                 & vlSelf->A)))]);
+            vlSelf->DataPath__DOT__RD = (((- (IData)(
+                                                     (1U 
+                                                      & (vlSelf->DataPath__DOT__ram_array
+                                                         [
+                                                         (0x1fffcU 
+                                                          & vlSelf->A)] 
+                                                         >> 7U)))) 
+                                          << 0x10U) 
+                                         | ((vlSelf->DataPath__DOT__ram_array
+                                             [(0x1fffcU 
+                                               & vlSelf->A)] 
+                                             << 8U) 
+                                            | vlSelf->DataPath__DOT__ram_array
+                                            [(0x1ffffU 
+                                              & ((IData)(1U) 
+                                                 + 
+                                                 (0x1fffcU 
+                                                  & vlSelf->A)))]));
             vlSelf->Result = vlSelf->DataPath__DOT__RD;
         } else if ((3U == (IData)(vlSelf->modeBU))) {
-            vlSelf->DataPath__DOT__RD = vlSelf->DataPath__DOT__ram_array
-                [(0x1fffcU & vlSelf->A)];
+            vlSelf->DataPath__DOT__RD = (((- (IData)(
+                                                     (1U 
+                                                      & (vlSelf->DataPath__DOT__ram_array
+                                                         [
+                                                         (0x1fffcU 
+                                                          & vlSelf->A)] 
+                                                         >> 7U)))) 
+                                          << 8U) | 
+                                         vlSelf->DataPath__DOT__ram_array
+                                         [(0x1fffcU 
+                                           & vlSelf->A)]);
             vlSelf->Result = vlSelf->DataPath__DOT__RD;
         }
     } else if ((0U == (IData)(vlSelf->ResultSrc))) {
