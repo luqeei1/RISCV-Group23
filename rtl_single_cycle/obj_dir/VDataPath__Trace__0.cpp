@@ -23,7 +23,7 @@ void VDataPath___024root__trace_chg_sub_0(VDataPath___024root* vlSelf, Verilated
     // Init
     uint32_t* const oldp VL_ATTR_UNUSED = bufp->oldp(vlSymsp->__Vm_baseCode + 1);
     // Body
-    bufp->chgCData(oldp+0,(vlSelf->ResultSrc),2);
+    bufp->chgCData(oldp+0,(vlSelf->ResultSrc),3);
     bufp->chgCData(oldp+1,(vlSelf->modeBU),2);
     bufp->chgBit(oldp+2,(vlSelf->clk));
     bufp->chgIData(oldp+3,(vlSelf->A),32);

@@ -11,7 +11,7 @@ VL_ATTR_COLD void VDataPath___024root__trace_init_sub__TOP__0(VDataPath___024roo
     // Init
     const int c = vlSymsp->__Vm_baseCode;
     // Body
-    tracep->declBus(c+1,"ResultSrc", false,-1, 1,0);
+    tracep->declBus(c+1,"ResultSrc", false,-1, 2,0);
     tracep->declBus(c+2,"modeBU", false,-1, 1,0);
     tracep->declBit(c+3,"clk", false,-1);
     tracep->declBus(c+4,"A", false,-1, 31,0);
@@ -20,7 +20,7 @@ VL_ATTR_COLD void VDataPath___024root__trace_init_sub__TOP__0(VDataPath___024roo
     tracep->declBus(c+7,"Result", false,-1, 31,0);
     tracep->pushNamePrefix("DataPath ");
     tracep->declBus(c+9,"WIDTH", false,-1, 31,0);
-    tracep->declBus(c+1,"ResultSrc", false,-1, 1,0);
+    tracep->declBus(c+1,"ResultSrc", false,-1, 2,0);
     tracep->declBus(c+2,"modeBU", false,-1, 1,0);
     tracep->declBit(c+3,"clk", false,-1);
     tracep->declBus(c+4,"A", false,-1, 31,0);
@@ -71,7 +71,7 @@ VL_ATTR_COLD void VDataPath___024root__trace_full_sub_0(VDataPath___024root* vlS
     // Init
     uint32_t* const oldp VL_ATTR_UNUSED = bufp->oldp(vlSymsp->__Vm_baseCode);
     // Body
-    bufp->fullCData(oldp+1,(vlSelf->ResultSrc),2);
+    bufp->fullCData(oldp+1,(vlSelf->ResultSrc),3);
     bufp->fullCData(oldp+2,(vlSelf->modeBU),2);
     bufp->fullBit(oldp+3,(vlSelf->clk));
     bufp->fullIData(oldp+4,(vlSelf->A),32);

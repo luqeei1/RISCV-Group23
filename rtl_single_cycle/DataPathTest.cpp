@@ -32,7 +32,7 @@ protected:
     }
 };
 
-TEST_F(DataPathTest, WriteEnableIsZeroAndResultSrcIsZero) {
+ TEST_F(DataPathTest, WriteEnableIsZeroAndResultSrcIsZero) {
     dut->ResultSrc = 0;   
     dut->A = 0x00000020;
     dut->WE = 0;
@@ -41,7 +41,7 @@ TEST_F(DataPathTest, WriteEnableIsZeroAndResultSrcIsZero) {
     clockTick();
     evaluate();
     EXPECT_EQ(dut->Result, 0x000000020); 
-}
+} 
 
 TEST_F(DataPathTest, WriteEnableIsOneAndResultSrcIsOne) {
     dut->ResultSrc = 1;   
@@ -54,6 +54,33 @@ TEST_F(DataPathTest, WriteEnableIsOneAndResultSrcIsOne) {
     evaluate();
     EXPECT_EQ(dut->Result, 0x0002); 
 }
+
+TEST_F(DataPathTest, WriteEnableIsOneAndResultSrcIsOneAndModeBUIsTwo) {
+    dut->ResultSrc = 1;   
+    dut->A = 0x000040;
+    dut->WE = 1;
+    dut->WD = 0x0004;
+    dut->modeBU = 2;
+    evaluate();
+    clockTick();
+    evaluate();
+    EXPECT_EQ(dut->Result, 0x0004); 
+}
+
+TEST_F(DataPathTest, WriteEnableIsOneAndResultSrcIsOneAndModeBUIsThree) {
+    dut->ResultSrc = 1;   
+    dut->A = 0x000050;
+    dut->WE = 1;
+    dut->WD = 0x0005;
+    dut->modeBU = 3;
+    evaluate();
+    clockTick();
+    evaluate();
+    EXPECT_EQ(dut->Result, 0x0005); 
+}
+
+
+
 
 int main(int argc, char **argv)
 {
