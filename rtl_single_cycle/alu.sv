@@ -33,7 +33,7 @@ module alu #(
     always_comb begin
         case (ALUctrl)
         4'b1010:    Zero = (SrcA == SrcB);                         //BEQ
-        4'b1011:    Zero = (SrcA == SrcB);                         //BNE
+        4'b1011:    Zero = (SrcA != SrcB);                         //BNE
         4'b1100:    Zero = ($signed(SrcA) < $signed(SrcB));        //BLT
         4'b1101:    Zero = ($signed(SrcA) >= $signed(SrcB));       //BGE
         4'b1110:    Zero = (SrcA < SrcB);                          //BLTU

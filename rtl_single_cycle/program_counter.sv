@@ -3,7 +3,7 @@ module program_counter #(
 )(
     input logic clk,
     input logic rst,
-    input logic PCSrc,
+    input logic [1:0] PCSrc,
     input logic ZeroE,
     input logic jump,
     input logic PCPlus4F,   // input as [PCF + 4]
@@ -16,23 +16,17 @@ logic [WIDTH-1:0] out;
 
 always_comb begin
     case (PCSrc)
-        3'b000: // PCNEXT
+        2'b00: // PCNEXT
             out = PCPlus4F;
-        3'b001: //ALWAYS JUMP
+        2'b01: //ALWAYS JUMP
             out = PCTarget;
-        3'b101: begin //COND JUMP
+        2'b10: begin //COND JUMP
             if(ZeroE)
                 out = PCTarget;
             else
                 out = PCPlus4F;
         end
-        3'b100: begin //INV COND JUMP
-            if(ZeroE)
-                out = PCPlus4F;
-            else
-                out = PCTarget;
-        end
-        3'b010:  // JALR
+        2'b11:  // JALR
             out = ALUResult;
     endcase
 end     
