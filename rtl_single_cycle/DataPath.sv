@@ -18,6 +18,10 @@ module DataPath #(
 
     logic [7:0] ram_array [2**17 -1:0];
 
+    initial begin
+        $readmeh("datamem.hex", ram_array);
+    end;
+
     
 
     logic [WIDTH-1:0] RD;
@@ -51,7 +55,7 @@ always_ff @(posedge clk)
                             ram_array[{A[31:2], 2'b0}] <= WD[15:8];
                             ram_array[{A[31:2], 2'b0} + 1] <= WD[7:0];
                         end
-                    3'b101:
+                    3'b101: 
                         begin
                             ram_array[{A[31:2], 2'b0}] <= WD[7:0];
                         end
