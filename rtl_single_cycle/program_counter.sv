@@ -1,13 +1,13 @@
 module program_counter #(
-    parameter WIDTH = 32;
+    parameter WIDTH = 32
 )(
     input logic clk,
     input logic rst,
     input logic [1:0] PCSrc,
     input logic ZeroE,
     input logic jump,
-    input logic PCPlus4F,   // input as [PCF + 4]
-    input logic ALUResult, //for JALR instruction
+    input logic [WIDTH-1:0] PCPlus4F,   // input as [PCF + 4]
+    input logic [WIDTH-1:0] ALUResult, //for JALR instruction
     input logic [WIDTH-1:0] PCTarget, // input in top module as [PCE + ImmOp]
     output logic [WIDTH-1:0] PCF
 );
