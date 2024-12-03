@@ -28,13 +28,16 @@ always_comb begin
         end
         2'b11:  // JALR
             out = ALUResult;
+        default:
+            out = PCPlus4F;
     endcase
 end     
 
 always_ff @(posedge clk) begin
-    if(!stall) begin
-        PCF <= rst ? 32'b0 : out;
-    end
+    if(rst)
+        PCF <= 32'b0;              // On reset, this goes to zero
+    else
+        PCF <= out;                // If not reset, this updates the PC with the next value
 end
 
 endmodule
