@@ -1,4 +1,4 @@
-module DataPath #(
+module data_memory #(
     parameter WIDTH = 32
                 
 
@@ -10,7 +10,7 @@ module DataPath #(
     input logic [WIDTH-1:0]      A,
     input logic [WIDTH-1:0]      WD,
     input logic                  WE,
-    output logic [WIDTH-1:0]     Result
+    output logic [WIDTH-1:0]     RD
     
 
 

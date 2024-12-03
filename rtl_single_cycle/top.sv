@@ -8,40 +8,44 @@ module top#(
     output logic [WIDTH-1:0] a7
 );
 
-    // PC
-    logic [1:0] PCsrc
+    // PC signals
+    logic [1:0] PCSrc;
     logic [WIDTH-1:0] ExtImm;
     logic [WIDTH-1:0] PC;
     logic [WIDTH-1:0] PCnext;
-    logic ZeroE;
 
-    // instruction memory
+    // instruction memory signals
     logic [WIDTH-1:0] addr;
     logic [WIDTH-1:0] instr;
 
-    // sign extend
+    // sign extend signal
     logic [2:0] ImmSrc;
 
-    // Register File
+    // Register File signals
     logic [4:0] A1;
     logic [4:0] A2;
     logic [4:0] A3;
-    logic WE3;
+    logic RegWrite;
     logic [WIDTH-1:0] RD1;
     logic [WIDTH-1:0] RD2;
 
 
     // Control Unit
-    logic  PCSrc;
     logic  [3:0] ALUctrl;
     logic  ALUSrc;
-    logic  RegWrite;
+    logic  [1:0] ResultSrc;
+    logic  MemWrite;
+    logic  [2:0] modeBU;
 
     // ALU
     logic  [WIDTH-1:0] ALUResult;
     logic  Zero;
     logic  [WIDTH-1:0] SrcA;
     logic  [WIDTH-1:0] SrcB;
+
+    // Data Memory
+    logic [WIDTH-1:0] ReadData;
+    logic [WIDTH-1:0] Result;
 
     //Memory Initialisation
     initial begin
@@ -56,24 +60,36 @@ module top#(
     assign SrcA = RD1;
     assign SrcB = (ALUSrc) ? ExtImm : RD2;
 
+    // Result multiplexer for RegFile write data
+    always_comb begin
+        case(ResultSrc)
+            2'b00: Result = ALUResult;
+            2'b01: Result = ReadData;
+            2'b10: Result = PC + 4;
+            default: Result = ALUResult;
+        endcase
+    end
 
-    pc program_counter (
+    // Program Counter
+    program_counter pc (
         .clk(clk),
         .rst(rst),
         .PCPlus4F(PC + 4),
         .PCTarget(PC + ExtImm),
         .PCSrc(PCSrc),
-        .ZeroE(ZeroE),
+        .ZeroE(Zero),
+        .ALUResult(ALUResult),
         .PCF(PCnext)
     );
 
-    RegisterFile regfile (
+    //Register File
+    RegFile regfile (
         .clk(clk),
         .AD1(A1),
         .AD2(A2),
         .AD3(A3),
         .WE3(RegWrite),
-        .WD3(ALUResult),
+        .WD3(Result),
         .RD1(RD1),
         .RD2(RD2),
         .a0(a0),
@@ -81,41 +97,55 @@ module top#(
         .a7(a7)
     );
 
+    // Instruction Memory
     instructionMemory instruction_memory (
         .addr(addr),
         .instr(instr)
     );
 
+    // Control Unit
     controlUnit control_unit (
-        .op(instr[6:0]),
-        .funct3(instr[14:12]),
-        .funct7(instr[31:25]),
+        .InstrD(instr),
         .PCSrc(PCSrc),
+        .ResultSrc(ResultSrc),
+        .MemWrite(MemWrite),
         .ALUControl(ALUctrl),
-        .IMMSrc(ImmSrc),
-        .RegWrite(RegWrite),
         .ALUSrc(ALUSrc),
-        .zero(Zero)
+        .ImmSrc(ImmSrc),
+        .RegWrite(RegWrite),
+        .modeBU(modeBU)
     );
 
+    // Sign Extend
     signExtend sign_extend (
         .IMMSrc(ImmSrc),
         .ImmExt(ExtImm),
         .ImmInput(instr)
     );
 
-    ALU ALU (
-        .EQ(Zero),
-        .ALUout(ALUResult),
-        .ALUop1(SrcA),
-        .ALUop2(SrcB),
-        .ALUControl(ALUctrl)
+    // ALU
+    alu alu (
+        .Zero(Zero),
+        .ALUResult(ALUResult),
+        .SrcA(SrcA),
+        .SrcB(SrcB),
+        .ALUctrl(ALUctrl)
+    );
+
+    // Data Memory
+    data_memory data_memory (
+        .clk(clk),
+        .WE(MemWrite),
+        .modeBU(modeBU),
+        .A(ALUResult),
+        .WD(RD2),
+        .RD(ReadData)
     );
 
     // Update PC
     always_ff @(posedge clk) begin
-        if (rst)
-            PC <= 32'h0;
+        if(rst)
+            PC <= 32'b0;
         else
             PC <= PCnext;
     end
