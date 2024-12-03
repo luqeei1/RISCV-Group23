@@ -35,8 +35,8 @@ VL_ATTR_COLD void VDataPath___024root___ctor_var_reset(VDataPath___024root* vlSe
     VDataPath__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    VDataPath___024root___ctor_var_reset\n"); );
     // Body
-    vlSelf->ResultSrc = VL_RAND_RESET_I(3);
-    vlSelf->modeBU = VL_RAND_RESET_I(2);
+    vlSelf->ResultSrc = VL_RAND_RESET_I(2);
+    vlSelf->modeBU = VL_RAND_RESET_I(3);
     vlSelf->clk = VL_RAND_RESET_I(1);
     vlSelf->A = VL_RAND_RESET_I(32);
     vlSelf->WD = VL_RAND_RESET_I(32);

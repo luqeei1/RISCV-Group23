@@ -4,8 +4,8 @@ module DataPath #(
 
 
 )(
-    input logic [2:0]           ResultSrc,
-    input logic [1:0]           modeBU,
+    input logic [1:0]           ResultSrc,
+    input logic [2:0]           modeBU,
     input logic                 clk,
     input logic [WIDTH-1:0]      A,
     input logic [WIDTH-1:0]      WD,
@@ -69,7 +69,7 @@ always_comb begin
                         RD = {ram_array[{A[31:2], 2'b0}],ram_array[{A[31:2], 2'b0} + 1],ram_array[{A[31:2], 2'b0} + 2],ram_array[{A[31:2], 2'b0} + 3]}; 
                         Result = RD;
                     end                 
-                2'b010: //load half word
+                3'b010: //load half word
                     begin
                         RD = {{16{ram_array[{A[31:2], 2'b0}][7]}},ram_array[{A[31:2], 2'b0}],ram_array[{A[31:2], 2'b0} + 1]};
                         Result = RD;

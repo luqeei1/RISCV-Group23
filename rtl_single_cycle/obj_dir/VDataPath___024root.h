@@ -14,8 +14,8 @@ class VDataPath___024root final : public VerilatedModule {
 
     // DESIGN SPECIFIC STATE
     VL_IN8(clk,0,0);
-    VL_IN8(ResultSrc,2,0);
-    VL_IN8(modeBU,1,0);
+    VL_IN8(ResultSrc,1,0);
+    VL_IN8(modeBU,2,0);
     VL_IN8(WE,0,0);
     CData/*0:0*/ __Vclklast__TOP__clk;
     VL_IN(A,31,0);

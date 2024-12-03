@@ -28,10 +28,20 @@ VL_INLINE_OPT void VDataPath___024root___sequent__TOP__0(VDataPath___024root* vl
     IData/*16:0*/ __Vdlyvdim0__DataPath__DOT__ram_array__v6;
     CData/*7:0*/ __Vdlyvval__DataPath__DOT__ram_array__v6;
     CData/*0:0*/ __Vdlyvset__DataPath__DOT__ram_array__v6;
+    IData/*16:0*/ __Vdlyvdim0__DataPath__DOT__ram_array__v7;
+    CData/*7:0*/ __Vdlyvval__DataPath__DOT__ram_array__v7;
+    CData/*0:0*/ __Vdlyvset__DataPath__DOT__ram_array__v7;
+    IData/*16:0*/ __Vdlyvdim0__DataPath__DOT__ram_array__v8;
+    CData/*7:0*/ __Vdlyvval__DataPath__DOT__ram_array__v8;
+    IData/*16:0*/ __Vdlyvdim0__DataPath__DOT__ram_array__v9;
+    CData/*7:0*/ __Vdlyvval__DataPath__DOT__ram_array__v9;
+    CData/*0:0*/ __Vdlyvset__DataPath__DOT__ram_array__v9;
     // Body
     __Vdlyvset__DataPath__DOT__ram_array__v0 = 0U;
     __Vdlyvset__DataPath__DOT__ram_array__v4 = 0U;
     __Vdlyvset__DataPath__DOT__ram_array__v6 = 0U;
+    __Vdlyvset__DataPath__DOT__ram_array__v7 = 0U;
+    __Vdlyvset__DataPath__DOT__ram_array__v9 = 0U;
     if (vlSelf->WE) {
         if ((1U == (IData)(vlSelf->modeBU))) {
             __Vdlyvval__DataPath__DOT__ram_array__v0 
@@ -71,6 +81,23 @@ VL_INLINE_OPT void VDataPath___024root___sequent__TOP__0(VDataPath___024root* vl
             __Vdlyvset__DataPath__DOT__ram_array__v6 = 1U;
             __Vdlyvdim0__DataPath__DOT__ram_array__v6 
                 = (0x1fffcU & vlSelf->A);
+        } else if ((4U == (IData)(vlSelf->modeBU))) {
+            __Vdlyvval__DataPath__DOT__ram_array__v7 
+                = (0xffU & (vlSelf->WD >> 8U));
+            __Vdlyvset__DataPath__DOT__ram_array__v7 = 1U;
+            __Vdlyvdim0__DataPath__DOT__ram_array__v7 
+                = (0x1fffcU & vlSelf->A);
+            __Vdlyvval__DataPath__DOT__ram_array__v8 
+                = (0xffU & vlSelf->WD);
+            __Vdlyvdim0__DataPath__DOT__ram_array__v8 
+                = (0x1ffffU & ((IData)(1U) + (0x1fffcU 
+                                              & vlSelf->A)));
+        } else if ((5U == (IData)(vlSelf->modeBU))) {
+            __Vdlyvval__DataPath__DOT__ram_array__v9 
+                = (0xffU & vlSelf->WD);
+            __Vdlyvset__DataPath__DOT__ram_array__v9 = 1U;
+            __Vdlyvdim0__DataPath__DOT__ram_array__v9 
+                = (0x1fffcU & vlSelf->A);
         }
     }
     if (__Vdlyvset__DataPath__DOT__ram_array__v0) {
@@ -92,6 +119,16 @@ VL_INLINE_OPT void VDataPath___024root___sequent__TOP__0(VDataPath___024root* vl
     if (__Vdlyvset__DataPath__DOT__ram_array__v6) {
         vlSelf->DataPath__DOT__ram_array[__Vdlyvdim0__DataPath__DOT__ram_array__v6] 
             = __Vdlyvval__DataPath__DOT__ram_array__v6;
+    }
+    if (__Vdlyvset__DataPath__DOT__ram_array__v7) {
+        vlSelf->DataPath__DOT__ram_array[__Vdlyvdim0__DataPath__DOT__ram_array__v7] 
+            = __Vdlyvval__DataPath__DOT__ram_array__v7;
+        vlSelf->DataPath__DOT__ram_array[__Vdlyvdim0__DataPath__DOT__ram_array__v8] 
+            = __Vdlyvval__DataPath__DOT__ram_array__v8;
+    }
+    if (__Vdlyvset__DataPath__DOT__ram_array__v9) {
+        vlSelf->DataPath__DOT__ram_array[__Vdlyvdim0__DataPath__DOT__ram_array__v9] 
+            = __Vdlyvval__DataPath__DOT__ram_array__v9;
     }
 }
 
@@ -160,6 +197,21 @@ VL_INLINE_OPT void VDataPath___024root___combo__TOP__0(VDataPath___024root* vlSe
                                          [(0x1fffcU 
                                            & vlSelf->A)]);
             vlSelf->Result = vlSelf->DataPath__DOT__RD;
+        } else if ((4U == (IData)(vlSelf->modeBU))) {
+            vlSelf->DataPath__DOT__RD = ((vlSelf->DataPath__DOT__ram_array
+                                          [(0x1fffcU 
+                                            & vlSelf->A)] 
+                                          << 8U) | 
+                                         vlSelf->DataPath__DOT__ram_array
+                                         [(0x1ffffU 
+                                           & ((IData)(1U) 
+                                              + (0x1fffcU 
+                                                 & vlSelf->A)))]);
+            vlSelf->Result = vlSelf->DataPath__DOT__RD;
+        } else if ((5U == (IData)(vlSelf->modeBU))) {
+            vlSelf->DataPath__DOT__RD = vlSelf->DataPath__DOT__ram_array
+                [(0x1fffcU & vlSelf->A)];
+            vlSelf->Result = vlSelf->DataPath__DOT__RD;
         }
     } else if ((0U == (IData)(vlSelf->ResultSrc))) {
         vlSelf->Result = vlSelf->A;
@@ -187,9 +239,9 @@ void VDataPath___024root___eval_debug_assertions(VDataPath___024root* vlSelf) {
     VDataPath__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    VDataPath___024root___eval_debug_assertions\n"); );
     // Body
-    if (VL_UNLIKELY((vlSelf->ResultSrc & 0xf8U))) {
+    if (VL_UNLIKELY((vlSelf->ResultSrc & 0xfcU))) {
         Verilated::overWidthError("ResultSrc");}
-    if (VL_UNLIKELY((vlSelf->modeBU & 0xfcU))) {
+    if (VL_UNLIKELY((vlSelf->modeBU & 0xf8U))) {
         Verilated::overWidthError("modeBU");}
     if (VL_UNLIKELY((vlSelf->clk & 0xfeU))) {
         Verilated::overWidthError("clk");}
