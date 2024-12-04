@@ -4,13 +4,15 @@ module data_memory #(
 
 
 )(
-    input logic [1:0]           ResultSrc,
     input logic [2:0]           modeBU,
+    input  logic [1:0]          ResultSrc,
     input logic                 clk,
     input logic [WIDTH-1:0]      A,
     input logic [WIDTH-1:0]      WD,
     input logic                  WE,
-    output logic [WIDTH-1:0]     RD
+    output logic [WIDTH-1:0]     RD,
+    output logic [WIDTH-1:0]     Result
+    
     
 
 
@@ -19,12 +21,9 @@ module data_memory #(
     logic [7:0] ram_array [2**17 -1:0];
 
     initial begin
-        $readmeh("datamem.hex", ram_array);
-    end;
-
-    
-
-    logic [WIDTH-1:0] RD;
+        $readmemh("datamem.hex", ram_array);
+    end
+   
 
 
 

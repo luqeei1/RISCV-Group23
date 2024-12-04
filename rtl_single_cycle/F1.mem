@@ -1,0 +1,21 @@
+00000ef3    // jal ra, init
+ff5ff06f    // j main
+00000413    // li s0, 0
+0ff00493    // li s1, 0xff
+00000913    // li s2, 0
+00400993    // li s3, 4
+00141413    // slli s0, s0, 1
+00140413    // addi s0, s0, 1
+00847933    // and s2, s0, s1
+00090593    // mv a1, s2
+03100893    // li a7, 0x31
+00000073    // ecall
+fff98993    // addi s3, s3, -1
+fe099ee3    // bne s3, zero, wait
+00400993    // addi s3, zero, 4
+fe941ee3    // bne s1, s0, loopi
+00090913    // addi s2, zero, 0
+00090593    // mv a1, s2
+03100893    // li a7, 0x31
+00000073    // ecall
+00008067    // ret

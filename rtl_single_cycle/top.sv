@@ -79,7 +79,8 @@ module top#(
         .PCSrc(PCSrc),
         .ZeroE(Zero),
         .ALUResult(ALUResult),
-        .PCF(PCnext)
+        .PCF(PCnext),
+        .jump(1'b0)         // jump port connection
     );
 
     //Register File
@@ -137,9 +138,11 @@ module top#(
         .clk(clk),
         .WE(MemWrite),
         .modeBU(modeBU),
+        .ResultSrc(ResultSrc),
         .A(ALUResult),
         .WD(RD2),
-        .RD(ReadData)
+        .RD(ReadData),
+        .Result(Result)
     );
 
     // Update PC
