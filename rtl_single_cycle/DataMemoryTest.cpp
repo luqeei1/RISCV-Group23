@@ -1,19 +1,19 @@
 #include "gtest/gtest.h"
-#include "VDataPath.h"  // Include the correct Verilated header for the module
+#include "Vdata_memory.h"  // Include the correct Verilated header for the module
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 #include <iostream>
 #include <memory>
 
-class DataPathTest : public ::testing::Test
+class data_memoryTest : public ::testing::Test
 {
 public:
 
 protected:
-    VDataPath* dut; 
+    Vdata_memory* dut; 
 
     virtual void SetUp() override {
-        dut = new VDataPath;
+        dut = new Vdata_memory;
     }
 
     virtual void TearDown() override {
@@ -32,7 +32,7 @@ protected:
     }
 };
 
- TEST_F(DataPathTest, WriteEnableIsZeroAndResultSrcIsZero) {
+ TEST_F(data_memoryTest, WriteEnableIsZeroAndResultSrcIsZero) {
     dut->ResultSrc = 0;   
     dut->A = 0x00000020;
     dut->WE = 0;
@@ -43,7 +43,7 @@ protected:
     EXPECT_EQ(dut->Result, 0x000000020); 
 } 
 
-TEST_F(DataPathTest, WriteEnableIsOneAndResultSrcIsOne) {
+TEST_F(data_memoryTest, WriteEnableIsOneAndResultSrcIsOne) {
     dut->ResultSrc = 1;   
     dut->A = 0x000000;
     dut->WE = 1;
@@ -55,7 +55,7 @@ TEST_F(DataPathTest, WriteEnableIsOneAndResultSrcIsOne) {
     EXPECT_EQ(dut->Result, 0x0002); 
 }
 
-TEST_F(DataPathTest, WriteEnableIsOneAndResultSrcIsOneAndModeBUIsFour) {
+TEST_F(data_memoryTest, WriteEnableIsOneAndResultSrcIsOneAndModeBUIsFour) {
     dut->ResultSrc = 1;   
     dut->A = 0x000040;
     dut->WE = 1;
@@ -67,7 +67,7 @@ TEST_F(DataPathTest, WriteEnableIsOneAndResultSrcIsOneAndModeBUIsFour) {
     EXPECT_EQ(dut->Result, 0x0004); 
 }
 
-TEST_F(DataPathTest, WriteEnableIsOneAndResultSrcIsOneAndModeBUIsThree) {
+TEST_F(data_memoryTest, WriteEnableIsOneAndResultSrcIsOneAndModeBUIsThree) {
     dut->ResultSrc = 1;   
     dut->A = 0x000050;
     dut->WE = 1;
@@ -79,7 +79,7 @@ TEST_F(DataPathTest, WriteEnableIsOneAndResultSrcIsOneAndModeBUIsThree) {
     EXPECT_EQ(dut->Result, 0xFFFFFFFF); 
 }
 
-TEST_F(DataPathTest, WriteEnableIsOneAndResultSrcIsOneAndModeBUIsFive) {
+TEST_F(data_memoryTest, WriteEnableIsOneAndResultSrcIsOneAndModeBUIsFive) {
     dut->ResultSrc = 1;   
     dut->A = 0x000000;
     dut->WE = 1;
