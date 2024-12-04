@@ -17,10 +17,10 @@
 ## 29/11
 - Added logic to the ALUDecoder to support all of the RV32I Branch instructions
 
-# 2/12
+## 2/12
 - Started work on the branch prediction unit
 - Changed the ouput "PCSrc" from the control unit from one bit to two bits, working with Lucas's "program_counter.sv" module to ensure my output signal matched his input signal logic
 
-# 3/12
+## 3/12
 - Added modeBU logic to the control unit so that we can control whether word, half, or byte addressing occurs
 - Adhered to the signals set by Akarsh in his "dataPath.sv" module
