@@ -9,9 +9,12 @@ module hazard_unit #(
     input logic RegWriteM,
     input logic RegWriteW,
     input logic MemReadE,
+    input logic branch,
+    input logic branchResolved,
     output logic [1:0] ForwardAE,
     output logic [1:0] ForwardBE,
-    output logic stall
+    output logic stall,
+    output logic flush
 );
 
     always_comb begin
@@ -24,26 +27,25 @@ module hazard_unit #(
             01: forwarding from resultW (writeback stage)
             10: forwaring from ALUresult (execute stage)  */
 
-        if (RegWriteW && (Rs1E == RdW)) begin
+        //specify RdW or RdM not refer to $zero register
+        if (RegWriteW && (Rs1E == RdW) && (RdW != 0)) begin
             ForwardAE = 2'b01;
-        end else if (RegWriteM && (Rs1E == RdM)) begin
+        end else if (RegWriteM && (Rs1E == RdM) && (RdM != 0)) begin
             ForwardBE = 2'b10;
         end
 
         // ForwardBE - same implementation (for second source register)
 
-        if (RegWriteW && (Rs2E == RdW)) begin
+        if (RegWriteW && (Rs2E == RdW) && (RdW !=0)) begin
             ForwardBE = 2'b01;
-        end else if (RegWriteM && (Rs2E == RdM)) begin
+        end else if (RegWriteM && (Rs2E == RdM) && (RdM != 0)) begin
             ForwardBE = 2'b10;
         end
 
         // stall for lw dependency
+        stall = (MemReadE && ((RdE == Rs1E) || (RdE == Rs2E)));
 
-        if(MemReadE && ((RdE == Rs1E) || (RdE == Rs2E))) begin
-            stall = 1'b1;
-        end
-
-        // flush instruction after lw data hazard?
+        // flush if: (1) stall occurs, (2) branch instruction and prediction is wrong
+        flush = stall || (branch && !branchResolved);
     
     end
