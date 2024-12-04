@@ -16,10 +16,19 @@ loopi:
     addi s0, s0, 1
     and  s2, s1, s0 
 
+    mv a1, s2
+    li a7, 0x31         # Vbuddy ecall mode pre-specified in vbuddy.cpp
+    ecall               # Vbuddy display
+
 wait:
     addi s3, s3, -1
     bne s3, zero, wait
     addi s3, zero, 0x4
     bne s1, s0, loopi       # if s1 != s0, jump to loopi and keep turning lights on
     addi s2, zero, 0        # if s1 == s0, turn off all lights
+
+    mv a1, s2
+    li a7, 0x31
+    ecall 
+
     ret
