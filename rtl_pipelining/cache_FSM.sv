@@ -1,6 +1,7 @@
 `include "cache_data_structs.sv"
 
-module cache_FSM(
+module cache_FSM #(
+)(
     input logic clk,
     input logic rst,
     input request_type cpu_req,
