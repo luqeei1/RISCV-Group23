@@ -47,7 +47,7 @@ module hazard_unit #(
         stall = (MemReadE && ((RdE == Rs1E) || (RdE == Rs2E)));
 
         // flush if: (1) stall occurs, (2) branch instruction and prediction is wrong
-        flush = stall || (branch && !branchResolved);
+        flush = stall || flush_branch;
     
     end
 
