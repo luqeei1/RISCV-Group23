@@ -26,3 +26,10 @@
 - Wrote unit test for program counter
 - Added cache FSM and cache data structure modules (direct-mapped cache)
 - Added top module to integrate data memory and cache
+
+# 3/12
+- Made some changes to data memory
+- Added top file for single cycle
+- Fixed bug in hazard unit where there was unintended word forwarding when RdW or RdM were 0
+
+# 5/12

@@ -1,7 +1,6 @@
 `include "cache_data_structs.sv"
 
-module cache_FSM #(
-)(
+module cache_FSM(
     input logic clk,
     input logic rst,
     input request_type cpu_req,
@@ -21,6 +20,7 @@ module cache_FSM #(
     cache_block_type cache_line;
 
     logic [7:0] set;
+    logic [63:0] temp_block;
 
     assign set = cpu_req.addr[10:3];
     assign cpu_resp = next_cpu_resp;
@@ -57,28 +57,36 @@ module cache_FSM #(
                 else begin
                     // cache miss
                     next_mem_req = '{addr: cpu_req.addr, data: '0, op: 2'b10, valid: 1};
+                    // if cache_line is clean or bit is invalid then go straight to allocate
                     next_state = (!cache_line.valid || !cache_line.dirty) ? ALLOCATE : WRITE_BACK;
                 end
              end
 
              ALLOCATE: begin
-                if(mem_resp.ready) begin
-                    cache_line.data = mem_resp.data;
+                if(mem_resp.ready && cache_line.addr[2] == 1'b0) begin
+                    current_addr = {cpu_req.addr[31:2], 2'b00};
+                    // first word recieved, store in lower half of cache block
+                    temp_block[31:0] = mem_resp.data[31:0]
+                    current_addr = current_addr + 4; //move to next word
+                    next_mem_req = '{addr:current_addr, data: '0, op: 2'b10, valid: 1};
+                end
+                else if (mem_resp.ready && cache_line.addr[2] == 1'b1) begin
+                    // second word recieved, store in upper half
+                    temp_block[63:32] = mem_resp.data[31:0];
+                    // write to cache
+                    cache_line.data = temp_block;
                     cache_line.valid = 1;
                     cache_line.dirty = 0;
                     cache_line.tag = cpu_req.addr[TAG_MSB:TAG_LSB];
                     cache_mem[set] = cache_line;
                     next_state = COMPARE_TAG;
-                end
+                end                    
              end
 
              WRITE_BACK: begin
                 if(mem_resp.ready) begin
                     next_mem_req = '{addr: cpu_req.addr, data: '0, op: 2'b10, valid = 1};
                     next_state = ALLOCATE;
-                end else begin
-                    // write dirty block to memory
-                    next_mem_req = '{addr: {cache_line.tag, cpu_req.addr[TAG_LSB-1:0]}, data: cache_line.data, op: 2'b01, valid = 1};
                 end
              end
         endcase
