@@ -43,6 +43,7 @@ Vdata_memory::~Vdata_memory() {
 void Vdata_memory___024root___eval_initial(Vdata_memory___024root* vlSelf);
 void Vdata_memory___024root___eval_settle(Vdata_memory___024root* vlSelf);
 void Vdata_memory___024root___eval(Vdata_memory___024root* vlSelf);
+QData Vdata_memory___024root___change_request(Vdata_memory___024root* vlSelf);
 #ifdef VL_DEBUG
 void Vdata_memory___024root___eval_debug_assertions(Vdata_memory___024root* vlSelf);
 #endif  // VL_DEBUG
@@ -52,12 +53,27 @@ static void _eval_initial_loop(Vdata_memory__Syms* __restrict vlSymsp) {
     vlSymsp->__Vm_didInit = true;
     Vdata_memory___024root___eval_initial(&(vlSymsp->TOP));
     // Evaluate till stable
+    int __VclockLoop = 0;
+    QData __Vchange = 1;
     vlSymsp->__Vm_activity = true;
     do {
         VL_DEBUG_IF(VL_DBG_MSGF("+ Initial loop\n"););
         Vdata_memory___024root___eval_settle(&(vlSymsp->TOP));
         Vdata_memory___024root___eval(&(vlSymsp->TOP));
-    } while (0);
+        if (VL_UNLIKELY(++__VclockLoop > 100)) {
+            // About to fail, so enable debug to see what's not settling.
+            // Note you must run make with OPT=-DVL_DEBUG for debug prints.
+            int __Vsaved_debug = Verilated::debug();
+            Verilated::debug(1);
+            __Vchange = Vdata_memory___024root___change_request(&(vlSymsp->TOP));
+            Verilated::debug(__Vsaved_debug);
+            VL_FATAL_MT("data_memory.sv", 2, "",
+                "Verilated model didn't DC converge\n"
+                "- See https://verilator.org/warn/DIDNOTCONVERGE");
+        } else {
+            __Vchange = Vdata_memory___024root___change_request(&(vlSymsp->TOP));
+        }
+    } while (VL_UNLIKELY(__Vchange));
 }
 
 void Vdata_memory::eval_step() {
@@ -69,11 +85,26 @@ void Vdata_memory::eval_step() {
     // Initialize
     if (VL_UNLIKELY(!vlSymsp->__Vm_didInit)) _eval_initial_loop(vlSymsp);
     // Evaluate till stable
+    int __VclockLoop = 0;
+    QData __Vchange = 1;
     vlSymsp->__Vm_activity = true;
     do {
         VL_DEBUG_IF(VL_DBG_MSGF("+ Clock loop\n"););
         Vdata_memory___024root___eval(&(vlSymsp->TOP));
-    } while (0);
+        if (VL_UNLIKELY(++__VclockLoop > 100)) {
+            // About to fail, so enable debug to see what's not settling.
+            // Note you must run make with OPT=-DVL_DEBUG for debug prints.
+            int __Vsaved_debug = Verilated::debug();
+            Verilated::debug(1);
+            __Vchange = Vdata_memory___024root___change_request(&(vlSymsp->TOP));
+            Verilated::debug(__Vsaved_debug);
+            VL_FATAL_MT("data_memory.sv", 2, "",
+                "Verilated model didn't converge\n"
+                "- See https://verilator.org/warn/DIDNOTCONVERGE");
+        } else {
+            __Vchange = Vdata_memory___024root___change_request(&(vlSymsp->TOP));
+        }
+    } while (VL_UNLIKELY(__Vchange));
     // Evaluate cleanup
 }
 

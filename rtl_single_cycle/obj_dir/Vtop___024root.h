@@ -25,24 +25,23 @@ class Vtop___024root final : public VerilatedModule {
     CData/*0:0*/ top__DOT__control_unit__DOT__Store;
     CData/*0:0*/ top__DOT__control_unit__DOT__Load;
     CData/*0:0*/ __Vclklast__TOP__clk;
-    SData/*11:0*/ top__DOT__instruction_memory__DOT__word_addr;
     VL_OUT(a0,31,0);
     VL_OUT(a1,31,0);
     VL_OUT(a7,31,0);
     IData/*31:0*/ top__DOT__ExtImm;
     IData/*31:0*/ top__DOT__PC;
-    IData/*31:0*/ top__DOT__PCnext;
     IData/*31:0*/ top__DOT__instr;
     IData/*31:0*/ top__DOT__RD1;
     IData/*31:0*/ top__DOT__RD2;
     IData/*31:0*/ top__DOT__ALUResult;
     IData/*31:0*/ top__DOT__SrcB;
-    IData/*31:0*/ top__DOT__ReadData;
+    IData/*31:0*/ top__DOT__RD;
     IData/*31:0*/ top__DOT__Result;
     IData/*31:0*/ top__DOT____Vcellinp__pc__PCTarget;
-    IData/*24:0*/ top__DOT__sign_extend__DOT__ImmIn;
+    IData/*31:0*/ top__DOT__pc__DOT__out;
+    IData/*31:0*/ __Vchglast__TOP__top__DOT__RD;
     VlUnpacked<IData/*31:0*/, 32> top__DOT__regfile__DOT__registerfile_array;
-    VlUnpacked<CData/*7:0*/, 4096> top__DOT__instruction_memory__DOT__mem;
+    VlUnpacked<IData/*31:0*/, 2> top__DOT__instruction_memory__DOT__rom_array;
     VlUnpacked<CData/*7:0*/, 131072> top__DOT__data_memory__DOT__ram_array;
     VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
 

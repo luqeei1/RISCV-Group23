@@ -1,3 +1,6 @@
+/* verilator lint_off UNOPTFLAT */
+/* verilator lint_off UNUSED */
+/* verilator lint_off CASEINCOMPLETE */
 module top#(
     parameter WIDTH = 32
 )(
@@ -43,7 +46,7 @@ module top#(
     logic  [WIDTH-1:0] SrcB;
 
     // Data Memory
-    logic [WIDTH-1:0] ReadData;
+    logic [WIDTH-1:0] RD;
     logic [WIDTH-1:0] Result;
 
     assign A1 = instr[19:15];       //rs1
@@ -58,7 +61,7 @@ module top#(
     mux3 regfile_mux(
         .sel(ResultSrc),
         .in0(ALUResult),
-        .in1(ReadData),
+        .in1(RD),
         .in2(PC+4),
         .out(Result)
     );
@@ -133,7 +136,7 @@ module top#(
         .ResultSrc(ResultSrc),
         .A(ALUResult),
         .WD(RD2),
-        .RD(ReadData),
+        .RD(RD),
         .Result(Result)
     );
 

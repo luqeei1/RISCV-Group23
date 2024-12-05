@@ -11,7 +11,7 @@ module mux3 #(
         case (sel)
             2'b00: out = in0;         
             2'b01: out = in1;
-            2'b10  out = in2;
+            2'b10:  out = in2;
             default:    out = in0;
         endcase
     end

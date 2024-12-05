@@ -22,6 +22,7 @@ class Vdata_memory___024root final : public VerilatedModule {
     VL_IN(WD,31,0);
     VL_OUT(RD,31,0);
     VL_OUT(Result,31,0);
+    IData/*31:0*/ __Vchglast__TOP__RD;
     VlUnpacked<CData/*7:0*/, 131072> data_memory__DOT__ram_array;
 
     // INTERNAL VARIABLES

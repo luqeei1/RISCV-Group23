@@ -1,22 +1,20 @@
 module instructionMemory #(
-    parameter DATA_WIDTH = 32,
-    parameter BYTE_WIDTH = 8
-) (
-    input  logic [31:0] addr,
-    output logic [31:0] instr
+    parameter ADDRESS_WIDTH = 32,
+              DATA_WIDTH = 32
+)(
+    input logic [ADDRESS_WIDTH-1:0] addr,
+    output logic [DATA_WIDTH-1:0] instr
 );
 
-logic [BYTE_WIDTH-1:0] mem [32'hbfc00fff:32'hbfc00000];
-logic [11:0] word_addr;
+logic [DATA_WIDTH-1:0] rom_array [2**ADDRESS_WIDTH-1:0];
 
 initial begin
-    $readmemh("F1.mem", mem);
-    $display("INFO: Instruction memory loaded");
-end
+    $display("Loading rom.");
+    $readmemh("F1.mem", rom_array);     
+    //this allows ROM to be loaded with content stored in sinerom.mem
+end;
 
-always_comb begin
-    word_addr = addr[11:0];
-    instr = {{mem[word_addr+3]}, {mem[word_addr+2]}, {mem[word_addr+1]}, {mem[word_addr]}};
-end
-        
+always_comb
+        instr = rom_array[addr >> 2]; //converts word addressing to decimal addressing
+
 endmodule
