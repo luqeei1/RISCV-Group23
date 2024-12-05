@@ -11,6 +11,7 @@ module top#(
     // PC signals
     logic [1:0] PCSrc;
     logic [WIDTH-1:0] ExtImm;
+    logic [WIDTH-1:0] PC;
 
     // instruction memory signals
     logic [WIDTH-1:0] addr;
@@ -72,7 +73,7 @@ module top#(
         .PCSrc(PCSrc),
         .ZeroE(Zero),
         .ALUResult(ALUResult),
-        .PCF(PCnext)
+        .PCF(PC)
     );
 
     //Register File
