@@ -11,8 +11,6 @@ module top#(
     // PC signals
     logic [1:0] PCSrc;
     logic [WIDTH-1:0] ExtImm;
-    logic [WIDTH-1:0] PC;
-    logic [WIDTH-1:0] PCnext;
 
     // instruction memory signals
     logic [WIDTH-1:0] addr;
