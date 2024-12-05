@@ -19,5 +19,11 @@
 - Created a testbench and tested the F1.s assembly code using the Vbuddy 
 - Created the alu.sv and regfile.sv files for pipelined implementation 
 
-## Next Steps
-- 
+## 4/12
+- Modified top.sv file to include data_memory.sv
+- Created instructionMemory.sv
+- Debugged inconsistencies in signal names across alu.sv, program_counter.sv, data_memory.sv, control_unit.sv, reg_file.sv to make them compatible with top.sv file
+- Renamed DataPath.sv and DataPathTest.cpp to less confusing names			
+- added arbitary values to datamem.hex to bypass an error. CHANGE LATER
+- modified default case on signExtend block, correcting syntax errors with the case on controlUnit.sv
+- Began testing the F1 script on the lights
