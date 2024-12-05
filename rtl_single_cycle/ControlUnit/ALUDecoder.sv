@@ -14,12 +14,12 @@ always_comb begin
         2'b01: begin //B-type
             case (funct3)
                 3'b000: ALUControl = 4'b1010; //BEQ
-                3'b001: ALUControl = 4'b0010; //BNE
-                3'b100: ALUControl = 4'b0110; //BLT
-                3'b101: ALUControl = 4'b0111; //BGE
-                3'b110: ALUControl = 4'b1000; //BLTU
-                3'b111: ALUControl = 4'b1001; //BGEU
-                default: ALUControl = 4'b1111;
+                3'b001: ALUControl = 4'b1011; //BNE
+                3'b100: ALUControl = 4'b1100; //BLT
+                3'b101: ALUControl = 4'b1101; //BGE
+                3'b110: ALUControl = 4'b1110; //BLTU
+                3'b111: ALUControl = 4'b1111; //BGEU
+                default: ALUControl = 4'b0000; //Invalid
             endcase
         end
 

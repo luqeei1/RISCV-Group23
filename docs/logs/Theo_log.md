@@ -24,3 +24,10 @@
 ## 3/12
 - Added modeBU logic to the control unit so that we can control whether word, half, or byte addressing occurs
 - Adhered to the signals set by Akarsh in his "dataPath.sv" module
+
+## 4/12 
+- Changed ControlUnit logic for JALR and U-type instructions
+- Improved and finished the branch prediction unit
+
+## 5/12
+- Added extra necessary signals to the pipeline FF's
