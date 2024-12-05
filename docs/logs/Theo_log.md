@@ -31,3 +31,4 @@
 
 ## 5/12
 - Added extra necessary signals to the pipeline FF's
+- Wrote a working unit test for the ControlUnit/ALUDecoder

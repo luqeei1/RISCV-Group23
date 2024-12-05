@@ -1,3 +1,4 @@
+`include "def.sv"
 module program_counter #(
     parameter WIDTH = 32
 )(
@@ -15,17 +16,17 @@ logic [WIDTH-1:0] out;
 
 always_comb begin
     case (PCSrc)
-        2'b00: // PCNEXT
+        `PC_NEXT: // PCNEXT
             out = PCPlus4F;
-        2'b01: //ALWAYS JUMP
+        `PC_JUMP: 
             out = PCTarget;
-        2'b10: begin //COND JUMP
+        `PC_COND_JUMP: begin //COND JUMP
             if(ZeroE)
                 out = PCTarget;
             else
                 out = PCPlus4F;
         end
-        2'b11:  // JALR
+        `PC_JALR:  // JALR
             out = ALUResult;
         default:
             out = PCPlus4F;
