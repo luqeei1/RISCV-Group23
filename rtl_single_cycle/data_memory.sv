@@ -55,6 +55,8 @@ always_ff @(posedge clk) begin
                     begin
                         ram_array[{A[31:2],2'b0}] <= WD[7:0];
                     end
+                default:
+                    ram_array[{A[31:2],2'b0}] <= 8'b0;
             endcase
         end
     end
@@ -88,6 +90,8 @@ always_comb begin
                         RD = {{24'b0},ram_array[{A[31:2],2'b0}]};
                         Result = RD;
                     end 
+                default:
+                    Result = RD;
             endcase
         2'b00 : Result = A;
         2'b10 : Result = A + 4;
