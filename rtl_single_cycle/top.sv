@@ -83,7 +83,7 @@ module top#(
     );
 
     //Register File
-    RegFile regfile (
+    regFile Regfile (
         .clk(clk),
         .AD1(A1),
         .AD2(A2),
