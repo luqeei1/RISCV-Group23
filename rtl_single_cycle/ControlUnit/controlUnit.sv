@@ -5,7 +5,7 @@ module controlUnit #(
     output logic [1:0] PCSrc,
     output logic [1:0] ResultSrc,
     output logic MemWrite,
-    output logic [3:0] ALUControl,
+    output logic [3:0] ALUCtrl,
     output logic ALUSrc,
     output logic [2:0] ImmSrc,
     output logic RegWrite,
@@ -59,7 +59,7 @@ module controlUnit #(
         .op(op[5]),
         .funct3(funct3),
         .funct7(funct7),
-        .ALUControl(ALUControl)
+        .ALUCtrl(ALUCtrl)
     );
 
 endmodule
