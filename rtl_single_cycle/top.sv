@@ -105,7 +105,7 @@ module top#(
 
     // Control Unit
     controlUnit control_unit (
-        .InstrD(instr),
+        .Instr(instr),
         .PCSrc(PCSrc),
         .ResultSrc(ResultSrc),
         .MemWrite(MemWrite),
@@ -119,8 +119,8 @@ module top#(
     // Sign Extend
     signExtend sign_extend (
         .IMMSrc(ImmSrc),
-        .ImmExt(ExtImm),
-        .ImmInput(instr)
+        .ImmInput(instr),
+        .ImmExt(ExtImm)
     );
 
     // ALU
