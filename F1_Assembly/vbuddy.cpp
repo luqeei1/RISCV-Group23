@@ -3,7 +3,7 @@
  \brief   additional C++ code included in DUT testbench file to communicate with Vbuddy
  \author  Peter Cheung, Imperial College London
  \version 1.4
- \date    28 Oct 2022
+ \date    28 Oct 2  22
 
 This package is written to support a second year module on Electronics & Information Engineering (EIE)
 at Imperial College. The module is on the design of the RISC V CPU.

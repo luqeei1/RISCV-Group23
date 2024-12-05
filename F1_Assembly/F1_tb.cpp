@@ -10,6 +10,8 @@ int main(int argc, char **argv, char **env) {
   int tick;       
   int pattern = 0;
 
+  std::ignore = system("touch data_memory.hex");
+
   Verilated::commandArgs(argc, argv);
   // init top verilog instance
   Vtop * top = new Vtop;
@@ -44,7 +46,7 @@ int main(int argc, char **argv, char **env) {
     }
 
     // set up input signals of testbench
-    top->rst = (simcyc < 2);    // assert reset for 1st cycle
+    top->rst = (simcyc < 3);    // assert reset for 1st cycle
     vbdCycle(simcyc);
 
     if (Verilated::gotFinish())  exit(0);
