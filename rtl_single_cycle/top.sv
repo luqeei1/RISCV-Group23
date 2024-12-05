@@ -55,14 +55,13 @@ module top#(
     assign SrcB = (ALUSrc) ? ExtImm : RD2;
 
     // Result multiplexer for RegFile write data
-    always_comb begin
-        case(ResultSrc)
-            2'b00: Result = ALUResult;
-            2'b01: Result = ReadData;
-            2'b10: Result = PC + 4;
-            default: Result = ALUResult;
-        endcase
-    end
+    mux3 regfile_mux(
+        .sel(ResultSrc),
+        .in0(ALUResult),
+        .in1(ReadData),
+        .in2(PC+4),
+        .out(Result)
+    );
 
     // Program Counter
     program_counter pc (
