@@ -74,7 +74,7 @@ module top#(
         .PCSrc(PCSrc),
         .ZeroE(Zero),
         .ALUResult(ALUResult),
-        .PCF(PCnext),
+        .PCF(PCnext)
     );
 
     //Register File
@@ -104,7 +104,7 @@ module top#(
         .PCSrc(PCSrc),
         .ResultSrc(ResultSrc),
         .MemWrite(MemWrite),
-        .ALUControl(ALUctrl),
+        .ALUCtrl(ALUctrl),
         .ALUSrc(ALUSrc),
         .ImmSrc(ImmSrc),
         .RegWrite(RegWrite),
@@ -113,7 +113,7 @@ module top#(
 
     // Sign Extend
     signExtend sign_extend (
-        .IMMSrc(ImmSrc),
+        .ImmSrc(ImmSrc),
         .ImmInput(instr),
         .ImmExt(ExtImm)
     );

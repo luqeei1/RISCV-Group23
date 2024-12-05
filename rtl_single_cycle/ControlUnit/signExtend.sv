@@ -2,7 +2,7 @@ module signExtend #(
     parameter DATA_WIDTH = 32
 ) (
     input logic [2:0] ImmSrc,
-    input logic [31:7] ImmInput,
+    input logic [31:0] ImmInput,
     output logic [DATA_WIDTH-1:0] ImmExt
 );
     always_comb begin
