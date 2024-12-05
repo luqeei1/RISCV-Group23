@@ -47,11 +47,6 @@ module top#(
     logic [WIDTH-1:0] ReadData;
     logic [WIDTH-1:0] Result;
 
-    //Memory Initialisation
-    initial begin
-        $readmemh("F1.mem", instruction_memory.mem);
-    end 
-
     assign A1 = instr[19:15];       //rs1
     assign A2 = instr[24:20];       //rs2
     assign A3 = instr[11:7];        //rd
@@ -143,13 +138,5 @@ module top#(
         .RD(ReadData),
         .Result(Result)
     );
-
-    // Update PC
-    always_ff @(posedge clk) begin
-        if(rst)
-            PC <= 32'b0;
-        else
-            PC <= PCnext;
-    end
 
 endmodule
