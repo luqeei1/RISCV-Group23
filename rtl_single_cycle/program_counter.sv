@@ -5,7 +5,6 @@ module program_counter #(
     input logic rst,
     input logic [1:0] PCSrc,
     input logic ZeroE,
-    input logic jump,
     input logic [WIDTH-1:0] PCPlus4F,   // input as [PCF + 4]
     input logic [WIDTH-1:0] ALUResult, //for JALR instruction
     input logic [WIDTH-1:0] PCTarget, // input in top module as [PCE + ImmOp]

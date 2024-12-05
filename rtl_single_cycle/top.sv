@@ -80,7 +80,6 @@ module top#(
         .ZeroE(Zero),
         .ALUResult(ALUResult),
         .PCF(PCnext),
-        .jump(1'b0)         // jump port connection
     );
 
     //Register File
