@@ -2,7 +2,7 @@ module signExtend #(
     parameter DATA_WIDTH = 32
 ) (
     input logic [2:0] ImmSrc,
-    input logic [DATA_WIDTH-1:0] ImmInput,
+    input logic [31:7] ImmInput,
     output logic [DATA_WIDTH-1:0] ImmExt
 );
     input logic [31:7] ImmIn;

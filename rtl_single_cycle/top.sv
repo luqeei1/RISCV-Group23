@@ -47,11 +47,6 @@ module top#(
     logic [WIDTH-1:0] ReadData;
     logic [WIDTH-1:0] Result;
 
-    //Memory Initialisation
-    initial begin
-        $readmemh("F1.mem", instruction_memory.mem);
-    end 
-
     assign A1 = instr[19:15];       //rs1
     assign A2 = instr[24:20];       //rs2
     assign A3 = instr[11:7];        //rd
@@ -79,12 +74,11 @@ module top#(
         .PCSrc(PCSrc),
         .ZeroE(Zero),
         .ALUResult(ALUResult),
-        .PCF(PCnext),
-        .jump(1'b0)         // jump port connection
+        .PCF(PCnext)
     );
 
     //Register File
-    RegFile regfile (
+    regFile Regfile (
         .clk(clk),
         .AD1(A1),
         .AD2(A2),
@@ -110,7 +104,7 @@ module top#(
         .PCSrc(PCSrc),
         .ResultSrc(ResultSrc),
         .MemWrite(MemWrite),
-        .ALUControl(ALUctrl),
+        .ALUCtrl(ALUctrl),
         .ALUSrc(ALUSrc),
         .ImmSrc(ImmSrc),
         .RegWrite(RegWrite),
@@ -119,7 +113,7 @@ module top#(
 
     // Sign Extend
     signExtend sign_extend (
-        .IMMSrc(ImmSrc),
+        .ImmSrc(ImmSrc),
         .ImmInput(instr),
         .ImmExt(ExtImm)
     );
@@ -144,13 +138,5 @@ module top#(
         .RD(ReadData),
         .Result(Result)
     );
-
-    // Update PC
-    always_ff @(posedge clk) begin
-        if(rst)
-            PC <= 32'b0;
-        else
-            PC <= PCnext;
-    end
 
 endmodule
