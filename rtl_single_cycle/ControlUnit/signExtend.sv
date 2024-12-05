@@ -5,7 +5,7 @@ module signExtend #(
     input logic [31:0] ImmInput,
     output logic [DATA_WIDTH-1:0] ImmExt
 );
-    input logic [31:7] ImmIn;
+    logic [31:7] ImmIn;
     always_comb begin
         case (ImmSrc)
             3'b000: ImmExt = {{20{ImmIn[31]}}, ImmIn[31:20]}; //I-type

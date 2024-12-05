@@ -16,8 +16,7 @@ end
 
 always_comb begin
     word_addr = addr[11:0];
-    instr = {mem[word_addr+3], mem[word_addr+2], 
-            mem[word_addr+1], mem[word_addr]};
+    instr = {{mem[word_addr+3]}, {mem[word_addr+2]}, {mem[word_addr+1]}, {mem[word_addr]}};
 end
-    
+        
 endmodule
