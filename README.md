@@ -1,21 +1,27 @@
 # RISCV-Group23
 
+
 [See the single-cycle processor here](./rtl_single_cycle)
 
 [See the pipelined processor here](./rtl_pipelining)
 
-We split up tasks 
+## Task Allocation
+
+Our group decided to maintain a single branch and push any changes to main to simplfy the process and mitigate the effects of merge conflicts that would arise if separate branches were maintained (as we had experienced in Lab4). Based on the tasks we had each done during Lab4, we decided to split up our tasks for the single-processor as follows:
 
 | Task       | Akarsh | Sid | Theo | Lucas |
 |------------|--------|-----|------|-------|
-| alu.sv     |        |  x   |      |       |
-| DataPath.sv     |  x  |     |      |       |
-| program_counter.sv   |        |     |      |    X   |
-| regfile.sv     |        |   X  |      |       |
-| ALUDecoder.sv     |        |     |   X   |       |
-| controlUnit.sv     |        |     |   X   |       |
-| signExtend.sv     |        |     |    X  |       |
+| alu.sv     |        |  **   |      |       |
+| DataPath.sv     |  ** |     |      |       |
+| program_counter.sv   |        |     |      |    **   |
+| regfile.sv     |        |   **  |      |       |
+| ALUDecoder.sv     |        |     |   **   |       |
+| controlUnit.sv     |        |     |   **   |       |
+| signExtend.sv     |        |     |    **  |       |
+|       |   X     |  X   |     |       |
 | testbench     |   X     |  X   |     |       |
-| testbench     |   X     |  X   |     |       |
+
+** - Main Contributor
+* - Partial Contributor
 
 
