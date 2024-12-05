@@ -11,7 +11,7 @@ verilator   -Wall --trace \
             alu.sv \
             ControlUnit/controlUnit.sv \
             ControlUnit/ALUDecoder.sv \
-            --exe ../F1_Assembly/F1_tb.cpp \
+            --exe ../F1_tb.cpp \
             --prefix "Vtop" \
             -o Vtop
 
