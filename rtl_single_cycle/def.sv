@@ -1,10 +1,10 @@
 `ifndef DEF_SV
 
     `define DEF_SV
-    `define PC_NEXT                 3'b000
-    `define PC_ALWAYS               3'b001
-    `define PC_JALR                 3'b010
-    `define PC_INV_COND             3'b100
-    `define PC_COND                 3'b101
+
+    `define PC_NEXT                 2'b00
+    `define PC_JUMP                 2'b01
+    `define PC_JALR                 2'b11
+    `define PC_COND_JUMP            2'b10
 
 `endif
