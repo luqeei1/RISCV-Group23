@@ -11,6 +11,7 @@ module hazard_unit #(
     input logic MemReadE,
     input logic branch,
     input logic branchResolved,
+    input logic flushHazard,
     output logic [1:0] ForwardAE,
     output logic [1:0] ForwardBE,
     output logic stall,
@@ -49,3 +50,5 @@ module hazard_unit #(
         flush = stall || (branch && !branchResolved);
     
     end
+
+endmodule
