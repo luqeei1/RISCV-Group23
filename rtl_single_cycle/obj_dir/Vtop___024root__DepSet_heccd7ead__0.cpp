@@ -183,28 +183,22 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
         [0xbU];
     vlSelf->a7 = vlSelf->top__DOT__regfile__DOT__registerfile_array
         [0x11U];
-    vlSelf->top__DOT__instr = ((0xbfc00U == (vlSelf->top__DOT__PC 
-                                             >> 0xcU))
-                                ? ((vlSelf->top__DOT__instruction_memory__DOT__rom_array
-                                    [(0xfffU & ((IData)(3U) 
-                                                + vlSelf->top__DOT__PC))] 
-                                    << 0x18U) | ((vlSelf->top__DOT__instruction_memory__DOT__rom_array
-                                                  [
-                                                  (0xfffU 
-                                                   & ((IData)(2U) 
+    vlSelf->top__DOT__instr = ((vlSelf->top__DOT__instruction_memory__DOT__rom_array
+                                [(0xffffU & ((IData)(3U) 
+                                             + vlSelf->top__DOT__PC))] 
+                                << 0x18U) | ((vlSelf->top__DOT__instruction_memory__DOT__rom_array
+                                              [(0xffffU 
+                                                & ((IData)(2U) 
+                                                   + vlSelf->top__DOT__PC))] 
+                                              << 0x10U) 
+                                             | ((vlSelf->top__DOT__instruction_memory__DOT__rom_array
+                                                 [(0xffffU 
+                                                   & ((IData)(1U) 
                                                       + vlSelf->top__DOT__PC))] 
-                                                  << 0x10U) 
-                                                 | ((vlSelf->top__DOT__instruction_memory__DOT__rom_array
-                                                     [
-                                                     (0xfffU 
-                                                      & ((IData)(1U) 
-                                                         + vlSelf->top__DOT__PC))] 
-                                                     << 8U) 
-                                                    | vlSelf->top__DOT__instruction_memory__DOT__rom_array
-                                                    [
-                                                    (0xfffU 
-                                                     & vlSelf->top__DOT__PC)])))
-                                : 0U);
+                                                 << 8U) 
+                                                | vlSelf->top__DOT__instruction_memory__DOT__rom_array
+                                                [(0xffffU 
+                                                  & vlSelf->top__DOT__PC)])));
     if ((0x40U & vlSelf->top__DOT__instr)) {
         vlSelf->top__DOT__RegWrite = (1U & (IData)(
                                                    ((0x20U 
