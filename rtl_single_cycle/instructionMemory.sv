@@ -15,9 +15,8 @@ initial begin
     $display("ROM loaded successfully.");
 end
 
-// Check if PC is in the valid range
-
-// Fetch instruction only if address is valid, 0 otherwise
-assign instr = {{rom_array[PC + 3]}, {rom_array[PC + 2]}, {rom_array[PC + 1]}, {rom_array[PC]}};
+always_comb begin
+    instr = {{rom_array[PC + 3]}, {rom_array[PC + 2]}, {rom_array[PC + 1]}, {rom_array[PC]}};
+end 
 
 endmodule
