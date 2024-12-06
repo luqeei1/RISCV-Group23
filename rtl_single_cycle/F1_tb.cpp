@@ -19,7 +19,7 @@ int main(int argc, char **argv, char **env) {
   Verilated::traceEverOn(true);
   VerilatedVcdC* tfp = new VerilatedVcdC;
   top->trace (tfp, 99);
-  tfp->open ("F1.vcd");
+  tfp->open ("VCD/F1.vcd");
  
   // initialise Vbuddy
   if (vbdOpen()!=1) return(-1);
