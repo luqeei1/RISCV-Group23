@@ -15,7 +15,7 @@ typedef struct packed {
     logic valid;    // valid bit
     logic dirty;    // dirty bit
     logic [TAG_MSB:TAG_LSB] tag;
-    logic [7:0] data [0:7];  // array of 8 bytes
+    logic [7:0][0:7] data;  // array of 8 bytes
 } cache_block_type;
 
 typedef struct packed {
