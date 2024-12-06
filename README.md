@@ -20,6 +20,8 @@ Our group decided to maintain a single branch and push any changes to main to si
 | signExtend.sv     |        |     |    **  |       |
 |       |   X     |  X   |     |       |
 | testbench     |   X     |  X   |     |       |
+| DataMemoryTest.cpp    |   **     |    |     |       |
+
 
 ** - Main Contributor
 * - Partial Contributor
