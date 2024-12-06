@@ -93,7 +93,6 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->pushNamePrefix("instruction_memory ");
     tracep->declBus(c+70,"ADDRESS_WIDTH", false,-1, 31,0);
     tracep->declBus(c+70,"DATA_WIDTH", false,-1, 31,0);
-    tracep->declBus(c+3,"addr", false,-1, 31,0);
     tracep->declBus(c+3,"PC", false,-1, 31,0);
     tracep->declBus(c+4,"instr", false,-1, 31,0);
     tracep->declBit(c+27,"ValidAddr", false,-1);

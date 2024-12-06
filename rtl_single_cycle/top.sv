@@ -95,7 +95,6 @@ module top#(
 
     // Instruction Memory
     instructionMemory instruction_memory (
-        .addr(addr),
         .instr(instr),
         .PC(PC)
     );
