@@ -41,10 +41,9 @@ int main(int argc, char **argv, char **env) {
     }
 
     // Display pattern on VBuddy
-    if (top->a7 == 0x31) {      // Check for VBuddy ecall
-      vbdBar(top->a1 & 0xFF);          // Display value from a1 register
-      pattern = top->a1;        // Save current pattern
-    }
+      vbdBar(top->a0 & 0xFF);          // Display value from a1 register
+      pattern = top->a0;        // Save current pattern
+
 
     // set up input signals of testbench
     top->rst = (simcyc < 3);    // assert reset for 1st cycle
