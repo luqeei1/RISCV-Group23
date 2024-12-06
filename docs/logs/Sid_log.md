@@ -27,3 +27,8 @@
 - added arbitary values to datamem.hex to bypass an error. CHANGE LATER
 - modified default case on signExtend block, correcting syntax errors with the case on controlUnit.sv
 - Began testing the F1 script on the lights
+
+## 5/12 - 6/12
+- Implemented and tested F1 script, iteratively including a random delay and a trigger
+- assembled program.hex and wrote into it
+- Many hours were spent debugging the testbench for the F1 light sequence
