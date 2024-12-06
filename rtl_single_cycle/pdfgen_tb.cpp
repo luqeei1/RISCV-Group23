@@ -23,7 +23,7 @@ int main(int argc, char **argv, char **env) {
   // init Vbuddy
   if (vbdOpen()!=1) return(-1);
   vbdHeader("2: PDF Gen");
-  //vbdSetMode(1);        // Flag mode set to one-shot
+  vbdSetMode(0);
 
   // initialize simulation inputs
   top->clk = 1;
