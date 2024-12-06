@@ -15,13 +15,14 @@ typedef struct packed {
     logic valid;    // valid bit
     logic dirty;    // dirty bit
     logic [TAG_MSB:TAG_LSB] tag;
-    logic [63:0] data;  // block data
+    logic [7:0] data [0:7];  // array of 8 bytes
 } cache_block_type;
 
 typedef struct packed {
     logic [31:0] addr;
     logic [31:0] data;
     logic [1:0] op;     // 00 = read, 01 = write, 10 = allocate
+    logic [2:0] mode_addr;  
     logic valid;
 } request_type;
 

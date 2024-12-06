@@ -33,3 +33,6 @@
 - Fixed bug in hazard unit where there was unintended word forwarding when RdW or RdM were 0
 
 # 5/12
+- Added support for single byte addressing in FSM
+- Integrated data memory and cache into top memory module
+- Fixed error where trying $readmem file addresses beyond bounds of ram array - base address should have been 17 bits not 32 bits
