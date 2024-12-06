@@ -8,22 +8,14 @@ start address 0xbfc00000
 Disassembly of section .text:
 
 bfc00000 <main>:
-bfc00000:	000023b7          	lui	t2,0x2
+bfc00000:	00000513          	li	a0,0
+bfc00004:	0ff00313          	li	t1,255
 
-bfc00004 <iloop>:
-bfc00004:	0003ad03          	lw	s10,0(t2) # 2000 <main-0xbfbfe000>
-bfc00008:	fe0d0ee3          	beqz	s10,bfc00004 <iloop>
-bfc0000c:	00c000ef          	jal	ra,bfc00018 <init>
-bfc00010:	ff5ff06f          	j	bfc00004 <iloop>
-bfc00014:	00008067          	ret
+bfc00008 <shift_loop>:
+bfc00008:	00151513          	slli	a0,a0,0x1
+bfc0000c:	00156513          	ori	a0,a0,1
+bfc00010:	fe651ce3          	bne	a0,t1,bfc00008 <shift_loop>
 
-bfc00018 <init>:
-bfc00018:	00100513          	li	a0,1
-bfc0001c:	00300513          	li	a0,3
-bfc00020:	00700513          	li	a0,7
-bfc00024:	00f00513          	li	a0,15
-bfc00028:	01f00513          	li	a0,31
-bfc0002c:	03f00513          	li	a0,63
-bfc00030:	07f00513          	li	a0,127
-bfc00034:	0ff00513          	li	a0,255
-bfc00038:	00008067          	ret
+bfc00014 <reset_loop>:
+bfc00014:	00000513          	li	a0,0
+bfc00018:	fe0008e3          	beqz	zero,bfc00008 <shift_loop>
