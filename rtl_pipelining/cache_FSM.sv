@@ -7,7 +7,7 @@ module cache_FSM(
     output response_type cpu_resp,
 
     input response_type mem_resp,
-    output request_type mem_req,
+    output request_type mem_req
 );
 
     cache_block_type cache_mem [0:SETS-1];
@@ -41,7 +41,7 @@ module cache_FSM(
              end
 
              COMPARE_TAG: begin
-                if( cache_line.valid && (current_line.tag == cpu_req.addr[TAG_MSB:TAG_LSB])) begin
+                if( cache_line.valid && (cache_line.tag == cpu_req.addr[TAG_MSB:TAG_LSB])) begin
                     // cache HIT
                     next_cpu_resp.ready = 1;
 
@@ -58,7 +58,7 @@ module cache_FSM(
                         case(cpu_req.mode_addr)
 
                             3'b011, 3'b101: begin // single byte addressing
-                                cache_line.data[cpu_req.addr[2:0] = cpu_req.data[7:0]];
+                                cache_line.data[cpu_req.addr[2:0]] = cpu_req.data[7:0];
                             end
                             default:  // full word
                                 if(cpu_req.addr[2]) begin
