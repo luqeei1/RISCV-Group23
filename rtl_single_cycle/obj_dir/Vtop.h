@@ -29,7 +29,26 @@ class Vtop VL_NOT_FINAL : public VerilatedModel {
     VL_IN8(&rst,0,0);
     VL_OUT(&a0,31,0);
     VL_OUT(&a1,31,0);
+    VL_OUT(&a2,31,0);
+    VL_OUT(&a3,31,0);
+    VL_OUT(&a4,31,0);
+    VL_OUT(&a5,31,0);
+    VL_OUT(&a6,31,0);
     VL_OUT(&a7,31,0);
+    VL_OUT(&a8,31,0);
+    VL_OUT(&a9,31,0);
+    VL_OUT(&a10,31,0);
+    VL_OUT(&a11,31,0);
+    VL_OUT(&a12,31,0);
+    VL_OUT(&a13,31,0);
+    VL_OUT(&a14,31,0);
+    VL_OUT(&a15,31,0);
+    VL_OUT(&a16,31,0);
+    VL_OUT(&a17,31,0);
+    VL_OUT(&a18,31,0);
+    VL_OUT(&a19,31,0);
+    VL_OUT(&a20,31,0);
+    VL_OUT(&t1,31,0);
 
     // CELLS
     // Public to allow access to /* verilator public */ items.

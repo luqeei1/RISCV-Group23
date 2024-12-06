@@ -12,7 +12,6 @@ VL_ATTR_COLD void Vtop___024root___initial__TOP__0(Vtop___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___initial__TOP__0\n"); );
     // Init
     VlWide<3>/*95:0*/ __Vtemp_h4b288a68__0;
-    VlWide<3>/*95:0*/ __Vtemp_h3a032bfe__0;
     // Body
     VL_WRITEF("Loading ram.\n");
     __Vtemp_h4b288a68__0[0U] = 0x2e6d656dU;
@@ -22,10 +21,7 @@ VL_ATTR_COLD void Vtop___024root___initial__TOP__0(Vtop___024root* vlSelf) {
                  ,  &(vlSelf->top__DOT__data_memory__DOT__ram_array)
                  , 0U, 0x1ffffU);
     VL_WRITEF("Ram loaded\nLoading rom.\n");
-    __Vtemp_h3a032bfe__0[0U] = 0x2e686578U;
-    __Vtemp_h3a032bfe__0[1U] = 0x6772616dU;
-    __Vtemp_h3a032bfe__0[2U] = 0x70726fU;
-    VL_READMEM_N(true, 8, 65536, 0, VL_CVT_PACK_STR_NW(3, __Vtemp_h3a032bfe__0)
+    VL_READMEM_N(true, 8, 65536, 0, std::string{"pdf.hex"}
                  ,  &(vlSelf->top__DOT__instruction_memory__DOT__rom_array)
                  , 0, ~0ULL);
     VL_WRITEF("ROM loaded successfully.\n");
@@ -40,12 +36,50 @@ VL_ATTR_COLD void Vtop___024root___settle__TOP__0(Vtop___024root* vlSelf) {
     // Init
     CData/*6:0*/ __Vtableidx1;
     // Body
-    vlSelf->a0 = vlSelf->top__DOT__regfile__DOT__registerfile_array
-        [0xaU];
-    vlSelf->a1 = vlSelf->top__DOT__regfile__DOT__registerfile_array
-        [0xbU];
+    vlSelf->a9 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x13U];
+    vlSelf->a8 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x12U];
     vlSelf->a7 = vlSelf->top__DOT__regfile__DOT__registerfile_array
         [0x11U];
+    vlSelf->a6 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x10U];
+    vlSelf->a5 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0xfU];
+    vlSelf->a3 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0xdU];
+    vlSelf->a1 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0xbU];
+    vlSelf->a0 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0xaU];
+    vlSelf->t1 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [9U];
+    vlSelf->a4 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0xeU];
+    vlSelf->a12 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x16U];
+    vlSelf->a2 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0xcU];
+    vlSelf->a10 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x14U];
+    vlSelf->a11 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x15U];
+    vlSelf->a13 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x17U];
+    vlSelf->a14 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x18U];
+    vlSelf->a15 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x19U];
+    vlSelf->a16 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x1aU];
+    vlSelf->a17 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x1bU];
+    vlSelf->a18 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x1cU];
+    vlSelf->a19 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x1dU];
+    vlSelf->a20 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x1eU];
     vlSelf->top__DOT__instr = ((vlSelf->top__DOT__instruction_memory__DOT__rom_array
                                 [(0xffffU & ((IData)(3U) 
                                              + vlSelf->top__DOT__PC))] 
@@ -737,7 +771,26 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->rst = VL_RAND_RESET_I(1);
     vlSelf->a0 = VL_RAND_RESET_I(32);
     vlSelf->a1 = VL_RAND_RESET_I(32);
+    vlSelf->a2 = VL_RAND_RESET_I(32);
+    vlSelf->a3 = VL_RAND_RESET_I(32);
+    vlSelf->a4 = VL_RAND_RESET_I(32);
+    vlSelf->a5 = VL_RAND_RESET_I(32);
+    vlSelf->a6 = VL_RAND_RESET_I(32);
     vlSelf->a7 = VL_RAND_RESET_I(32);
+    vlSelf->a8 = VL_RAND_RESET_I(32);
+    vlSelf->a9 = VL_RAND_RESET_I(32);
+    vlSelf->a10 = VL_RAND_RESET_I(32);
+    vlSelf->a11 = VL_RAND_RESET_I(32);
+    vlSelf->a12 = VL_RAND_RESET_I(32);
+    vlSelf->a13 = VL_RAND_RESET_I(32);
+    vlSelf->a14 = VL_RAND_RESET_I(32);
+    vlSelf->a15 = VL_RAND_RESET_I(32);
+    vlSelf->a16 = VL_RAND_RESET_I(32);
+    vlSelf->a17 = VL_RAND_RESET_I(32);
+    vlSelf->a18 = VL_RAND_RESET_I(32);
+    vlSelf->a19 = VL_RAND_RESET_I(32);
+    vlSelf->a20 = VL_RAND_RESET_I(32);
+    vlSelf->t1 = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__PCSrc = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__ExtImm = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__PC = VL_RAND_RESET_I(32);
