@@ -136,6 +136,23 @@ module ptop#(
         end
     end
 
+        // Hazard Unit
+    hazard_unit hazard_unit (
+        .RdM(RdM),
+        .RdW(RdW),
+        .RdE(RdE),
+        .Rs1E(Rs1E),
+        .Rs2E(Rs2E),
+        .RegWriteM(RegWriteM),
+        .RegWriteW(RegWriteW),
+        .MemReadE(ResultSrcE[0]),
+        .flushBranch(PCSrcE),
+        .ForwardAE(ForwardAE),
+        .ForwardBE(ForwardBE),
+        .stall(stall),
+        .flush(flush)
+    );
+
     // Program Counter
     program_counter pc (
         .clk(clk),
@@ -243,5 +260,5 @@ module ptop#(
         .in2(PCPlus4W),
         .out(Result)
     );
-
+        
 endmodule
