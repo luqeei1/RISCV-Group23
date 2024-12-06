@@ -18,20 +18,25 @@ module regfile #(
     output logic [DATA_WIDTH-1:0]       a5,
     output logic [DATA_WIDTH-1:0]       a6,
     output logic [DATA_WIDTH-1:0]       a7,
-    output logic [DATA_WIDTH-1:0]       a8,
-    output logic [DATA_WIDTH-1:0]       a9,
-    output logic [DATA_WIDTH-1:0]       a10,
-    output logic [DATA_WIDTH-1:0]       a11,
-    output logic [DATA_WIDTH-1:0]       a12,
-    output logic [DATA_WIDTH-1:0]       a13,
-    output logic [DATA_WIDTH-1:0]       a14,
-    output logic [DATA_WIDTH-1:0]       a15,
-    output logic [DATA_WIDTH-1:0]       a16,
-    output logic [DATA_WIDTH-1:0]       a17,
-    output logic [DATA_WIDTH-1:0]       a18,
-    output logic [DATA_WIDTH-1:0]       a19,
-    output logic [DATA_WIDTH-1:0]       a20,
-    output logic [DATA_WIDTH-1:0]       t1
+    output logic [DATA_WIDTH-1:0]       t0,
+    output logic [DATA_WIDTH-1:0]       t1,
+    output logic [DATA_WIDTH-1:0]       t2,
+    output logic [DATA_WIDTH-1:0]       t3,
+    output logic [DATA_WIDTH-1:0]       t4,
+    output logic [DATA_WIDTH-1:0]       t5,
+    output logic [DATA_WIDTH-1:0]       t6,
+    output logic [DATA_WIDTH-1:0]       s0,
+    output logic [DATA_WIDTH-1:0]       s1,
+    output logic [DATA_WIDTH-1:0]       s2,
+    output logic [DATA_WIDTH-1:0]       s3,
+    output logic [DATA_WIDTH-1:0]       s4,
+    output logic [DATA_WIDTH-1:0]       s5,
+    output logic [DATA_WIDTH-1:0]       s6,
+    output logic [DATA_WIDTH-1:0]       s7,
+    output logic [DATA_WIDTH-1:0]       s8,
+    output logic [DATA_WIDTH-1:0]       s9,
+    output logic [DATA_WIDTH-1:0]       s10,
+    output logic [DATA_WIDTH-1:0]       s11
 );
 
 logic [DATA_WIDTH-1:0] registerfile_array [2**ADDRESS_WIDTH-1:0];
@@ -44,7 +49,11 @@ end
 always_comb begin
     RD1 = registerfile_array[AD1];
     RD2 = registerfile_array[AD2];
-    t1 = registerfile_array[9];
+    t0 = registerfile_array[5];
+    t1 = registerfile_array[6];
+    t2 = registerfile_array[7];
+    s0 = registerfile_array[8];
+    s1 = registerfile_array[9];
     a0 = registerfile_array[10];
     a1 = registerfile_array[11];
     a2 = registerfile_array[12];
@@ -53,19 +62,20 @@ always_comb begin
     a5 =  registerfile_array[15];
     a6 =  registerfile_array[16];
     a7 =  registerfile_array[17];
-    a8 =  registerfile_array[18];
-    a9 =  registerfile_array[19];
-    a10 =  registerfile_array[20];
-    a11 =  registerfile_array[21];
-    a12 =  registerfile_array[22];
-    a13 =  registerfile_array[23];
-    a14 =  registerfile_array[24];
-    a15 =  registerfile_array[25];
-    a16 =  registerfile_array[26];
-    a17 =  registerfile_array[27];
-    a18 =  registerfile_array[28];
-    a19 =  registerfile_array[29];
-    a20 =  registerfile_array[30];
+    s2 =  registerfile_array[18];
+    s3 =  registerfile_array[19];
+    s4 =  registerfile_array[20];
+    s5 =  registerfile_array[21];
+    s6 =  registerfile_array[22];
+    s7 =  registerfile_array[23];
+    s8 =  registerfile_array[24];
+    s9 =  registerfile_array[25];
+    s10 =  registerfile_array[26];
+    s11 =  registerfile_array[27];
+    t3 =  registerfile_array[28];
+    t4 =  registerfile_array[29];
+    t5 =  registerfile_array[30];
+    t6 = registerfile_array[31];
 end
 
 endmodule
