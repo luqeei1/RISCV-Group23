@@ -6,7 +6,7 @@ module BPU #(
     input logic [DATA_WIDTH-1:0] PCF,
     input logic ZeroE,
     input logic BranchE,
-    output logic flushHazard,
+    output logic flushBranch,
     output logic [DATA_WIDTH-1:0] PCBPU,
     output logic PCBPUSrc
 );
@@ -59,14 +59,14 @@ always_ff @(posedge clk) begin
     if(BranchE) begin //Branch instr 2 cycles later
         oldBranch <= queue[0];
         if(oldBranch.prediction == ZeroE) begin //If jump decision was correct
-            flushHazard <= 1'b0;
+            flushBranch <= 1'b0;
             if(oldBranch.direction == 1'b0)
                 forwardJumpCounter <= (forwardJumpCounter == 2'b11) ? 2'b11 : forwardJumpCounter + 1; //Increment forward jump counter
             if(oldBranch.direction == 1'b1)
                 backwardJumpCounter <= (backwardJumpCounter == 2'b11) ? 2'b11 : backwardJumpCounter + 1; //Increment back jump counter
         end
         if(oldBranch.prediction != ZeroE) begin //If jump decision was incorrect
-            flushHazard <= 1'b1; //Flush pipeline
+            flushBranch <= 1'b1; //Flush pipeline
             if(ZeroE == 0) //If jump should've not been taken
                 PCBPU <= oldBranch.branchAddr + 32'd4; //Jump to following instruction after branch
             else //If jump should've been taken
@@ -79,7 +79,7 @@ always_ff @(posedge clk) begin
         queue.pop_front(); //Discard top element in queue
     end
     else
-        flushHazard <= 1'b0;
+        flushBranch <= 1'b0;
 end
 
 endmodule
