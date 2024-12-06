@@ -1,3 +1,5 @@
+/* verilator lint_off UNOPTFLAT */
+/* verilator lint_off ALWCOMBORDER */
 `include "cache_data_structs.sv"
 
 module cache_FSM(
@@ -29,7 +31,7 @@ module cache_FSM(
     always_comb begin
         next_state = current_state;
         next_cpu_resp = '{data: '0, ready: 0};
-        next_mem_req = '{addr: '0, data: '0, op: '0, valid:0};
+        next_mem_req = '{addr: '0, data: '0, op: '0, mode_addr: '0, valid:0};
         cache_line = cache_mem[set];
 
         case (current_state)
@@ -48,8 +50,8 @@ module cache_FSM(
                     // READ LOGIC
                     if(cpu_req.op == 2'b00) begin
                         next_cpu_resp.data = (cpu_req.addr[2]) ?
-                            {cache_line.data[7], cache_line.data[6], cache_line.data[5], cache_line.data[4]} :
-                            {cache_line.data[3], cache_line.data[2], cache_line.data[1], cache_line.data[0]};
+                            {cache_line.data[63:56], cache_line.data[55:48], cache_line.data[47:40], cache_line.data[39:32]} :
+                            {cache_line.data[31:24], cache_line.data[23:16], cache_line.data[15:8], cache_line.data[7:0]};
                     end
                     
                     // WRITE LOGIC
@@ -58,22 +60,22 @@ module cache_FSM(
                         case(cpu_req.mode_addr)
 
                             3'b011, 3'b101: begin // single byte addressing
-                                cache_line.data[cpu_req.addr[2:0]] = cpu_req.data[7:0];
+                                cache_line.data[(cpu_req.addr[2:0]*8) +: 8] = cpu_req.data[7:0];
                             end
                             default:  // full word
                                 if(cpu_req.addr[2]) begin
-                                    cache_line.data[7] = cpu_req.data[31:24];
-                                    cache_line.data[6] = cpu_req.data[23:16];
-                                    cache_line.data[5] = cpu_req.data[15:8];
-                                    cache_line.data[4] = cpu_req.data[7:0];
+                                    cache_line.data[63:56] = cpu_req.data[31:24];
+                                    cache_line.data[55:48] = cpu_req.data[23:16];
+                                    cache_line.data[47:40] = cpu_req.data[15:8];
+                                    cache_line.data[39:32] = cpu_req.data[7:0];
                                 end else begin
-                                    cache_line.data[3] = cpu_req.data[31:24];
-                                    cache_line.data[2] = cpu_req.data[23:16];
-                                    cache_line.data[1] = cpu_req.data[15:8];
-                                    cache_line.data[0] = cpu_req.data[7:0];
+                                    cache_line.data[31:24] = cpu_req.data[31:24];
+                                    cache_line.data[23:16] = cpu_req.data[23:16];
+                                    cache_line.data[15:8] = cpu_req.data[15:8];
+                                    cache_line.data[7:0] = cpu_req.data[7:0];
                                 end
                         endcase
-                        cache_mem[set] = cache_line;
+                        cache_mem[set] = cache_line; 
                     end
                     
                     next_state = IDLE;
@@ -82,7 +84,7 @@ module cache_FSM(
                 else begin
                     // cache miss
                     current_addr = {cpu_req.addr[31:3], 3'b000};
-                    next_mem_req = '{addr: cpu_req.addr, data: '0, op: 2'b10, valid: 1};
+                    next_mem_req = '{addr: cpu_req.addr, data: '0, op: 2'b10, mode_addr: 3'b001, valid: 1};
                     // if cache_line is clean or bit is invalid then go straight to allocate
                     next_state = (!cache_line.valid || !cache_line.dirty) ? ALLOCATE : WRITE_BACK;
                 end
@@ -90,18 +92,18 @@ module cache_FSM(
 
              ALLOCATE: begin
                 if(mem_resp.ready) begin
-                    cache_line.data[3] = mem_resp.data[31:24];
-                    cache_line.data[2] = mem_resp.data[23:16];
-                    cache_line.data[1] = mem_resp.data[15:8];
-                    cache_line.data[0] = mem_resp.data[7:0];
+                    cache_line.data[31:24] = mem_resp.data[31:24];
+                    cache_line.data[23:16] = mem_resp.data[23:16];
+                    cache_line.data[15:8] = mem_resp.data[15:8];
+                    cache_line.data[7:0] = mem_resp.data[7:0];
 
                     current_addr = current_addr + 4;
-                    next_mem_req = '{addr: current_addr, data: 0, op: 2'b10, valid:1}; //fetching second word
+                    next_mem_req = '{addr: current_addr, data: 0, op: 2'b10, mode_addr: 3'b001, valid:1}; //fetching second word
 
-                    cache_line.data[7] = mem_resp.data[31:24];
-                    cache_line.data[6] = mem_resp.data[23:16];
-                    cache_line.data[5] = mem_resp.data[15:8];
-                    cache_line.data[4] = mem_resp.data[7:0];
+                    cache_line.data[63:56] = mem_resp.data[31:24];
+                    cache_line.data[55:48] = mem_resp.data[23:16];
+                    cache_line.data[47:40] = mem_resp.data[15:8];
+                    cache_line.data[39:32] = mem_resp.data[7:0];
 
                     cache_line.valid = 1;
                     cache_line.dirty = 0;
@@ -113,10 +115,15 @@ module cache_FSM(
 
              WRITE_BACK: begin
                 if(mem_resp.ready) begin
+                    // writeback first word of cache block
                     next_mem_req = '{addr: {cache_line.tag, set, 3'b0},
-                                    data: {cache_line.data[7], cache_line.data[6], cache_line.data[5], cache_line.data[4],
-                                           cache_line.data[3], cache_line.data[2], cache_line.data[1], cache_line.data[0]},
-                                    op: 2'b01, valid: 1};
+                                    data: {cache_line.data[63:56], cache_line.data[55:48], cache_line.data[47:40], cache_line.data[39:32]},
+                                    op: 2'b01, mode_addr: 3'b001, valid: 1};
+                    
+                    // writeback second word of cache block
+                    next_mem_req = '{addr: {cache_line.tag, set, 3'b100}, // increments address by 4
+                                    data: {cache_line.data[31:24], cache_line.data[23:16], cache_line.data[15:8], cache_line.data[7:0]},
+                                    op: 2'b01, mode_addr: 3'b001, valid: 1};
                     next_state = ALLOCATE;
                 end
              end
