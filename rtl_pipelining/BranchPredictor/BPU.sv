@@ -18,7 +18,7 @@ typedef struct {
     logic prediction; //Predicted outcome: 1 = taken, 0 = not taken
 } BranchInfo;
 
-BranchInfo branch_queue[$]; //Queue to store branch information
+BranchInfo branch_queue[$]; //Queue to store branch information 
 BranchInfo newBranch;
 BranchInfo oldBranch;
 logic [1:0] forwardJumpCounter; //2 bit forward counter
@@ -31,21 +31,21 @@ always_ff @(posedge clk) begin
         newBranch.targetAddr <= PCF + {{20{RD[31]}}, RD[7], RD[30:25], RD[11:8], 1'b0};
         newBranch.direction <= RD[31];
         if(RD[31] == 1'b0) begin //forward jump
-            if(forwardJumpCounter == 2'b10 | 2'b11) begin //take forward jump
+            if(forwardJumpCounter >= 2'b10) begin //take forward jump
                 PCBPUSrc <= 1'b1;
                 newBranch.prediction <= 1'b1;
             end
-            if(forwardJumpCounter == 2'b00 | 2'b01) begin //don't take forward jump
+            if(forwardJumpCounter <= 2'b01) begin //don't take forward jump
                 PCBPUSrc <= 1'b0;
                 newBranch.prediction <= 1'b0;
             end
         end
         if(RD[31] == 1'b1) begin //backward jump
-            if(backwardJumpCounter == 2'b10 | 2'b11) begin //take backward jump
+            if(backwardJumpCounter >= 2'b10) begin //take backward jump
                 PCBPUSrc <= 1'b1;
                 newBranch.prediction <= 1'b1;
             end
-            if(backwardJumpCounter == 2'b00 | 2'b01) begin //don't take backward jump
+            if(backwardJumpCounter <= 2'b01) begin //don't take backward jump
                 PCBPUSrc <= 1'b0;
                 newBranch.prediction <= 1'b0;
             end
@@ -57,7 +57,7 @@ always_ff @(posedge clk) begin
     end
 
     if(BranchE) begin //Branch instr 2 cycles later
-        oldBranch <= queue[0];
+        oldBranch <= branch_queue[0];
         if(oldBranch.prediction == ZeroE) begin //If jump decision was correct
             flushBranch <= 1'b0;
             if(oldBranch.direction == 1'b0)
