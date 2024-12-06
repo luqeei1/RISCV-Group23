@@ -15,7 +15,26 @@ Vtop::Vtop(VerilatedContext* _vcontextp__, const char* _vcname__)
     , rst{vlSymsp->TOP.rst}
     , a0{vlSymsp->TOP.a0}
     , a1{vlSymsp->TOP.a1}
+    , a2{vlSymsp->TOP.a2}
+    , a3{vlSymsp->TOP.a3}
+    , a4{vlSymsp->TOP.a4}
+    , a5{vlSymsp->TOP.a5}
+    , a6{vlSymsp->TOP.a6}
     , a7{vlSymsp->TOP.a7}
+    , a8{vlSymsp->TOP.a8}
+    , a9{vlSymsp->TOP.a9}
+    , a10{vlSymsp->TOP.a10}
+    , a11{vlSymsp->TOP.a11}
+    , a12{vlSymsp->TOP.a12}
+    , a13{vlSymsp->TOP.a13}
+    , a14{vlSymsp->TOP.a14}
+    , a15{vlSymsp->TOP.a15}
+    , a16{vlSymsp->TOP.a16}
+    , a17{vlSymsp->TOP.a17}
+    , a18{vlSymsp->TOP.a18}
+    , a19{vlSymsp->TOP.a19}
+    , a20{vlSymsp->TOP.a20}
+    , t1{vlSymsp->TOP.t1}
     , rootp{&(vlSymsp->TOP)}
 {
     // Register model with the context

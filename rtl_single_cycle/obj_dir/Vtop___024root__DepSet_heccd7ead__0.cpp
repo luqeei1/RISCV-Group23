@@ -177,12 +177,50 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
     if (__Vdlyvset__top__DOT__data_memory__DOT__ram_array__v11) {
         vlSelf->top__DOT__data_memory__DOT__ram_array[__Vdlyvdim0__top__DOT__data_memory__DOT__ram_array__v11] = 0U;
     }
-    vlSelf->a0 = vlSelf->top__DOT__regfile__DOT__registerfile_array
-        [0xaU];
-    vlSelf->a1 = vlSelf->top__DOT__regfile__DOT__registerfile_array
-        [0xbU];
+    vlSelf->a9 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x13U];
+    vlSelf->a8 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x12U];
     vlSelf->a7 = vlSelf->top__DOT__regfile__DOT__registerfile_array
         [0x11U];
+    vlSelf->a6 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x10U];
+    vlSelf->a5 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0xfU];
+    vlSelf->a3 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0xdU];
+    vlSelf->a1 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0xbU];
+    vlSelf->a0 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0xaU];
+    vlSelf->t1 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [9U];
+    vlSelf->a4 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0xeU];
+    vlSelf->a12 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x16U];
+    vlSelf->a2 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0xcU];
+    vlSelf->a10 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x14U];
+    vlSelf->a11 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x15U];
+    vlSelf->a13 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x17U];
+    vlSelf->a14 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x18U];
+    vlSelf->a15 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x19U];
+    vlSelf->a16 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x1aU];
+    vlSelf->a17 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x1bU];
+    vlSelf->a18 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x1cU];
+    vlSelf->a19 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x1dU];
+    vlSelf->a20 = vlSelf->top__DOT__regfile__DOT__registerfile_array
+        [0x1eU];
     vlSelf->top__DOT__instr = ((vlSelf->top__DOT__instruction_memory__DOT__rom_array
                                 [(0xffffU & ((IData)(3U) 
                                              + vlSelf->top__DOT__PC))] 
@@ -871,7 +909,7 @@ VL_INLINE_OPT QData Vtop___024root___change_request_1(Vtop___024root* vlSelf) {
     // Change detection
     QData __req = false;  // Logically a bool
     __req |= ((vlSelf->top__DOT__RD ^ vlSelf->__Vchglast__TOP__top__DOT__RD));
-    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__RD ^ vlSelf->__Vchglast__TOP__top__DOT__RD))) VL_DBG_MSGF("        CHANGE: top.sv:49: top.RD\n"); );
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__RD ^ vlSelf->__Vchglast__TOP__top__DOT__RD))) VL_DBG_MSGF("        CHANGE: top.sv:69: top.RD\n"); );
     // Final
     vlSelf->__Vchglast__TOP__top__DOT__RD = vlSelf->top__DOT__RD;
     return __req;
