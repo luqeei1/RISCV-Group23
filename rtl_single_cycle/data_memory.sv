@@ -21,7 +21,7 @@ module data_memory #(
     logic [7:0] ram_array [2**17 -1:0];
 
     initial begin
-        $readmemh("datamem.hex", ram_array, 17'h10000, 17'h1FFFF);
+        $readmemh("datamem.mem", ram_array, 17'h10000, 17'h1FFFF);
     end
    
 
