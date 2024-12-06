@@ -189,22 +189,27 @@ void Vtop___024root__trace_chg_sub_0(Vtop___024root* vlSelf, VerilatedVcd::Buffe
     bufp->chgIData(oldp+68,(vlSelf->a5),32);
     bufp->chgIData(oldp+69,(vlSelf->a6),32);
     bufp->chgIData(oldp+70,(vlSelf->a7),32);
-    bufp->chgIData(oldp+71,(vlSelf->a8),32);
-    bufp->chgIData(oldp+72,(vlSelf->a9),32);
-    bufp->chgIData(oldp+73,(vlSelf->a10),32);
-    bufp->chgIData(oldp+74,(vlSelf->a11),32);
-    bufp->chgIData(oldp+75,(vlSelf->a12),32);
-    bufp->chgIData(oldp+76,(vlSelf->a13),32);
-    bufp->chgIData(oldp+77,(vlSelf->a14),32);
-    bufp->chgIData(oldp+78,(vlSelf->a15),32);
-    bufp->chgIData(oldp+79,(vlSelf->a16),32);
-    bufp->chgIData(oldp+80,(vlSelf->a17),32);
-    bufp->chgIData(oldp+81,(vlSelf->a18),32);
-    bufp->chgIData(oldp+82,(vlSelf->a19),32);
-    bufp->chgIData(oldp+83,(vlSelf->a20),32);
-    bufp->chgIData(oldp+84,(vlSelf->t1),32);
-    bufp->chgIData(oldp+85,(vlSelf->top__DOT__RD),32);
-    bufp->chgIData(oldp+86,(vlSelf->top__DOT__Result),32);
+    bufp->chgIData(oldp+71,(vlSelf->t0),32);
+    bufp->chgIData(oldp+72,(vlSelf->t1),32);
+    bufp->chgIData(oldp+73,(vlSelf->t2),32);
+    bufp->chgIData(oldp+74,(vlSelf->t3),32);
+    bufp->chgIData(oldp+75,(vlSelf->t4),32);
+    bufp->chgIData(oldp+76,(vlSelf->t5),32);
+    bufp->chgIData(oldp+77,(vlSelf->t6),32);
+    bufp->chgIData(oldp+78,(vlSelf->s0),32);
+    bufp->chgIData(oldp+79,(vlSelf->s1),32);
+    bufp->chgIData(oldp+80,(vlSelf->s2),32);
+    bufp->chgIData(oldp+81,(vlSelf->s3),32);
+    bufp->chgIData(oldp+82,(vlSelf->s4),32);
+    bufp->chgIData(oldp+83,(vlSelf->s5),32);
+    bufp->chgIData(oldp+84,(vlSelf->s6),32);
+    bufp->chgIData(oldp+85,(vlSelf->s7),32);
+    bufp->chgIData(oldp+86,(vlSelf->s8),32);
+    bufp->chgIData(oldp+87,(vlSelf->s9),32);
+    bufp->chgIData(oldp+88,(vlSelf->s10),32);
+    bufp->chgIData(oldp+89,(vlSelf->s11),32);
+    bufp->chgIData(oldp+90,(vlSelf->top__DOT__RD),32);
+    bufp->chgIData(oldp+91,(vlSelf->top__DOT__Result),32);
 }
 
 void Vtop___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {
