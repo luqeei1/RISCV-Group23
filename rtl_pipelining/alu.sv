@@ -23,7 +23,6 @@ module alu #(
         4'b0111:    ALUResult = $signed(SrcA) >>> SrcB[4:0];                   //SRA
         4'b1000:    ALUResult = $signed(SrcA) < $signed(SrcB) ? 1 : 0;         // SLT
         4'b1001:    ALUResult = SrcA < SrcB ? 1 : 0;                           // SLTU
-        4'b1011:    ALUResult = SrcA != SrcB ? 1 : 0;                           // BNE
         default:    ALUResult = '0;
         endcase
     end
