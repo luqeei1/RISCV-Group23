@@ -18,7 +18,6 @@ Our group decided to maintain a single branch and push any changes to main to si
 | ALUDecoder.sv     |        |     |   **   |       |
 | controlUnit.sv     |        |     |   **   |       |
 | signExtend.sv     |        |     |    **  |       |
-|       |   X     |  X   |     |       |
 | testbench     |   X     |  X   |     |       |
 | DataMemoryTest.cpp    |   **     |    |     |       |
 
