@@ -645,15 +645,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
                                     ? ((4U & (IData)(vlSelf->top__DOT__ALUctrl))
                                         ? 0U : ((2U 
                                                  & (IData)(vlSelf->top__DOT__ALUctrl))
-                                                 ? 
-                                                ((1U 
-                                                  & (IData)(vlSelf->top__DOT__ALUctrl))
-                                                  ? 
-                                                 ((vlSelf->top__DOT__RD1 
-                                                   != vlSelf->top__DOT__SrcB)
-                                                   ? 1U
-                                                   : 0U)
-                                                  : 0U)
+                                                 ? 0U
                                                  : 
                                                 ((1U 
                                                   & (IData)(vlSelf->top__DOT__ALUctrl))
