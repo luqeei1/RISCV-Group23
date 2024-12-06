@@ -27,6 +27,7 @@ class Vtop VL_NOT_FINAL : public VerilatedModel {
     // propagate new values into/out from the Verilated model.
     VL_IN8(&clk,0,0);
     VL_IN8(&rst,0,0);
+    VL_IN8(&trigger,0,0);
     VL_OUT(&a0,31,0);
     VL_OUT(&a1,31,0);
     VL_OUT(&a2,31,0);
@@ -35,20 +36,25 @@ class Vtop VL_NOT_FINAL : public VerilatedModel {
     VL_OUT(&a5,31,0);
     VL_OUT(&a6,31,0);
     VL_OUT(&a7,31,0);
-    VL_OUT(&a8,31,0);
-    VL_OUT(&a9,31,0);
-    VL_OUT(&a10,31,0);
-    VL_OUT(&a11,31,0);
-    VL_OUT(&a12,31,0);
-    VL_OUT(&a13,31,0);
-    VL_OUT(&a14,31,0);
-    VL_OUT(&a15,31,0);
-    VL_OUT(&a16,31,0);
-    VL_OUT(&a17,31,0);
-    VL_OUT(&a18,31,0);
-    VL_OUT(&a19,31,0);
-    VL_OUT(&a20,31,0);
+    VL_OUT(&t0,31,0);
     VL_OUT(&t1,31,0);
+    VL_OUT(&t2,31,0);
+    VL_OUT(&t3,31,0);
+    VL_OUT(&t4,31,0);
+    VL_OUT(&t5,31,0);
+    VL_OUT(&t6,31,0);
+    VL_OUT(&s0,31,0);
+    VL_OUT(&s1,31,0);
+    VL_OUT(&s2,31,0);
+    VL_OUT(&s3,31,0);
+    VL_OUT(&s4,31,0);
+    VL_OUT(&s5,31,0);
+    VL_OUT(&s6,31,0);
+    VL_OUT(&s7,31,0);
+    VL_OUT(&s8,31,0);
+    VL_OUT(&s9,31,0);
+    VL_OUT(&s10,31,0);
+    VL_OUT(&s11,31,0);
 
     // CELLS
     // Public to allow access to /* verilator public */ items.

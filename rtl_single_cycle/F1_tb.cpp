@@ -24,15 +24,18 @@ int main(int argc, char **argv, char **env) {
   // initialise Vbuddy
   if (vbdOpen()!=1) return(-1);
   vbdHeader("F1: LED Pattern");
-  vbdSetMode(0);        // Set to continuous mode
+  vbdSetMode(1);        // Set to button mode
 
   // initialise simulation inputs
   top->clk = 1;
   top->rst = 0;
-  //top->trigger = 0;
-  
+  top->trigger = 0;
+
   // run simulation for MAX_SIM_CYC clock cycles
   for (simcyc=0; simcyc<MAX_SIM_CYC; simcyc++) {
+    // Move this line inside the loop
+    top->trigger = vbdFlag();         // Get button state before clock edge
+    
     // dump variables into VCD file and toggle clock
     for (tick=0; tick<2; tick++) {
       tfp->dump (2*simcyc+tick);
@@ -40,13 +43,12 @@ int main(int argc, char **argv, char **env) {
       top->eval ();
     }
 
-    // Display pattern on VBuddy
-      vbdBar(top->a0 & 0xFF);          // Display value from a1 register
-      pattern = top->a0;        // Save current pattern
-
+    // Display pattern on VBuddy and get button state
+    vbdBar(top->a0 & 0xFF);          // Display LED pattern
+    pattern = top->a0;                // Save current pattern
 
     // set up input signals of testbench
-    top->rst = (simcyc < 3);    // assert reset for 1st cycle
+    top->rst = (simcyc < 3);          // assert reset for 1st cycle
     vbdCycle(simcyc);
 
     if (Verilated::gotFinish())  exit(0);
