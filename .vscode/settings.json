@@ -3,6 +3,7 @@
         "any": "cpp",
         "memory": "cpp",
         "random": "cpp",
-        "optional": "cpp"
+        "optional": "cpp",
+        "cstdlib": "cpp"
     }
 }
