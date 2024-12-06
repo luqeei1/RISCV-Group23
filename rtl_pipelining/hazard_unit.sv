@@ -9,9 +9,7 @@ module hazard_unit #(
     input logic RegWriteM,
     input logic RegWriteW,
     input logic MemReadE,
-    input logic branch,
-    input logic branchResolved,
-    input logic flushHazard,
+    input logic flushBranch,
     output logic [1:0] ForwardAE,
     output logic [1:0] ForwardBE,
     output logic stall,
@@ -47,7 +45,7 @@ module hazard_unit #(
         stall = (MemReadE && ((RdE == Rs1E) || (RdE == Rs2E)));
 
         // flush if: (1) stall occurs, (2) branch instruction and prediction is wrong
-        flush = stall || flush_branch;
+        flush = stall || flushBranch;
     
     end
 
