@@ -1,35 +1,50 @@
+# s0: current state
+# s1: target value
+# s2: output state
+# s3: delay counter
+# t0: temporary register
+
 .text
 .globl main
 
 main:
-    JAL ra, init            # jump to init and save return address in ra
-    j   main                # unconditional jump back to main
+    JAL ra, init
+    j   main
 
 init:
-    li s0, 0x0        # s0 holds the current state
-    li s1, 0xff       # s1 holds the target value
-    li s2, 0x0       # s2 outputs the current state
-    li s3, 0x4       # s3 controls the delay counter
+    lui t0, 0x0
+    addi t0, t0, 0x0
+    si t0, 0x0
+
+    lui t0, 0x0
+    addi t0, t0, 0xff
+    si t0, 0x4
+
+    lui t0, 0x0
+    addi t0, t0, 0x0
+    si t0, 0x8
+
+    lui t0, 0x0
+    addi t0, t0, 0x4
+    si t0, 0xc
+
+    li s0, 0x0
+    li s1, 0x4 
+    li s2, 0x8
+    li s3, 0xc      
 
 loopi:
-    slli s0, s0, 1
+    slli s0, s0, 1 
     addi s0, s0, 1
-    and  s2, s1, s0 
-
-    mv a1, s2
-    li a7, 0x31         # Vbuddy ecall mode pre-specified in vbuddy.cpp
-    ecall               # Vbuddy display
+    and s2, s1, s0
+    si s2, 0x8
 
 wait:
-    addi s3, s3, -1
-    bne s3, zero, wait
-    addi s3, zero, 0x4
-    bne s1, s0, loopi       # if s1 != s0, jump to loopi and keep turning lights on
-    addi s2, zero, 0        # if s1 == s0, turn off all lights
-
-    mv a1, s2
-    li a7, 0x31
-    ecall 
-
+    addi s3, s3, -1 
+    bne s3, zero, wait 
+    lui t0, 0x0
+    addi s3, t0, 0x4 
+    bne s1, s0, loopi
+    addi s2, zero, 0
+    si s2, 0x8
     ret
-    
