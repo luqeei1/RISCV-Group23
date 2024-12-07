@@ -11,7 +11,7 @@ logic [7:0] rom_array [2**16 - 1 : 0];
 
 initial begin
     $display("Loading rom.");
-    $readmemh("InstructionFiles/Test3.hex", rom_array);     
+    $readmemh("InstructionFiles/Test4.hex", rom_array);     
     $display("ROM loaded successfully.");
 end
 
