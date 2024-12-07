@@ -97,6 +97,8 @@ always_comb begin
                         begin // load unsigned byte
                             RD = {{24'b0},ram_array[{A[16:2],2'b0}]};
                             Result = RD;
+                            $display{"Loading: "};
+                            $dispaly{RD};
                         end 
                     default:
                         Result = RD;
