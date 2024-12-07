@@ -69,8 +69,6 @@ module ptop#(
     logic [WIDTH-1:0] PCPlus4W;
 
     // Control signals
-    logic [1:0] PCSrc_D;
-    logic [1:0] PCSrc_E;
     logic [WIDTH-1:0] ExtImmD;
     logic [WIDTH-1:0] ExtImmE;
     logic [2:0] ImmSrcD;
@@ -144,7 +142,8 @@ module ptop#(
     PC_mux PC_mux (
         .PCPlus4F(PCPlus4F),
         .PCTarget(PCE + ExtImmE),  // Branch/Jump target from Execute stage
-        .PCSrc(PCSrc_E),
+        .JumpE(JumpE),
+        .BranchE(BranchE),
         .ZeroE(Zero),
         .ALUResult(ALUResult),
         .PC(PC)
@@ -328,7 +327,7 @@ module ptop#(
         .ResultSrcE(ResultSrcE),
         .MemWriteE(MemWriteE),
         .JumpE(JumpE),
-        .BranchE(Branche),
+        .BranchE(BranchE),
         .ALUControlE(ALUControlE),
         .ALUSrcE(ALUSrcE),
         .RD1E(RD1E),
