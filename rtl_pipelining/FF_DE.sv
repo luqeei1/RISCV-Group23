@@ -35,7 +35,9 @@ module FF_DE #(
     input logic [DATA_WIDTH-1:0] ExtImmD,
     output logic [DATA_WIDTH-1:0] ExtImmE,
     input logic [DATA_WIDTH-1:0] PCPlus4D,
-    output logic [DATA_WIDTH-1:0] PCPlus4E
+    output logic [DATA_WIDTH-1:0] PCPlus4E,
+    input logic [2:0] modeBUD,
+    output logic [2:0] modeBUE
 );
 
 always_ff @(posedge clk) begin
@@ -47,7 +49,8 @@ always_ff @(posedge clk) begin
         JumpE <= 1'b0;                  
         BranchE <= 1'b0;                 
         ALUControlE <= 4'b0000;         
-        ALUSrcE <= 1'b0;                 
+        ALUSrcE <= 1'b0;      
+        modeBUE <= 3'b000;           
 
         RD1E <= {DATA_WIDTH{1'b0}};
         RD2E <= {DATA_WIDTH{1'b0}};
@@ -76,6 +79,7 @@ always_ff @(posedge clk) begin
         RdE <= RdD;
         ExtImmE <= ExtImmD;
         PCPlus4E <= PCPlus4D;
+        modeBUE <= modeBUD;
     end
 end
 endmodule

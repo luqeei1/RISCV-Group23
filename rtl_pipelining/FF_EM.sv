@@ -16,7 +16,9 @@ module FF_EM #(
     input logic [WIDTH-1:0] RdE,
     output logic [WIDTH-1:0] RdM,
     input logic [DATA_WIDTH-1:0] PCPlus4E,
-    output logic [DATA_WIDTH-1:0] PCPlus4M
+    output logic [DATA_WIDTH-1:0] PCPlus4M,
+    input logic [2:0] modeBUE,
+    output logic [2:0] modeBUM
 );
 
 always_ff @(posedge clk) begin
@@ -27,6 +29,7 @@ always_ff @(posedge clk) begin
     WriteDataM <= WriteDataE;
     RdM <= RdE;
     PCPlus4M <= PCPlus4E;
+    modeBUM <= modeBUE;
 end
 
 endmodule
