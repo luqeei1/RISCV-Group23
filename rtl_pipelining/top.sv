@@ -215,14 +215,13 @@ module ptop#(
     // Control Unit
     controlUnit control_unit (
         .Instr(InstrD),
-        .PCSrc(PCSrc_D),
         .ResultSrcD(ResultSrcD),
         .MemWriteD(MemWriteD),
         .ALUControlD(ALUControlD),
         .ALUSrcD(ALUSrcD),
         .ImmSrcD(ImmSrcD),
         .RegWriteD(RegWriteD),
-        .modeBU(modeBU),
+        .modeBUD(modeBUD),
         .BranchD(BranchD),
         .JumpD(JumpD),
         .MemReadD(MemReadD)
@@ -263,7 +262,7 @@ module ptop#(
 
     // ALU
     alu alu (
-        .Zero(Zero),
+        .ZeroE(ZeroE),
         .ALUResult(ALUResult),
         .SrcA(RD1E),
         .SrcB(ALUSrcE ? ExtImmE : RD2E),
