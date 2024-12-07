@@ -39,14 +39,13 @@ module ptop#(
     // FF_FD
     logic [WIDTH-1:0] PCF, PCPlus4F;
     logic [WIDTH-1:0] InstrF;
-    logic [WIDTH-1:0] PCF_D, PCPlus4F_D;
+    logic [WIDTH-1:0] PCD, PCPlus4D;
     logic [WIDTH-1:0] InstrD;
 
     // FF_DE
     logic [WIDTH-1:0] RD1E, RD2E;
     logic [WIDTH-1:0] PCE, PCPlus4E;
     logic [4:0] RdE;
-    logic [WIDTH-1:0] ImmExtE;
     logic RegWriteE, ALUSrcE, MemWriteE;
     logic [1:0] ResultSrcE;
     logic [3:0] ALUCtrlE;
@@ -70,16 +69,26 @@ module ptop#(
     logic [WIDTH-1:0] PCPlus4W;
 
     // Control signals
-    logic [1:0] PCSrc;
-    logic [WIDTH-1:0] ExtImm;
-    logic [2:0] ImmSrc;
-    logic RegWrite;
-    logic [3:0] ALUctrl;
-    logic ALUSrc;
-    logic [1:0] ResultSrc;
-    logic MemWrite;
+    logic [1:0] PCSrc_D;
+    logic [1:0] PCSrc_E;
+    logic [WIDTH-1:0] ExtImmD;
+    logic [WIDTH-1:0] ExtImmE;
+    logic [2:0] ImmSrcD;
+    logic RegWriteD;
+    logic [3:0] ALUcontrolD;
+    logic ALUSrcD;
+    logic [1:0] ResultSrcD;
+    logic MemWriteD;
     logic [2:0] modeBU;
     logic Zero;
+    logic MemReadD;
+    logic MemReadE;
+
+    logic JumpD;
+    logic JumpE;
+    logic BranchD;
+    logic BranchE;
+
 
     // Datapath signals
     logic [WIDTH-1:0] RD1, RD2;
@@ -88,55 +97,21 @@ module ptop#(
     logic [WIDTH-1:0] Result;
     logic [WIDTH-1:0] SrcA, SrcB;
 
-    // Pipeline Register
-    always_ff @(posedge clk) begin
-        if (rst) begin
-            // Reset all pipeline registers
-            {PCF_D, InstrD, PCPlus4F_D} <= '0;
-            {RD1E, RD2E, PCE, RdE, ImmExtE, RegWriteE, ALUSrcE, MemWriteE, ResultSrcE, ALUCtrlE, modeBUE, PCPlus4E} <= '0;
-            {ALUResultM, WriteDataM, RdM, RegWriteM, MemWriteM, ResultSrcM, modeBUM, PCPlus4M} <= '0;
-            {ALUResultW, ReadDataW, RdW, RegWriteW, ResultSrcW, PCPlus4W} <= '0;
-        end else begin
-            // FD Register
-            PCF_D <= PCF;
-            InstrD <= InstrF;
-            PCPlus4F_D <= PCPlus4F;
+    // Hazard Unit
+    logic ForwardAE;
+    logic ForwardBE;
+    logic flush;
+    logic stall;
 
-            // DE Register
-            RD1E <= RD1;
-            RD2E <= RD2;
-            PCE <= PCF_D;
-            RdE <= InstrD[11:7];
-            ImmExtE <= ExtImm;
-            RegWriteE <= RegWrite;
-            ALUSrcE <= ALUSrc;
-            MemWriteE <= MemWrite;
-            ResultSrcE <= ResultSrc;
-            ALUCtrlE <= ALUctrl;
-            modeBUE <= modeBU;
-            PCPlus4E <= PCPlus4F_D;
+    // Branch Prediction Unit
+    logic flushBranch;
+    logic BPU_Src;
+    logic [WIDTH-1:0] PC_predict;
+    logic PC_next;
 
-            // EM Register
-            ALUResultM <= ALUResult;
-            WriteDataM <= RD2E;
-            RdM <= RdE;
-            RegWriteM <= RegWriteE;
-            MemWriteM <= MemWriteE;
-            ResultSrcM <= ResultSrcE;
-            modeBUM <= modeBUE;
-            PCPlus4M <= PCPlus4E;
+    assign PCPlus4F = PCF + 4;
 
-            // MW Register
-            ALUResultW <= ALUResultM;
-            ReadDataW <= RD;
-            RdW <= RdM;
-            RegWriteW <= RegWriteM;
-            ResultSrcW <= ResultSrcM;
-            PCPlus4W <= PCPlus4M;
-        end
-    end
-
-        // Hazard Unit
+    // Hazard Unit
     hazard_unit hazard_unit (
         .RdM(RdM),
         .RdW(RdW),
@@ -145,23 +120,50 @@ module ptop#(
         .Rs2E(Rs2E),
         .RegWriteM(RegWriteM),
         .RegWriteW(RegWriteW),
-        .MemReadE(ResultSrcE[0]),
-        .flushBranch(PCSrcE),
+        .MemReadE(MemReadE),
+        .flushBranch(flushBranch),
         .ForwardAE(ForwardAE),
         .ForwardBE(ForwardBE),
         .stall(stall),
         .flush(flush)
     );
 
-    // Program Counter
-    program_counter pc (
+    BPU branch_prediction_unit (
         .clk(clk),
-        .rst(rst),
+        .RD(RD),
+        .PCF(PCF),
+        .ZeroE(ZeroE),
+        .BranchE(BranchE),
+        
+        .flushBranch(flushBranch),
+        .PCBPU(PC_predict),
+        .PCBPUSrc(BPU_Src)
+    );
+
+    // Program Counter
+    PC_mux PC_mux (
         .PCPlus4F(PCPlus4F),
-        .PCTarget(PCE + ImmExtE),  // Branch/Jump target from Execute stage
-        .PCSrc(PCSrc),
+        .PCTarget(PCE + ExtImmE),  // Branch/Jump target from Execute stage
+        .PCSrc(PCSrc_E),
         .ZeroE(Zero),
         .ALUResult(ALUResult),
+        .PC(PC)
+    );
+
+    mux2 BPU_mux (
+        .sel(BPU_Src),
+        .in0(PC),
+        .in1(PC_predict),
+
+        .out(PC_next)
+    );
+
+    program_counter program_counter (
+        .clk(clk),
+        .rst(rst),
+        .PC(PC_next),
+        .stall(stall),
+
         .PCF(PCF)
     );
 
@@ -213,21 +215,50 @@ module ptop#(
     // Control Unit
     controlUnit control_unit (
         .Instr(InstrD),
-        .PCSrc(PCSrc),
-        .ResultSrc(ResultSrc),
-        .MemWrite(MemWrite),
-        .ALUCtrl(ALUctrl),
-        .ALUSrc(ALUSrc),
-        .ImmSrc(ImmSrc),
-        .RegWrite(RegWrite),
-        .modeBU(modeBU)
+        .PCSrc(PCSrc_D),
+        .ResultSrcD(ResultSrcD),
+        .MemWriteD(MemWriteD),
+        .ALUControlD(ALUControlD),
+        .ALUSrcD(ALUSrcD),
+        .ImmSrcD(ImmSrcD),
+        .RegWriteD(RegWriteD),
+        .modeBU(modeBU),
+        .BranchD(BranchD),
+        .JumpD(JumpD),
+        .MemReadD(MemReadD)
     );
 
     // Sign Extend
     signExtend sign_extend (
         .ImmSrc(ImmSrc),
         .ImmInput(InstrD),
-        .ImmExt(ExtImm)
+        .ImmExtD(ExtImmD)
+    );
+
+    mux3 forwardAE_mux (
+        .sel(ForwardAE),
+        .in0(RD1E),
+        .in1(ResultW),
+        .in2(ALUResultM),
+
+        .out(SrcA)
+    );
+
+    mux3 forwardBE_mux (
+        .sel(ForwardBE),
+        .in0(RD2E),
+        .in1(ResultW),
+        .in2(ALUResultM),
+
+        .out(WriteDataE)
+    );
+
+    mux2 alu_SrcBE_mux (
+        .sel(ALUSrcE),
+        .in0(WriteDataE),
+        .in1(ExtImmE),
+
+        .out(SrcBE)
     );
 
     // ALU
@@ -235,8 +266,8 @@ module ptop#(
         .Zero(Zero),
         .ALUResult(ALUResult),
         .SrcA(RD1E),
-        .SrcB(ALUSrcE ? ImmExtE : RD2E),
-        .ALUctrl(ALUCtrlE)
+        .SrcB(ALUSrcE ? ExtImmE : RD2E),
+        .ALUctrl(ALUControlE)
     );
 
     // Data Memory
@@ -260,5 +291,94 @@ module ptop#(
         .in2(PCPlus4W),
         .out(Result)
     );
+
+    FF_FD pipeline_FD(
+        .clk(clk),
+        .RD(InstrF),
+        .PCF(PCF),
+        .PCPlus4F(PCPlus4F),
+        .flush(flush),
+        .stall(stall),
+
+        .InstrD(InstrD),
+        .PCD(PCD),
+        .PCPlus4D(PCPlus4D)
+    );
+
+    FF_DE pipeline_DE (
+        .clk(clk),
+        .flush(flush),
+        .RegWriteD(RegWriteD),
+        .ResultSrcD(ResultSrcD),
+        .MemWriteD(MemWriteD),
+        .JumpD(JumpD),
+        .BranchD(BranchD),
+        .ALUControlD(ALUControlD),
+        .ALUSrcD(ALUSrcD),
+        .RD1(RD1),
+        .RD2(RD2),
+        .PCD(PCD),
+        .Rs1D(Rs1D),
+        .Rs2D(Rs2D),
+        .RdD(RdD),
+        .ExtImmD(ExtImmD),
+        .PCPlus4D(PCPlus4D),
+        .MemReadD(MemReadD),
+
+        .RegWriteE(RegWriteE),
+        .ResultSrcE(ResultSrcE),
+        .MemWriteE(MemWriteE),
+        .JumpE(JumpE),
+        .BranchE(Branche),
+        .ALUControlE(ALUControlE),
+        .ALUSrcE(ALUSrcE),
+        .RD1E(RD1E),
+        .RD2E(RD2E),
+        .PCE(PCE),
+        .Rs1E(Rs1E),
+        .Rs2E(Rs2E),
+        .RdE(RdE),
+        .ExtImmE(ExtImmE),
+        .PCPlus4E(PCPlus4E),
+        .MemReadE(MemReadE)
+    );
+
+    FF_EM pipeline_EM (
+       .clk(clk),
+       .RegWriteE(RegWriteE),
+       .ResultSrcE(ResultSrcE),
+       .MemWriteE(MemWriteE),
+       .ALUResult(ALUResult),
+       .WriteDataE(WriteDataE),
+       .RdE(RdE),
+       .PCPlus4E(PCPlus4E),
+
+       .RegWriteM(RegWriteM),
+       .ResultSrcM(ResultSrcM),
+       .MemWriteM(MemWriteM),
+       .ALUResultM(ALUResultM),
+       .WriteDataM(WriteDataM),
+       .RdM(RdM),
+       .PCPlus4M(PCPlus4M)
+    );
+
+    FF_MW pipeline_MW (
+        .clk(clk),
+        .RegWriteM(RegWriteM),
+        .ResultSrcM(ResultSrcM),
+        .ALUResultM(ALUResultM),
+        .RD(RD),
+        .RdM(RdM),
+        .PCPlus4M(PCPlus4M),
+
+        .RegWriteW(RegWriteW),
+        .ResultSrcW(ResultSrcW),
+        .ALUResultW(ALUResultW),
+        .RD(RD),
+        .ReadDataW(ReadDataW),
+        .RdW(RdW),
+        .PCPlus4W(PCPlus4W)
+    );
+
         
 endmodule
