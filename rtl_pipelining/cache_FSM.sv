@@ -1,5 +1,6 @@
 /* verilator lint_off UNOPTFLAT */
 /* verilator lint_off ALWCOMBORDER */
+
 `include "cache_data_structs.sv"
 
 module cache_FSM(
@@ -9,10 +10,49 @@ module cache_FSM(
     output response_type cpu_resp,
 
     input response_type mem_resp,
-    output request_type mem_req
-);
+    output request_type mem_req,
 
+    //ONLY FOR TESTING ***** 
+    // EXPOSING PORTS because verilator public not supported for typedef struct 
+    output logic [TAG_MSB:TAG_LSB] cache_mem_tag [0:SETS-1],
+    output logic cache_mem_dirty [0:SETS-1],
+    output logic cache_mem_valid [0:SETS-1],
+    output logic [63:0] cache_mem_data [0:SETS-1],
+    
+    output logic [31:0] cpu_req_addr,
+    output logic [31:0] cpu_req_data,
+    output logic [1:0] cpu_req_op,
+    output logic [3:0] cpu_req_mode_addr,
+    output logic cpu_req_valid,
+
+    output logic [31:0] cpu_resp_data,
+    output logic cpu_resp_ready,
+    output logic [31:0] mem_resp_data,
+    output logic mem_resp_ready
+);
     cache_block_type cache_mem [0:SETS-1];
+
+    //ONLY FOR TESTING *****
+    assign cpu_req_addr = cpu_req.addr;
+    assign cpu_req_data = cpu_req.data;
+    assign cpu_req_op = cpu_req.op;
+    assign cpu_req_mode_addr = cpu_req.mode_addr;
+    assign cpu_req_vaild = cpu_req.valid;
+
+    assign cpu_resp_data = cpu_resp.data;
+    assign cpu_resp_ready = cpu_resp.ready;
+    assign mem_resp_ready = mem_resp.ready;
+    assign mem_resp_ready = mem_resp.ready;
+
+    //ONLY FOR TESTING *****
+    generate
+        for(genvar i=0;i<SETS;i++) begin
+            assign cache_mem_tag[i] = cache_mem[i].tag;
+            assign cache_mem_dirty[i] = cache_mem[i].dirty;
+            assign cache_mem_valid[i] = cache_mem[i].valid;
+            assign cache_mem_data[i] = cache_mem[i].data;
+        end
+    endgenerate
 
     typedef enum {IDLE, COMPARE_TAG, ALLOCATE, WRITE_BACK} cache_state;
     cache_state current_state, next_state;
