@@ -1,0 +1,45 @@
+
+a.out.reloc:     file format elf32-littleriscv
+architecture: riscv:rv32, flags 0x00000112:
+EXEC_P, HAS_SYMS, D_PAGED
+start address 0xbfc00000
+
+
+Disassembly of section .text:
+
+bfc00000 <main>:
+bfc00000:	00000513          	li	a0,0
+bfc00004:	00000597          	auipc	a1,0x0
+bfc00008:	05c58593          	addi	a1,a1,92 # bfc00060 <seed>
+bfc0000c:	0ff00713          	li	a4,255
+
+bfc00010 <wait_trigger>:
+bfc00010:	10002783          	lw	a5,256(zero) # 100 <main-0xbfbfff00>
+bfc00014:	0017f793          	andi	a5,a5,1
+bfc00018:	fe078ce3          	beqz	a5,bfc00010 <wait_trigger>
+
+bfc0001c <shift_loop>:
+bfc0001c:	00151513          	slli	a0,a0,0x1
+bfc00020:	00156513          	ori	a0,a0,1
+bfc00024:	0005a603          	lw	a2,0(a1)
+bfc00028:	000046b7          	lui	a3,0x4
+bfc0002c:	1a768693          	addi	a3,a3,423 # 41a7 <main-0xbfbfbe59>
+bfc00030:	02d60633          	mul	a2,a2,a3
+bfc00034:	3e560613          	addi	a2,a2,997
+bfc00038:	00c5a023          	sw	a2,0(a1)
+bfc0003c:	00865693          	srli	a3,a2,0x8
+bfc00040:	00868693          	addi	a3,a3,8
+
+bfc00044 <delay_loop>:
+bfc00044:	fff68693          	addi	a3,a3,-1
+bfc00048:	fe069ee3          	bnez	a3,bfc00044 <delay_loop>
+bfc0004c:	0ff57513          	zext.b	a0,a0
+bfc00050:	00e50463          	beq	a0,a4,bfc00058 <reset>
+bfc00054:	fc0004e3          	beqz	zero,bfc0001c <shift_loop>
+
+bfc00058 <reset>:
+bfc00058:	00000513          	li	a0,0
+bfc0005c:	fa000ae3          	beqz	zero,bfc00010 <wait_trigger>
+
+bfc00060 <seed>:
+bfc00060:	00003039          	.word	0x00003039

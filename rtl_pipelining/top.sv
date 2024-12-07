@@ -1,7 +1,10 @@
 /* verilator lint_off UNOPTFLAT */
 /* verilator lint_off UNUSED */
 /* verilator lint_off CASEINCOMPLETE */
-module ptop#(
+/* verilator lint_off PINMISSING */
+/* verilator lint_off MULTITOP */ 
+
+module top#(
     parameter WIDTH = 32    
 )(
     input logic clk,
@@ -38,6 +41,7 @@ module ptop#(
     // Pipeline Registers
     // FF_FD
     logic [WIDTH-1:0] PCF, PCPlus4F;
+    logic [WIDTH-1:0] PC;
     logic [WIDTH-1:0] InstrF;
     logic [WIDTH-1:0] PCD, PCPlus4D;
     logic [WIDTH-1:0] InstrD;
@@ -48,8 +52,9 @@ module ptop#(
     logic [4:0] RdE;
     logic RegWriteE, ALUSrcE, MemWriteE;
     logic [1:0] ResultSrcE;
-    logic [3:0] ALUCtrlE;
+    logic [3:0] ALUControlE;
     logic [2:0] modeBUE;
+    logic [WIDTH-1:0] WriteDataE;
 
     // FF_EM
     logic [WIDTH-1:0] ALUResultM;
@@ -73,12 +78,12 @@ module ptop#(
     logic [WIDTH-1:0] ExtImmE;
     logic [2:0] ImmSrcD;
     logic RegWriteD;
-    logic [3:0] ALUcontrolD;
+    logic [3:0] ALUControlD;
     logic ALUSrcD;
     logic [1:0] ResultSrcD;
     logic MemWriteD;
     logic [2:0] modeBU;
-    logic Zero;
+    logic ZeroE;
     logic MemReadD;
     logic MemReadE;
 
@@ -87,7 +92,6 @@ module ptop#(
     logic BranchD;
     logic BranchE;
 
-
     // Datapath signals
     logic [WIDTH-1:0] RD1, RD2;
     logic [WIDTH-1:0] ALUResult;
@@ -95,9 +99,17 @@ module ptop#(
     logic [WIDTH-1:0] Result;
     logic [WIDTH-1:0] SrcA, SrcB;
 
+    logic [4:0] Rs1D;
+    logic [4:0] Rs2D;
+    logic [4:0] RdD;
+    logic [4:0] Rs1E;
+    logic [4:0] Rs2E;
+    logic [WIDTH-1:0] ResultW;
+    logic [WIDTH-1:0] SrcBE;
+
     // Hazard Unit
-    logic ForwardAE;
-    logic ForwardBE;
+    logic [1:0] ForwardAE;
+    logic [1:0] ForwardBE;
     logic flush;
     logic stall;
 
@@ -105,7 +117,7 @@ module ptop#(
     logic flushBranch;
     logic BPU_Src;
     logic [WIDTH-1:0] PC_predict;
-    logic PC_next;
+    logic [WIDTH-1:0] PC_next;
 
     assign PCPlus4F = PCF + 4;
 
@@ -144,7 +156,7 @@ module ptop#(
         .PCTarget(PCE + ExtImmE),  // Branch/Jump target from Execute stage
         .JumpE(JumpE),
         .BranchE(BranchE),
-        .ZeroE(Zero),
+        .ZeroE(ZeroE),
         .ALUResult(ALUResult),
         .PC(PC)
     );
@@ -153,7 +165,6 @@ module ptop#(
         .sel(BPU_Src),
         .in0(PC),
         .in1(PC_predict),
-
         .out(PC_next)
     );
 
@@ -162,12 +173,11 @@ module ptop#(
         .rst(rst),
         .PC(PC_next),
         .stall(stall),
-
         .PCF(PCF)
     );
 
     // Instruction Memory
-    instructionMemory instruction_memory (
+    instruction_memory instruction_memory (
         .instr(InstrF),
         .PC(PCF)
     );
@@ -213,14 +223,14 @@ module ptop#(
 
     // Control Unit
     controlUnit control_unit (
-        .Instr(InstrD),
+        .InstrD(InstrD),
         .ResultSrcD(ResultSrcD),
         .MemWriteD(MemWriteD),
         .ALUControlD(ALUControlD),
         .ALUSrcD(ALUSrcD),
         .ImmSrcD(ImmSrcD),
         .RegWriteD(RegWriteD),
-        .modeBUD(modeBUD),
+        .modeBUD(modeBU),
         .BranchD(BranchD),
         .JumpD(JumpD),
         .MemReadD(MemReadD)
@@ -228,9 +238,9 @@ module ptop#(
 
     // Sign Extend
     signExtend sign_extend (
-        .ImmSrc(ImmSrc),
+        .ImmSrc(ImmSrcD),
         .ImmInput(InstrD),
-        .ImmExtD(ExtImmD)
+        .ImmExt(ExtImmD)
     );
 
     mux3 forwardAE_mux (
@@ -238,7 +248,7 @@ module ptop#(
         .in0(RD1E),
         .in1(ResultW),
         .in2(ALUResultM),
-
+        
         .out(SrcA)
     );
 
@@ -287,6 +297,7 @@ module ptop#(
         .in0(ALUResultW),
         .in1(ReadDataW),
         .in2(PCPlus4W),
+        
         .out(Result)
     );
 
@@ -372,11 +383,9 @@ module ptop#(
         .RegWriteW(RegWriteW),
         .ResultSrcW(ResultSrcW),
         .ALUResultW(ALUResultW),
-        .RD(RD),
         .ReadDataW(ReadDataW),
         .RdW(RdW),
         .PCPlus4W(PCPlus4W)
     );
 
-        
 endmodule

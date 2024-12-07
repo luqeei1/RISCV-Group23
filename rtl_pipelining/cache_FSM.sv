@@ -37,7 +37,7 @@ module cache_FSM(
     assign cpu_req_data = cpu_req.data;
     assign cpu_req_op = cpu_req.op;
     assign cpu_req_mode_addr = cpu_req.mode_addr;
-    assign cpu_req_vaild = cpu_req.valid;
+    assign cpu_req_valid = cpu_req.valid;
 
     assign cpu_resp_data = cpu_resp.data;
     assign cpu_resp_ready = cpu_resp.ready;

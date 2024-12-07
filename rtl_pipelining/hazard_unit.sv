@@ -17,8 +17,8 @@ module hazard_unit #(
 );
 
     always_comb begin
-        forwardAE = 2'b00;
-        forwardBE = 2'b00;
+        ForwardAE = 2'b00;
+        ForwardBE = 2'b00;
         stall = 1'b0;
 
         /* forwardAE
