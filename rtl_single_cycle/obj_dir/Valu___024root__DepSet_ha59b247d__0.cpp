@@ -14,18 +14,17 @@ VL_INLINE_OPT void Valu___024root___combo__TOP__0(Valu___024root* vlSelf) {
     vlSelf->ALUResult = ((8U & (IData)(vlSelf->ALUctrl))
                           ? ((4U & (IData)(vlSelf->ALUctrl))
                               ? 0U : ((2U & (IData)(vlSelf->ALUctrl))
-                                       ? ((1U & (IData)(vlSelf->ALUctrl))
-                                           ? ((vlSelf->SrcA 
-                                               != vlSelf->SrcB)
-                                               ? 1U
-                                               : 0U)
-                                           : 0U) : 
-                                      ((1U & (IData)(vlSelf->ALUctrl))
-                                        ? ((vlSelf->SrcA 
-                                            < vlSelf->SrcB)
-                                            ? 1U : 0U)
-                                        : (VL_LTS_III(32, vlSelf->SrcA, vlSelf->SrcB)
-                                            ? 1U : 0U))))
+                                       ? 0U : ((1U 
+                                                & (IData)(vlSelf->ALUctrl))
+                                                ? (
+                                                   (vlSelf->SrcA 
+                                                    < vlSelf->SrcB)
+                                                    ? 1U
+                                                    : 0U)
+                                                : (
+                                                   VL_LTS_III(32, vlSelf->SrcA, vlSelf->SrcB)
+                                                    ? 1U
+                                                    : 0U))))
                           : ((4U & (IData)(vlSelf->ALUctrl))
                               ? ((2U & (IData)(vlSelf->ALUctrl))
                                   ? ((1U & (IData)(vlSelf->ALUctrl))
@@ -64,7 +63,7 @@ VL_INLINE_OPT void Valu___024root___combo__TOP__0(Valu___024root* vlSelf) {
                         : (((IData)(vlSelf->ALUctrl) 
                             >> 1U) & ((1U & (IData)(vlSelf->ALUctrl))
                                        ? (vlSelf->SrcA 
-                                          == vlSelf->SrcB)
+                                          != vlSelf->SrcB)
                                        : (vlSelf->SrcA 
                                           == vlSelf->SrcB)))));
 }

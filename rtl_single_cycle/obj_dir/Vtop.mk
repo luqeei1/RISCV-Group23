@@ -41,7 +41,11 @@ VM_USER_LDLIBS = \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
+<<<<<<< HEAD
 	F1_tb \
+=======
+	Test3 \
+>>>>>>> bff40f6b4359a2541f7da3f69b1a5e025f83b166
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
@@ -57,7 +61,11 @@ include $(VERILATOR_ROOT)/include/verilated.mk
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
+<<<<<<< HEAD
 F1_tb.o: ../F1_tb.cpp
+=======
+Test3.o: ../Test3.cpp
+>>>>>>> bff40f6b4359a2541f7da3f69b1a5e025f83b166
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)
