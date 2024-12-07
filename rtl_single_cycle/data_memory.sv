@@ -23,7 +23,7 @@ module data_memory #(
 
     initial begin
         $display("Loading ram.");
-        $readmemh("datamem.mem", ram_array, 17'h00000, 17'h1FFFF);
+        $readmemh("InstructionFiles/Test3.hex", ram_array, 17'h00000, 17'h1FFFF);
         $display("Ram loaded");
     end
    
@@ -35,63 +35,67 @@ always_ff @(posedge clk) begin
             case(modeBU)
                 3'b001: // store word
                     begin
-                        ram_array[{A[16:2],2'b0}] <= WD[31:24];
-                        ram_array[{A[16:2],2'b0} +1] <= WD[23:16];
-                        ram_array[{A[16:2],2'b0} +2] <= WD[15:8];
-                        ram_array[{A[16:2],2'b0} +3] <= WD[7:0];
+                        ram_array[{A[16:0]}] <= WD[31:24];
+                        ram_array[{A[16:0]} +1] <= WD[23:16];
+                        ram_array[{A[16:0]} +2] <= WD[15:8];
+                        ram_array[{A[16:0]} +3] <= WD[7:0];
                     end
                 3'b010: // store half word
                     begin
-                        ram_array[{A[16:2],2'b0}] <= WD[15:8];
-                        ram_array[{A[16:2],2'b0} + 1] <= WD[7:0];
+                        ram_array[{A[16:0]}] <= WD[15:8];
+                        ram_array[{A[16:0]} + 1] <= WD[7:0];
                     end
                 3'b011: // store byte
                     begin
-                        ram_array[{A[16:2],2'b0}] <= WD[7:0];
+                        ram_array[{A[16:0]}] <= WD[7:0];
                     end
                 3'b100:
                     begin
-                        ram_array[{A[16:2],2'b0}] <= WD[15:8];
-                        ram_array[{A[16:2],2'b0} + 1] <= WD[7:0];
+                        ram_array[{A[16:0]}] <= WD[15:8];
+                        ram_array[{A[16:0]} + 1] <= WD[7:0];
                     end
                 3'b101: 
                     begin
-                        ram_array[{A[16:2],2'b0}] <= WD[7:0];
+                        ram_array[{A[16:0]}] <= WD[7:0];
                     end
                 default:
-                    ram_array[{A[16:2],2'b0}] <= 8'b0;
+                    ram_array[{A[16:0]}] <= 8'b0;
             endcase
         end
     end
 
 always_comb begin
-    begin
+    if (A == 32'h100) begin
+        RD = {31'b0, trigger};  // Return trigger when reading 0x100
+        Result = RD;
+    end
+    else begin
         case(ResultSrc)
             2'b01: begin 
                 case(modeBU)
                     3'b001: 
                         begin // load word
-                            RD = {ram_array[{A[16:2],2'b0}],ram_array[{A[16:2],2'b0} + 1],ram_array[{A[16:2],2'b0} + 2],ram_array[{A[16:2],2'b0} + 3]}; 
+                            RD = {ram_array[{A[16:0]}],ram_array[{A[16:0]} + 1],ram_array[{A[16:0]} + 2],ram_array[{A[16:0]} + 3]}; 
                             Result = RD;
                         end                 
                     3'b010: //load half word
                         begin
-                            RD = {{16{ram_array[{A[16:2],2'b0}][7]}},ram_array[{A[16:2],2'b0}],ram_array[{A[16:2],2'b0} + 1]};
+                            RD = {{16{ram_array[{A[16:0]}][7]}},ram_array[{A[16:0]}],ram_array[{A[16:0]} + 1]};
                             Result = RD;
                         end
                     3'b011:
                         begin // load byte
-                            RD = {{24{ram_array[{A[16:2],2'b0}][7]}},ram_array[{A[16:2],2'b0}]};
+                            RD = {{24{ram_array[{A[16:0]}][7]}},ram_array[{A[16:0]}]};
                             Result = RD;
                         end
                     3'b100:
                         begin //load unsigned half word
-                            RD = {{{16'b0}},ram_array[{A[16:2],2'b0}],ram_array[{A[16:2],2'b0} + 1]};
+                            RD = {{{16'b0}},ram_array[{A[16:0]}],ram_array[{A[16:0]} + 1]};
                             Result = RD;
                         end
                     3'b101:
                         begin // load unsigned byte
-                            RD = {{24'b0},ram_array[{A[16:2],2'b0}]};
+                            RD = {{24'b0},ram_array[{A[16:0]}]};
                             Result = RD;
                         end 
                     default:
