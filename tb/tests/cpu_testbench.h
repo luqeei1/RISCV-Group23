@@ -32,6 +32,7 @@ public:
     // program to be assembled and loaded into instruction memory
     void initSimulation()
     {
+        std::ignore = system(("mkdir -p test_out/" + name_).c_str());
         top_ = new Vdut(context_);
         tfp_ = new VerilatedVcdC;
 
@@ -43,7 +44,7 @@ public:
         // Initialise inputs
         top_->clk = 1;
         top_->rst = 1;
-        top_->trigger = 0;
+        //top_->trigger = 0;
         runSimulation(10);  // Process reset
         top_->rst = 0;
     }

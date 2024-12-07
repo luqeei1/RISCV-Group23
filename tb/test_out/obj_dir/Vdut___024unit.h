@@ -7,22 +7,23 @@
 
 #include "verilated.h"
 
+
 class Vdut__Syms;
 
-class Vdut___024unit final : public VerilatedModule {
+class alignas(VL_CACHE_LINE_BYTES) Vdut___024unit final : public VerilatedModule {
   public:
 
     // INTERNAL VARIABLES
     Vdut__Syms* const vlSymsp;
 
     // CONSTRUCTORS
-    Vdut___024unit(Vdut__Syms* symsp, const char* name);
+    Vdut___024unit(Vdut__Syms* symsp, const char* v__name);
     ~Vdut___024unit();
     VL_UNCOPYABLE(Vdut___024unit);
 
     // INTERNAL METHODS
     void __Vconfigure(bool first);
-} VL_ATTR_ALIGNED(VL_CACHE_LINE_BYTES);
+};
 
 
 #endif  // guard
