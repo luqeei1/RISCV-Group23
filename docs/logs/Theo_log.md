@@ -32,3 +32,13 @@
 ## 5/12
 - Added extra necessary signals to the pipeline FF's
 - Wrote a working unit test for the ControlUnit/ALUDecoder
+
+## 6/12 
+- Helped debug the F1 simulation 
+- Successful in getting the F1 simulation working
+- Wrote testbenches for all Tests and converted into HEX files
+
+## 7/12
+- Passed Test 1 and Test 2
+- Worked on and solving issues with Test 3 and Test 4
+- Started testing with the PDF simulation/test
