@@ -7,7 +7,7 @@
         li      a4, 0xFF                     # Value to check for reset
 
     wait_trigger:
-        lw      a5, 0x100(zero)              # Read button input (replace address as needed)
+        lw      a5, 0x100(zero)              # Read button input
         andi    a5, a5, 0x1                  # Mask to get button bit
         beq     a5, zero, wait_trigger       # If button not pressed, keep waiting
 
