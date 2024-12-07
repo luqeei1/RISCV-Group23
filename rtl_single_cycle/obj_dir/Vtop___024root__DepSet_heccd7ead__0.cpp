@@ -907,33 +907,6 @@ void Vtop___024root___eval(Vtop___024root* vlSelf) {
     vlSelf->__Vclklast__TOP__clk = vlSelf->clk;
 }
 
-<<<<<<< HEAD
-=======
-QData Vtop___024root___change_request_1(Vtop___024root* vlSelf);
-
-VL_INLINE_OPT QData Vtop___024root___change_request(Vtop___024root* vlSelf) {
-    if (false && vlSelf) {}  // Prevent unused
-    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___change_request\n"); );
-    // Body
-    return (Vtop___024root___change_request_1(vlSelf));
-}
-
-VL_INLINE_OPT QData Vtop___024root___change_request_1(Vtop___024root* vlSelf) {
-    if (false && vlSelf) {}  // Prevent unused
-    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___change_request_1\n"); );
-    // Body
-    // Change detection
-    QData __req = false;  // Logically a bool
-    __req |= ((vlSelf->top__DOT__RD ^ vlSelf->__Vchglast__TOP__top__DOT__RD));
-    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__RD ^ vlSelf->__Vchglast__TOP__top__DOT__RD))) VL_DBG_MSGF("        CHANGE: top.sv:74: top.RD\n"); );
-    // Final
-    vlSelf->__Vchglast__TOP__top__DOT__RD = vlSelf->top__DOT__RD;
-    return __req;
-}
-
->>>>>>> acbcf27a01d242ac9dc4841eeeed009052b05c35
 #ifdef VL_DEBUG
 void Vtop___024root___eval_debug_assertions(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
