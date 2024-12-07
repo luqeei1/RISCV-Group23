@@ -65,11 +65,7 @@ always_ff @(posedge clk) begin
     end
 
 always_comb begin
-    if (A == 32'h100) begin
-        RD = {31'b0, trigger};  // Return trigger when reading 0x100
-        Result = RD;
-    end
-    else begin
+    begin
         case(ResultSrc)
             2'b01: begin 
                 case(modeBU)

@@ -792,10 +792,15 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__0(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___combo__TOP__0\n"); );
     // Body
-    if ((0x100U == vlSelf->top__DOT__ALUResult)) {
-        vlSelf->top__DOT__RD = vlSelf->trigger;
-        vlSelf->top__DOT__Result = vlSelf->top__DOT__RD;
-    } else if ((1U == (IData)(vlSelf->top__DOT__ResultSrc))) {
+    vlSelf->top__DOT__Result = ((0U == (IData)(vlSelf->top__DOT__ResultSrc))
+                                 ? vlSelf->top__DOT__ALUResult
+                                 : ((1U == (IData)(vlSelf->top__DOT__ResultSrc))
+                                     ? vlSelf->top__DOT__RD
+                                     : ((2U == (IData)(vlSelf->top__DOT__ResultSrc))
+                                         ? ((IData)(4U) 
+                                            + vlSelf->top__DOT__PC)
+                                         : vlSelf->top__DOT__ALUResult)));
+    if ((1U == (IData)(vlSelf->top__DOT__ResultSrc))) {
         if ((4U & (IData)(vlSelf->top__DOT__modeBU))) {
             if ((2U & (IData)(vlSelf->top__DOT__modeBU))) {
                 vlSelf->top__DOT__Result = vlSelf->top__DOT__RD;
@@ -886,14 +891,6 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__0(Vtop___024root* vlSelf) {
                                             + vlSelf->top__DOT__ALUResult)
                                          : vlSelf->top__DOT__ALUResult));
     }
-    vlSelf->top__DOT__Result = ((0U == (IData)(vlSelf->top__DOT__ResultSrc))
-                                 ? vlSelf->top__DOT__ALUResult
-                                 : ((1U == (IData)(vlSelf->top__DOT__ResultSrc))
-                                     ? vlSelf->top__DOT__RD
-                                     : ((2U == (IData)(vlSelf->top__DOT__ResultSrc))
-                                         ? ((IData)(4U) 
-                                            + vlSelf->top__DOT__PC)
-                                         : vlSelf->top__DOT__ALUResult)));
 }
 
 void Vtop___024root___eval(Vtop___024root* vlSelf) {
@@ -908,6 +905,30 @@ void Vtop___024root___eval(Vtop___024root* vlSelf) {
     Vtop___024root___combo__TOP__0(vlSelf);
     // Final
     vlSelf->__Vclklast__TOP__clk = vlSelf->clk;
+}
+
+QData Vtop___024root___change_request_1(Vtop___024root* vlSelf);
+
+VL_INLINE_OPT QData Vtop___024root___change_request(Vtop___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___change_request\n"); );
+    // Body
+    return (Vtop___024root___change_request_1(vlSelf));
+}
+
+VL_INLINE_OPT QData Vtop___024root___change_request_1(Vtop___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___change_request_1\n"); );
+    // Body
+    // Change detection
+    QData __req = false;  // Logically a bool
+    __req |= ((vlSelf->top__DOT__RD ^ vlSelf->__Vchglast__TOP__top__DOT__RD));
+    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__RD ^ vlSelf->__Vchglast__TOP__top__DOT__RD))) VL_DBG_MSGF("        CHANGE: top.sv:75: top.RD\n"); );
+    // Final
+    vlSelf->__Vchglast__TOP__top__DOT__RD = vlSelf->top__DOT__RD;
+    return __req;
 }
 
 #ifdef VL_DEBUG
