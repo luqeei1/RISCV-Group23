@@ -97,7 +97,7 @@ module top#(
     logic [4:0] Rs1E;
     logic [4:0] Rs2E;
     logic [WIDTH-1:0] ResultW;
-    logic [WIDTH-1:0] SrcBE;
+    logic [WIDTH-1:0] SrcAE;
 
     // Hazard Unit
     logic [1:0] ForwardAE;
@@ -255,14 +255,6 @@ module top#(
         .in2(ALUResultM),
 
         .out(WriteDataE)
-    );
-
-    mux2 alu_SrcBE_mux (
-        .sel(ALUSrcE),
-        .in0(WriteDataE),
-        .in1(ExtImmE),
-
-        .out(SrcBE)
     );
 
     // ALU
