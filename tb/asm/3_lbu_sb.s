@@ -3,9 +3,9 @@
 main:
     li s0, 0x00010000   # create pointer to base of data array
 
-    li t1, 100
+    li t1, 270
     sb t1, 0(s0)    # store 100 at address 0x00010000
-    li t2, 200
+    li t2, 260
     sb t2, 1(s0)    # store 200 at address 0x00010001
 
     lbu t3, 0(s0)   # t3 = *(0x00010000)    (=100)
