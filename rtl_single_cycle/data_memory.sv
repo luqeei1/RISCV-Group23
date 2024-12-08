@@ -23,7 +23,7 @@ module data_memory #(
 
     initial begin
         $display("Loading ram.");
-        $readmemh("InstructionFiles/Test3.hex", ram_array, 17'h00000, 17'h1FFFF);
+        $readmemh("data_memory.hex", ram_array, 17'h00000, 17'h1FFFF);
         $display("Ram loaded");
     end
    

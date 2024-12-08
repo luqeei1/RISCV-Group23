@@ -11,18 +11,15 @@ VL_ATTR_COLD void Vtop___024root___initial__TOP__0(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___initial__TOP__0\n"); );
     // Init
-    VlWide<7>/*223:0*/ __Vtemp_h16fb1a01__0;
+    VlWide<4>/*127:0*/ __Vtemp_hfb5a4ebb__0;
     VlWide<3>/*95:0*/ __Vtemp_h3a032bfe__0;
     // Body
     VL_WRITEF("Loading ram.\n");
-    __Vtemp_h16fb1a01__0[0U] = 0x2e686578U;
-    __Vtemp_h16fb1a01__0[1U] = 0x65737433U;
-    __Vtemp_h16fb1a01__0[2U] = 0x65732f54U;
-    __Vtemp_h16fb1a01__0[3U] = 0x6e46696cU;
-    __Vtemp_h16fb1a01__0[4U] = 0x6374696fU;
-    __Vtemp_h16fb1a01__0[5U] = 0x73747275U;
-    __Vtemp_h16fb1a01__0[6U] = 0x496eU;
-    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(7, __Vtemp_h16fb1a01__0)
+    __Vtemp_hfb5a4ebb__0[0U] = 0x2e686578U;
+    __Vtemp_hfb5a4ebb__0[1U] = 0x6d6f7279U;
+    __Vtemp_hfb5a4ebb__0[2U] = 0x615f6d65U;
+    __Vtemp_hfb5a4ebb__0[3U] = 0x646174U;
+    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(4, __Vtemp_hfb5a4ebb__0)
                  ,  &(vlSelf->top__DOT__data_memory__DOT__ram_array)
                  , 0U, 0x1ffffU);
     VL_WRITEF("Ram loaded\nLoading rom.\n");

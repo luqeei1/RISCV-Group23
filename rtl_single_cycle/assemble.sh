@@ -4,11 +4,11 @@
 
 # Default vars
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
-output_file="$SCRIPT_DIR/Test3.hex"
+output_file="$SCRIPT_DIR/program.hex"
 
 # Handle terminal arguments
 if [[ $# -eq 0 ]]; then
-    echo "Usage: ./assemble.sh asm/3_lbu_sb.s"
+    echo "Usage: ./assemble.sh F1.s"
     exit 1
 fi
 

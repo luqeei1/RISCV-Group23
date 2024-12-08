@@ -1,42 +1,55 @@
-    .text
-    .globl main
+.text
+.globl main
 
-    main:
-        addi    a0, zero, 0x0                # LED pattern starts at 0
+main:
+        addi    a0, zero, 0                  # Start with LEDs off
+        li      a4, 0xff                     # LED mask for checking completion
         la      a1, seed                     # Load address of seed
-        li      a4, 0xFF                     # Value to check for reset
 
-    wait_trigger:
+wait_trigger:
+        addi    a0, zero, 0                  # Ensure LEDs are off while waiting
         lw      a5, 0x100(zero)              # Read button input
-        andi    a5, a5, 0x1                  # Mask to get button bit
+        andi    a5, a5, 1                    # Mask to get button state
         beq     a5, zero, wait_trigger       # If button not pressed, keep waiting
 
-    shift_loop:
-        slli    a0, a0, 1                    # Shift left by 1
-        ori     a0, a0, 0b1                  # Set rightmost bit to 1
+        addi    a0, zero, 1                  # Start with first LED
 
-        # Random number generation
+led_sequence:
+        # Generate pseudo-random number using LFSR
         lw      a2, 0(a1)                    # Load current seed
-        li      a3, 16807                    # Multiplier of prime
-        mul     a2, a2, a3                   # random number generator. CHECK AGAIN LATER (replace mul with something else, very slow now)
-        addi    a2, a2, 997                  # Add increment
+        srli    a3, a2, 2                    # Shift right by 2
+        xor     a2, a2, a3                   # XOR with shifted value
+        srli    a3, a2, 1                    # Shift right by 1
+        xor     a2, a2, a3                   # XOR with shifted value
+        slli    a2, a2, 1                    # Shift left by 1
+        ori     a2, a2, 1                    # Set lowest bit
         sw      a2, 0(a1)                    # Store new seed
-        
-        srli    a3, a2, 8                   # Get delay value
-        addi    a3, a3, 8                   # Add base delay
 
-    delay_loop:
-        addi    a3, a3, -1                   # Decrement counter
-        bne     a3, zero, delay_loop         # Continue until counter is 0
+        # Create small delay from random value
+        andi    a3, a2, 0x1F                 # Get 5 bits (0-31)
+        addi    a3, a3, 20                   # Add base delay of 20
+        jal     ra, delay_routine            # Call delay subroutine
 
-        andi    a0, a0, 0xFF                 # Keep only lower 8 bits
-        beq     a0, a4, reset                # Reset if all bits are 1
-        beq     zero, zero, shift_loop       # Continue pattern
+        # Add next LED to pattern
+        slli    t0, a0, 1                    # Shift 1 to get next LED position
+        ori     a0, t0, 1                    # Combine with existing pattern
 
-    reset:
-        addi    a0, zero, 0x0                # Reset LED pattern
-        beq     zero, zero, wait_trigger     # Wait for next trigger
+        # Check if pattern is complete
+        beq     a0, a4, pattern_complete     # If all LEDs are on, complete the sequence
+        j       led_sequence                 # Otherwise, continue sequence
 
-    .data
-    seed:   .word 12345                      # Initial seed value
-    
+pattern_complete:
+        # Add a delay while all LEDs are on
+        li      a3, 50                      # Delay at the end
+        jal     ra, delay_routine           # Call delay subroutine
+
+        j       wait_trigger                # Go back to waiting (will reset LEDs)
+
+# Delay subroutine
+delay_routine:
+        addi    a3, a3, -1                  # Decrement counter
+        bne     a3, zero, delay_routine     # Continue until counter is 0
+        ret                                 # Return to caller
+
+.data
+seed:   .word   0xABC                       # Initial seed value
