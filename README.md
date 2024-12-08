@@ -86,48 +86,20 @@ Screenshots of waveforms showing the working F1.s script and specific signals ca
 
 | Component       | Akarsh | Sid | Theo | Lucas |
 |------------|--------|-----|------|-------|
-| alu.sv     |        |  M   |      |       |
-| data_memory.sv     |  M |     |      |       |
-| program_counter.sv   |        |     |      |    M   |
-| instruction_memory.sv     |    P    |  P   |    M  |       |
-| regfile.sv     |   P     |   M  |      |       |
-| ALUDecoder.sv     |        |     |   M   |    P   |
-| controlUnit.sv     |        |  P   |   M   |       |
-| signExtend.sv     |        |     |    M  |       |
-| PC_mux.sv     |       |    |    |       |
-| mux2.sv     |       |    |    |       |
-| mux3.sv     |        |     |      |    M   |
-| top.sv     |       |  P  |  M   |       |
-| BPU.sv     |       |  P  |  M  |    P   |
-| FF_DE.sv     |       |    |    |       |
-| FF_EM.sv     |       |    |    |       |
-| FF_FD.sv     |       |    |    |       |
-| FF_MW.sv     |       |    |    |       |
-| hazard_unit.sv     |       |    |    |       |
+| ALU     |        |  M   |      |       |
+| Data Memory     |  M |     |      |   P    |
+| Program Counter   |        |     |      |    M   |
+| Instruction Memory     |    P    |  P   |    M  |       |
+| Sign Extend     |        |     |      |       |
+| Register File     |   P     |   M  |      |       |
+| Control Unit     |        |  P   |   M   |   P    |
+| Top (single-cycle)     |       |  M  |     |       |
+| Branch Prediction     |       |  P  |  M  |       |
+| Pipeline Flip Flops     |       |    |  M  |       |
+| Hazard Unit     |       |    |  P  |   M    |
+| Cache     |       |    |    |   M    |
+| Top (pipelining)     |       |  P  |     |   M    |
 
-M - Main Contributor
-P - Partial Contributor
-
-
-
-
-## RV32I Pipelined Design (with cache)
-
-| Component       | Akarsh | Sid | Theo | Lucas |
-|------------|--------|-----|------|-------|
-| alu.sv     |        |  M   |      |       |
-| data_memory.sv     |  M |     |      |       |
-| program_counter.sv   |        |     |      |    M   |
-| instruction_memory.sv     |    P    |  P   |    M  |       |
-| regfile.sv     |   P     |   M  |      |       |
-| ALUDecoder.sv     |        |     |   M   |    P   |
-| controlUnit.sv     |        |  P   |   M   |       |
-| signExtend.sv     |        |     |    M  |       |
-| mux3.sv     |        |     |      |    M   |
-| top.sv     |       |  P  |  M   |       |
-| BPU.sv     |       |  P  |  M  |    P   |
-| cache_data_structs.sv     |       |    |    |    M   |
-| cache_FSM.sv     |       |    |    |    M   |
 
 M - Main Contributor
 P - Partial Contributor
