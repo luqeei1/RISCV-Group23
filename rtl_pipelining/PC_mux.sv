@@ -15,9 +15,9 @@ always_comb begin
     // by default increment PC by 4
     PC = PCPlus4F;
     if(JumpE)
-        PC = (BranchE) ? ALUResult : PCTarget;
+        PC = (BranchE) ? ALUResult : PCTarget;  // JALR or unconditional jump
     else if(BranchE && ZeroE)
-        PC = PCTarget;
+        PC = PCTarget;  // conditional jump: branch taken
 end
 
 endmodule

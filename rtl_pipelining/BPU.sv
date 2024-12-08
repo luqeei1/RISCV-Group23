@@ -25,7 +25,7 @@ logic [1:0] forwardJumpCounter; //2 bit forward counter
 logic [1:0] backwardJumpCounter; //2 bit backward counter
 
 always_ff @(posedge clk) begin
-    if(RD[6:0] == 6'b1100011) begin //current instruction is a branch  
+    if(RD[6:0] == 7'b1100011) begin //current instruction is a branch  
         newBranch.branchAddr <= PCF; 
         PCBPU <= PCF + {{20{RD[31]}}, RD[7], RD[30:25], RD[11:8], 1'b0}; //calculate destination address
         newBranch.targetAddr <= PCF + {{20{RD[31]}}, RD[7], RD[30:25], RD[11:8], 1'b0};
