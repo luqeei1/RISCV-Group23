@@ -32,3 +32,14 @@
 - Implemented and tested F1 script, iteratively including a random delay and a trigger
 - assembled program.hex and wrote into it
 - Many hours were spent debugging the testbench for the F1 light sequence
+
+## 7/12
+- - created testbench and assembly files for testing F1 lights on pipelined CPU
+- debugged the controlUnit, mux3 and top files
+- modified control unit file to reflect PCSrc being made redundant and its logic moved into the program_counter.sv file. Added Jump and Branch control instructions
+- explicitly declared --top-module top \ in the F1_pipelined.sh file and it worked
+- added some missing datapath signal declarations in the top file and adjusted and fixed bit widths (discovered when testing waveforms)
+
+## 8/12
+- modified F1.s code to generate values randomly by using LFSR method instead of LCG --> much more reliable
+- uploaded images of testing onto Github and started README writeup for assembly code

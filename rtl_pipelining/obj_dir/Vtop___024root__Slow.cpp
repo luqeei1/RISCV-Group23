@@ -23,7 +23,6 @@ constexpr IData/*31:0*/ Vtop___024root::top__DOT__control_unit__DOT__DATA_WIDTH;
 constexpr IData/*31:0*/ Vtop___024root::top__DOT__sign_extend__DOT__DATA_WIDTH;
 constexpr IData/*31:0*/ Vtop___024root::top__DOT__forwardAE_mux__DOT__WIDTH;
 constexpr IData/*31:0*/ Vtop___024root::top__DOT__forwardBE_mux__DOT__WIDTH;
-constexpr IData/*31:0*/ Vtop___024root::top__DOT__alu_SrcBE_mux__DOT__WIDTH;
 constexpr IData/*31:0*/ Vtop___024root::top__DOT__alu__DOT__CONTROL_WIDTH;
 constexpr IData/*31:0*/ Vtop___024root::top__DOT__alu__DOT__DATA_WIDTH;
 constexpr IData/*31:0*/ Vtop___024root::top__DOT__data_memory__DOT__WIDTH;

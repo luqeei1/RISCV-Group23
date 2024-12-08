@@ -25,22 +25,19 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__clk;
         CData/*0:0*/ top__DOT__rst;
         CData/*0:0*/ top__DOT__trigger;
-        CData/*4:0*/ top__DOT__RdE;
         CData/*0:0*/ top__DOT__RegWriteE;
         CData/*0:0*/ top__DOT__ALUSrcE;
         CData/*0:0*/ top__DOT__MemWriteE;
         CData/*1:0*/ top__DOT__ResultSrcE;
         CData/*3:0*/ top__DOT__ALUControlE;
         CData/*2:0*/ top__DOT__modeBUE;
-        CData/*4:0*/ top__DOT__RdM;
         CData/*0:0*/ top__DOT__RegWriteM;
         CData/*0:0*/ top__DOT__MemWriteM;
         CData/*1:0*/ top__DOT__ResultSrcM;
-        CData/*2:0*/ top__DOT__modeBUM;
-        CData/*4:0*/ top__DOT__RdW;
+        CData/*2:0*/ top__DOT__modeAddrM;
         CData/*0:0*/ top__DOT__RegWriteW;
         CData/*1:0*/ top__DOT__ResultSrcW;
-        CData/*2:0*/ top__DOT__ImmSrcD;
+        CData/*2:0*/ top__DOT__ImmSrc;
         CData/*0:0*/ top__DOT__RegWriteD;
         CData/*3:0*/ top__DOT__ALUControlD;
         CData/*0:0*/ top__DOT__ALUSrcD;
@@ -65,6 +62,9 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__stall;
         CData/*0:0*/ top__DOT__flushBranch;
         CData/*0:0*/ top__DOT__BPU_Src;
+        CData/*0:0*/ top__DOT__ALUResult;
+        CData/*0:0*/ top__DOT__ImmSrcD;
+        CData/*0:0*/ top__DOT__modeAddrD;
         CData/*4:0*/ top__DOT__hazard_unit__DOT__RdM;
         CData/*4:0*/ top__DOT__hazard_unit__DOT__RdW;
         CData/*4:0*/ top__DOT__hazard_unit__DOT__RdE;
@@ -107,7 +107,7 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__control_unit__DOT__ALUSrcD;
         CData/*2:0*/ top__DOT__control_unit__DOT__ImmSrcD;
         CData/*0:0*/ top__DOT__control_unit__DOT__RegWriteD;
-        CData/*2:0*/ top__DOT__control_unit__DOT__modeBUD;
+        CData/*2:0*/ top__DOT__control_unit__DOT__modeAddr;
         CData/*0:0*/ top__DOT__control_unit__DOT__MemReadD;
         CData/*6:0*/ top__DOT__control_unit__DOT__op;
         CData/*2:0*/ top__DOT__control_unit__DOT__funct3;
@@ -123,10 +123,9 @@ class Vtop___024root final : public VerilatedModule {
         CData/*2:0*/ top__DOT__sign_extend__DOT__ImmSrc;
         CData/*1:0*/ top__DOT__forwardAE_mux__DOT__sel;
         CData/*1:0*/ top__DOT__forwardBE_mux__DOT__sel;
-        CData/*0:0*/ top__DOT__alu_SrcBE_mux__DOT__sel;
         CData/*3:0*/ top__DOT__alu__DOT__ALUctrl;
         CData/*0:0*/ top__DOT__alu__DOT__ZeroE;
-        CData/*2:0*/ top__DOT__data_memory__DOT__modeBU;
+        CData/*2:0*/ top__DOT__data_memory__DOT__modeAddr;
         CData/*1:0*/ top__DOT__data_memory__DOT__ResultSrc;
         CData/*0:0*/ top__DOT__data_memory__DOT__clk;
         CData/*0:0*/ top__DOT__data_memory__DOT__trigger;
@@ -149,9 +148,9 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__pipeline_DE__DOT__JumpE;
         CData/*0:0*/ top__DOT__pipeline_DE__DOT__BranchD;
         CData/*0:0*/ top__DOT__pipeline_DE__DOT__BranchE;
+        CData/*3:0*/ top__DOT__pipeline_DE__DOT__ALUControlD;
     };
     struct {
-        CData/*3:0*/ top__DOT__pipeline_DE__DOT__ALUControlD;
         CData/*3:0*/ top__DOT__pipeline_DE__DOT__ALUControlE;
         CData/*0:0*/ top__DOT__pipeline_DE__DOT__ALUSrcD;
         CData/*0:0*/ top__DOT__pipeline_DE__DOT__ALUSrcE;
@@ -161,8 +160,8 @@ class Vtop___024root final : public VerilatedModule {
         CData/*4:0*/ top__DOT__pipeline_DE__DOT__Rs2E;
         CData/*4:0*/ top__DOT__pipeline_DE__DOT__RdD;
         CData/*4:0*/ top__DOT__pipeline_DE__DOT__RdE;
-        CData/*2:0*/ top__DOT__pipeline_DE__DOT__modeBUD;
-        CData/*2:0*/ top__DOT__pipeline_DE__DOT__modeBUE;
+        CData/*2:0*/ top__DOT__pipeline_DE__DOT__modeAddrD;
+        CData/*2:0*/ top__DOT__pipeline_DE__DOT__modeAddrE;
         CData/*0:0*/ top__DOT__pipeline_EM__DOT__clk;
         CData/*0:0*/ top__DOT__pipeline_EM__DOT__RegWriteE;
         CData/*0:0*/ top__DOT__pipeline_EM__DOT__RegWriteM;
@@ -172,8 +171,8 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__pipeline_EM__DOT__MemWriteM;
         CData/*4:0*/ top__DOT__pipeline_EM__DOT__RdE;
         CData/*4:0*/ top__DOT__pipeline_EM__DOT__RdM;
-        CData/*2:0*/ top__DOT__pipeline_EM__DOT__modeBUE;
-        CData/*2:0*/ top__DOT__pipeline_EM__DOT__modeBUM;
+        CData/*2:0*/ top__DOT__pipeline_EM__DOT__modeAddrE;
+        CData/*2:0*/ top__DOT__pipeline_EM__DOT__modeAddrM;
         CData/*0:0*/ top__DOT__pipeline_MW__DOT__clk;
         CData/*0:0*/ top__DOT__pipeline_MW__DOT__RegWriteM;
         CData/*0:0*/ top__DOT__pipeline_MW__DOT__RegWriteW;
@@ -215,9 +214,9 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__a3;
         IData/*31:0*/ top__DOT__a4;
         IData/*31:0*/ top__DOT__a5;
+        IData/*31:0*/ top__DOT__a6;
     };
     struct {
-        IData/*31:0*/ top__DOT__a6;
         IData/*31:0*/ top__DOT__a7;
         IData/*31:0*/ top__DOT__t0;
         IData/*31:0*/ top__DOT__t1;
@@ -250,23 +249,18 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__PCE;
         IData/*31:0*/ top__DOT__PCPlus4E;
         IData/*31:0*/ top__DOT__WriteDataE;
-        IData/*31:0*/ top__DOT__ALUResultM;
-        IData/*31:0*/ top__DOT__WriteDataM;
-        IData/*31:0*/ top__DOT__PCPlus4M;
-        IData/*31:0*/ top__DOT__ALUResultW;
         IData/*31:0*/ top__DOT__ReadDataW;
         IData/*31:0*/ top__DOT__PCPlus4W;
         IData/*31:0*/ top__DOT__ExtImmD;
         IData/*31:0*/ top__DOT__ExtImmE;
         IData/*31:0*/ top__DOT__RD1;
         IData/*31:0*/ top__DOT__RD2;
-        IData/*31:0*/ top__DOT__ALUResult;
         IData/*31:0*/ top__DOT__RD;
         IData/*31:0*/ top__DOT__Result;
         IData/*31:0*/ top__DOT__SrcA;
         IData/*31:0*/ top__DOT__SrcB;
         IData/*31:0*/ top__DOT__ResultW;
-        IData/*31:0*/ top__DOT__SrcBE;
+        IData/*31:0*/ top__DOT__SrcAE;
         IData/*31:0*/ top__DOT__PC_predict;
         IData/*31:0*/ top__DOT__PC_next;
         IData/*31:0*/ top__DOT__branch_prediction_unit__DOT__RD;
@@ -281,14 +275,14 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__BPU_mux__DOT__out;
         IData/*31:0*/ top__DOT__program_counter__DOT__PC;
         IData/*31:0*/ top__DOT__program_counter__DOT__PCF;
-    };
-    struct {
         IData/*31:0*/ top__DOT__instruction_memory__DOT__PC;
         IData/*31:0*/ top__DOT__instruction_memory__DOT__instr;
         IData/*31:0*/ top__DOT__regfile__DOT__WD3;
         IData/*31:0*/ top__DOT__regfile__DOT__RD1;
         IData/*31:0*/ top__DOT__regfile__DOT__RD2;
         IData/*31:0*/ top__DOT__regfile__DOT__a0;
+    };
+    struct {
         IData/*31:0*/ top__DOT__regfile__DOT__a1;
         IData/*31:0*/ top__DOT__regfile__DOT__a2;
         IData/*31:0*/ top__DOT__regfile__DOT__a3;
@@ -326,9 +320,6 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__forwardBE_mux__DOT__in1;
         IData/*31:0*/ top__DOT__forwardBE_mux__DOT__in2;
         IData/*31:0*/ top__DOT__forwardBE_mux__DOT__out;
-        IData/*31:0*/ top__DOT__alu_SrcBE_mux__DOT__in0;
-        IData/*31:0*/ top__DOT__alu_SrcBE_mux__DOT__in1;
-        IData/*31:0*/ top__DOT__alu_SrcBE_mux__DOT__out;
         IData/*31:0*/ top__DOT__alu__DOT__SrcA;
         IData/*31:0*/ top__DOT__alu__DOT__SrcB;
         IData/*31:0*/ top__DOT__alu__DOT__ALUResult;
@@ -347,8 +338,6 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__pipeline_FD__DOT__PCPlus4F;
         IData/*31:0*/ top__DOT__pipeline_FD__DOT__PCPlus4D;
         IData/*31:0*/ top__DOT__pipeline_DE__DOT__RD1;
-    };
-    struct {
         IData/*31:0*/ top__DOT__pipeline_DE__DOT__RD1E;
         IData/*31:0*/ top__DOT__pipeline_DE__DOT__RD2;
         IData/*31:0*/ top__DOT__pipeline_DE__DOT__RD2E;
@@ -358,7 +347,9 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__pipeline_DE__DOT__ExtImmE;
         IData/*31:0*/ top__DOT__pipeline_DE__DOT__PCPlus4D;
         IData/*31:0*/ top__DOT__pipeline_DE__DOT__PCPlus4E;
-        IData/*31:0*/ top__DOT__pipeline_EM__DOT__ALUResult;
+    };
+    struct {
+        IData/*31:0*/ top__DOT__pipeline_EM__DOT__ALUResultE;
         IData/*31:0*/ top__DOT__pipeline_EM__DOT__ALUResultM;
         IData/*31:0*/ top__DOT__pipeline_EM__DOT__WriteDataE;
         IData/*31:0*/ top__DOT__pipeline_EM__DOT__WriteDataM;
@@ -370,6 +361,7 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__ReadDataW;
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__PCPlus4M;
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__PCPlus4W;
+        IData/*31:0*/ __Vchglast__TOP__top__DOT__data_memory__DOT__RD;
         VlWide<3>/*65:0*/ top__DOT__branch_prediction_unit__DOT__newBranch;
         VlWide<3>/*65:0*/ top__DOT__branch_prediction_unit__DOT__oldBranch;
         VlUnpacked<CData/*7:0*/, 65536> top__DOT__instruction_memory__DOT__rom_array;
@@ -396,7 +388,6 @@ class Vtop___024root final : public VerilatedModule {
     static constexpr IData/*31:0*/ top__DOT__sign_extend__DOT__DATA_WIDTH = 0x00000020U;
     static constexpr IData/*31:0*/ top__DOT__forwardAE_mux__DOT__WIDTH = 0x00000020U;
     static constexpr IData/*31:0*/ top__DOT__forwardBE_mux__DOT__WIDTH = 0x00000020U;
-    static constexpr IData/*31:0*/ top__DOT__alu_SrcBE_mux__DOT__WIDTH = 0x00000020U;
     static constexpr IData/*31:0*/ top__DOT__alu__DOT__CONTROL_WIDTH = 4U;
     static constexpr IData/*31:0*/ top__DOT__alu__DOT__DATA_WIDTH = 0x00000020U;
     static constexpr IData/*31:0*/ top__DOT__data_memory__DOT__WIDTH = 0x00000020U;

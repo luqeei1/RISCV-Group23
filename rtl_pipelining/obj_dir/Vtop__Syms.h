@@ -39,7 +39,6 @@ class Vtop__Syms final : public VerilatedSyms {
     VerilatedScope __Vscope_top__BPU_mux;
     VerilatedScope __Vscope_top__PC_mux;
     VerilatedScope __Vscope_top__alu;
-    VerilatedScope __Vscope_top__alu_SrcBE_mux;
     VerilatedScope __Vscope_top__branch_prediction_unit;
     VerilatedScope __Vscope_top__control_unit;
     VerilatedScope __Vscope_top__control_unit__alu_decoder;

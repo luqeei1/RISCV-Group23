@@ -218,14 +218,12 @@ module top#(
     // Control Unit
     controlUnit control_unit (
         .InstrD(InstrD),
-        .InstrD(InstrD),
         .ResultSrcD(ResultSrcD),
         .MemWriteD(MemWriteD),
         .ALUControlD(ALUControlD),
         .ALUSrcD(ALUSrcD),
         .ImmSrcD(ImmSrc),
         .RegWriteD(RegWriteD),
-        .modeBUD(modeBU),
         .BranchD(BranchD),
         .JumpD(JumpD),
         .MemReadD(MemReadD)
@@ -235,7 +233,6 @@ module top#(
     signExtend sign_extend (
         .ImmSrc(ImmSrcD),
         .ImmInput(InstrD),
-        .ImmExt(ExtImmD)
         .ImmExt(ExtImmD)
     );
 
