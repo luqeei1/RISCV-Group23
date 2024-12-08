@@ -1,9 +1,8 @@
 module instruction_memory #(
-    parameter ADDRESS_WIDTH = 32,
-              DATA_WIDTH = 32
+    parameter WIDTH = 32
 )(
-    input logic [31:0]                  PC,
-    output logic [DATA_WIDTH-1:0] instr
+    input logic [WIDTH-1:0]                  PC,
+    output logic [WIDTH-1:0] instr
 );
 
 logic [7:0] rom_array [2**16 - 1 : 0];

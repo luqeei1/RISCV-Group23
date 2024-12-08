@@ -9,7 +9,7 @@ module FF_MW #(
     output logic [1:0] ResultSrcW,
     input logic [DATA_WIDTH-1:0] ALUResultM,
     output logic [DATA_WIDTH-1:0] ALUResultW,
-    input logic [DATA_WIDTH-1:0] RD,
+    input logic [DATA_WIDTH-1:0] ReadDataM,
     output logic [DATA_WIDTH-1:0] ReadDataW,
     input logic [WIDTH-1:0] RdM,
     output logic [WIDTH-1:0] RdW,
@@ -21,7 +21,7 @@ always_ff @(posedge clk) begin
     RegWriteW <= RegWriteM;
     ResultSrcW <= ResultSrcM;
     ALUResultW <= ALUResultM;
-    ReadDataW <= RD;
+    ReadDataW <= ReadDataM;
     RdW <= RdM;
     PCPlus4W <= PCPlus4M;
 end

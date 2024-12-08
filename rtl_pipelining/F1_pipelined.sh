@@ -11,8 +11,6 @@ verilator   -Wall --trace \
             program_counter.sv \
             signExtend.sv \
             alu.sv \
-            cache_FSM.sv \
-            cache_data_structs.sv \
             BPU.sv \
             FF_DE.sv \
             FF_EM.sv \

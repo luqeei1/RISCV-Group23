@@ -1,9 +1,6 @@
 /* verilator lint_off UNOPTFLAT */
 /* verilator lint_off UNUSED */
 /* verilator lint_off CASEINCOMPLETE */
-/* verilator lint_off PINMISSING */
-/* verilator lint_off MULTITOP */ 
-
 module top#(
     parameter WIDTH = 32    
 )(
@@ -40,20 +37,14 @@ module top#(
 );
     // Pipeline Registers
     // FF_FD
-    logic [WIDTH-1:0] PCF, PCPlus4F;
-    logic [WIDTH-1:0] PC;
-    logic [WIDTH-1:0] InstrF;
-    logic [WIDTH-1:0] PCD, PCPlus4D;
-    logic [WIDTH-1:0] InstrD;
+    logic [WIDTH-1:0] InstrD, InstrF;
 
     // FF_DE
     logic [WIDTH-1:0] RD1E, RD2E;
     logic [WIDTH-1:0] PCE, PCPlus4E;
     logic RegWriteE, ALUSrcE, MemWriteE;
     logic [1:0] ResultSrcE;
-    logic [3:0] ALUControlE;
-    logic [2:0] modeBUE;
-    logic [WIDTH-1:0] WriteDataE;
+    logic [2:0] modeAddrE;
 
     // FF_EM
     logic RegWriteM, MemWriteM;
@@ -61,7 +52,7 @@ module top#(
     logic [2:0] modeAddrM;
 
     // FF_MW
-    logic [WIDTH-1:0] ReadDataW;
+    logic [WIDTH-1:0] ReadDataW, ReadDataM;
     logic RegWriteW;
     logic [1:0] ResultSrcW;
     logic [WIDTH-1:0] PCPlus4W;
@@ -71,12 +62,12 @@ module top#(
     logic [WIDTH-1:0] ExtImmE;
     logic [2:0] ImmSrc;
     logic RegWriteD;
-    logic [3:0] ALUControlD;
+    logic [3:0] ALUControlD, ALUControlE;
     logic ALUSrcD;
     logic [1:0] ResultSrcD;
     logic MemWriteD;
-    logic [2:0] modeBU;
-    logic ZeroE;
+    logic [2:0] modeAddrD;
+    logic Zero;
     logic MemReadD;
     logic MemReadE;
 
@@ -85,31 +76,33 @@ module top#(
     logic BranchD;
     logic BranchE;
 
+    // ALU
+    logic [WIDTH-1:0] WriteDataE, WriteDataM;
+    logic [WIDTH-1:0] ALUResultM, ALUResultE, ALUResultW;
+
+    // Program Counter
+    logic [WIDTH-1:0] PC, PCF, PCPlus4F, PCPlus4D, PCPlus4M, PCD;
+
+    // Regfile
+    logic [4:0] Rs1D, Rs1E, Rs2D, Rs2E;
+
+    logic [4:0] RdD, RdE, RdM, RdW;
+
     // Datapath signals
     logic [WIDTH-1:0] RD1, RD2;
     logic [WIDTH-1:0] RD;
-    logic [WIDTH-1:0] Result;
-    logic [WIDTH-1:0] SrcA, SrcB;
-
-    logic [4:0] Rs1D;
-    logic [4:0] Rs2D;
-    logic [4:0] RdD;
-    logic [4:0] Rs1E;
-    logic [4:0] Rs2E;
     logic [WIDTH-1:0] ResultW;
     logic [WIDTH-1:0] SrcAE;
 
     // Hazard Unit
-    logic [1:0] ForwardAE;
-    logic [1:0] ForwardBE;
+    logic [1:0] ForwardAE, ForwardBE;
     logic flush;
     logic stall;
 
     // Branch Prediction Unit
     logic flushBranch;
     logic BPU_Src;
-    logic [WIDTH-1:0] PC_predict;
-    logic [WIDTH-1:0] PC_next;
+    logic [WIDTH-1:0] PC_predict, PC_next;
 
     assign PCPlus4F = PCF + 4;
     assign Rs1D = InstrD[19:15];
@@ -135,7 +128,7 @@ module top#(
 
     BPU branch_prediction_unit (
         .clk(clk),
-        .RD(RD),
+        .RD(InstrF),
         .PCF(PCF),
         .ZeroE(Zero),
         .BranchE(BranchE),
@@ -151,8 +144,8 @@ module top#(
         .PCTarget(PCE + ExtImmE),  // Branch/Jump target from Execute stage
         .JumpE(JumpE),
         .BranchE(BranchE),
-        .ZeroE(ZeroE),
-        .ALUResult(ALUResult),
+        .ZeroE(Zero),
+        .ALUResult(ALUResultE),
         .PC(PC)
     );
 
@@ -160,6 +153,7 @@ module top#(
         .sel(BPU_Src),
         .in0(PC),
         .in1(PC_predict),
+
         .out(PC_next)
     );
 
@@ -168,6 +162,7 @@ module top#(
         .rst(rst),
         .PC(PC_next),
         .stall(stall),
+
         .PCF(PCF)
     );
 
@@ -224,6 +219,7 @@ module top#(
         .ALUSrcD(ALUSrcD),
         .ImmSrcD(ImmSrc),
         .RegWriteD(RegWriteD),
+        .modeAddr(modeAddrD),
         .BranchD(BranchD),
         .JumpD(JumpD),
         .MemReadD(MemReadD)
@@ -231,7 +227,7 @@ module top#(
 
     // Sign Extend
     signExtend sign_extend (
-        .ImmSrc(ImmSrcD),
+        .ImmSrc(ImmSrc),
         .ImmInput(InstrD),
         .ImmExt(ExtImmD)
     );
@@ -241,8 +237,8 @@ module top#(
         .in0(RD1E),
         .in1(ResultW),
         .in2(ALUResultM),
-        
-        .out(SrcA)
+
+        .out(SrcAE)
     );
 
     mux3 forwardBE_mux (
@@ -272,8 +268,8 @@ module top#(
         .A(ALUResultM),
         .WD(WriteDataM),
         .trigger(trigger),
-        .RD(RD),
-        .Result(ResultW)
+
+        .RD(ReadDataM)
     );
 
     // Result multiplexer for RegFile write data
@@ -282,8 +278,7 @@ module top#(
         .in0(ALUResultW),
         .in1(ReadDataW),
         .in2(PCPlus4W),
-        
-        .out(Result)
+        .out(ResultW)
     );
 
     FF_FD pipeline_FD(
@@ -365,7 +360,7 @@ module top#(
         .RegWriteM(RegWriteM),
         .ResultSrcM(ResultSrcM),
         .ALUResultM(ALUResultM),
-        .RD(RD),
+        .ReadDataM(ReadDataM),
         .RdM(RdM),
         .PCPlus4M(PCPlus4M),
 
@@ -377,4 +372,5 @@ module top#(
         .PCPlus4W(PCPlus4W)
     );
 
+        
 endmodule

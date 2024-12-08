@@ -2,9 +2,7 @@
 // DESCRIPTION: Verilator output: Design implementation internals
 // See Vtop.h for the primary calling header
 
-#include "verilated.h"
-#include "verilated_dpi.h"
-
+#include "Vtop__pch.h"
 #include "Vtop__Syms.h"
 #include "Vtop___024root.h"
 
@@ -15,8 +13,7 @@ constexpr IData/*31:0*/ Vtop___024root::top__DOT__branch_prediction_unit__DOT__D
 constexpr IData/*31:0*/ Vtop___024root::top__DOT__PC_mux__DOT__WIDTH;
 constexpr IData/*31:0*/ Vtop___024root::top__DOT__BPU_mux__DOT__WIDTH;
 constexpr IData/*31:0*/ Vtop___024root::top__DOT__program_counter__DOT__WIDTH;
-constexpr IData/*31:0*/ Vtop___024root::top__DOT__instruction_memory__DOT__ADDRESS_WIDTH;
-constexpr IData/*31:0*/ Vtop___024root::top__DOT__instruction_memory__DOT__DATA_WIDTH;
+constexpr IData/*31:0*/ Vtop___024root::top__DOT__instruction_memory__DOT__WIDTH;
 constexpr IData/*31:0*/ Vtop___024root::top__DOT__regfile__DOT__ADDRESS_WIDTH;
 constexpr IData/*31:0*/ Vtop___024root::top__DOT__regfile__DOT__DATA_WIDTH;
 constexpr IData/*31:0*/ Vtop___024root::top__DOT__control_unit__DOT__DATA_WIDTH;
@@ -38,8 +35,8 @@ constexpr IData/*31:0*/ Vtop___024root::top__DOT__pipeline_MW__DOT__WIDTH;
 
 void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf);
 
-Vtop___024root::Vtop___024root(Vtop__Syms* symsp, const char* name)
-    : VerilatedModule{name}
+Vtop___024root::Vtop___024root(Vtop__Syms* symsp, const char* v__name)
+    : VerilatedModule{v__name}
     , vlSymsp{symsp}
  {
     // Reset structure values
@@ -47,7 +44,7 @@ Vtop___024root::Vtop___024root(Vtop__Syms* symsp, const char* name)
 }
 
 void Vtop___024root::__Vconfigure(bool first) {
-    if (false && first) {}  // Prevent unused
+    (void)first;  // Prevent unused variable warning
 }
 
 Vtop___024root::~Vtop___024root() {

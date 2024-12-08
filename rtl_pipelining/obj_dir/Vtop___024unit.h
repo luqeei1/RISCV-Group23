@@ -7,9 +7,10 @@
 
 #include "verilated.h"
 
+
 class Vtop__Syms;
 
-class Vtop___024unit final : public VerilatedModule {
+class alignas(VL_CACHE_LINE_BYTES) Vtop___024unit final : public VerilatedModule {
   public:
 
     // INTERNAL VARIABLES
@@ -21,13 +22,13 @@ class Vtop___024unit final : public VerilatedModule {
     static constexpr IData/*31:0*/ SETS = 0x00000100U;
 
     // CONSTRUCTORS
-    Vtop___024unit(Vtop__Syms* symsp, const char* name);
+    Vtop___024unit(Vtop__Syms* symsp, const char* v__name);
     ~Vtop___024unit();
     VL_UNCOPYABLE(Vtop___024unit);
 
     // INTERNAL METHODS
     void __Vconfigure(bool first);
-} VL_ATTR_ALIGNED(VL_CACHE_LINE_BYTES);
+};
 
 
 #endif  // guard
