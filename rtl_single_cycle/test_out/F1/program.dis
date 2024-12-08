@@ -10,8 +10,8 @@ Disassembly of section .text:
 bfc00000 <main>:
 bfc00000:	00000513          	li	a0,0
 bfc00004:	0ff00713          	li	a4,255
-bfc00008:	00000597          	auipc	a1,0x0
-bfc0000c:	07058593          	addi	a1,a1,112 # bfc00078 <seed>
+bfc00008:	000015b7          	lui	a1,0x1
+bfc0000c:	abc58593          	addi	a1,a1,-1348 # abc <main-0xbfbff544>
 
 bfc00010 <wait_trigger>:
 bfc00010:	00000513          	li	a0,0
@@ -21,14 +21,14 @@ bfc0001c:	fe078ae3          	beqz	a5,bfc00010 <wait_trigger>
 bfc00020:	00100513          	li	a0,1
 
 bfc00024 <led_sequence>:
-bfc00024:	0005a603          	lw	a2,0(a1)
+bfc00024:	00058613          	mv	a2,a1
 bfc00028:	00265693          	srli	a3,a2,0x2
 bfc0002c:	00d64633          	xor	a2,a2,a3
 bfc00030:	00165693          	srli	a3,a2,0x1
 bfc00034:	00d64633          	xor	a2,a2,a3
 bfc00038:	00161613          	slli	a2,a2,0x1
 bfc0003c:	00166613          	ori	a2,a2,1
-bfc00040:	00c5a023          	sw	a2,0(a1)
+bfc00040:	00060593          	mv	a1,a2
 bfc00044:	01f67693          	andi	a3,a2,31
 bfc00048:	01468693          	addi	a3,a3,20
 bfc0004c:	020000ef          	jal	ra,bfc0006c <delay_routine>
@@ -46,6 +46,3 @@ bfc0006c <delay_routine>:
 bfc0006c:	fff68693          	addi	a3,a3,-1
 bfc00070:	fe069ee3          	bnez	a3,bfc0006c <delay_routine>
 bfc00074:	00008067          	ret
-
-bfc00078 <seed>:
-bfc00078:	00000abc          	.word	0x00000abc
