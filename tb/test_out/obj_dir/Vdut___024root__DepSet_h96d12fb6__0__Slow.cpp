@@ -17,12 +17,6 @@ VL_ATTR_COLD void Vdut___024root___eval_triggers__stl(Vdut___024root* vlSelf) {
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
     vlSelfRef.__VstlTriggered.set(0U, (IData)(vlSelfRef.__VstlFirstIteration));
-    vlSelfRef.__VstlTriggered.set(1U, vlSelfRef.__Vtrigprevexpr___TOP__cache_FSM__DOT__cache_mem__0.neq(vlSelfRef.cache_FSM__DOT__cache_mem));
-    vlSelfRef.__Vtrigprevexpr___TOP__cache_FSM__DOT__cache_mem__0.assign(vlSelfRef.cache_FSM__DOT__cache_mem);
-    if (VL_UNLIKELY((1U & (~ (IData)(vlSelfRef.__VstlDidInit))))) {
-        vlSelfRef.__VstlDidInit = 1U;
-        vlSelfRef.__VstlTriggered.set(1U, 1U);
-    }
 #ifdef VL_DEBUG
     if (VL_UNLIKELY(vlSymsp->_vm_contextp__->debug())) {
         Vdut___024root___dump_triggers__stl(vlSelf);

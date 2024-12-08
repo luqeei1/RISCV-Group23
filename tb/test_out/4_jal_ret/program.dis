@@ -9,9 +9,9 @@ Disassembly of section .text:
 
 bfc00000 <main>:
 bfc00000:	03200313          	li	t1,50
-bfc00004:	010000ef          	jal	ra,bfc00014 <add_one>
-bfc00008:	00c000ef          	jal	ra,bfc00014 <add_one>
-bfc0000c:	008000ef          	jal	ra,bfc00014 <add_one>
+bfc00004:	010000ef          	jal	bfc00014 <add_one>
+bfc00008:	00c000ef          	jal	bfc00014 <add_one>
+bfc0000c:	008000ef          	jal	bfc00014 <add_one>
 bfc00010:	00c0006f          	j	bfc0001c <finish>
 
 bfc00014 <add_one>:

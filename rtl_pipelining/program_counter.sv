@@ -3,7 +3,7 @@ module program_counter #(
 )(
     input logic clk,
     input logic rst,
-    input logic PC,
+    input logic [WIDTH-1:0] PC,
     input logic stall,
 
     output logic [WIDTH-1:0] PCF

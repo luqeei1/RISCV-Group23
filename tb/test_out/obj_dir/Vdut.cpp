@@ -12,23 +12,34 @@ Vdut::Vdut(VerilatedContext* _vcontextp__, const char* _vcname__)
     , vlSymsp{new Vdut__Syms(contextp(), _vcname__, this)}
     , clk{vlSymsp->TOP.clk}
     , rst{vlSymsp->TOP.rst}
-    , cpu_req_op{vlSymsp->TOP.cpu_req_op}
-    , cpu_req_mode_addr{vlSymsp->TOP.cpu_req_mode_addr}
-    , cpu_req_valid{vlSymsp->TOP.cpu_req_valid}
-    , cpu_resp_ready{vlSymsp->TOP.cpu_resp_ready}
-    , mem_resp_ready{vlSymsp->TOP.mem_resp_ready}
-    , cpu_req_addr{vlSymsp->TOP.cpu_req_addr}
-    , cpu_req_data{vlSymsp->TOP.cpu_req_data}
-    , cpu_resp_data{vlSymsp->TOP.cpu_resp_data}
-    , mem_resp_data{vlSymsp->TOP.mem_resp_data}
-    , cpu_req{vlSymsp->TOP.cpu_req}
-    , cpu_resp{vlSymsp->TOP.cpu_resp}
-    , mem_resp{vlSymsp->TOP.mem_resp}
-    , mem_req{vlSymsp->TOP.mem_req}
-    , cache_mem_tag{vlSymsp->TOP.cache_mem_tag}
-    , cache_mem_dirty{vlSymsp->TOP.cache_mem_dirty}
-    , cache_mem_valid{vlSymsp->TOP.cache_mem_valid}
-    , cache_mem_data{vlSymsp->TOP.cache_mem_data}
+    , trigger{vlSymsp->TOP.trigger}
+    , a0{vlSymsp->TOP.a0}
+    , a1{vlSymsp->TOP.a1}
+    , a2{vlSymsp->TOP.a2}
+    , a3{vlSymsp->TOP.a3}
+    , a4{vlSymsp->TOP.a4}
+    , a5{vlSymsp->TOP.a5}
+    , a6{vlSymsp->TOP.a6}
+    , a7{vlSymsp->TOP.a7}
+    , t0{vlSymsp->TOP.t0}
+    , t1{vlSymsp->TOP.t1}
+    , t2{vlSymsp->TOP.t2}
+    , t3{vlSymsp->TOP.t3}
+    , t4{vlSymsp->TOP.t4}
+    , t5{vlSymsp->TOP.t5}
+    , t6{vlSymsp->TOP.t6}
+    , s0{vlSymsp->TOP.s0}
+    , s1{vlSymsp->TOP.s1}
+    , s2{vlSymsp->TOP.s2}
+    , s3{vlSymsp->TOP.s3}
+    , s4{vlSymsp->TOP.s4}
+    , s5{vlSymsp->TOP.s5}
+    , s6{vlSymsp->TOP.s6}
+    , s7{vlSymsp->TOP.s7}
+    , s8{vlSymsp->TOP.s8}
+    , s9{vlSymsp->TOP.s9}
+    , s10{vlSymsp->TOP.s10}
+    , s11{vlSymsp->TOP.s11}
     , rootp{&(vlSymsp->TOP)}
 {
     // Register model with the context

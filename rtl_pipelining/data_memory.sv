@@ -2,7 +2,7 @@ module data_memory #(
     parameter WIDTH = 32
 
 )(
-    input logic [2:0]           modeBU,
+    input logic [2:0]           modeAddr,
     input  logic [1:0]          ResultSrc,
     input logic                 clk,
     input logic [WIDTH-1:0]      A,
@@ -24,7 +24,7 @@ module data_memory #(
 
 always_ff @(posedge clk) begin
         if(WE) begin
-            case(modeBU)
+            case(modeAddr)
                 3'b001: // store word
                     begin
                         ram_array[{A[16:2],2'b0}] <= WD[31:24];
@@ -64,7 +64,7 @@ always_comb begin
     else begin
         case(ResultSrc)
             2'b01: begin 
-                case(modeBU)
+                case(modeAddr)
                     3'b001: 
                         begin // load word
                             RD = {ram_array[{A[16:2],2'b0}],ram_array[{A[16:2],2'b0} + 1],ram_array[{A[16:2],2'b0} + 2],ram_array[{A[16:2],2'b0} + 3]}; 

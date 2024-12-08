@@ -29,11 +29,10 @@ VM_CLASSES_FAST += \
 
 # Generated module classes, non-fast-path, compile with low/medium optimization
 VM_CLASSES_SLOW += \
+	Vdut__ConstPool_0 \
 	Vdut___024root__Slow \
 	Vdut___024root__DepSet_h96d12fb6__0__Slow \
 	Vdut___024root__DepSet_h5056ad81__0__Slow \
-	Vdut___024unit__Slow \
-	Vdut___024unit__DepSet_heff202b8__0__Slow \
 
 # Generated support classes, fast-path, compile with highest optimization
 VM_SUPPORT_FAST += \
