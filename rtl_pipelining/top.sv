@@ -49,7 +49,6 @@ module top#(
     // FF_DE
     logic [WIDTH-1:0] RD1E, RD2E;
     logic [WIDTH-1:0] PCE, PCPlus4E;
-    logic [4:0] RdE;
     logic RegWriteE, ALUSrcE, MemWriteE;
     logic [1:0] ResultSrcE;
     logic [3:0] ALUControlE;
@@ -57,18 +56,12 @@ module top#(
     logic [WIDTH-1:0] WriteDataE;
 
     // FF_EM
-    logic [WIDTH-1:0] ALUResultM;
-    logic [WIDTH-1:0] WriteDataM;
-    logic [4:0] RdM;
     logic RegWriteM, MemWriteM;
     logic [1:0] ResultSrcM;
-    logic [2:0] modeBUM;
-    logic [WIDTH-1:0] PCPlus4M;
+    logic [2:0] modeAddrM;
 
     // FF_MW
-    logic [WIDTH-1:0] ALUResultW;
     logic [WIDTH-1:0] ReadDataW;
-    logic [4:0] RdW;
     logic RegWriteW;
     logic [1:0] ResultSrcW;
     logic [WIDTH-1:0] PCPlus4W;
@@ -76,7 +69,7 @@ module top#(
     // Control signals
     logic [WIDTH-1:0] ExtImmD;
     logic [WIDTH-1:0] ExtImmE;
-    logic [2:0] ImmSrcD;
+    logic [2:0] ImmSrc;
     logic RegWriteD;
     logic [3:0] ALUControlD;
     logic ALUSrcD;
@@ -94,7 +87,6 @@ module top#(
 
     // Datapath signals
     logic [WIDTH-1:0] RD1, RD2;
-    logic [WIDTH-1:0] ALUResult;
     logic [WIDTH-1:0] RD;
     logic [WIDTH-1:0] Result;
     logic [WIDTH-1:0] SrcA, SrcB;
@@ -120,6 +112,9 @@ module top#(
     logic [WIDTH-1:0] PC_next;
 
     assign PCPlus4F = PCF + 4;
+    assign Rs1D = InstrD[19:15];
+    assign Rs2D = InstrD[24:20];
+    assign RdD = InstrD[11:7];
 
     // Hazard Unit
     hazard_unit hazard_unit (
@@ -142,7 +137,7 @@ module top#(
         .clk(clk),
         .RD(RD),
         .PCF(PCF),
-        .ZeroE(ZeroE),
+        .ZeroE(Zero),
         .BranchE(BranchE),
         
         .flushBranch(flushBranch),
@@ -182,14 +177,13 @@ module top#(
         .PC(PCF)
     );
 
-    // Register File
     regfile regfile (
         .clk(clk),
-        .AD1(InstrD[19:15]),  // rs1
-        .AD2(InstrD[24:20]),  // rs2
+        .AD1(Rs1D),  // rs1
+        .AD2(Rs2D),  // rs2
         .AD3(RdW),            // Write register from Writeback stage
         .WE3(RegWriteW),
-        .WD3(Result),
+        .WD3(ResultW),
         .RD1(RD1),
         .RD2(RD2),
         .a0(a0), 
@@ -224,11 +218,12 @@ module top#(
     // Control Unit
     controlUnit control_unit (
         .InstrD(InstrD),
+        .InstrD(InstrD),
         .ResultSrcD(ResultSrcD),
         .MemWriteD(MemWriteD),
         .ALUControlD(ALUControlD),
         .ALUSrcD(ALUSrcD),
-        .ImmSrcD(ImmSrcD),
+        .ImmSrcD(ImmSrc),
         .RegWriteD(RegWriteD),
         .modeBUD(modeBU),
         .BranchD(BranchD),
@@ -240,6 +235,7 @@ module top#(
     signExtend sign_extend (
         .ImmSrc(ImmSrcD),
         .ImmInput(InstrD),
+        .ImmExt(ExtImmD)
         .ImmExt(ExtImmD)
     );
 
@@ -271,9 +267,9 @@ module top#(
 
     // ALU
     alu alu (
-        .ZeroE(ZeroE),
-        .ALUResult(ALUResult),
-        .SrcA(RD1E),
+        .ZeroE(Zero),
+        .ALUResult(ALUResultE),
+        .SrcA(SrcAE),
         .SrcB(ALUSrcE ? ExtImmE : RD2E),
         .ALUctrl(ALUControlE)
     );
@@ -282,13 +278,13 @@ module top#(
     data_memory data_memory (
         .clk(clk),
         .WE(MemWriteM),
-        .modeBU(modeBUM),
+        .modeAddr(modeAddrM),
         .ResultSrc(ResultSrcM),
         .A(ALUResultM),
         .WD(WriteDataM),
         .trigger(trigger),
         .RD(RD),
-        .Result(Result)
+        .Result(ResultW)
     );
 
     // Result multiplexer for RegFile write data
@@ -333,6 +329,7 @@ module top#(
         .ExtImmD(ExtImmD),
         .PCPlus4D(PCPlus4D),
         .MemReadD(MemReadD),
+        .modeAddrD(modeAddrD),
 
         .RegWriteE(RegWriteE),
         .ResultSrcE(ResultSrcE),
@@ -349,6 +346,7 @@ module top#(
         .RdE(RdE),
         .ExtImmE(ExtImmE),
         .PCPlus4E(PCPlus4E),
+        .modeAddrE(modeAddrE),
         .MemReadE(MemReadE)
     );
 
@@ -357,10 +355,11 @@ module top#(
        .RegWriteE(RegWriteE),
        .ResultSrcE(ResultSrcE),
        .MemWriteE(MemWriteE),
-       .ALUResult(ALUResult),
+       .ALUResultE(ALUResultE),
        .WriteDataE(WriteDataE),
        .RdE(RdE),
        .PCPlus4E(PCPlus4E),
+       .modeAddrE(modeAddrE),
 
        .RegWriteM(RegWriteM),
        .ResultSrcM(ResultSrcM),
@@ -368,7 +367,8 @@ module top#(
        .ALUResultM(ALUResultM),
        .WriteDataM(WriteDataM),
        .RdM(RdM),
-       .PCPlus4M(PCPlus4M)
+       .PCPlus4M(PCPlus4M),
+       .modeAddrM(modeAddrM)
     );
 
     FF_MW pipeline_MW (
