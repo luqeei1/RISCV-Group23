@@ -76,7 +76,7 @@ always_ff @(posedge clk) begin
             if(oldBranch.direction == 1'b1)
                 backwardJumpCounter <= (backwardJumpCounter == 2'b00) ? 2'b00 : backwardJumpCounter - 1; //Decrement back jump counter
         end
-        queue.pop_front(); //Discard top element in queue
+        branch_queue.pop_front(); //Discard top element in queue
     end
     else
         flushBranch <= 1'b0;

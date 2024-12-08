@@ -92,7 +92,7 @@ module top#(
     logic [WIDTH-1:0] RD1, RD2;
     logic [WIDTH-1:0] RD;
     logic [WIDTH-1:0] ResultW;
-    logic [WIDTH-1:0] SrcAE, SrcBE;
+    logic [WIDTH-1:0] SrcAE;
 
     // Hazard Unit
     logic [1:0] ForwardAE, ForwardBE;
@@ -103,7 +103,7 @@ module top#(
     logic flushBranch;
     logic BPU_Src;
     logic [WIDTH-1:0] PC_predict;
-    logic PC_next;
+    logic [WIDTH-1:0] PC_next;
 
     assign PCPlus4F = PCF + 4;
     assign Rs1D = InstrD[19:15];
@@ -249,14 +249,6 @@ module top#(
         .in2(ALUResultM),
 
         .out(WriteDataE)
-    );
-
-    mux2 alu_SrcBE_mux (
-        .sel(ALUSrcE),
-        .in0(WriteDataE),
-        .in1(ExtImmE),
-
-        .out(SrcBE)
     );
 
     // ALU
