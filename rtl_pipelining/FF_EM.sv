@@ -21,7 +21,7 @@ module FF_EM #(
     output logic [2:0] modeAddrM,
     //for debugging
     input logic [DATA_WIDTH-1:0] InstrE,
-    output logic [DATA_WIDTH-1:0] InstrM,
+    output logic [DATA_WIDTH-1:0] InstrM
 );
 
 always_ff @(posedge clk) begin

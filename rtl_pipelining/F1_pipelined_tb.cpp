@@ -29,18 +29,22 @@ int main(int argc, char **argv, char **env) {
   // initialise simulation inputs
   top->clk = 1;
   top->rst = 0;
-  top->trigger = 0;
+  // top->trigger = 0;
 
   // run simulation for MAX_SIM_CYC clock cycles
   for (simcyc=0; simcyc<MAX_SIM_CYC; simcyc++) {
+<<<<<<< HEAD
     //top->trigger = vbdFlag();
+=======
+    // top->trigger = vbdFlag();
+>>>>>>> 792990d9c5637cb82218f4c36398bfcf1982c43b
     
     // dump variables into VCD file and toggle clock
     for (tick=0; tick<2; tick++) {
       tfp->dump (2*simcyc+tick);
       top->clk = !top->clk;
       top->eval();
-      //top->eval();  // Second eval for pipeline stability
+      top->eval();  // Second eval for pipeline stability
     }
 
     // Display pattern on VBuddy and get button state

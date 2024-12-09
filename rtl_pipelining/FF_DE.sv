@@ -84,7 +84,7 @@ always_ff @(posedge clk) begin
         ExtImmE <= ExtImmD;
         PCPlus4E <= PCPlus4D;
         modeAddrE <= modeAddrD;
-        InstrE <= IstrD;
+        InstrE <= InstrD;
     end
 end
 endmodule
