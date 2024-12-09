@@ -76,7 +76,7 @@ The delay has been "randomised" through a simple LFSR process, with an initial s
 
 // insert working video here
 
-Screenshots of waveforms showing the working F1.s script and specific signals can be viewed [here](./Test_Results/images/F1_single_cycle)
+Screenshots of waveforms showing the working F1.s script and specific signals can be viewed [here](./Test_Results/Images/F1_single_cycle)
 
 ### Testing the pdf.s script
 
