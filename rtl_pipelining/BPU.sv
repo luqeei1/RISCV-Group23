@@ -24,6 +24,11 @@ BranchInfo oldBranch;
 logic [1:0] forwardJumpCounter; //2 bit forward counter
 logic [1:0] backwardJumpCounter; //2 bit backward counter
 
+initial begin
+    forwardJumpCounter = 2'b10;
+    backwardJumpCounter = 2'b10;
+end
+
 always_ff @(posedge clk) begin
     if(RD[6:0] == 7'b1100011) begin //current instruction is a branch  
         newBranch.branchAddr <= PCF; 

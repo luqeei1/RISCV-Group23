@@ -1,7 +1,7 @@
 // Verilated -*- C++ -*-
 // DESCRIPTION: Verilator output: Symbol table implementation internals
 
-#include "Vtop__pch.h"
+#include "Vtop__Syms.h"
 #include "Vtop.h"
 #include "Vtop___024root.h"
 
@@ -17,8 +17,6 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
     // Setup module instances
     , TOP{this, namep}
 {
-        // Check resources
-        Verilated::stackCheck(249);
     // Configure time unit / time precision
     _vm_contextp__->timeunit(-12);
     _vm_contextp__->timeprecision(-12);
@@ -26,29 +24,29 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
     // Setup each module's pointer back to symbol table (for public functions)
     TOP.__Vconfigure(true);
     // Setup scopes
-    __Vscope_TOP.configure(this, name(), "TOP", "TOP", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top.configure(this, name(), "top", "top", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__BPU_mux.configure(this, name(), "top.BPU_mux", "BPU_mux", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__PC_mux.configure(this, name(), "top.PC_mux", "PC_mux", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__alu.configure(this, name(), "top.alu", "alu", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__branch_prediction_unit.configure(this, name(), "top.branch_prediction_unit", "branch_prediction_unit", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__control_unit.configure(this, name(), "top.control_unit", "control_unit", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__control_unit__alu_decoder.configure(this, name(), "top.control_unit.alu_decoder", "alu_decoder", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__data_memory.configure(this, name(), "top.data_memory", "data_memory", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__forwardAE_mux.configure(this, name(), "top.forwardAE_mux", "forwardAE_mux", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__forwardBE_mux.configure(this, name(), "top.forwardBE_mux", "forwardBE_mux", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__hazard_unit.configure(this, name(), "top.hazard_unit", "hazard_unit", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__instruction_memory.configure(this, name(), "top.instruction_memory", "instruction_memory", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__pipeline_DE.configure(this, name(), "top.pipeline_DE", "pipeline_DE", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__pipeline_EM.configure(this, name(), "top.pipeline_EM", "pipeline_EM", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__pipeline_FD.configure(this, name(), "top.pipeline_FD", "pipeline_FD", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__pipeline_MW.configure(this, name(), "top.pipeline_MW", "pipeline_MW", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__program_counter.configure(this, name(), "top.program_counter", "program_counter", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__regfile.configure(this, name(), "top.regfile", "regfile", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__regfile_mux.configure(this, name(), "top.regfile_mux", "regfile_mux", "<null>", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__sign_extend.configure(this, name(), "top.sign_extend", "sign_extend", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_TOP.configure(this, name(), "TOP", "TOP", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top.configure(this, name(), "top", "top", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__BPU_mux.configure(this, name(), "top.BPU_mux", "BPU_mux", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__PC_mux.configure(this, name(), "top.PC_mux", "PC_mux", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__alu.configure(this, name(), "top.alu", "alu", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__branch_prediction_unit.configure(this, name(), "top.branch_prediction_unit", "branch_prediction_unit", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__control_unit.configure(this, name(), "top.control_unit", "control_unit", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__control_unit__alu_decoder.configure(this, name(), "top.control_unit.alu_decoder", "alu_decoder", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__data_memory.configure(this, name(), "top.data_memory", "data_memory", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__forwardAE_mux.configure(this, name(), "top.forwardAE_mux", "forwardAE_mux", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__forwardBE_mux.configure(this, name(), "top.forwardBE_mux", "forwardBE_mux", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__hazard_unit.configure(this, name(), "top.hazard_unit", "hazard_unit", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__instruction_memory.configure(this, name(), "top.instruction_memory", "instruction_memory", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__pipeline_DE.configure(this, name(), "top.pipeline_DE", "pipeline_DE", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__pipeline_EM.configure(this, name(), "top.pipeline_EM", "pipeline_EM", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__pipeline_FD.configure(this, name(), "top.pipeline_FD", "pipeline_FD", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__pipeline_MW.configure(this, name(), "top.pipeline_MW", "pipeline_MW", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__program_counter.configure(this, name(), "top.program_counter", "program_counter", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__regfile.configure(this, name(), "top.regfile", "regfile", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__regfile_mux.configure(this, name(), "top.regfile_mux", "regfile_mux", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__sign_extend.configure(this, name(), "top.sign_extend", "sign_extend", 0, VerilatedScope::SCOPE_OTHER);
     // Setup export functions
-    for (int __Vfinal = 0; __Vfinal < 2; ++__Vfinal) {
+    for (int __Vfinal=0; __Vfinal<2; __Vfinal++) {
         __Vscope_TOP.varInsert(__Vfinal,"a0", &(TOP.a0), false, VLVT_UINT32,VLVD_OUT|VLVF_PUB_RW,1 ,31,0);
         __Vscope_TOP.varInsert(__Vfinal,"a1", &(TOP.a1), false, VLVT_UINT32,VLVD_OUT|VLVF_PUB_RW,1 ,31,0);
         __Vscope_TOP.varInsert(__Vfinal,"a2", &(TOP.a2), false, VLVT_UINT32,VLVD_OUT|VLVF_PUB_RW,1 ,31,0);
@@ -78,6 +76,7 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
         __Vscope_TOP.varInsert(__Vfinal,"t4", &(TOP.t4), false, VLVT_UINT32,VLVD_OUT|VLVF_PUB_RW,1 ,31,0);
         __Vscope_TOP.varInsert(__Vfinal,"t5", &(TOP.t5), false, VLVT_UINT32,VLVD_OUT|VLVF_PUB_RW,1 ,31,0);
         __Vscope_TOP.varInsert(__Vfinal,"t6", &(TOP.t6), false, VLVT_UINT32,VLVD_OUT|VLVF_PUB_RW,1 ,31,0);
+        __Vscope_TOP.varInsert(__Vfinal,"trigger", &(TOP.trigger), false, VLVT_UINT8,VLVD_IN|VLVF_PUB_RW,0);
         __Vscope_top.varInsert(__Vfinal,"ALUControlD", &(TOP.top__DOT__ALUControlD), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,3,0);
         __Vscope_top.varInsert(__Vfinal,"ALUControlE", &(TOP.top__DOT__ALUControlE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,3,0);
         __Vscope_top.varInsert(__Vfinal,"ALUResultE", &(TOP.top__DOT__ALUResultE), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
@@ -180,6 +179,7 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
         __Vscope_top.varInsert(__Vfinal,"t4", &(TOP.top__DOT__t4), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top.varInsert(__Vfinal,"t5", &(TOP.top__DOT__t5), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top.varInsert(__Vfinal,"t6", &(TOP.top__DOT__t6), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
+        __Vscope_top.varInsert(__Vfinal,"trigger", &(TOP.top__DOT__trigger), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__BPU_mux.varInsert(__Vfinal,"WIDTH", const_cast<void*>(static_cast<const void*>(&(TOP.top__DOT__BPU_mux__DOT__WIDTH))), true, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top__BPU_mux.varInsert(__Vfinal,"in0", &(TOP.top__DOT__BPU_mux__DOT__in0), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top__BPU_mux.varInsert(__Vfinal,"in1", &(TOP.top__DOT__BPU_mux__DOT__in1), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
@@ -239,7 +239,6 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
         __Vscope_top__control_unit__alu_decoder.varInsert(__Vfinal,"op", &(TOP.top__DOT__control_unit__DOT__alu_decoder__DOT__op), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__data_memory.varInsert(__Vfinal,"A", &(TOP.top__DOT__data_memory__DOT__A), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top__data_memory.varInsert(__Vfinal,"RD", &(TOP.top__DOT__data_memory__DOT__RD), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
-        __Vscope_top__data_memory.varInsert(__Vfinal,"ResultSrc", &(TOP.top__DOT__data_memory__DOT__ResultSrc), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,1,0);
         __Vscope_top__data_memory.varInsert(__Vfinal,"WD", &(TOP.top__DOT__data_memory__DOT__WD), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top__data_memory.varInsert(__Vfinal,"WE", &(TOP.top__DOT__data_memory__DOT__WE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__data_memory.varInsert(__Vfinal,"WIDTH", const_cast<void*>(static_cast<const void*>(&(TOP.top__DOT__data_memory__DOT__WIDTH))), true, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);

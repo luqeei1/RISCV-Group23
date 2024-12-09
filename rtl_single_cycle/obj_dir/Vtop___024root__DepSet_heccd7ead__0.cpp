@@ -801,11 +801,11 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__0(Vtop___024root* vlSelf) {
             } else {
                 vlSelf->top__DOT__RD = ((vlSelf->top__DOT__data_memory__DOT__ram_array
                                          [(0x1ffffU 
-                                           & vlSelf->top__DOT__ALUResult)] 
+                                           & ((IData)(1U) 
+                                              + vlSelf->top__DOT__ALUResult))] 
                                          << 8U) | vlSelf->top__DOT__data_memory__DOT__ram_array
                                         [(0x1ffffU 
-                                          & ((IData)(1U) 
-                                             + vlSelf->top__DOT__ALUResult))]);
+                                          & vlSelf->top__DOT__ALUResult)]);
                 vlSelf->top__DOT__Result = vlSelf->top__DOT__RD;
             }
         } else if ((2U & (IData)(vlSelf->top__DOT__modeBU))) {
@@ -832,35 +832,35 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__0(Vtop___024root* vlSelf) {
                                          << 0x10U) 
                                         | ((vlSelf->top__DOT__data_memory__DOT__ram_array
                                             [(0x1ffffU 
-                                              & vlSelf->top__DOT__ALUResult)] 
+                                              & ((IData)(1U) 
+                                                 + vlSelf->top__DOT__ALUResult))] 
                                             << 8U) 
                                            | vlSelf->top__DOT__data_memory__DOT__ram_array
                                            [(0x1ffffU 
-                                             & ((IData)(1U) 
-                                                + vlSelf->top__DOT__ALUResult))]));
+                                             & vlSelf->top__DOT__ALUResult)]));
                 vlSelf->top__DOT__Result = vlSelf->top__DOT__RD;
             }
         } else if ((1U & (IData)(vlSelf->top__DOT__modeBU))) {
             vlSelf->top__DOT__RD = ((vlSelf->top__DOT__data_memory__DOT__ram_array
-                                     [(0x1ffffU & vlSelf->top__DOT__ALUResult)] 
+                                     [(0x1ffffU & ((IData)(3U) 
+                                                   + vlSelf->top__DOT__ALUResult))] 
                                      << 0x18U) | ((
                                                    vlSelf->top__DOT__data_memory__DOT__ram_array
                                                    [
                                                    (0x1ffffU 
-                                                    & ((IData)(1U) 
+                                                    & ((IData)(2U) 
                                                        + vlSelf->top__DOT__ALUResult))] 
                                                    << 0x10U) 
                                                   | ((vlSelf->top__DOT__data_memory__DOT__ram_array
                                                       [
                                                       (0x1ffffU 
-                                                       & ((IData)(2U) 
+                                                       & ((IData)(1U) 
                                                           + vlSelf->top__DOT__ALUResult))] 
                                                       << 8U) 
                                                      | vlSelf->top__DOT__data_memory__DOT__ram_array
                                                      [
                                                      (0x1ffffU 
-                                                      & ((IData)(3U) 
-                                                         + vlSelf->top__DOT__ALUResult))])));
+                                                      & vlSelf->top__DOT__ALUResult)])));
             vlSelf->top__DOT__Result = vlSelf->top__DOT__RD;
         } else {
             vlSelf->top__DOT__Result = vlSelf->top__DOT__RD;

@@ -66,10 +66,8 @@ always_ff @(posedge clk) begin
         PCPlus4E <= {DATA_WIDTH{1'b0}};
     end
     else begin
-        if(!stall) begin
-            JumpE <= JumpD;
-            BranchE <= BranchD;
-        end
+        JumpE <= JumpD;
+        BranchE <= BranchD;
         MemReadE <= MemReadD;
         RegWriteE <= RegWriteD;
         MemWriteE <= MemWriteD;
