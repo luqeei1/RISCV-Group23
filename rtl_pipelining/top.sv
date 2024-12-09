@@ -6,7 +6,7 @@ module top#(
 )(
     input logic clk,
     input logic rst,
-    input logic trigger,
+    // input logic trigger,
     output logic [WIDTH-1:0] a0,
     output logic [WIDTH-1:0] a1,
     output logic [WIDTH-1:0] a2,
