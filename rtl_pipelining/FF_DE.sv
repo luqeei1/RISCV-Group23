@@ -45,33 +45,18 @@ module FF_DE #(
 
 always_ff @(posedge clk) begin
     if(flush) begin
-        MemReadE <= 1'b0;
         RegWriteE <= 1'b0;               
-        ResultSrcE <= 2'b00;   
         MemWriteE <= 1'b0;             
-        JumpE <= 1'b0;                  
-        BranchE <= BranchD;                 
-        ALUControlE <= 4'b0000;         
-        ALUSrcE <= 1'b0;      
-        modeAddrE <= 3'b000;
-        InstrE <= 0; //for debugging           
-
-        RD1E <= {DATA_WIDTH{1'b0}};
-        RD2E <= {DATA_WIDTH{1'b0}};
-        PCE <= {DATA_WIDTH{1'b0}};
-        Rs1E <= {WIDTH{1'b0}};
-        Rs2E <= {WIDTH{1'b0}};
-        RdE <= {WIDTH{1'b0}};
-        ExtImmE <= {DATA_WIDTH{1'b0}};
-        PCPlus4E <= {DATA_WIDTH{1'b0}};
+        JumpE <= 1'b0;       
+        BranchE <= 1'b0;           
     end
     else begin
         JumpE <= JumpD;
         BranchE <= BranchD;
-        MemReadE <= MemReadD;
         RegWriteE <= RegWriteD;
         MemWriteE <= MemWriteD;
-
+    end
+    MemReadE <= MemReadD;
         ResultSrcE <= ResultSrcD;
         ALUControlE <= ALUControlD;
         ALUSrcE <= ALUSrcD;
@@ -85,6 +70,5 @@ always_ff @(posedge clk) begin
         PCPlus4E <= PCPlus4D;
         modeAddrE <= modeAddrD;
         InstrE <= InstrD;
-    end
 end
 endmodule
