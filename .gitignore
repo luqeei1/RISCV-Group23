@@ -1,0 +1,11 @@
+obj_dir/
+*.bin
+*.dis
+*.vcd
+*.hex
+a.out
+a.out.reloc
+.vscode
+*.code-workspace
+vbuddy.cfg
+riscv-binutils-gdb
