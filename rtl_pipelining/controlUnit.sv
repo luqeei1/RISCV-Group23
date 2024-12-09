@@ -2,7 +2,7 @@ module controlUnit #(
     parameter DATA_WIDTH = 32
 ) (
     input logic [DATA_WIDTH-1:0] InstrD, 
-    output logic [1:0] ResultSrcD,
+    output logic [1:0] ResultSrcD ,
     output logic MemWriteD,
     output logic JumpD,
     output logic BranchD,
@@ -13,12 +13,9 @@ module controlUnit #(
     output logic [2:0] modeAddr,
     output logic MemReadD
 );
-    logic [6:0] op;
-    assign op = InstrD[6:0];
-    logic [14:12] funct3;
-    assign funct3 = InstrD[14:12];
-    logic funct7;
-    assign funct7 = InstrD[30];
+    logic [6:0] op = InstrD[6:0];
+    logic [14:12] funct3 = InstrD[14:12];
+    logic funct7 = InstrD[30];
     logic [1:0] ALUOp; 
     logic Store;
     logic Load;

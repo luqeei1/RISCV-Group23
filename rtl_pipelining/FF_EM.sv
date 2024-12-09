@@ -18,7 +18,10 @@ module FF_EM #(
     input logic [DATA_WIDTH-1:0] PCPlus4E,
     output logic [DATA_WIDTH-1:0] PCPlus4M,
     input logic [2:0] modeAddrE,
-    output logic [2:0] modeAddrM
+    output logic [2:0] modeAddrM,
+    //for debugging
+    input logic [DATA_WIDTH-1:0] InstrE,
+    output logic [DATA_WIDTH-1:0] InstrM,
 );
 
 always_ff @(posedge clk) begin
@@ -30,6 +33,8 @@ always_ff @(posedge clk) begin
     RdM <= RdE;
     PCPlus4M <= PCPlus4E;
     modeAddrM <= modeAddrE;
+    //for debugging
+    InstrM <= InstrE;
 end
 
 endmodule
