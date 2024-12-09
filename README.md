@@ -74,7 +74,7 @@ The delay has been "randomised" through a simple LFSR process, with an initial s
 
 [The complete F1.s assembly code can be seen here](./rtl_single_cycle/F1.s)
 
-[The video of working lights can be seen here](/.Test_Results/Videos/F1_lights_video.mp4)
+[The video of working lights can be seen here](./Test_Results/Videos/F1_lights_video.mp4)
 
 Screenshots of waveforms showing the working F1.s script and specific signals can be viewed [here](./Test_Results/Images/F1_single_cycle)
 
