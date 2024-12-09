@@ -11,7 +11,7 @@ module BPU #(
     output logic PCBPUSrc
 );
 
-typedef struct {
+typedef struct packed{
     logic [31:0] branchAddr; //Branch address
     logic [31:0] targetAddr; //Branch target address
     logic direction; //Branch direction: 0 = forward, 1 = backward

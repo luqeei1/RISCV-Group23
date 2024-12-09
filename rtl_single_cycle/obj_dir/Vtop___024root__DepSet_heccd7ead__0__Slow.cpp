@@ -11,7 +11,12 @@ VL_ATTR_COLD void Vtop___024root___initial__TOP__0(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___initial__TOP__0\n"); );
     // Init
+<<<<<<< HEAD
     VlWide<3>/*95:0*/ __Vtemp_h2553e7c1__0;
+=======
+    VlWide<4>/*127:0*/ __Vtemp_hfb5a4ebb__0;
+    VlWide<6>/*191:0*/ __Vtemp_hc4683f0f__0;
+>>>>>>> 7e693137a16f50513c4402897ae6a3524ef2f876
     // Body
     VL_WRITEF("Loading ram.\n");
     __Vtemp_h2553e7c1__0[0U] = 0x2e6d656dU;
@@ -21,7 +26,17 @@ VL_ATTR_COLD void Vtop___024root___initial__TOP__0(Vtop___024root* vlSelf) {
                  ,  &(vlSelf->top__DOT__data_memory__DOT__ram_array)
                  , 0x200U, ~0ULL);
     VL_WRITEF("Ram loaded\nLoading rom.\n");
+<<<<<<< HEAD
     VL_READMEM_N(true, 8, 65536, 0, std::string{"pdf.hex"}
+=======
+    __Vtemp_hc4683f0f__0[0U] = 0x2e686578U;
+    __Vtemp_hc4683f0f__0[1U] = 0x2f706466U;
+    __Vtemp_hc4683f0f__0[2U] = 0x696c6573U;
+    __Vtemp_hc4683f0f__0[3U] = 0x696f6e46U;
+    __Vtemp_hc4683f0f__0[4U] = 0x72756374U;
+    __Vtemp_hc4683f0f__0[5U] = 0x496e7374U;
+    VL_READMEM_N(true, 8, 65536, 0, VL_CVT_PACK_STR_NW(6, __Vtemp_hc4683f0f__0)
+>>>>>>> 7e693137a16f50513c4402897ae6a3524ef2f876
                  ,  &(vlSelf->top__DOT__instruction_memory__DOT__rom_array)
                  , 0, ~0ULL);
     VL_WRITEF("ROM loaded successfully.\n");
@@ -92,20 +107,20 @@ VL_ATTR_COLD void Vtop___024root___settle__TOP__0(Vtop___024root* vlSelf) {
         [0x1fU];
     vlSelf->top__DOT__instr = ((vlSelf->top__DOT__instruction_memory__DOT__rom_array
                                 [(0xffffU & ((IData)(3U) 
-                                             + vlSelf->top__DOT__PC))] 
+                                             + (IData)((QData)((IData)(vlSelf->top__DOT__PC)))))] 
                                 << 0x18U) | ((vlSelf->top__DOT__instruction_memory__DOT__rom_array
                                               [(0xffffU 
                                                 & ((IData)(2U) 
-                                                   + vlSelf->top__DOT__PC))] 
+                                                   + (IData)((QData)((IData)(vlSelf->top__DOT__PC)))))] 
                                               << 0x10U) 
                                              | ((vlSelf->top__DOT__instruction_memory__DOT__rom_array
                                                  [(0xffffU 
                                                    & ((IData)(1U) 
-                                                      + vlSelf->top__DOT__PC))] 
+                                                      + (IData)((QData)((IData)(vlSelf->top__DOT__PC)))))] 
                                                  << 8U) 
                                                 | vlSelf->top__DOT__instruction_memory__DOT__rom_array
                                                 [(0xffffU 
-                                                  & vlSelf->top__DOT__PC)])));
+                                                  & (IData)((QData)((IData)(vlSelf->top__DOT__PC))))])));
     if ((0x40U & vlSelf->top__DOT__instr)) {
         vlSelf->top__DOT__RegWrite = (1U & (IData)(
                                                    ((0x20U 

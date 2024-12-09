@@ -8,9 +8,9 @@ start address 0xbfc00000
 Disassembly of section .text:
 
 bfc00000 <main>:
-bfc00000:	010000ef          	jal	bfc00010 <init>
-bfc00004:	020000ef          	jal	bfc00024 <build>
-bfc00008:	050000ef          	jal	bfc00058 <display>
+bfc00000:	010000ef          	jal	ra,bfc00010 <init>
+bfc00004:	020000ef          	jal	ra,bfc00024 <build>
+bfc00008:	050000ef          	jal	ra,bfc00058 <display>
 bfc0000c:	06c0006f          	j	bfc00078 <finish>
 
 bfc00010 <init>:
