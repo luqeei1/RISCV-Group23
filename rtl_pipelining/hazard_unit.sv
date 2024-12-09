@@ -30,7 +30,7 @@ module hazard_unit #(
         if (RegWriteW && (Rs1E == RdW) && (RdW != 0)) begin
             ForwardAE = 2'b01;
         end else if (RegWriteM && (Rs1E == RdM) && (RdM != 0)) begin
-            ForwardBE = 2'b10;
+            ForwardAE = 2'b10;
         end
 
         // ForwardBE - same implementation (for second source register)
@@ -40,6 +40,8 @@ module hazard_unit #(
         end else if (RegWriteM && (Rs2E == RdM) && (RdM != 0)) begin
             ForwardBE = 2'b10;
         end
+
+        //
 
         // stall for lw dependency
         stall = (MemReadE && ((RdE == Rs1E) || (RdE == Rs2E)));
