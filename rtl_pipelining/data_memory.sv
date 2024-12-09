@@ -7,8 +7,7 @@ module data_memory #(
     input logic [WIDTH-1:0]      WD,
     input logic                  trigger,
     input logic                  WE,
-    output logic [WIDTH-1:0]     RD    
-    output logic [WIDTH-1:0]     RD    
+    output logic [WIDTH-1:0]     RD      
 );
 
     logic [7:0] ram_array [2**17 -1:0];
@@ -56,7 +55,6 @@ always_ff @(posedge clk) begin
                         ram_array[{A[16:0]}] <= WD[7:0];
                     end
                 default:
-                    ram_array[{A[16:0]}] <= 8'b0;
                     ram_array[{A[16:0]}] <= 8'b0;
             endcase
         end

@@ -11,6 +11,8 @@ module BPU #(
     output logic PCBPUSrc
 );
 
+logic flushA;
+logic flushB;
 typedef struct packed{
     logic [31:0] branchAddr; //Branch address
     logic [31:0] targetAddr; //Branch target address
@@ -38,6 +40,7 @@ always_ff @(posedge clk) begin
         if(RD[31] == 1'b0) begin //forward jump
             if(forwardJumpCounter >= 2'b10) begin //take forward jump
                 PCBPUSrc <= 1'b1;
+                flushA <= 1'b1;
                 newBranch.prediction <= 1'b1;
             end
             if(forwardJumpCounter <= 2'b01) begin //don't take forward jump
@@ -48,6 +51,7 @@ always_ff @(posedge clk) begin
         if(RD[31] == 1'b1) begin //backward jump
             if(backwardJumpCounter >= 2'b10) begin //take backward jump
                 PCBPUSrc <= 1'b1;
+                flushA <= 1'b1;
                 newBranch.prediction <= 1'b1;
             end
             if(backwardJumpCounter <= 2'b01) begin //don't take backward jump
@@ -59,19 +63,20 @@ always_ff @(posedge clk) begin
     end
     else begin //current instruction is not a branch instruction
         PCBPUSrc <= 1'b0;
+        flushA <= 1'b0;
     end
 
     if(BranchE) begin //Branch instr 2 cycles later
         oldBranch <= branch_queue[0];
         if(oldBranch.prediction == ZeroE) begin //If jump decision was correct
-            flushBranch <= 1'b0;
+            flushB <= 1'b0;
             if(oldBranch.direction == 1'b0)
                 forwardJumpCounter <= (forwardJumpCounter == 2'b11) ? 2'b11 : forwardJumpCounter + 1; //Increment forward jump counter
             if(oldBranch.direction == 1'b1)
                 backwardJumpCounter <= (backwardJumpCounter == 2'b11) ? 2'b11 : backwardJumpCounter + 1; //Increment back jump counter
         end
         if(oldBranch.prediction != ZeroE) begin //If jump decision was incorrect
-            flushBranch <= 1'b1; //Flush pipeline
+            flushB <= 1'b1; //Flush pipeline
             if(ZeroE == 0) //If jump should've not been taken
                 PCBPU <= oldBranch.branchAddr + 32'd4; //Jump to following instruction after branch
             else //If jump should've been taken
@@ -84,7 +89,9 @@ always_ff @(posedge clk) begin
         branch_queue.pop_front(); //Discard top element in queue
     end
     else
-        flushBranch <= 1'b0;
+        flushB <= 1'b0;
+
+    flushBranch <= flushA || flushB;
 end
 
 endmodule
