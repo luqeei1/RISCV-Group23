@@ -50,7 +50,7 @@ always_ff @(posedge clk) begin
         ResultSrcE <= 2'b00;   
         MemWriteE <= 1'b0;             
         JumpE <= 1'b0;                  
-        BranchE <= 1'b0;                 
+        BranchE <= BranchD;                 
         ALUControlE <= 4'b0000;         
         ALUSrcE <= 1'b0;      
         modeAddrE <= 3'b000;
@@ -66,11 +66,13 @@ always_ff @(posedge clk) begin
         PCPlus4E <= {DATA_WIDTH{1'b0}};
     end
     else begin
+        if(!stall) begin
+            JumpE <= JumpD;
+            BranchE <= BranchD;
+        end
         MemReadE <= MemReadD;
         RegWriteE <= RegWriteD;
         MemWriteE <= MemWriteD;
-        JumpE <= JumpD;
-        BranchE <= BranchD;
 
         ResultSrcE <= ResultSrcD;
         ALUControlE <= ALUControlD;
@@ -84,7 +86,7 @@ always_ff @(posedge clk) begin
         ExtImmE <= ExtImmD;
         PCPlus4E <= PCPlus4D;
         modeAddrE <= modeAddrD;
-        InstrE <= IstrD;
+        InstrE <= InstrD;
     end
 end
 endmodule

@@ -18,7 +18,7 @@ Vdut__Syms::Vdut__Syms(VerilatedContext* contextp, const char* namep, Vdut* mode
     , TOP{this, namep}
 {
         // Check resources
-        Verilated::stackCheck(223);
+        Verilated::stackCheck(199);
     // Configure time unit / time precision
     _vm_contextp__->timeunit(-12);
     _vm_contextp__->timeprecision(-12);

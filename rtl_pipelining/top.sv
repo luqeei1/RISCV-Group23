@@ -314,7 +314,7 @@ module top#(
         .PCPlus4D(PCPlus4D),
         .MemReadD(MemReadD),
         .modeAddrD(modeAddrD),
-        .instrD(instrD), //for debugging
+        .InstrD(InstrD), //for debugging
 
         .RegWriteE(RegWriteE),
         .ResultSrcE(ResultSrcE),
@@ -346,7 +346,7 @@ module top#(
        .RdE(RdE),
        .PCPlus4E(PCPlus4E),
        .modeAddrE(modeAddrE),
-       .instrE(instrE), //for debugging
+       .InstrE(InstrE), //for debugging
 
        .RegWriteM(RegWriteM),
        .ResultSrcM(ResultSrcM),

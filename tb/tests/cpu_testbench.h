@@ -25,14 +25,13 @@ public:
         // Assemble the program
         std::ignore = system(("./assemble.sh asm/" + name_ + ".s").c_str());
         // Create default empty file for data memory
-        std::ignore = system("touch data.hex");
+        std::ignore = system("touch data_memory.hex");
     }
 
     // CPU instantiated outside of SetUp to allow for correct
     // program to be assembled and loaded into instruction memory
     void initSimulation()
     {
-        std::ignore = system(("mkdir -p test_out/" + name_).c_str());
         top_ = new Vdut(context_);
         tfp_ = new VerilatedVcdC;
 
@@ -44,7 +43,7 @@ public:
         // Initialise inputs
         top_->clk = 1;
         top_->rst = 1;
-        //top_->trigger = 0;
+        top_->trigger = 0;
         runSimulation(10);  // Process reset
         top_->rst = 0;
     }
@@ -81,14 +80,14 @@ public:
         delete context_;
 
         // Save data and program memory files to test_out directory
-        std::ignore = system(("mv data.hex test_out/" + name_ + "/data.hex").c_str());
+        std::ignore = system(("mv data_memory.hex test_out/" + name_ + "/data.hex").c_str());
         std::ignore = system(("mv program.hex test_out/" + name_ + "/program.hex").c_str());
     }
 
     void setData(const std::string &data_file)
     {
         // Fill data.hex with program data
-        std::ignore = system(("cp " + data_file + " data.hex").c_str());
+        std::ignore = system(("cp " + data_file + " data_memory.hex").c_str());
     }
 
 protected:
