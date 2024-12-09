@@ -21,11 +21,13 @@ module data_memory #(
 
     logic [7:0] ram_array [2**17 -1:0];
 
-    initial begin
-        $display("Loading ram.");
-        $readmemh("data_memory.hex", ram_array, 17'h00000, 17'h1FFFF);
-        $display("Ram loaded");
-    end
+initial begin
+    // Read the contents of "gaussian.mem" into the data_array up to the size of the array
+    $readmemh("gaussian.mem", ram_array, 32'h00010000);
+end 
+
+
+
    
 
 
@@ -75,12 +77,12 @@ always_comb begin
                 case(modeBU)
                     3'b001: 
                         begin // load word
-                            RD = {ram_array[{A[16:0]}],ram_array[{A[16:0]} + 1],ram_array[{A[16:0]} + 2],ram_array[{A[16:0]} + 3]}; 
+                            RD = {ram_array[{A[16:0]} + 3],ram_array[{A[16:0]} + 2],ram_array[{A[16:0]} + 1],ram_array[{A[16:0]}]}; 
                             Result = RD;
                         end                 
                     3'b010: //load half word
                         begin
-                            RD = {{16{ram_array[{A[16:0]}][7]}},ram_array[{A[16:0]}],ram_array[{A[16:0]} + 1]};
+                            RD = {{16{ram_array[{A[16:0]}][7]}},ram_array[{A[16:0]} + 1],ram_array[{A[16:0]}]};
                             Result = RD;
                         end
                     3'b011:
@@ -90,7 +92,7 @@ always_comb begin
                         end
                     3'b100:
                         begin //load unsigned half word
-                            RD = {{{16'b0}},ram_array[{A[16:0]}],ram_array[{A[16:0]} + 1]};
+                            RD = {{{16'b0}},ram_array[{A[16:0]} + 1],ram_array[{A[16:0]}]};
                             Result = RD;
                         end
                     3'b101:
