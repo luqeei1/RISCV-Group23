@@ -3,6 +3,8 @@ obj_dir/
 *.dis
 *.vcd
 *.hex
+*.d
+*.o
 a.out
 a.out.reloc
 .vscode

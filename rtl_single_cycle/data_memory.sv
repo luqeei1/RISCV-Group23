@@ -23,7 +23,7 @@ module data_memory #(
 
     initial begin
         $display("Loading ram.");
-        $readmemh("data_memory.hex", ram_array, 17'h00000, 17'h1FFFF);
+        $readmemh("gaussian.mem", ram_array, 32'h00010000);
         $display("Ram loaded");
     end
    
@@ -35,10 +35,10 @@ always_ff @(posedge clk) begin
             case(modeBU)
                 3'b001: // store word
                     begin
-                        ram_array[{A[16:0]}] <= WD[31:24];
-                        ram_array[{A[16:0]} +1] <= WD[23:16];
-                        ram_array[{A[16:0]} +2] <= WD[15:8];
-                        ram_array[{A[16:0]} +3] <= WD[7:0];
+                        ram_array[{A[16:0]} - 32'h00010000] <= WD[31:24];
+                        ram_array[{A[16:0]} - 32'h00010000 + 1] <= WD[23:16];
+                        ram_array[{A[16:0]} - 32'h00010000 + 2] <= WD[15:8];
+                        ram_array[{A[16:0]} - 32'h00010000 + 3] <= WD[7:0];
                     end
                 3'b010: // store half word
                     begin
@@ -75,7 +75,7 @@ always_comb begin
                 case(modeBU)
                     3'b001: 
                         begin // load word
-                            RD = {ram_array[{A[16:0]}],ram_array[{A[16:0]} + 1],ram_array[{A[16:0]} + 2],ram_array[{A[16:0]} + 3]}; 
+                            {ram_array[{A[16:0]} - 32'h00010000], ram_array[{A[16:0]} - 32'h00010000 + 1], ram_array[{A[16:0]} - 32'h00010000 + 2], ram_array[{A[16:0]} - 32'h00010000 + 3]};
                             Result = RD;
                         end                 
                     3'b010: //load half word
