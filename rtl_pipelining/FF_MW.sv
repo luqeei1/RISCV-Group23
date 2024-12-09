@@ -14,7 +14,11 @@ module FF_MW #(
     input logic [WIDTH-1:0] RdM,
     output logic [WIDTH-1:0] RdW,
     input logic [DATA_WIDTH-1:0] PCPlus4M,
-    output logic [DATA_WIDTH-1:0] PCPlus4W
+    output logic [DATA_WIDTH-1:0] PCPlus4W,
+
+    //for debugging
+    input logic [DATA_WIDTH-1:0] InstrM,
+    output logic [DATA_WIDTH-1:0] InstrW
 );
 
 always_ff @(posedge clk) begin
@@ -24,6 +28,9 @@ always_ff @(posedge clk) begin
     ReadDataW <= ReadDataM;
     RdW <= RdM;
     PCPlus4W <= PCPlus4M;
+
+    //for debugging
+    InstrW <= InstrW;
 end
 
 endmodule

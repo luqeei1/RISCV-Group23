@@ -37,7 +37,7 @@ module top#(
 );
     // Pipeline Registers
     // FF_FD
-    logic [WIDTH-1:0] InstrD, InstrF;
+    logic [WIDTH-1:0] InstrD, InstrF, InstrE, InstrM, InstrW;
 
     // FF_DE
     logic [WIDTH-1:0] RD1E, RD2E;
@@ -314,6 +314,7 @@ module top#(
         .PCPlus4D(PCPlus4D),
         .MemReadD(MemReadD),
         .modeAddrD(modeAddrD),
+        .instrD(instrD), //for debugging
 
         .RegWriteE(RegWriteE),
         .ResultSrcE(ResultSrcE),
@@ -331,7 +332,8 @@ module top#(
         .ExtImmE(ExtImmE),
         .PCPlus4E(PCPlus4E),
         .modeAddrE(modeAddrE),
-        .MemReadE(MemReadE)
+        .MemReadE(MemReadE),
+        .InstrE(InstrE) //for debugging
     );
 
     FF_EM pipeline_EM (
@@ -344,6 +346,7 @@ module top#(
        .RdE(RdE),
        .PCPlus4E(PCPlus4E),
        .modeAddrE(modeAddrE),
+       .instrE(instrE), //for debugging
 
        .RegWriteM(RegWriteM),
        .ResultSrcM(ResultSrcM),
@@ -352,7 +355,8 @@ module top#(
        .WriteDataM(WriteDataM),
        .RdM(RdM),
        .PCPlus4M(PCPlus4M),
-       .modeAddrM(modeAddrM)
+       .modeAddrM(modeAddrM),
+       .InstrM(InstrM) //for debugging
     );
 
     FF_MW pipeline_MW (
@@ -363,13 +367,15 @@ module top#(
         .ReadDataM(ReadDataM),
         .RdM(RdM),
         .PCPlus4M(PCPlus4M),
+        .InstrM(InstrM), //for debugging
 
         .RegWriteW(RegWriteW),
         .ResultSrcW(ResultSrcW),
         .ALUResultW(ALUResultW),
         .ReadDataW(ReadDataW),
         .RdW(RdW),
-        .PCPlus4W(PCPlus4W)
+        .PCPlus4W(PCPlus4W),
+        .InstrW(InstrW) //for debugging
     );
 
         

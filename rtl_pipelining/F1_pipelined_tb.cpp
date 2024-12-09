@@ -22,9 +22,9 @@ int main(int argc, char **argv, char **env) {
   tfp->open ("VCD/F1.vcd");
  
   // initialise Vbuddy
-  if (vbdOpen()!=1) return(-1);
-  vbdHeader("F1: LED Pattern");
-  vbdSetMode(1);        // Set to button mode
+  // if (vbdOpen()!=1) return(-1);
+  // vbdHeader("F1: LED Pattern");
+  // vbdSetMode(1);        // Set to button mode
 
   // initialise simulation inputs
   top->clk = 1;
@@ -33,7 +33,7 @@ int main(int argc, char **argv, char **env) {
 
   // run simulation for MAX_SIM_CYC clock cycles
   for (simcyc=0; simcyc<MAX_SIM_CYC; simcyc++) {
-    top->trigger = vbdFlag();
+    //top->trigger = vbdFlag();
     
     // dump variables into VCD file and toggle clock
     for (tick=0; tick<2; tick++) {
@@ -49,12 +49,12 @@ int main(int argc, char **argv, char **env) {
 
     // Modify reset timing for pipeline flush
     top->rst = (simcyc < 5);  // Extended reset period for pipeline flush
-    vbdCycle(simcyc);
+    //vbdCycle(simcyc);
 
     if (Verilated::gotFinish())  exit(0);
   }
 
-  vbdClose();     
+  //vbdClose();     
   tfp->close(); 
   exit(0);
 }
