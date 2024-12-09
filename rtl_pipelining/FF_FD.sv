@@ -14,7 +14,7 @@ module FF_FD #(
 
 always_ff @(posedge clk) begin
     if(flush) begin
-        InstrD <= 0;
+        InstrD <= 32'd0;
     end else if (!stall) begin
         InstrD <= RD;
         PCD <= PCF;

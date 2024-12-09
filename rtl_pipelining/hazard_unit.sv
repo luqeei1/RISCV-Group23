@@ -41,6 +41,8 @@ module hazard_unit #(
             ForwardBE = 2'b10;
         end
 
+        //
+
         // stall for lw dependency
         // stall = (MemReadE && ((RdE == Rs1E) || (RdE == Rs2E)));
 
