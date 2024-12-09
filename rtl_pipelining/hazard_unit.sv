@@ -10,8 +10,12 @@ module hazard_unit #(
     input logic RegWriteW,
     input logic MemReadE,
     input logic flushBranch,
+    input logic BranchD,
+
     output logic [1:0] ForwardAE,
     output logic [1:0] ForwardBE,
+    output logic [1:0] ForwardAD,
+    output logic [1:0] ForwardBD,
     output logic stall,
     output logic flush
 );
@@ -19,6 +23,8 @@ module hazard_unit #(
     always_comb begin
         ForwardAE = 2'b00;
         ForwardBE = 2'b00;
+        ForwardAD = 2'b00;
+        ForwardBD = 2'b00;
         stall = 1'b0;
 
         /* forwardAE
@@ -41,13 +47,18 @@ module hazard_unit #(
             ForwardBE = 2'b10;
         end
 
-        //
+        ForwardAD = ((RsD != 0) && (Rs1D == RdM) && RegWriteM);
+        ForwardBD = ((RsD != 0) && (Rs2D == RdM) && RegWriteM);
 
         // stall for lw dependency
-        // stall = (MemReadE && ((RdE == Rs1E) || (RdE == Rs2E)));
+        stall = (MemReadE && ((RdE == Rs1E) || (RdE == Rs2E)));
+
+        branchstall = (BranchD && RegWriteE && (RdE == Rs2D || RdE == Rs1D)
+                        || BranchD && MemReadM && (RdM == Rs2D || RdM == Rs1D)) 
+
 
         // flush if: (1) stall occurs, (2) branch instruction and prediction is wrong
-        flush = stall || flushBranch;
+        flush = stall || flushBranch || branchstall;
     
     end
 
