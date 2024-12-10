@@ -55,9 +55,9 @@ module hazard_unit #(
         // ForwardBD = ((Rs2D != 0) && (Rs2D == RdM) && RegWriteM);
 
         // stall for lw dependency
-        stall = (MemReadE && ((RdE == Rs1E) || (RdE == Rs2E)))
-                    || (BranchD && RegWriteE && (RdE == Rs2D || RdE == Rs1D)
-                        || BranchD && MemReadM && (RdM == Rs2D || RdM == Rs1D)); 
+        stall = (MemReadE && ((RdE == Rs1D) || (RdE == Rs2D)));
+                    // || (BranchD && RegWriteE && (RdE == Rs2D || RdE == Rs1D)
+                    //     || BranchD && MemReadM && (RdM == Rs2D || RdM == Rs1D)); 
 
 
         // flush if: (1) stall occurs, (2) branch instruction and prediction is wrong
