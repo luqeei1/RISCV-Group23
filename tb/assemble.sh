@@ -4,11 +4,11 @@
 
 # Default vars
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
-output_file="$SCRIPT_DIR/Test4.hex"
+output_file="$SCRIPT_DIR/program.hex"
 
 # Handle terminal arguments
 if [[ $# -eq 0 ]]; then
-    echo "Usage: ./assemble.sh asm/4_jal_ret.s"
+    echo "Usage: ./assemble.sh F1_pipelined.s"
     exit 1
 fi
 
