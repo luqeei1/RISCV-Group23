@@ -19,6 +19,7 @@ verilator   -Wall --trace \
             hazard_unit.sv \
             mux2.sv \
             mux3.sv \
+            mux4.sv \
             PC_mux.sv \
             controlUnit.sv \
             ALUDecoder.sv \

@@ -3,7 +3,7 @@ module FF_DE #(
     parameter WIDTH = 5
 )(
     input logic clk,
-    input logic flush,
+    input logic flushBranch,
     input logic MemReadD,
     output logic MemReadE,
     input logic RegWriteD,
@@ -44,18 +44,16 @@ module FF_DE #(
 );
 
 always_ff @(posedge clk) begin
-    if(flush) begin
-        RegWriteE <= 1'b0;               
-        MemWriteE <= 1'b0;             
-        JumpE <= 1'b0;       
-        BranchE <= 1'b0;           
-    end
-    else begin
+    if(flushBranch) begin
+        JumpE <= 0;
+        BranchE <= 0;
+        RegWriteE <= 0;
+        MemWriteE <= 0;
+    end else begin
         JumpE <= JumpD;
         BranchE <= BranchD;
         RegWriteE <= RegWriteD;
         MemWriteE <= MemWriteD;
-    end
         MemReadE <= MemReadD;
         ResultSrcE <= ResultSrcD;
         ALUControlE <= ALUControlD;
@@ -70,5 +68,6 @@ always_ff @(posedge clk) begin
         PCPlus4E <= PCPlus4D;
         modeAddrE <= modeAddrD;
         InstrE <= InstrD;
+    end
 end
 endmodule

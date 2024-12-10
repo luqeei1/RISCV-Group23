@@ -47,7 +47,7 @@ module top#(
     logic [2:0] modeAddrE;
 
     // FF_EM
-    logic RegWriteM, MemWriteM, MemReadM;
+    logic RegWriteM, MemWriteM;
     logic [1:0] ResultSrcM;
     logic [2:0] modeAddrM;
 
@@ -70,6 +70,7 @@ module top#(
     logic Zero;
     logic MemReadD;
     logic MemReadE;
+    logic MemReadM;
 
     logic JumpD;
     logic JumpE;
@@ -114,21 +115,17 @@ module top#(
         .RdM(RdM),
         .RdW(RdW),
         .RdE(RdE),
-        .Rs1E(Rs1E),
-        .Rs2E(Rs2E),
         .Rs1D(Rs1D),
         .Rs2D(Rs2D),
-        .BranchD(BranchD),
+        .Rs1E(Rs1E),
+        .Rs2E(Rs2E),
         .RegWriteM(RegWriteM),
         .RegWriteW(RegWriteW),
-        .RegWriteE(RegWriteE),
         .MemReadE(MemReadE),
         .MemReadM(MemReadM),
         .flushBranch(flushBranch),
         .ForwardAE(ForwardAE),
         .ForwardBE(ForwardBE),
-        // .ForwardAD(ForwardAD),
-        // .ForwardBD(ForwardBD),
         .stall(stall),
         .flush(flush)
     );
@@ -239,20 +236,22 @@ module top#(
         .ImmExt(ExtImmD)
     );
 
-    mux3 forwardAE_mux (
+    mux4 forwardAE_mux (
         .sel(ForwardAE),
         .in0(RD1E),
         .in1(ResultW),
         .in2(ALUResultM),
+        .in3(ReadDataM),
 
         .out(SrcAE)
     );
 
-    mux3 forwardBE_mux (
+    mux4 forwardBE_mux (
         .sel(ForwardBE),
         .in0(RD2E),
         .in1(ResultW),
         .in2(ALUResultM),
+        .in3(ReadDataM),
 
         .out(WriteDataE)
     );
@@ -302,7 +301,7 @@ module top#(
 
     FF_DE pipeline_DE (
         .clk(clk),
-        .flush(flush),
+        .flushBranch(flushBranch),
         .RegWriteD(RegWriteD),
         .ResultSrcD(ResultSrcD),
         .MemWriteD(MemWriteD),
@@ -347,23 +346,23 @@ module top#(
        .RegWriteE(RegWriteE),
        .ResultSrcE(ResultSrcE),
        .MemWriteE(MemWriteE),
+       .MemReadE(MemReadE),
        .ALUResultE(ALUResultE),
        .WriteDataE(WriteDataE),
        .RdE(RdE),
        .PCPlus4E(PCPlus4E),
        .modeAddrE(modeAddrE),
-       .MemReadE(MemReadE),
        .InstrE(InstrE), //for debugging
 
        .RegWriteM(RegWriteM),
        .ResultSrcM(ResultSrcM),
        .MemWriteM(MemWriteM),
+       .MemReadM(MemReadM),
        .ALUResultM(ALUResultM),
        .WriteDataM(WriteDataM),
        .RdM(RdM),
        .PCPlus4M(PCPlus4M),
        .modeAddrM(modeAddrM),
-       .MemReadM(MemReadM),
        .InstrM(InstrM) //for debugging
     );
 
