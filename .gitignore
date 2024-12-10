@@ -1,4 +1,5 @@
 ../obj_dir/
+rtl_pipelining/obj_dir/
 *.bin
 *.dis
 *.vcd
@@ -6,6 +7,7 @@
 *.d
 *.o
 *.sh
+*.dat
 a.out
 a.out.reloc
 .vscode
@@ -13,3 +15,4 @@ a.out.reloc
 vbuddy.cfg
 riscv-binutils-gdb
 tb/assemble.sh
+rtl_pipelining/obj_dir/Vtop__verFiles.dat

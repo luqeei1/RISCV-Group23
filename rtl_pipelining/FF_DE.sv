@@ -1,4 +1,3 @@
-
 module FF_DE #(
     parameter DATA_WIDTH = 32,
     parameter WIDTH = 5
