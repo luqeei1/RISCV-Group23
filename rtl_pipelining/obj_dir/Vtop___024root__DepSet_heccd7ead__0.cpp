@@ -1054,11 +1054,9 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__1(Vtop___024root* vlSelf) {
                                                                             == 
                                                                             (7U 
                                                                              & (IData)(vlSelf->top__DOT__control_unit__DOT__op))))))));
-    vlSelf->top__DOT__control_unit__DOT__MemReadD = 
-        (1U & (IData)(((0U == (0x60U & (IData)(vlSelf->top__DOT__control_unit__DOT__op))) 
-                       & ((0x10U & (IData)(vlSelf->top__DOT__control_unit__DOT__op))
-                           ? (IData)((3U == (0xfU & (IData)(vlSelf->top__DOT__control_unit__DOT__op))))
-                           : (IData)((3U == (0xfU & (IData)(vlSelf->top__DOT__control_unit__DOT__op))))))));
+    vlSelf->top__DOT__control_unit__DOT__MemReadD = (IData)(
+                                                            (3U 
+                                                             == (IData)(vlSelf->top__DOT__control_unit__DOT__op)));
     vlSelf->top__DOT__control_unit__DOT__modeAddr = 
         ((IData)(vlSelf->top__DOT__control_unit__DOT__Store)
           ? ((0U == (IData)(vlSelf->top__DOT__control_unit__DOT__funct3))
