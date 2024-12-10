@@ -15,3 +15,4 @@ a.out.reloc
 vbuddy.cfg
 riscv-binutils-gdb
 tb/assemble.sh
+rtl_pipelining/obj_dir/Vtop__verFiles.dat
