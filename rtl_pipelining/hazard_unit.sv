@@ -33,18 +33,17 @@ module hazard_unit #(
             10: forwaring from ALUresult (execute stage)  */
 
         //specify RdW or RdM not refer to $zero register
-        if (RegWriteW && (Rs1E == RdW) && (RdW != 0)) begin
-            ForwardAE = 2'b01;
-        end else if (RegWriteM && (Rs1E == RdM) && (RdM != 0)) begin
-            ForwardAE = 2'b10;
+        if(RegWriteM && (Rs1E == RdM) && (Rs1E != 0)) begin
+            ForwardBE = 2'b10;
+        end else if (RegWriteW && (Rs1E == RdW) && (Rs1E !=0)) begin
+            ForwardBE = 2'b01;
         end
 
         // ForwardBE - same implementation (for second source register)
-
-        if (RegWriteW && (Rs2E == RdW) && (RdW !=0)) begin
-            ForwardBE = 2'b01;
-        end else if (RegWriteM && (Rs2E == RdM) && (RdM != 0)) begin
+        if(RegWriteM && (Rs2E == RdM) && (Rs2E != 0)) begin
             ForwardBE = 2'b10;
+        end else if (RegWriteW && (Rs2E == RdW) && (Rs2E !=0)) begin
+            ForwardBE = 2'b01;
         end
 
         // ForwardAD = ((Rs1D != 0) && (Rs1D == RdM) && RegWriteM);
