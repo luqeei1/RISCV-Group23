@@ -57,18 +57,18 @@ always_ff @(posedge clk) begin
         MemWriteE <= MemWriteD;
     end
     MemReadE <= MemReadD;
-        ResultSrcE <= ResultSrcD;
-        ALUControlE <= ALUControlD;
-        ALUSrcE <= ALUSrcD;
-        RD1E <= RD1;
-        RD2E <= RD2;
-        PCE <= PCD;
-        Rs1E <= Rs1D;
-        Rs2E <= Rs2D;
-        RdE <= RdD;
-        ExtImmE <= ExtImmD;
-        PCPlus4E <= PCPlus4D;
-        modeAddrE <= modeAddrD;
-        InstrE <= InstrD;
+    ResultSrcE <= ResultSrcD;
+    ALUControlE <= ALUControlD;
+    ALUSrcE <= ALUSrcD;
+    RD1E <= RD1;
+    RD2E <= RD2;
+    PCE <= PCD;
+    Rs1E <= Rs1D;
+    Rs2E <= Rs2D;
+    RdE <= RdD;
+    ExtImmE <= ExtImmD;
+    PCPlus4E <= PCPlus4D;
+    modeAddrE <= modeAddrD;
+    InstrE <= InstrD;
 end
 endmodule
