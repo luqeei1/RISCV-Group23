@@ -7,6 +7,7 @@ rtl_pipelining/obj_dir/
 *.d
 *.o
 *.sh
+*.dat
 a.out
 a.out.reloc
 .vscode
