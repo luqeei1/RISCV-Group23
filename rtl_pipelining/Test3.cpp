@@ -19,7 +19,7 @@ int main(int argc, char **argv, char **env) {
   Verilated::traceEverOn(true);
   VerilatedVcdC* tfp = new VerilatedVcdC;
   top->trace (tfp, 99);
-  tfp->open ("VCD/Test2.vcd");
+  tfp->open ("VCD/Test3.vcd");
 
   // initialise simulation inputs
   top->clk = 1;
@@ -36,8 +36,7 @@ int main(int argc, char **argv, char **env) {
     top->rst = 0;
     if (Verilated::gotFinish())  exit(0);
   }
-
-  std::cout << "Expect a0 = 1000" << std::endl;
+  std::cout << "Expect a0 = 300" << std::endl;
   std::cout << "a0: " << top->a0 << std::endl;
   tfp->close(); 
   exit(0);

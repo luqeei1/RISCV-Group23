@@ -38,9 +38,9 @@ module hazard_unit #(
 
         //specify RdW or RdM not refer to $zero register
         if(RegWriteM && (Rs1E == RdM) && (Rs1E != 0)) begin
-            ForwardBE = 2'b10;
+            ForwardAE = 2'b10;
         end else if (RegWriteW && (Rs1E == RdW) && (Rs1E !=0)) begin
-            ForwardBE = 2'b01;
+            ForwardAE = 2'b01;
         end
 
         // ForwardBE - same implementation (for second source register)

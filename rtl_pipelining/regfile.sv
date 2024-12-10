@@ -41,7 +41,7 @@ module regfile #(
 
 logic [DATA_WIDTH-1:0] registerfile_array [2**ADDRESS_WIDTH-1:0];
 
-always_ff @(posedge clk) begin
+always_ff @(negedge clk) begin
     if(WE3)
         registerfile_array[AD3] <= (AD3 == 5'b0) ? 32'b0 : WD3;
 end
