@@ -91,6 +91,8 @@ always_comb begin
                     RD = {{24'b0},ram_array[{A[16:0]}]};
                     RD = {{24'b0},ram_array[{A[16:0]}]};
                 end 
+            default: 
+                RD = 32'b0;
         endcase
     end
 end

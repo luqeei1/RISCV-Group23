@@ -20,7 +20,7 @@ verilator   -Wall --trace \
             PC_mux.sv \
             controlUnit.sv \
             ALUDecoder.sv \
-            --exe ../Test1.cpp \
+            --exe ../Test2.cpp \
             --prefix "Vtop" \
             -o Vtop
 

@@ -47,7 +47,7 @@ module top#(
     logic [2:0] modeAddrE;
 
     // FF_EM
-    logic RegWriteM, MemWriteM;
+    logic RegWriteM, MemWriteM, MemReadM;
     logic [1:0] ResultSrcM;
     logic [2:0] modeAddrM;
 
@@ -116,12 +116,19 @@ module top#(
         .RdE(RdE),
         .Rs1E(Rs1E),
         .Rs2E(Rs2E),
+        .Rs1D(Rs1D),
+        .Rs2D(Rs2D),
+        .BranchD(BranchD),
         .RegWriteM(RegWriteM),
         .RegWriteW(RegWriteW),
+        .RegWriteE(RegWriteE),
         .MemReadE(MemReadE),
+        .MemReadM(MemReadM),
         .flushBranch(flushBranch),
         .ForwardAE(ForwardAE),
         .ForwardBE(ForwardBE),
+        // .ForwardAD(ForwardAD),
+        // .ForwardBD(ForwardBD),
         .stall(stall),
         .flush(flush)
     );
@@ -345,6 +352,7 @@ module top#(
        .RdE(RdE),
        .PCPlus4E(PCPlus4E),
        .modeAddrE(modeAddrE),
+       .MemReadE(MemReadE),
        .InstrE(InstrE), //for debugging
 
        .RegWriteM(RegWriteM),
@@ -355,6 +363,7 @@ module top#(
        .RdM(RdM),
        .PCPlus4M(PCPlus4M),
        .modeAddrM(modeAddrM),
+       .MemReadM(MemReadM),
        .InstrM(InstrM) //for debugging
     );
 

@@ -56,7 +56,7 @@ always_ff @(posedge clk) begin
         RegWriteE <= RegWriteD;
         MemWriteE <= MemWriteD;
     end
-    MemReadE <= MemReadD;
+        MemReadE <= MemReadD;
         ResultSrcE <= ResultSrcD;
         ALUControlE <= ALUControlD;
         ALUSrcE <= ALUSrcD;
