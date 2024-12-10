@@ -12,3 +12,4 @@ a.out.reloc
 *.code-workspace
 vbuddy.cfg
 riscv-binutils-gdb
+tb/assemble.sh
