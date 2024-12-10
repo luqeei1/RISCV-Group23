@@ -40,8 +40,12 @@ int main(int argc, char **argv, char **env) {
     
     
     // plot ROM output and print cycle count
-    vbdPlot(int (top->a0), 0, 255);
-    vbdCycle(simcyc);
+    if( top->a0 != 0){
+      vbdPlot(int (top->a0), 0, 255);
+      vbdCycle(simcyc);
+    }
+    
+
 
     // either simulation finished, or 'q' is pressed
     if ((Verilated::gotFinish()) || (vbdGetkey()=='q')) 
