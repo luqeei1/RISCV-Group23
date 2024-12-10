@@ -1,6 +1,6 @@
 # RISCV-Group23
 
-## Structure
+## Joint Statement and Structure
 
 This repo contains all components, testing and results for the RV32I single-cycle processor and the RV32I pipelined processor with cache, as well as videos of the functional tests on the Vbuddy. It also contains a log of what tasks each of us completed on what days and everyone also has their personal statements, which can be seen in the table below:
 
@@ -78,7 +78,9 @@ The delay has been "randomised" through a simple LFSR process, with an initial s
 
 Screenshots of waveforms showing the working F1.s script and specific signals can be viewed [here](./Test_Results/Images/F1_single_cycle)
 
-### Testing the pdf.s script
+### Testing the probability density function tests
+
+There were three files: gaussian.mem, noisy.mem, and triangle.mem , which could be run 
 
 ### Tests 1-4:
 
