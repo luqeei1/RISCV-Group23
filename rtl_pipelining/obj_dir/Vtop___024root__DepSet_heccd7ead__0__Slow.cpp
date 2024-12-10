@@ -14,20 +14,16 @@ VL_ATTR_COLD void Vtop___024root___initial__TOP__0(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___initial__TOP__0\n"); );
     // Init
-    VlWide<7>/*223:0*/ __Vtemp_h16fb1a01__0;
+    VlWide<3>/*95:0*/ __Vtemp_h943c1e17__0;
     // Body
     VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(8, Vtop__ConstPool__CONST_h316b8f81_0)
                  ,  &(vlSelf->top__DOT__data_memory__DOT__ram_array)
                  , 0U, 0x1ffffU);
     VL_WRITEF("Loading rom.\n");
-    __Vtemp_h16fb1a01__0[0U] = 0x2e686578U;
-    __Vtemp_h16fb1a01__0[1U] = 0x65737433U;
-    __Vtemp_h16fb1a01__0[2U] = 0x65732f54U;
-    __Vtemp_h16fb1a01__0[3U] = 0x6e46696cU;
-    __Vtemp_h16fb1a01__0[4U] = 0x6374696fU;
-    __Vtemp_h16fb1a01__0[5U] = 0x73747275U;
-    __Vtemp_h16fb1a01__0[6U] = 0x496eU;
-    VL_READMEM_N(true, 8, 65536, 0, VL_CVT_PACK_STR_NW(7, __Vtemp_h16fb1a01__0)
+    __Vtemp_h943c1e17__0[0U] = 0x2e686578U;
+    __Vtemp_h943c1e17__0[1U] = 0x65737434U;
+    __Vtemp_h943c1e17__0[2U] = 0x54U;
+    VL_READMEM_N(true, 8, 65536, 0, VL_CVT_PACK_STR_NW(3, __Vtemp_h943c1e17__0)
                  ,  &(vlSelf->top__DOT__instruction_memory__DOT__rom_array)
                  , 0, ~0ULL);
     VL_WRITEF("ROM loaded successfully.\n");
