@@ -1,3 +1,4 @@
+
 module FF_DE #(
     parameter DATA_WIDTH = 32,
     parameter WIDTH = 5
@@ -56,7 +57,6 @@ always_ff @(posedge clk) begin
         RegWriteE <= RegWriteD;
         MemWriteE <= MemWriteD;
     end
-<<<<<<< HEAD
         MemReadE <= MemReadD;
         ResultSrcE <= ResultSrcD;
         ALUControlE <= ALUControlD;
@@ -71,21 +71,5 @@ always_ff @(posedge clk) begin
         PCPlus4E <= PCPlus4D;
         modeAddrE <= modeAddrD;
         InstrE <= InstrD;
-=======
-    MemReadE <= MemReadD;
-    ResultSrcE <= ResultSrcD;
-    ALUControlE <= ALUControlD;
-    ALUSrcE <= ALUSrcD;
-    RD1E <= RD1;
-    RD2E <= RD2;
-    PCE <= PCD;
-    Rs1E <= Rs1D;
-    Rs2E <= Rs2D;
-    RdE <= RdD;
-    ExtImmE <= ExtImmD;
-    PCPlus4E <= PCPlus4D;
-    modeAddrE <= modeAddrD;
-    InstrE <= InstrD;
->>>>>>> 92ff0189842fd287b798d20ea51f0e2b165c8dfe
 end
 endmodule
