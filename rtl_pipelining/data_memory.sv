@@ -25,33 +25,23 @@ always_ff @(posedge clk) begin
                         ram_array[{A[16:0]} +1] <= WD[23:16];
                         ram_array[{A[16:0]} +2] <= WD[15:8];
                         ram_array[{A[16:0]} +3] <= WD[7:0];
-                        ram_array[{A[16:0]}] <= WD[31:24];
-                        ram_array[{A[16:0]} +1] <= WD[23:16];
-                        ram_array[{A[16:0]} +2] <= WD[15:8];
-                        ram_array[{A[16:0]} +3] <= WD[7:0];
                     end
                 3'b010: // store half word
                     begin
-                        ram_array[{A[16:0]}] <= WD[15:8];
-                        ram_array[{A[16:0]} + 1] <= WD[7:0];
                         ram_array[{A[16:0]}] <= WD[15:8];
                         ram_array[{A[16:0]} + 1] <= WD[7:0];
                     end
                 3'b011: // store byte
                     begin
                         ram_array[{A[16:0]}] <= WD[7:0];
-                        ram_array[{A[16:0]}] <= WD[7:0];
                     end
                 3'b100:
                     begin
                         ram_array[{A[16:0]}] <= WD[15:8];
                         ram_array[{A[16:0]} + 1] <= WD[7:0];
-                        ram_array[{A[16:0]}] <= WD[15:8];
-                        ram_array[{A[16:0]} + 1] <= WD[7:0];
                     end
                 3'b101: 
                     begin
-                        ram_array[{A[16:0]}] <= WD[7:0];
                         ram_array[{A[16:0]}] <= WD[7:0];
                     end
                 default:
@@ -69,26 +59,21 @@ always_comb begin
             3'b001: 
                 begin // load word
                     RD = {ram_array[{A[16:0]} + 3],ram_array[{A[16:0]} + 2],ram_array[{A[16:0]} + 1],ram_array[{A[16:0]}]}; 
-                    RD = {ram_array[{A[16:0]} + 3],ram_array[{A[16:0]} + 2],ram_array[{A[16:0]} + 1],ram_array[{A[16:0]}]}; 
                 end                 
             3'b010: //load half word
                 begin
-                    RD = {{16{ram_array[{A[16:0]}][7]}},ram_array[{A[16:0]} + 1],ram_array[{A[16:0]}]};
                     RD = {{16{ram_array[{A[16:0]}][7]}},ram_array[{A[16:0]} + 1],ram_array[{A[16:0]}]};
                 end
             3'b011:
                 begin // load byte
                     RD = {{24{ram_array[{A[16:0]}][7]}},ram_array[{A[16:0]}]};
-                    RD = {{24{ram_array[{A[16:0]}][7]}},ram_array[{A[16:0]}]};
                 end
             3'b100:
                 begin //load unsigned half word
                     RD = {{{16'b0}},ram_array[{A[16:0]} + 1],ram_array[{A[16:0]}]};
-                    RD = {{{16'b0}},ram_array[{A[16:0]} + 1],ram_array[{A[16:0]}]};
                 end
             3'b101:
                 begin // load unsigned byte
-                    RD = {{24'b0},ram_array[{A[16:0]}]};
                     RD = {{24'b0},ram_array[{A[16:0]}]};
                 end 
             default: 

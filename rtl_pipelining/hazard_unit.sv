@@ -59,7 +59,6 @@ module hazard_unit #(
                     // || (BranchD && RegWriteE && (RdE == Rs2D || RdE == Rs1D)
                     //     || BranchD && MemReadM && (RdM == Rs2D || RdM == Rs1D)); 
 
-
         // flush if: (1) stall occurs, (2) branch instruction and prediction is wrong
         flush = stall || flushBranch;
     
