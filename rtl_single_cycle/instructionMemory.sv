@@ -6,7 +6,7 @@ module instructionMemory #(
     output logic [DATA_WIDTH-1:0] instr
 );
 
-logic [7:0] rom_array [2**16 - 1 : 0];
+logic [7:0] rom_array [2**12 - 1 : 0];
 
 
 initial begin

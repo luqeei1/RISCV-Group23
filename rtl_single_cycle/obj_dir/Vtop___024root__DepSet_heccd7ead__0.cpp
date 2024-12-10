@@ -227,20 +227,20 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->t6 = vlSelf->top__DOT__regfile__DOT__registerfile_array
         [0x1fU];
     vlSelf->top__DOT__instr = ((vlSelf->top__DOT__instruction_memory__DOT__rom_array
-                                [(0xffffU & ((IData)(3U) 
-                                             + (IData)((QData)((IData)(vlSelf->top__DOT__PC)))))] 
+                                [(0xfffU & ((IData)(3U) 
+                                            + (IData)((QData)((IData)(vlSelf->top__DOT__PC)))))] 
                                 << 0x18U) | ((vlSelf->top__DOT__instruction_memory__DOT__rom_array
-                                              [(0xffffU 
+                                              [(0xfffU 
                                                 & ((IData)(2U) 
                                                    + (IData)((QData)((IData)(vlSelf->top__DOT__PC)))))] 
                                               << 0x10U) 
                                              | ((vlSelf->top__DOT__instruction_memory__DOT__rom_array
-                                                 [(0xffffU 
+                                                 [(0xfffU 
                                                    & ((IData)(1U) 
                                                       + (IData)((QData)((IData)(vlSelf->top__DOT__PC)))))] 
                                                  << 8U) 
                                                 | vlSelf->top__DOT__instruction_memory__DOT__rom_array
-                                                [(0xffffU 
+                                                [(0xfffU 
                                                   & (IData)((QData)((IData)(vlSelf->top__DOT__PC))))])));
     if ((0x40U & vlSelf->top__DOT__instr)) {
         vlSelf->top__DOT__RegWrite = (1U & (IData)(

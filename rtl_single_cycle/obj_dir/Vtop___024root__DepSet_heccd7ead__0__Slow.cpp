@@ -27,7 +27,7 @@ VL_ATTR_COLD void Vtop___024root___initial__TOP__0(Vtop___024root* vlSelf) {
     __Vtemp_hc4683f0f__0[3U] = 0x696f6e46U;
     __Vtemp_hc4683f0f__0[4U] = 0x72756374U;
     __Vtemp_hc4683f0f__0[5U] = 0x496e7374U;
-    VL_READMEM_N(true, 8, 65536, 0, VL_CVT_PACK_STR_NW(6, __Vtemp_hc4683f0f__0)
+    VL_READMEM_N(true, 8, 4096, 0, VL_CVT_PACK_STR_NW(6, __Vtemp_hc4683f0f__0)
                  ,  &(vlSelf->top__DOT__instruction_memory__DOT__rom_array)
                  , 0, ~0ULL);
     VL_WRITEF("ROM loaded successfully.\n");
@@ -97,20 +97,20 @@ VL_ATTR_COLD void Vtop___024root___settle__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->t6 = vlSelf->top__DOT__regfile__DOT__registerfile_array
         [0x1fU];
     vlSelf->top__DOT__instr = ((vlSelf->top__DOT__instruction_memory__DOT__rom_array
-                                [(0xffffU & ((IData)(3U) 
-                                             + (IData)((QData)((IData)(vlSelf->top__DOT__PC)))))] 
+                                [(0xfffU & ((IData)(3U) 
+                                            + (IData)((QData)((IData)(vlSelf->top__DOT__PC)))))] 
                                 << 0x18U) | ((vlSelf->top__DOT__instruction_memory__DOT__rom_array
-                                              [(0xffffU 
+                                              [(0xfffU 
                                                 & ((IData)(2U) 
                                                    + (IData)((QData)((IData)(vlSelf->top__DOT__PC)))))] 
                                               << 0x10U) 
                                              | ((vlSelf->top__DOT__instruction_memory__DOT__rom_array
-                                                 [(0xffffU 
+                                                 [(0xfffU 
                                                    & ((IData)(1U) 
                                                       + (IData)((QData)((IData)(vlSelf->top__DOT__PC)))))] 
                                                  << 8U) 
                                                 | vlSelf->top__DOT__instruction_memory__DOT__rom_array
-                                                [(0xffffU 
+                                                [(0xfffU 
                                                   & (IData)((QData)((IData)(vlSelf->top__DOT__PC))))])));
     if ((0x40U & vlSelf->top__DOT__instr)) {
         vlSelf->top__DOT__RegWrite = (1U & (IData)(
@@ -826,7 +826,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     for (int __Vi0=0; __Vi0<32; ++__Vi0) {
         vlSelf->top__DOT__regfile__DOT__registerfile_array[__Vi0] = VL_RAND_RESET_I(32);
     }
-    for (int __Vi0=0; __Vi0<65536; ++__Vi0) {
+    for (int __Vi0=0; __Vi0<4096; ++__Vi0) {
         vlSelf->top__DOT__instruction_memory__DOT__rom_array[__Vi0] = VL_RAND_RESET_I(8);
     }
     vlSelf->top__DOT__control_unit__DOT__ALUOp = VL_RAND_RESET_I(2);
