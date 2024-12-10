@@ -4,11 +4,11 @@
 
 # Default vars
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
-output_file="$SCRIPT_DIR/Test1.hex"
+output_file="$SCRIPT_DIR/Test2.hex"
 
 # Handle terminal arguments
 if [[ $# -eq 0 ]]; then
-    echo "Usage: ./assemble.sh asm/1_addi_bne.s"
+    echo "Usage: ./assemble.sh asm/2_li_add.s"
     exit 1
 fi
 

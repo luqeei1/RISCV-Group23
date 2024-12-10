@@ -1,10 +1,11 @@
-obj_dir/
+../obj_dir/
 *.bin
 *.dis
 *.vcd
 *.hex
 *.d
 *.o
+*.sh
 a.out
 a.out.reloc
 .vscode
