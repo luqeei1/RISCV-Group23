@@ -33,7 +33,7 @@ int main(int argc, char **argv, char **env) {
       top->clk = !top->clk;
       top->eval ();
     }
-    top->rst = (simcyc < 3); // Assert reset for the first two cycles
+    top->rst = 0; // Assert reset for the first two cycles
     if (Verilated::gotFinish())  exit(0);
   }
 

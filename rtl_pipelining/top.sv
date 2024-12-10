@@ -262,7 +262,7 @@ module top#(
         .ZeroE(Zero),
         .ALUResult(ALUResultE),
         .SrcA(SrcAE),
-        .SrcB(ALUSrcE ? ExtImmE : RD2E),
+        .SrcB(ALUSrcE ? ExtImmE : WriteDataE),
         .ALUctrl(ALUControlE)
     );
 
