@@ -5,6 +5,7 @@ obj_dir/
 *.hex
 *.d
 *.o
+*.dat
 a.out
 a.out.reloc
 .vscode
