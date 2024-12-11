@@ -78,9 +78,11 @@ The delay has been "randomised" through a simple LFSR process, with an initial s
 
 Screenshots of waveforms showing the working F1.s script and specific signals can be viewed [here](./Test_Results/Images/F1_single_cycle)
 
+To run this specific code, the instruction memory would need to read the program.hex file and the data memory would read 
+
 ### Testing the probability density function tests
 
-There were three files: gaussian.mem, noisy.mem, and triangle.mem , which could be run 
+There were three files: gaussian.mem, noisy.mem, and triangle.mem , which could be run by running the ```./pdf.sh``` command on terminal, ensuring it was being tested via the pdfgen_tb.cpp testbench
 
 ### Tests 1-4:
 
