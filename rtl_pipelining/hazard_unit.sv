@@ -14,6 +14,7 @@ module hazard_unit #(
     input logic JumpE, 
     input logic MemReadM, 
     input logic flushBranch,
+    input logic miss_stall,
 
     output logic [1:0] ForwardAE,
     output logic [1:0] ForwardBE,
@@ -61,12 +62,12 @@ module hazard_unit #(
         // ForwardBD = ((Rs2D != 0) && (Rs2D == RdM) && RegWriteM);
 
         // stall for lw dependency
-        stall = (MemReadE && ((RdE == Rs1D) || (RdE == Rs2D)));
+        stall = (MemReadE && ((RdE == Rs1D) || (RdE == Rs2D))) || miss_stall;
                     // || (BranchD && RegWriteE && (RdE == Rs2D || RdE == Rs1D)
                     //     || BranchD && MemReadM && (RdM == Rs2D || RdM == Rs1D)); 
 
         // flush if: (1) stall occurs, (2) branch instruction and prediction is wrong 
-        flush = stall || flushBranch || JumpE;
+        flush = stall || flushBranch || JumpE || miss_stall;
 
         flushDE = flushBranch || JumpE;
     

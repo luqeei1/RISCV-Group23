@@ -1,9 +1,10 @@
 // Verilated -*- C++ -*-
 // DESCRIPTION: Verilator output: Symbol table implementation internals
 
-#include "Vtop__Syms.h"
+#include "Vtop__pch.h"
 #include "Vtop.h"
 #include "Vtop___024root.h"
+#include "Vtop___024unit.h"
 
 // FUNCTIONS
 Vtop__Syms::~Vtop__Syms()
@@ -16,37 +17,44 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
     , __Vm_modelp{modelp}
     // Setup module instances
     , TOP{this, namep}
+    , TOP____024unit{this, Verilated::catName(namep, "$unit")}
 {
+        // Check resources
+        Verilated::stackCheck(281);
     // Configure time unit / time precision
     _vm_contextp__->timeunit(-12);
     _vm_contextp__->timeprecision(-12);
     // Setup each module's pointers to their submodules
+    TOP.__PVT____024unit = &TOP____024unit;
     // Setup each module's pointer back to symbol table (for public functions)
     TOP.__Vconfigure(true);
+    TOP____024unit.__Vconfigure(true);
     // Setup scopes
-    __Vscope_TOP.configure(this, name(), "TOP", "TOP", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top.configure(this, name(), "top", "top", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__BPU_mux.configure(this, name(), "top.BPU_mux", "BPU_mux", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__PC_mux.configure(this, name(), "top.PC_mux", "PC_mux", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__alu.configure(this, name(), "top.alu", "alu", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__branch_prediction_unit.configure(this, name(), "top.branch_prediction_unit", "branch_prediction_unit", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__control_unit.configure(this, name(), "top.control_unit", "control_unit", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__control_unit__alu_decoder.configure(this, name(), "top.control_unit.alu_decoder", "alu_decoder", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__data_memory.configure(this, name(), "top.data_memory", "data_memory", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__forwardAE_mux.configure(this, name(), "top.forwardAE_mux", "forwardAE_mux", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__forwardBE_mux.configure(this, name(), "top.forwardBE_mux", "forwardBE_mux", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__hazard_unit.configure(this, name(), "top.hazard_unit", "hazard_unit", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__instruction_memory.configure(this, name(), "top.instruction_memory", "instruction_memory", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__pipeline_DE.configure(this, name(), "top.pipeline_DE", "pipeline_DE", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__pipeline_EM.configure(this, name(), "top.pipeline_EM", "pipeline_EM", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__pipeline_FD.configure(this, name(), "top.pipeline_FD", "pipeline_FD", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__pipeline_MW.configure(this, name(), "top.pipeline_MW", "pipeline_MW", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__program_counter.configure(this, name(), "top.program_counter", "program_counter", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__regfile.configure(this, name(), "top.regfile", "regfile", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__regfile_mux.configure(this, name(), "top.regfile_mux", "regfile_mux", 0, VerilatedScope::SCOPE_OTHER);
-    __Vscope_top__sign_extend.configure(this, name(), "top.sign_extend", "sign_extend", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_TOP.configure(this, name(), "TOP", "TOP", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope___024unit.configure(this, name(), "$unit", "$unit", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top.configure(this, name(), "top", "top", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__BPU_mux.configure(this, name(), "top.BPU_mux", "BPU_mux", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__PC_mux.configure(this, name(), "top.PC_mux", "PC_mux", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__alu.configure(this, name(), "top.alu", "alu", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__branch_prediction_unit.configure(this, name(), "top.branch_prediction_unit", "branch_prediction_unit", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__cached_data_memory.configure(this, name(), "top.cached_data_memory", "cached_data_memory", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__cached_data_memory__cache.configure(this, name(), "top.cached_data_memory.cache", "cache", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__control_unit.configure(this, name(), "top.control_unit", "control_unit", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__control_unit__alu_decoder.configure(this, name(), "top.control_unit.alu_decoder", "alu_decoder", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__forwardAE_mux.configure(this, name(), "top.forwardAE_mux", "forwardAE_mux", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__forwardBE_mux.configure(this, name(), "top.forwardBE_mux", "forwardBE_mux", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__hazard_unit.configure(this, name(), "top.hazard_unit", "hazard_unit", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__instruction_memory.configure(this, name(), "top.instruction_memory", "instruction_memory", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__pipeline_DE.configure(this, name(), "top.pipeline_DE", "pipeline_DE", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__pipeline_EM.configure(this, name(), "top.pipeline_EM", "pipeline_EM", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__pipeline_FD.configure(this, name(), "top.pipeline_FD", "pipeline_FD", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__pipeline_MW.configure(this, name(), "top.pipeline_MW", "pipeline_MW", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__program_counter.configure(this, name(), "top.program_counter", "program_counter", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__regfile.configure(this, name(), "top.regfile", "regfile", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__regfile_mux.configure(this, name(), "top.regfile_mux", "regfile_mux", "<null>", 0, VerilatedScope::SCOPE_OTHER);
+    __Vscope_top__sign_extend.configure(this, name(), "top.sign_extend", "sign_extend", "<null>", 0, VerilatedScope::SCOPE_OTHER);
     // Setup export functions
-    for (int __Vfinal=0; __Vfinal<2; __Vfinal++) {
+    for (int __Vfinal = 0; __Vfinal < 2; ++__Vfinal) {
         __Vscope_TOP.varInsert(__Vfinal,"a0", &(TOP.a0), false, VLVT_UINT32,VLVD_OUT|VLVF_PUB_RW,1 ,31,0);
         __Vscope_TOP.varInsert(__Vfinal,"a1", &(TOP.a1), false, VLVT_UINT32,VLVD_OUT|VLVF_PUB_RW,1 ,31,0);
         __Vscope_TOP.varInsert(__Vfinal,"a2", &(TOP.a2), false, VLVT_UINT32,VLVD_OUT|VLVF_PUB_RW,1 ,31,0);
@@ -77,6 +85,9 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
         __Vscope_TOP.varInsert(__Vfinal,"t5", &(TOP.t5), false, VLVT_UINT32,VLVD_OUT|VLVF_PUB_RW,1 ,31,0);
         __Vscope_TOP.varInsert(__Vfinal,"t6", &(TOP.t6), false, VLVT_UINT32,VLVD_OUT|VLVF_PUB_RW,1 ,31,0);
         __Vscope_TOP.varInsert(__Vfinal,"trigger", &(TOP.trigger), false, VLVT_UINT8,VLVD_IN|VLVF_PUB_RW,0);
+        __Vscope___024unit.varInsert(__Vfinal,"SETS", const_cast<void*>(static_cast<const void*>(&(TOP____024unit.SETS))), true, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
+        __Vscope___024unit.varInsert(__Vfinal,"TAG_LSB", const_cast<void*>(static_cast<const void*>(&(TOP____024unit.TAG_LSB))), true, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
+        __Vscope___024unit.varInsert(__Vfinal,"TAG_MSB", const_cast<void*>(static_cast<const void*>(&(TOP____024unit.TAG_MSB))), true, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top.varInsert(__Vfinal,"ALUControlD", &(TOP.top__DOT__ALUControlD), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,3,0);
         __Vscope_top.varInsert(__Vfinal,"ALUControlE", &(TOP.top__DOT__ALUControlE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,3,0);
         __Vscope_top.varInsert(__Vfinal,"ALUResultE", &(TOP.top__DOT__ALUResultE), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
@@ -159,6 +170,7 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
         __Vscope_top.varInsert(__Vfinal,"flush", &(TOP.top__DOT__flush), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top.varInsert(__Vfinal,"flushBranch", &(TOP.top__DOT__flushBranch), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top.varInsert(__Vfinal,"flushDE", &(TOP.top__DOT__flushDE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
+        __Vscope_top.varInsert(__Vfinal,"miss_stall", &(TOP.top__DOT__miss_stall), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top.varInsert(__Vfinal,"modeAddrD", &(TOP.top__DOT__modeAddrD), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,2,0);
         __Vscope_top.varInsert(__Vfinal,"modeAddrE", &(TOP.top__DOT__modeAddrE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,2,0);
         __Vscope_top.varInsert(__Vfinal,"modeAddrM", &(TOP.top__DOT__modeAddrM), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,2,0);
@@ -222,6 +234,41 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
         __Vscope_top__branch_prediction_unit.varInsert(__Vfinal,"forwardJumpDecisionCorrect", &(TOP.top__DOT__branch_prediction_unit__DOT__forwardJumpDecisionCorrect), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__branch_prediction_unit.varInsert(__Vfinal,"newBranch", &(TOP.top__DOT__branch_prediction_unit__DOT__newBranch), false, VLVT_WDATA,VLVD_NODIR|VLVF_PUB_RW,1 ,65,0);
         __Vscope_top__branch_prediction_unit.varInsert(__Vfinal,"oldBranch", &(TOP.top__DOT__branch_prediction_unit__DOT__oldBranch), false, VLVT_WDATA,VLVD_NODIR|VLVF_PUB_RW,1 ,65,0);
+        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"ADDR_WIDTH", const_cast<void*>(static_cast<const void*>(&(TOP.top__DOT__cached_data_memory__DOT__ADDR_WIDTH))), true, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
+        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"DATA_WIDTH", const_cast<void*>(static_cast<const void*>(&(TOP.top__DOT__cached_data_memory__DOT__DATA_WIDTH))), true, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
+        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"RE", &(TOP.top__DOT__cached_data_memory__DOT__RE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
+        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"WE", &(TOP.top__DOT__cached_data_memory__DOT__WE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
+        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"addr", &(TOP.top__DOT__cached_data_memory__DOT__addr), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
+        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"byte0", &(TOP.top__DOT__cached_data_memory__DOT__byte0), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,7,0);
+        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"byte1", &(TOP.top__DOT__cached_data_memory__DOT__byte1), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,7,0);
+        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"byte2", &(TOP.top__DOT__cached_data_memory__DOT__byte2), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,7,0);
+        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"byte3", &(TOP.top__DOT__cached_data_memory__DOT__byte3), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,7,0);
+        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"clk", &(TOP.top__DOT__cached_data_memory__DOT__clk), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
+        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"data_out", &(TOP.top__DOT__cached_data_memory__DOT__data_out), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
+        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"miss_stall", &(TOP.top__DOT__cached_data_memory__DOT__miss_stall), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
+        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"modeAddr", &(TOP.top__DOT__cached_data_memory__DOT__modeAddr), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,2,0);
+        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"out_cache", &(TOP.top__DOT__cached_data_memory__DOT__out_cache), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
+        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"rst", &(TOP.top__DOT__cached_data_memory__DOT__rst), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
+        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"write_data", &(TOP.top__DOT__cached_data_memory__DOT__write_data), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"RE", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__RE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"WE", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__WE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"WIDTH", const_cast<void*>(static_cast<const void*>(&(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__WIDTH))), true, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"addr", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__addr), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"block", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__block), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"cache_line", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__cache_line), false, VLVT_WDATA,VLVD_NODIR|VLVF_PUB_RW,1 ,86,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"cache_line_data", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__cache_line_data), false, VLVT_UINT64,VLVD_NODIR|VLVF_PUB_RW,1 ,63,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"cache_line_valid", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__cache_line_valid), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"cache_mem", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem), false, VLVT_WDATA,VLVD_NODIR|VLVF_PUB_RW,2 ,86,0 ,0,255);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"cache_out", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__cache_out), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"clk", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__clk), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"current_state", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__current_state), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW|VLVF_DPI_CLAY,1 ,31,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"miss_stall", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__miss_stall), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"modeAddr", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__modeAddr), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,2,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"next_state", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__next_state), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW|VLVF_DPI_CLAY,1 ,31,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"ram_array", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__ram_array), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,2 ,7,0 ,131071,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"rst", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__rst), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"set", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__set), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,7,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"write_data", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__write_data), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top__control_unit.varInsert(__Vfinal,"ALUControlD", &(TOP.top__DOT__control_unit__DOT__ALUControlD), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,3,0);
         __Vscope_top__control_unit.varInsert(__Vfinal,"ALUOp", &(TOP.top__DOT__control_unit__DOT__ALUOp), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,1,0);
         __Vscope_top__control_unit.varInsert(__Vfinal,"ALUSrcD", &(TOP.top__DOT__control_unit__DOT__ALUSrcD), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
@@ -246,15 +293,6 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
         __Vscope_top__control_unit__alu_decoder.varInsert(__Vfinal,"funct3", &(TOP.top__DOT__control_unit__DOT__alu_decoder__DOT__funct3), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,2,0);
         __Vscope_top__control_unit__alu_decoder.varInsert(__Vfinal,"funct7", &(TOP.top__DOT__control_unit__DOT__alu_decoder__DOT__funct7), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__control_unit__alu_decoder.varInsert(__Vfinal,"op", &(TOP.top__DOT__control_unit__DOT__alu_decoder__DOT__op), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
-        __Vscope_top__data_memory.varInsert(__Vfinal,"A", &(TOP.top__DOT__data_memory__DOT__A), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
-        __Vscope_top__data_memory.varInsert(__Vfinal,"RD", &(TOP.top__DOT__data_memory__DOT__RD), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
-        __Vscope_top__data_memory.varInsert(__Vfinal,"WD", &(TOP.top__DOT__data_memory__DOT__WD), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
-        __Vscope_top__data_memory.varInsert(__Vfinal,"WE", &(TOP.top__DOT__data_memory__DOT__WE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
-        __Vscope_top__data_memory.varInsert(__Vfinal,"WIDTH", const_cast<void*>(static_cast<const void*>(&(TOP.top__DOT__data_memory__DOT__WIDTH))), true, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
-        __Vscope_top__data_memory.varInsert(__Vfinal,"clk", &(TOP.top__DOT__data_memory__DOT__clk), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
-        __Vscope_top__data_memory.varInsert(__Vfinal,"modeAddr", &(TOP.top__DOT__data_memory__DOT__modeAddr), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,2,0);
-        __Vscope_top__data_memory.varInsert(__Vfinal,"ram_array", &(TOP.top__DOT__data_memory__DOT__ram_array), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,2 ,7,0 ,131071,0);
-        __Vscope_top__data_memory.varInsert(__Vfinal,"trigger", &(TOP.top__DOT__data_memory__DOT__trigger), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__forwardAE_mux.varInsert(__Vfinal,"WIDTH", const_cast<void*>(static_cast<const void*>(&(TOP.top__DOT__forwardAE_mux__DOT__WIDTH))), true, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top__forwardAE_mux.varInsert(__Vfinal,"in0", &(TOP.top__DOT__forwardAE_mux__DOT__in0), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top__forwardAE_mux.varInsert(__Vfinal,"in1", &(TOP.top__DOT__forwardAE_mux__DOT__in1), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
@@ -287,6 +325,7 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
         __Vscope_top__hazard_unit.varInsert(__Vfinal,"flush", &(TOP.top__DOT__hazard_unit__DOT__flush), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__hazard_unit.varInsert(__Vfinal,"flushBranch", &(TOP.top__DOT__hazard_unit__DOT__flushBranch), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__hazard_unit.varInsert(__Vfinal,"flushDE", &(TOP.top__DOT__hazard_unit__DOT__flushDE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
+        __Vscope_top__hazard_unit.varInsert(__Vfinal,"miss_stall", &(TOP.top__DOT__hazard_unit__DOT__miss_stall), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__hazard_unit.varInsert(__Vfinal,"stall", &(TOP.top__DOT__hazard_unit__DOT__stall), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__instruction_memory.varInsert(__Vfinal,"PC", &(TOP.top__DOT__instruction_memory__DOT__PC), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top__instruction_memory.varInsert(__Vfinal,"WIDTH", const_cast<void*>(static_cast<const void*>(&(TOP.top__DOT__instruction_memory__DOT__WIDTH))), true, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
