@@ -26,7 +26,9 @@ module cache #(
 
     logic [7:0] set;
     logic block;
+    logic [63:0] cache_line_data;
 
+    assign cache_line_data = cache_line.data;
     assign set = addr[10:3];
  
     initial begin
@@ -45,9 +47,10 @@ module cache #(
                             {cache_line.data[63:32]} :
                             {cache_line.data[31:0]};
                     end
+                    
                     miss_stall = 0;
                     next_state = COMPARE_TAG;
-                end else begin
+                end else if (RE || WE) begin
                     miss_stall = 1;
                     next_state = (!cache_line.dirty) ? ALLOCATE : WRITE_BACK;
                 end

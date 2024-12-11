@@ -24,8 +24,10 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         CData/*0:0*/ top__DOT__RegWrite;
         CData/*3:0*/ top__DOT__ALUctrl;
         CData/*1:0*/ top__DOT__ResultSrc;
+        CData/*0:0*/ top__DOT__MemWrite;
         CData/*2:0*/ top__DOT__modeBU;
         CData/*0:0*/ top__DOT__miss_stall;
+        CData/*0:0*/ top__DOT__MemRead;
         CData/*7:0*/ top__DOT__cached_datamem__DOT__byte3;
         CData/*7:0*/ top__DOT__cached_datamem__DOT__byte2;
         CData/*7:0*/ top__DOT__cached_datamem__DOT__byte1;
@@ -78,20 +80,20 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__cached_datamem__DOT__cache__DOT__current_state;
         IData/*31:0*/ top__DOT__cached_datamem__DOT__cache__DOT__next_state;
         IData/*31:0*/ top__DOT__pc__DOT__out;
-        IData/*23:0*/ __VdfgRegularize_hd87f99a1_0_1;
-        IData/*31:0*/ __VactIterCount;
     };
     struct {
+        IData/*23:0*/ __VdfgRegularize_hd87f99a1_0_1;
+        IData/*31:0*/ __VactIterCount;
         VlWide<3>/*86:0*/ top__DOT__cached_datamem__DOT__cache__DOT__cache_line;
         VlUnpacked<CData/*7:0*/, 131072> top__DOT__cached_datamem__DOT__cache__DOT__ram_array;
         VlUnpacked<VlWide<3>/*86:0*/, 256> top__DOT__cached_datamem__DOT__cache__DOT__cache_mem;
         VlUnpacked<IData/*31:0*/, 32> top__DOT__regfile__DOT__registerfile_array;
         VlUnpacked<CData/*7:0*/, 65536> top__DOT__instruction_memory__DOT__rom_array;
-        VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
+        VlUnpacked<CData/*0:0*/, 4> __Vm_traceActivity;
     };
     VlTriggerVec<1> __VstlTriggered;
-    VlTriggerVec<1> __VactTriggered;
-    VlTriggerVec<1> __VnbaTriggered;
+    VlTriggerVec<2> __VactTriggered;
+    VlTriggerVec<2> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     Vtop__Syms* const vlSymsp;

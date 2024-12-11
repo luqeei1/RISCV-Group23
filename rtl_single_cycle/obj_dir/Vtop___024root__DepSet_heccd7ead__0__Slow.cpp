@@ -551,6 +551,26 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
         }
         vlSelfRef.top__DOT__PCSrc = 0U;
     }
+    vlSelfRef.top__DOT__MemWrite = ((1U & (~ (vlSelfRef.top__DOT__instr 
+                                              >> 6U))) 
+                                    && ((1U & (vlSelfRef.top__DOT__instr 
+                                               >> 5U)) 
+                                        && ((1U & (~ 
+                                                   (vlSelfRef.top__DOT__instr 
+                                                    >> 4U))) 
+                                            && ((1U 
+                                                 & (~ 
+                                                    (vlSelfRef.top__DOT__instr 
+                                                     >> 3U))) 
+                                                && ((1U 
+                                                     & (~ 
+                                                        (vlSelfRef.top__DOT__instr 
+                                                         >> 2U))) 
+                                                    && ((1U 
+                                                         & (vlSelfRef.top__DOT__instr 
+                                                            >> 1U)) 
+                                                        && (1U 
+                                                            & vlSelfRef.top__DOT__instr)))))));
     vlSelfRef.top__DOT__modeBU = ((IData)(vlSelfRef.top__DOT__control_unit__DOT__Store)
                                    ? ((0U == (7U & 
                                               (vlSelfRef.top__DOT__instr 
@@ -590,6 +610,26 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                    ? 2U
                                                    : 3U)))
                                        : 0U));
+    vlSelfRef.top__DOT__MemRead = ((1U & (~ (vlSelfRef.top__DOT__instr 
+                                             >> 6U))) 
+                                   && ((1U & (~ (vlSelfRef.top__DOT__instr 
+                                                 >> 5U))) 
+                                       && ((1U & (~ 
+                                                  (vlSelfRef.top__DOT__instr 
+                                                   >> 4U))) 
+                                           && ((1U 
+                                                & (~ 
+                                                   (vlSelfRef.top__DOT__instr 
+                                                    >> 3U))) 
+                                               && ((1U 
+                                                    & (~ 
+                                                       (vlSelfRef.top__DOT__instr 
+                                                        >> 2U))) 
+                                                   && ((1U 
+                                                        & (vlSelfRef.top__DOT__instr 
+                                                           >> 1U)) 
+                                                       && (1U 
+                                                           & vlSelfRef.top__DOT__instr)))))));
     vlSelfRef.top__DOT__RD2 = vlSelfRef.top__DOT__regfile__DOT__registerfile_array
         [(0x1fU & (vlSelfRef.top__DOT__instr >> 0x14U))];
     __Vtableidx1 = (((0x40U & (vlSelfRef.top__DOT__instr 
@@ -815,43 +855,20 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                            == (vlSelfRef.top__DOT__ALUResult 
                                >> 0xbU)))) {
             vlSelfRef.top__DOT__cached_datamem__DOT__cache__DOT__next_state = 0U;
-            if (((1U & (~ (vlSelfRef.top__DOT__instr 
-                           >> 6U))) && ((1U & (~ (vlSelfRef.top__DOT__instr 
-                                                  >> 5U))) 
-                                        && ((1U & (~ 
-                                                   (vlSelfRef.top__DOT__instr 
-                                                    >> 4U))) 
-                                            && ((1U 
-                                                 & (~ 
-                                                    (vlSelfRef.top__DOT__instr 
-                                                     >> 3U))) 
-                                                && ((1U 
-                                                     & (~ 
-                                                        (vlSelfRef.top__DOT__instr 
-                                                         >> 2U))) 
-                                                    && ((1U 
-                                                         & (vlSelfRef.top__DOT__instr 
-                                                            >> 1U)) 
-                                                        && (1U 
-                                                            & vlSelfRef.top__DOT__instr)))))))) {
+            vlSelfRef.top__DOT__miss_stall = 0U;
+            if (vlSelfRef.top__DOT__MemRead) {
                 vlSelfRef.top__DOT__cached_datamem__DOT__out_cache 
                     = ((4U & vlSelfRef.top__DOT__ALUResult)
                         ? vlSelfRef.top__DOT__cached_datamem__DOT__cache__DOT__cache_line[1U]
                         : vlSelfRef.top__DOT__cached_datamem__DOT__cache__DOT__cache_line[0U]);
             }
-        } else {
+        } else if (((IData)(vlSelfRef.top__DOT__MemRead) 
+                    | (IData)(vlSelfRef.top__DOT__MemWrite))) {
             vlSelfRef.top__DOT__cached_datamem__DOT__cache__DOT__next_state 
                 = ((0x200000U & vlSelfRef.top__DOT__cached_datamem__DOT__cache__DOT__cache_line[2U])
                     ? 2U : 1U);
+            vlSelfRef.top__DOT__miss_stall = 1U;
         }
-        vlSelfRef.top__DOT__miss_stall = (1U & (~ (
-                                                   (vlSelfRef.top__DOT__cached_datamem__DOT__cache__DOT__cache_line[2U] 
-                                                    >> 0x16U) 
-                                                   & ((0x1fffffU 
-                                                       & vlSelfRef.top__DOT__cached_datamem__DOT__cache__DOT__cache_line[2U]) 
-                                                      == 
-                                                      (vlSelfRef.top__DOT__ALUResult 
-                                                       >> 0xbU)))));
     } else if ((1U == vlSelfRef.top__DOT__cached_datamem__DOT__cache__DOT__current_state)) {
         vlSelfRef.top__DOT__cached_datamem__DOT__cache__DOT__next_state = 0U;
         vlSelfRef.top__DOT__miss_stall = 1U;
@@ -942,6 +959,9 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__act(Vtop___024root* vlSelf) {
     if ((1ULL & vlSelfRef.__VactTriggered.word(0U))) {
         VL_DBG_MSGF("         'act' region trigger index 0 is active: @(posedge clk)\n");
     }
+    if ((2ULL & vlSelfRef.__VactTriggered.word(0U))) {
+        VL_DBG_MSGF("         'act' region trigger index 1 is active: @(negedge clk)\n");
+    }
 }
 #endif  // VL_DEBUG
 
@@ -958,6 +978,9 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__nba(Vtop___024root* vlSelf) {
     if ((1ULL & vlSelfRef.__VnbaTriggered.word(0U))) {
         VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(posedge clk)\n");
     }
+    if ((2ULL & vlSelfRef.__VnbaTriggered.word(0U))) {
+        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(negedge clk)\n");
+    }
 }
 #endif  // VL_DEBUG
 
@@ -969,6 +992,8 @@ VL_ATTR_COLD void Vtop___024root____Vm_traceActivitySetAll(Vtop___024root* vlSel
     // Body
     vlSelfRef.__Vm_traceActivity[0U] = 1U;
     vlSelfRef.__Vm_traceActivity[1U] = 1U;
+    vlSelfRef.__Vm_traceActivity[2U] = 1U;
+    vlSelfRef.__Vm_traceActivity[3U] = 1U;
 }
 
 VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
@@ -1017,11 +1042,13 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__RD2 = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__ALUctrl = VL_RAND_RESET_I(4);
     vlSelf->top__DOT__ResultSrc = VL_RAND_RESET_I(2);
+    vlSelf->top__DOT__MemWrite = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__modeBU = VL_RAND_RESET_I(3);
     vlSelf->top__DOT__ALUResult = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__SrcB = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__RD = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__miss_stall = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__MemRead = VL_RAND_RESET_I(1);
     vlSelf->top__DOT____Vcellinp__pc__PCTarget = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__cached_datamem__DOT__out_cache = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__cached_datamem__DOT__byte3 = VL_RAND_RESET_I(8);
@@ -1051,7 +1078,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->__VdfgRegularize_hd87f99a1_0_0 = VL_RAND_RESET_I(16);
     vlSelf->__VdfgRegularize_hd87f99a1_0_1 = VL_RAND_RESET_I(24);
     vlSelf->__Vtrigprevexpr___TOP__clk__0 = VL_RAND_RESET_I(1);
-    for (int __Vi0 = 0; __Vi0 < 2; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = 0;
     }
 }

@@ -18,6 +18,8 @@ void Vtop___024root___eval_triggers__act(Vtop___024root* vlSelf) {
     // Body
     vlSelfRef.__VactTriggered.set(0U, ((IData)(vlSelfRef.clk) 
                                        & (~ (IData)(vlSelfRef.__Vtrigprevexpr___TOP__clk__0))));
+    vlSelfRef.__VactTriggered.set(1U, ((~ (IData)(vlSelfRef.clk)) 
+                                       & (IData)(vlSelfRef.__Vtrigprevexpr___TOP__clk__0)));
     vlSelfRef.__Vtrigprevexpr___TOP__clk__0 = vlSelfRef.clk;
 #ifdef VL_DEBUG
     if (VL_UNLIKELY(vlSymsp->_vm_contextp__->debug())) {
