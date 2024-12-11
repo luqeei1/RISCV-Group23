@@ -33,7 +33,7 @@ int main(int argc, char **argv, char **env) {
       top->clk = !top->clk;
       top->eval ();
     }
-    top->rst = (simcyc < 3);
+    top->rst = 0;
     if (Verilated::gotFinish())  exit(0);
   }
   std::cout << "Expect a0 = 53" << std::endl;

@@ -24,38 +24,37 @@ int main(int argc, char **argv, char **env) {
   // initialise Vbuddy
   if (vbdOpen()!=1) return(-1);
   vbdHeader("F1: LED Pattern");
-  vbdSetMode(1);        // Set to button mode
+  vbdSetMode(0);        // Set to button mode
 
   // initialise simulation inputs
   top->clk = 1;
-  top->rst = 1;
-  top->trigger = 1;
+  top->rst = 0;
+  top->trigger = 0;
 
   // run simulation for MAX_SIM_CYC clock cycles
   for (simcyc=0; simcyc<MAX_SIM_CYC; simcyc++) {
-    if (simcyc < 5) {
-      top->trigger = 1;
-    }
+    // Move this line inside the loop
+    top->trigger = vbdFlag();         // Get button state before clock edge
+    
     // dump variables into VCD file and toggle clock
     for (tick=0; tick<2; tick++) {
       tfp->dump (2*simcyc+tick);
       top->clk = !top->clk;
-      top->eval();
-      top->eval();  // Second eval for pipeline stability
+      top->eval ();
     }
 
     // Display pattern on VBuddy and get button state
-    vbdBar(top->a0 & 0xFF);
-    pattern = top->a0;
+    vbdBar(top->a0 & 0xFF);          // Display LED pattern
+    pattern = top->a0;                // Save current pattern
 
-    // Modify reset timing for pipeline flush
-    top->rst = (simcyc < 5);  // Extended reset period for pipeline flush
+    // set up input signals of testbench
+    top->rst = 0;          // assert reset for 1st cycle
     vbdCycle(simcyc);
 
     if (Verilated::gotFinish())  exit(0);
   }
 
-  //vbdClose();     
+  vbdClose();     
   tfp->close(); 
   exit(0);
 }

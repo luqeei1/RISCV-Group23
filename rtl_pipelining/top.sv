@@ -45,9 +45,10 @@ module top#(
     logic RegWriteE, ALUSrcE, MemWriteE;
     logic [1:0] ResultSrcE;
     logic [2:0] modeAddrE;
+    logic JALRE;
 
     // FF_EM
-    logic RegWriteM, MemWriteM, MemReadM;
+    logic RegWriteM, MemWriteM;
     logic [1:0] ResultSrcM;
     logic [2:0] modeAddrM;
 
@@ -70,11 +71,13 @@ module top#(
     logic Zero;
     logic MemReadD;
     logic MemReadE;
+    logic MemReadM;
 
     logic JumpD;
     logic JumpE;
     logic BranchD;
     logic BranchE;
+    logic JALRD;
 
     // ALU
     logic [WIDTH-1:0] WriteDataE, WriteDataM;
@@ -97,6 +100,7 @@ module top#(
     // Hazard Unit
     logic [1:0] ForwardAE, ForwardBE;
     logic flush;
+    logic flushDE;
     logic stall;
 
     // Branch Prediction Unit
@@ -114,23 +118,21 @@ module top#(
         .RdM(RdM),
         .RdW(RdW),
         .RdE(RdE),
-        .Rs1E(Rs1E),
-        .Rs2E(Rs2E),
         .Rs1D(Rs1D),
         .Rs2D(Rs2D),
-        .BranchD(BranchD),
+        .Rs1E(Rs1E),
+        .Rs2E(Rs2E),
         .RegWriteM(RegWriteM),
         .RegWriteW(RegWriteW),
-        .RegWriteE(RegWriteE),
         .MemReadE(MemReadE),
         .MemReadM(MemReadM),
         .flushBranch(flushBranch),
+        .JumpE(JumpE),
         .ForwardAE(ForwardAE),
         .ForwardBE(ForwardBE),
-        // .ForwardAD(ForwardAD),
-        // .ForwardBD(ForwardBD),
         .stall(stall),
-        .flush(flush)
+        .flush(flush),
+        .flushDE(flushDE)
     );
 
     BPU branch_prediction_unit (
@@ -138,6 +140,7 @@ module top#(
         .RD(InstrF),
         .PCF(PCF),
         .ZeroE(Zero),
+        .JumpE(JumpE),
         .BranchE(BranchE),
         
         .flushBranch(flushBranch),
@@ -151,6 +154,7 @@ module top#(
         .PCTarget(PCE + ExtImmE),  // Branch/Jump target from Execute stage
         .JumpE(JumpE),
         .BranchE(BranchE),
+        .JALRE(JALRE),
         .ZeroE(Zero),
         .ALUResult(ALUResultE),
         .PC(PC)
@@ -229,6 +233,7 @@ module top#(
         .modeAddr(modeAddrD),
         .BranchD(BranchD),
         .JumpD(JumpD),
+        .JALRD(JALRD),
         .MemReadD(MemReadD)
     );
 
@@ -239,20 +244,22 @@ module top#(
         .ImmExt(ExtImmD)
     );
 
-    mux3 forwardAE_mux (
+    mux4 forwardAE_mux (
         .sel(ForwardAE),
         .in0(RD1E),
         .in1(ResultW),
         .in2(ALUResultM),
+        .in3(ReadDataM),
 
         .out(SrcAE)
     );
 
-    mux3 forwardBE_mux (
+    mux4 forwardBE_mux (
         .sel(ForwardBE),
         .in0(RD2E),
         .in1(ResultW),
         .in2(ALUResultM),
+        .in3(ReadDataM),
 
         .out(WriteDataE)
     );
@@ -302,12 +309,13 @@ module top#(
 
     FF_DE pipeline_DE (
         .clk(clk),
-        .flush(flush),
+        .flushBranch(flushDE),
         .RegWriteD(RegWriteD),
         .ResultSrcD(ResultSrcD),
         .MemWriteD(MemWriteD),
         .JumpD(JumpD),
         .BranchD(BranchD),
+        .JALRD(JALRD),
         .ALUControlD(ALUControlD),
         .ALUSrcD(ALUSrcD),
         .RD1(RD1),
@@ -327,6 +335,7 @@ module top#(
         .MemWriteE(MemWriteE),
         .JumpE(JumpE),
         .BranchE(BranchE),
+        .JALRE(JALRE),
         .ALUControlE(ALUControlE),
         .ALUSrcE(ALUSrcE),
         .RD1E(RD1E),
@@ -347,23 +356,23 @@ module top#(
        .RegWriteE(RegWriteE),
        .ResultSrcE(ResultSrcE),
        .MemWriteE(MemWriteE),
+       .MemReadE(MemReadE),
        .ALUResultE(ALUResultE),
        .WriteDataE(WriteDataE),
        .RdE(RdE),
        .PCPlus4E(PCPlus4E),
        .modeAddrE(modeAddrE),
-       .MemReadE(MemReadE),
        .InstrE(InstrE), //for debugging
 
        .RegWriteM(RegWriteM),
        .ResultSrcM(ResultSrcM),
        .MemWriteM(MemWriteM),
+       .MemReadM(MemReadM),
        .ALUResultM(ALUResultM),
        .WriteDataM(WriteDataM),
        .RdM(RdM),
        .PCPlus4M(PCPlus4M),
        .modeAddrM(modeAddrM),
-       .MemReadM(MemReadM),
        .InstrM(InstrM) //for debugging
     );
 
