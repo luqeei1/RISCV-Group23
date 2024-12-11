@@ -35,8 +35,8 @@ module cache #(
 
     always_comb begin
         next_state = current_state;
-        miss_stall = 0;
         cache_out = 0;
+        miss_stall = 0;
 
         case (current_state)
             COMPARE_TAG: begin
@@ -68,8 +68,6 @@ module cache #(
 always_ff @(posedge clk) begin
     if (rst) begin
         current_state <= COMPARE_TAG;
-        miss_stall <= 0;
-        cache_out <= 0;
     end else begin
         cache_line <= cache_mem[set];
         current_state <= next_state;
