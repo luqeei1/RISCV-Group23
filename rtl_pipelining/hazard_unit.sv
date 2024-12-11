@@ -68,7 +68,7 @@ module hazard_unit #(
         // flush if: (1) stall occurs, (2) branch instruction and prediction is wrong 
         flush = stall || flushBranch || JumpE;
 
-        flushDE = flushBranch;
+        flushDE = flushBranch || JumpE;
     
     end
 
