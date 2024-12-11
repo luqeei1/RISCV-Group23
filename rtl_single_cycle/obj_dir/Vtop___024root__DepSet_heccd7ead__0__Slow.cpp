@@ -761,7 +761,6 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                                   + vlSelfRef.top__DOT__SrcB)))));
     vlSelfRef.top__DOT__cached_datamem__DOT__cache__DOT__next_state 
         = vlSelfRef.top__DOT__cached_datamem__DOT__cache__DOT__current_state;
-    vlSelfRef.top__DOT__miss_stall = 0U;
     vlSelfRef.top__DOT__pc__DOT__out = ((2U & (IData)(vlSelfRef.top__DOT__PCSrc))
                                          ? ((1U & (IData)(vlSelfRef.top__DOT__PCSrc))
                                              ? vlSelfRef.top__DOT__ALUResult
@@ -845,12 +844,14 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                 = ((0x200000U & vlSelfRef.top__DOT__cached_datamem__DOT__cache__DOT__cache_line[2U])
                     ? 2U : 1U);
         }
-        if ((1U & (~ ((vlSelfRef.top__DOT__cached_datamem__DOT__cache__DOT__cache_line[2U] 
-                       >> 0x16U) & ((0x1fffffU & vlSelfRef.top__DOT__cached_datamem__DOT__cache__DOT__cache_line[2U]) 
-                                    == (vlSelfRef.top__DOT__ALUResult 
-                                        >> 0xbU)))))) {
-            vlSelfRef.top__DOT__miss_stall = 1U;
-        }
+        vlSelfRef.top__DOT__miss_stall = (1U & (~ (
+                                                   (vlSelfRef.top__DOT__cached_datamem__DOT__cache__DOT__cache_line[2U] 
+                                                    >> 0x16U) 
+                                                   & ((0x1fffffU 
+                                                       & vlSelfRef.top__DOT__cached_datamem__DOT__cache__DOT__cache_line[2U]) 
+                                                      == 
+                                                      (vlSelfRef.top__DOT__ALUResult 
+                                                       >> 0xbU)))));
     } else if ((1U == vlSelfRef.top__DOT__cached_datamem__DOT__cache__DOT__current_state)) {
         vlSelfRef.top__DOT__cached_datamem__DOT__cache__DOT__next_state = 0U;
         vlSelfRef.top__DOT__miss_stall = 1U;

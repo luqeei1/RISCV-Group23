@@ -18,17 +18,4 @@ typedef struct packed {
     logic [63:0] data;
 } cache_block_type;
 
-typedef struct packed {
-    logic [31:0] addr;
-    logic [31:0] data;
-    logic [1:0] op;     // 00 = read, 01 = write, 10 = allocate
-    logic [2:0] mode_addr;  
-    logic valid;
-} request_type;
-
-typedef struct packed{
-    logic [31:0] data;
-    logic ready;
-} response_type;
-
 `endif 

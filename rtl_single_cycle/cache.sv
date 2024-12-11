@@ -34,9 +34,8 @@ module cache #(
     end    
 
     always_comb begin
-        next_state = current_state;
         cache_out = 0;
-        miss_stall = 0;
+        next_state = current_state;
 
         case (current_state)
             COMPARE_TAG: begin
@@ -46,6 +45,7 @@ module cache #(
                             {cache_line.data[63:32]} :
                             {cache_line.data[31:0]};
                     end
+                    miss_stall = 0;
                     next_state = COMPARE_TAG;
                 end else begin
                     miss_stall = 1;
@@ -76,17 +76,14 @@ always_ff @(posedge clk) begin
             COMPARE_TAG: begin
                 if (WE && cache_line.valid && (cache_line.tag == addr[TAG_MSB:TAG_LSB])) begin
                     cache_line.dirty <= 1;
-                    block <= 1;
                     case (modeAddr)
                         3'b011, 3'b101: begin
                             cache_line.data[(addr[2:0] * 8) +: 8] <= write_data[7:0];
                         end
                         default: begin
                             if (addr[2]) begin
-                                block <= 1;
                                 cache_line.data[63:32] <= write_data;
                             end else begin
-                                block <= 1;
                                 cache_line.data[31:0] <= write_data;
                             end
                         end
@@ -104,6 +101,7 @@ always_ff @(posedge clk) begin
                                            ram_array[addr[16:0] + 6],
                                            ram_array[addr[16:0] + 5],
                                            ram_array[addr[16:0] + 4]};
+                block <= 1;
                 cache_line.valid <= 1;
                 cache_line.dirty <= 0;
                 cache_line.tag <= addr[TAG_MSB:TAG_LSB];
