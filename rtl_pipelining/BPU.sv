@@ -6,6 +6,7 @@ module BPU #(
     input logic [DATA_WIDTH-1:0] RD,
     input logic [DATA_WIDTH-1:0] PCF,
     input logic ZeroE,
+    input logic JumpE, 
     input logic BranchE,
     output logic flushBranch,
     output logic [DATA_WIDTH-1:0] PCBPU,
@@ -34,7 +35,7 @@ end
 
 
 always_comb begin
-    if(RD[6:0] == 7'b1100011) begin //current instruction is a branch  
+    if(RD[6:0] == 7'b1100011 && !JumpE) begin //current instruction is a branch
         PCBPU = PCF + {{20{RD[31]}}, RD[7], RD[30:25], RD[11:8], 1'b0}; //calculate destination address
         newBranch.branchAddr = PCF; 
         newBranch.targetAddr = PCF + {{20{RD[31]}}, RD[7], RD[30:25], RD[11:8], 1'b0};
@@ -66,7 +67,6 @@ always_comb begin
     end
 
     if(BranchE) begin //Branch instr 2 cycles later
-        oldBranch = branch_queue[0];
         if(oldBranch.prediction == ZeroE) begin //If jump decision was correct
             flushBranch = 1'b0;
             if(oldBranch.direction == 1'b0)
@@ -82,14 +82,15 @@ always_comb begin
             else //If jump should've been taken
                 PCBPU = oldBranch.targetAddr; //Jump to target address of branch
         end
-        branch_queue.pop_front(); //Discard top element in queue
+        branch_queue.pop_front(); //Discard top element in queue 
     end
     else
         flushBranch = 1'b0;
 end
 
-always_ff @(posedge clk) begin
+always_ff @(negedge clk) begin
     if(BranchE) begin 
+        oldBranch <= branch_queue[0];
         if (oldBranch.direction == 1'b0) begin
             forwardJumpCounter <= (ZeroE == oldBranch.prediction)
                 ? ((forwardJumpCounter == 2'b11) ? 2'b11 : forwardJumpCounter + 1) //Increment forward counter

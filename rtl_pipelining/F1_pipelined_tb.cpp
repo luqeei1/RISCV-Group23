@@ -24,7 +24,7 @@ int main(int argc, char **argv, char **env) {
   // initialise Vbuddy
   if (vbdOpen()!=1) return(-1);
   vbdHeader("F1: LED Pattern");
-  vbdSetMode(1);        // Set to button mode
+  vbdSetMode(0);        // Set to button mode
 
   // initialise simulation inputs
   top->clk = 1;
@@ -48,7 +48,7 @@ int main(int argc, char **argv, char **env) {
     pattern = top->a0;                // Save current pattern
 
     // set up input signals of testbench
-    top->rst = (simcyc < 3);          // assert reset for 1st cycle
+    top->rst = 0;          // assert reset for 1st cycle
     vbdCycle(simcyc);
 
     if (Verilated::gotFinish())  exit(0);

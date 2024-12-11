@@ -16,6 +16,8 @@ module FF_DE #(
     output logic JumpE,
     input logic BranchD,
     output logic BranchE,
+    input logic JALRD,
+    output logic JALRE,
     input logic [3:0] ALUControlD,
     output logic [3:0] ALUControlE,
     input logic ALUSrcD,
@@ -47,11 +49,13 @@ always_ff @(posedge clk) begin
     if(flushBranch) begin
         JumpE <= 0;
         BranchE <= 0;
+        JALRE <= 0;
         RegWriteE <= 0;
         MemWriteE <= 0;
     end else begin
         JumpE <= JumpD;
         BranchE <= BranchD;
+        JALRE <= JALRD;
         RegWriteE <= RegWriteD;
         MemWriteE <= MemWriteD;
         MemReadE <= MemReadD;

@@ -45,6 +45,7 @@ module top#(
     logic RegWriteE, ALUSrcE, MemWriteE;
     logic [1:0] ResultSrcE;
     logic [2:0] modeAddrE;
+    logic JALRE;
 
     // FF_EM
     logic RegWriteM, MemWriteM;
@@ -76,6 +77,7 @@ module top#(
     logic JumpE;
     logic BranchD;
     logic BranchE;
+    logic JALRD;
 
     // ALU
     logic [WIDTH-1:0] WriteDataE, WriteDataM;
@@ -98,6 +100,7 @@ module top#(
     // Hazard Unit
     logic [1:0] ForwardAE, ForwardBE;
     logic flush;
+    logic flushDE;
     logic stall;
 
     // Branch Prediction Unit
@@ -124,10 +127,12 @@ module top#(
         .MemReadE(MemReadE),
         .MemReadM(MemReadM),
         .flushBranch(flushBranch),
+        .JumpE(JumpE),
         .ForwardAE(ForwardAE),
         .ForwardBE(ForwardBE),
         .stall(stall),
-        .flush(flush)
+        .flush(flush),
+        .flushDE(flushDE)
     );
 
     BPU branch_prediction_unit (
@@ -135,6 +140,7 @@ module top#(
         .RD(InstrF),
         .PCF(PCF),
         .ZeroE(Zero),
+        .JumpE(JumpE),
         .BranchE(BranchE),
         
         .flushBranch(flushBranch),
@@ -148,6 +154,7 @@ module top#(
         .PCTarget(PCE + ExtImmE),  // Branch/Jump target from Execute stage
         .JumpE(JumpE),
         .BranchE(BranchE),
+        .JALRE(JALRE),
         .ZeroE(Zero),
         .ALUResult(ALUResultE),
         .PC(PC)
@@ -226,6 +233,7 @@ module top#(
         .modeAddr(modeAddrD),
         .BranchD(BranchD),
         .JumpD(JumpD),
+        .JALRD(JALRD),
         .MemReadD(MemReadD)
     );
 
@@ -301,12 +309,13 @@ module top#(
 
     FF_DE pipeline_DE (
         .clk(clk),
-        .flushBranch(flushBranch),
+        .flushBranch(flushDE),
         .RegWriteD(RegWriteD),
         .ResultSrcD(ResultSrcD),
         .MemWriteD(MemWriteD),
         .JumpD(JumpD),
         .BranchD(BranchD),
+        .JALRD(JALRD),
         .ALUControlD(ALUControlD),
         .ALUSrcD(ALUSrcD),
         .RD1(RD1),
@@ -326,6 +335,7 @@ module top#(
         .MemWriteE(MemWriteE),
         .JumpE(JumpE),
         .BranchE(BranchE),
+        .JALRE(JALRE),
         .ALUControlE(ALUControlE),
         .ALUSrcE(ALUSrcE),
         .RD1E(RD1E),
