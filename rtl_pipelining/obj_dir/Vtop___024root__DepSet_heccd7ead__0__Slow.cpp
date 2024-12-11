@@ -7,7 +7,7 @@
 
 #include "Vtop___024root.h"
 
-extern const VlWide<8>/*255:0*/ Vtop__ConstPool__CONST_h316b8f81_0;
+extern const VlWide<11>/*351:0*/ Vtop__ConstPool__CONST_h814b10ff_0;
 
 VL_ATTR_COLD void Vtop___024root___initial__TOP__0(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
@@ -27,7 +27,7 @@ VL_ATTR_COLD void Vtop___024root___initial__TOP__0(Vtop___024root* vlSelf) {
                  ,  &(vlSelf->top__DOT__instruction_memory__DOT__rom_array)
                  , 0, ~0ULL);
     VL_WRITEF("ROM loaded successfully.\n");
-    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(8, Vtop__ConstPool__CONST_h316b8f81_0)
+    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(11, Vtop__ConstPool__CONST_h814b10ff_0)
                  ,  &(vlSelf->top__DOT__data_memory__DOT__ram_array)
                  , 0U, 0x1ffffU);
     vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter = 2U;
@@ -123,8 +123,8 @@ VL_ATTR_COLD void Vtop___024root___settle__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__BranchE = vlSelf->top__DOT__pipeline_DE__DOT__BranchE;
     vlSelf->top__DOT__JumpE = vlSelf->top__DOT__pipeline_DE__DOT__JumpE;
     vlSelf->top__DOT__InstrD = vlSelf->top__DOT__pipeline_FD__DOT__InstrD;
-    vlSelf->top__DOT__PCF = vlSelf->top__DOT__program_counter__DOT__PCF;
     vlSelf->top__DOT__ALUControlE = vlSelf->top__DOT__pipeline_DE__DOT__ALUControlE;
+    vlSelf->top__DOT__PCF = vlSelf->top__DOT__program_counter__DOT__PCF;
     vlSelf->top__DOT__ALUSrcE = vlSelf->top__DOT__pipeline_DE__DOT__ALUSrcE;
     vlSelf->top__DOT__ExtImmE = vlSelf->top__DOT__pipeline_DE__DOT__ExtImmE;
     vlSelf->top__DOT__RD1E = vlSelf->top__DOT__pipeline_DE__DOT__RD1E;
@@ -224,6 +224,7 @@ VL_ATTR_COLD void Vtop___024root___settle__TOP__0(Vtop___024root* vlSelf) {
                                        >> 0x14U));
     vlSelf->top__DOT__control_unit__DOT__op = (0x7fU 
                                                & vlSelf->top__DOT__InstrD);
+    vlSelf->top__DOT__alu__DOT__ALUctrl = vlSelf->top__DOT__ALUControlE;
     vlSelf->top__DOT__branch_prediction_unit__DOT__PCF 
         = vlSelf->top__DOT__PCF;
     vlSelf->top__DOT__instruction_memory__DOT__PC = vlSelf->top__DOT__PCF;
@@ -241,7 +242,6 @@ VL_ATTR_COLD void Vtop___024root___settle__TOP__0(Vtop___024root* vlSelf) {
                                            + vlSelf->top__DOT__PCF))] 
                                         << 8U) | vlSelf->top__DOT__instruction_memory__DOT__rom_array
                                        [(0xffffU & vlSelf->top__DOT__PCF)])));
-    vlSelf->top__DOT__alu__DOT__ALUctrl = vlSelf->top__DOT__ALUControlE;
     top__DOT____Vcellinp__PC_mux__PCTarget = (vlSelf->top__DOT__PCE 
                                               + vlSelf->top__DOT__ExtImmE);
     vlSelf->top__DOT__forwardAE_mux__DOT__in0 = vlSelf->top__DOT__RD1E;
@@ -1074,18 +1074,15 @@ VL_ATTR_COLD void Vtop___024root___settle__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__PC_mux__DOT__ALUResult = vlSelf->top__DOT__ALUResultE;
     vlSelf->top__DOT__pipeline_EM__DOT__ALUResultE 
         = vlSelf->top__DOT__ALUResultE;
-    vlSelf->top__DOT__branch_prediction_unit__DOT__ZeroE 
-        = vlSelf->top__DOT__Zero;
-    vlSelf->top__DOT__PC_mux__DOT__ZeroE = vlSelf->top__DOT__Zero;
     vlSelf->top__DOT__PC_mux__DOT__PC = vlSelf->top__DOT__PCPlus4F;
     if (vlSelf->top__DOT__JumpE) {
         vlSelf->top__DOT__PC_mux__DOT__PC = ((IData)(vlSelf->top__DOT__JALRE)
                                               ? vlSelf->top__DOT__ALUResultE
                                               : top__DOT____Vcellinp__PC_mux__PCTarget);
-    } else if (((IData)(vlSelf->top__DOT__BranchE) 
-                & (IData)(vlSelf->top__DOT__Zero))) {
-        vlSelf->top__DOT__PC_mux__DOT__PC = top__DOT____Vcellinp__PC_mux__PCTarget;
     }
+    vlSelf->top__DOT__branch_prediction_unit__DOT__ZeroE 
+        = vlSelf->top__DOT__Zero;
+    vlSelf->top__DOT__PC_mux__DOT__ZeroE = vlSelf->top__DOT__Zero;
     if (((0x63U == (0x7fU & vlSelf->top__DOT__InstrF)) 
          & (~ (IData)(vlSelf->top__DOT__JumpE)))) {
         vlSelf->top__DOT__branch_prediction_unit__DOT__PCBPU 
