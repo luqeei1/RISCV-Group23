@@ -1,12 +1,12 @@
 # RISCV-Group23
 
-## Structure
+## Joint Statement and Structure
 
 This repo contains all components, testing and results for the RV32I single-cycle processor and the RV32I pipelined processor with cache, as well as videos of the functional tests on the Vbuddy. It also contains a log of what tasks each of us completed on what days and everyone also has their personal statements, which can be seen in the table below:
 
 | Name       | CID | Link to Logbook | Personal Statement |
 |------------|--------|-----|------|
-| Akarsh     |        |   [Akarsh's Log](./docs/logs/Akarsh_log.md)  |      |
+| Akarsh     | 02395592       |   [Akarsh's Log](./docs/logs/Akarsh_log.md)  |      |
 | Lucas     |   |  [Lucas's Log](./docs/logs/Lucas_log.md)    |   |
 | Sid   |    02382743    |   [Sid's Log](./docs/logs/Sid_log.md)   |    |
 | Theo     |        |  [Theo's Log](./docs/logs/Theo_log.md)    |    |
@@ -78,7 +78,11 @@ The delay has been "randomised" through a simple LFSR process, with an initial s
 
 Screenshots of waveforms showing the working F1.s script and specific signals can be viewed [here](./Test_Results/Images/F1_single_cycle)
 
-### Testing the pdf.s script
+To run this specific code, the instruction memory would need to read the program.hex file and the data memory would read 
+
+### Testing the probability density function tests
+
+There were three files: gaussian.mem, noisy.mem, and triangle.mem , which could be run by running the ```./pdf.sh``` command on terminal, ensuring it was being tested via the pdfgen_tb.cpp testbench
 
 ### Tests 1-4:
 
