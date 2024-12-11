@@ -36,7 +36,10 @@ module hazard_unit #(
             11: forward from ReadDataM (memory stage)        */
 
         //specify RdW or RdM not refer to $zero register
-        if(RegWriteM && (Rs1E == RdM) && (Rs1E != 0)) begin
+
+        if (MemReadM && (Rs1E == RdM) && (Rs1E != 0)) begin
+            ForwardAE = 2'b11;
+        end else if(RegWriteM && (Rs1E == RdM) && (Rs1E != 0)) begin
             ForwardAE = 2'b10;
         end else if (RegWriteW && (Rs1E == RdW) && (Rs1E !=0)) begin
             ForwardAE = 2'b01;
