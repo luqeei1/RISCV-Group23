@@ -17,8 +17,8 @@ always_comb begin
     PC = PCPlus4F;
     if(JumpE)
         PC = (JALRE) ? ALUResult : PCTarget;  // JALR or unconditional jump (jal)
-    else if(BranchE && ZeroE)
-        PC = PCTarget;  // conditional jump: branch taken
+    // else if(BranchE && ZeroE)
+    //     PC = PCTarget;  // conditional jump: branch taken
 end
 
 endmodule

@@ -42,3 +42,20 @@
 - Passed Test 1 and Test 2
 - Worked on and solving issues with Test 3 and Test 4
 - Started testing with the PDF simulation/test
+
+## 8/12 
+- Changed the RegFile to write on the negative edge and implemented forwarding straight from the data memory
+- Passed Test 3
+
+## 9/12
+- Changed hazard unit logic in controlling the flush
+- The hazard unit now flushes whenever a jump is executed
+
+## 10/12
+- Changed the logic in the PC mux to decide between jumping via JAL or JALR 
+- Passed Test 4
+
+## 11/12
+- Added a JALR signal to properly differentiate between JAL and JALR
+- Altered the queue logic in the BPU logic to load on the negative edge of the clock
+- Passed the F1 test with trigger intialisation/reset and random delays between the lights 

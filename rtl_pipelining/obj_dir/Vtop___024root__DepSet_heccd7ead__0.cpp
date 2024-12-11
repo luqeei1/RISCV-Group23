@@ -329,8 +329,8 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__1(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__PCD = vlSelf->top__DOT__pipeline_FD__DOT__PCD;
     vlSelf->top__DOT__InstrD = vlSelf->top__DOT__pipeline_FD__DOT__InstrD;
     vlSelf->top__DOT__WriteDataM = vlSelf->top__DOT__pipeline_EM__DOT__WriteDataM;
-    vlSelf->top__DOT__PCF = vlSelf->top__DOT__program_counter__DOT__PCF;
     vlSelf->top__DOT__ALUControlE = vlSelf->top__DOT__pipeline_DE__DOT__ALUControlE;
+    vlSelf->top__DOT__PCF = vlSelf->top__DOT__program_counter__DOT__PCF;
     vlSelf->top__DOT__ALUSrcE = vlSelf->top__DOT__pipeline_DE__DOT__ALUSrcE;
     vlSelf->top__DOT__ExtImmE = vlSelf->top__DOT__pipeline_DE__DOT__ExtImmE;
     vlSelf->top__DOT__RD1E = vlSelf->top__DOT__pipeline_DE__DOT__RD1E;
@@ -444,6 +444,7 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__1(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__control_unit__DOT__op = (0x7fU 
                                                & vlSelf->top__DOT__InstrD);
     vlSelf->top__DOT__data_memory__DOT__WD = vlSelf->top__DOT__WriteDataM;
+    vlSelf->top__DOT__alu__DOT__ALUctrl = vlSelf->top__DOT__ALUControlE;
     vlSelf->top__DOT__branch_prediction_unit__DOT__PCF 
         = vlSelf->top__DOT__PCF;
     vlSelf->top__DOT__instruction_memory__DOT__PC = vlSelf->top__DOT__PCF;
@@ -461,7 +462,6 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__1(Vtop___024root* vlSelf) {
                                            + vlSelf->top__DOT__PCF))] 
                                         << 8U) | vlSelf->top__DOT__instruction_memory__DOT__rom_array
                                        [(0xffffU & vlSelf->top__DOT__PCF)])));
-    vlSelf->top__DOT__alu__DOT__ALUctrl = vlSelf->top__DOT__ALUControlE;
     top__DOT____Vcellinp__PC_mux__PCTarget = (vlSelf->top__DOT__PCE 
                                               + vlSelf->top__DOT__ExtImmE);
     vlSelf->top__DOT__forwardAE_mux__DOT__in0 = vlSelf->top__DOT__RD1E;
@@ -1324,18 +1324,15 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__1(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__PC_mux__DOT__ALUResult = vlSelf->top__DOT__ALUResultE;
     vlSelf->top__DOT__pipeline_EM__DOT__ALUResultE 
         = vlSelf->top__DOT__ALUResultE;
-    vlSelf->top__DOT__branch_prediction_unit__DOT__ZeroE 
-        = vlSelf->top__DOT__Zero;
-    vlSelf->top__DOT__PC_mux__DOT__ZeroE = vlSelf->top__DOT__Zero;
     vlSelf->top__DOT__PC_mux__DOT__PC = vlSelf->top__DOT__PCPlus4F;
     if (vlSelf->top__DOT__JumpE) {
         vlSelf->top__DOT__PC_mux__DOT__PC = ((IData)(vlSelf->top__DOT__JALRE)
                                               ? vlSelf->top__DOT__ALUResultE
                                               : top__DOT____Vcellinp__PC_mux__PCTarget);
-    } else if (((IData)(vlSelf->top__DOT__BranchE) 
-                & (IData)(vlSelf->top__DOT__Zero))) {
-        vlSelf->top__DOT__PC_mux__DOT__PC = top__DOT____Vcellinp__PC_mux__PCTarget;
     }
+    vlSelf->top__DOT__branch_prediction_unit__DOT__ZeroE 
+        = vlSelf->top__DOT__Zero;
+    vlSelf->top__DOT__PC_mux__DOT__ZeroE = vlSelf->top__DOT__Zero;
     if (((0x63U == (0x7fU & vlSelf->top__DOT__InstrF)) 
          & (~ (IData)(vlSelf->top__DOT__JumpE)))) {
         vlSelf->top__DOT__branch_prediction_unit__DOT__PCBPU 
