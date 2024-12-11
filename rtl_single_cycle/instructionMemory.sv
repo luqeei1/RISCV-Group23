@@ -2,7 +2,7 @@ module instructionMemory #(
     parameter ADDRESS_WIDTH = 32,
               DATA_WIDTH = 32
 )(
-    input logic [ADDRESS_WIDTH:0]                  PC,
+    input logic [ADDRESS_WIDTH-1:0]                  PC,
     output logic [DATA_WIDTH-1:0] instr
 );
 
@@ -11,7 +11,7 @@ logic [7:0] rom_array [2**16 - 1 : 0];
 
 initial begin
     $display("Loading rom.");
-    $readmemh("InstructionFiles/pdf.hex", rom_array);     
+    $readmemh("InstructionFiles/Test3.hex", rom_array);     
     $display("ROM loaded successfully.");
 end
 

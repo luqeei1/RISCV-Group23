@@ -75,6 +75,11 @@ module top#(
     logic [WIDTH-1:0] RD;
     logic [WIDTH-1:0] Result;
 
+    // Cache
+    logic miss_stall;
+    logic MemRead;
+
+
     assign A1 = instr[19:15];       //rs1
     assign A2 = instr[24:20];       //rs2
     assign A3 = instr[11:7];        //rd
@@ -82,6 +87,32 @@ module top#(
 
     assign SrcA = RD1;
     assign SrcB = (ALUSrc) ? ExtImm : RD2;
+
+    cached_datamem cached_datamem(
+        .clk(clk),
+        .rst(rst),
+        .WE(MemWrite),
+        .RE(MemRead),
+        .modeAddr(modeBU),
+        .addr(ALUResult),
+        .write_data(RD2),
+
+        .data_out(RD),
+        .miss_stall(miss_stall)
+    );
+
+    // Data Memory
+    // data_memory data_memory (
+    //     .clk(clk),
+    //     .WE(MemWrite),
+    //     .modeBU(modeBU),
+    //     .ResultSrc(ResultSrc),
+    //     .A(ALUResult),
+    //     .WD(RD2),
+    //     .trigger(trigger),
+    //     .RD(RD),
+    //     .Result(Result)
+    // );
 
     // Result multiplexer for RegFile write data
     mux3 regfile_mux(
@@ -101,6 +132,7 @@ module top#(
         .PCSrc(PCSrc),
         .ZeroE(Zero),
         .ALUResult(ALUResult),
+        .miss_stall(miss_stall),
         .PCF(PC)
     );
 
@@ -159,7 +191,8 @@ module top#(
         .ALUSrc(ALUSrc),
         .ImmSrc(ImmSrc),
         .RegWrite(RegWrite),
-        .modeBU(modeBU)
+        .modeBU(modeBU),
+        .MemRead(MemRead)
     );
 
     // Sign Extend
@@ -176,19 +209,6 @@ module top#(
         .SrcA(SrcA),
         .SrcB(SrcB),
         .ALUctrl(ALUctrl)
-    );
-
-    // Data Memory
-    data_memory data_memory (
-        .clk(clk),
-        .WE(MemWrite),
-        .modeBU(modeBU),
-        .ResultSrc(ResultSrc),
-        .A(ALUResult),
-        .WD(RD2),
-        .trigger(trigger),
-        .RD(RD),
-        .Result(Result)
     );
 
 endmodule

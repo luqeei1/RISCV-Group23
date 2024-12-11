@@ -5,7 +5,7 @@ verilator   -Wall --trace \
             -cc top.sv \
             regfile.sv \
             instructionMemory.sv \
-            data_memory.sv \
+            cached_datamem.sv \
             program_counter.sv \
             ControlUnit/signExtend.sv \
             alu.sv \

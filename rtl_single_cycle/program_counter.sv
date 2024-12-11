@@ -9,6 +9,7 @@ module program_counter #(
     input logic [WIDTH-1:0] PCPlus4F,   // input as [PCF + 4]
     input logic [WIDTH-1:0] ALUResult, //for JALR instruction
     input logic [WIDTH-1:0] PCTarget, // input in top module as [PCE + ImmOp]
+    input logic miss_stall,
     output logic [WIDTH-1:0] PCF
 );
 
@@ -36,7 +37,7 @@ end
 always_ff @(posedge clk) begin
     if(rst)
         PCF <= 32'b0;              // On reset, this goes to zero
-    else
+    else if(!miss_stall)
         PCF <= out;                // If not reset, this updates the PC with the next value
 end
 
