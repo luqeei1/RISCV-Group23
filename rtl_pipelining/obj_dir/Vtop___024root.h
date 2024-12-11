@@ -7,10 +7,9 @@
 
 #include "verilated.h"
 
-
 class Vtop__Syms;
 
-class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule {
+class Vtop___024root final : public VerilatedModule {
   public:
 
     // DESIGN SPECIFIC STATE
@@ -184,10 +183,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         CData/*1:0*/ top__DOT__pipeline_MW__DOT__ResultSrcW;
         CData/*4:0*/ top__DOT__pipeline_MW__DOT__RdM;
         CData/*4:0*/ top__DOT__pipeline_MW__DOT__RdW;
-        CData/*0:0*/ __VstlFirstIteration;
-        CData/*0:0*/ __VicoFirstIteration;
-        CData/*0:0*/ __Vtrigprevexpr___TOP__clk__0;
-        CData/*0:0*/ __VactContinue;
+        CData/*0:0*/ __Vclklast__TOP__clk;
         VL_OUT(a0,31,0);
         VL_OUT(a1,31,0);
         VL_OUT(a2,31,0);
@@ -212,11 +208,11 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         VL_OUT(s6,31,0);
         VL_OUT(s7,31,0);
         VL_OUT(s8,31,0);
-    };
-    struct {
         VL_OUT(s9,31,0);
         VL_OUT(s10,31,0);
         VL_OUT(s11,31,0);
+    };
+    struct {
         IData/*31:0*/ top__DOT__a0;
         IData/*31:0*/ top__DOT__a1;
         IData/*31:0*/ top__DOT__a2;
@@ -278,11 +274,11 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__PC_next;
         IData/*31:0*/ top__DOT__branch_prediction_unit__DOT__RD;
         IData/*31:0*/ top__DOT__branch_prediction_unit__DOT__PCF;
-    };
-    struct {
         IData/*31:0*/ top__DOT__branch_prediction_unit__DOT__PCBPU;
         IData/*31:0*/ top__DOT__PC_mux__DOT__PCPlus4F;
         IData/*31:0*/ top__DOT__PC_mux__DOT__ALUResult;
+    };
+    struct {
         IData/*31:0*/ top__DOT__PC_mux__DOT__PCTarget;
         IData/*31:0*/ top__DOT__PC_mux__DOT__PC;
         IData/*31:0*/ top__DOT__BPU_mux__DOT__in0;
@@ -344,11 +340,11 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__regfile_mux__DOT__in0;
         IData/*31:0*/ top__DOT__regfile_mux__DOT__in1;
         IData/*31:0*/ top__DOT__regfile_mux__DOT__in2;
-    };
-    struct {
         IData/*31:0*/ top__DOT__regfile_mux__DOT__out;
         IData/*31:0*/ top__DOT__pipeline_FD__DOT__RD;
         IData/*31:0*/ top__DOT__pipeline_FD__DOT__InstrD;
+    };
+    struct {
         IData/*31:0*/ top__DOT__pipeline_FD__DOT__PCF;
         IData/*31:0*/ top__DOT__pipeline_FD__DOT__PCD;
         IData/*31:0*/ top__DOT__pipeline_FD__DOT__PCPlus4F;
@@ -381,7 +377,6 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__PCPlus4W;
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__InstrM;
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__InstrW;
-        IData/*31:0*/ __VactIterCount;
         VlWide<3>/*65:0*/ top__DOT__branch_prediction_unit__DOT__newBranch;
         VlWide<3>/*65:0*/ top__DOT__branch_prediction_unit__DOT__oldBranch;
         VlUnpacked<CData/*7:0*/, 65536> top__DOT__instruction_memory__DOT__rom_array;
@@ -389,10 +384,6 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         VlUnpacked<CData/*7:0*/, 131072> top__DOT__data_memory__DOT__ram_array;
     };
     VlQueue<VlWide<3>/*65:0*/> top__DOT__branch_prediction_unit__DOT__branch_queue;
-    VlTriggerVec<1> __VstlTriggered;
-    VlTriggerVec<1> __VicoTriggered;
-    VlTriggerVec<2> __VactTriggered;
-    VlTriggerVec<2> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     Vtop__Syms* const vlSymsp;
@@ -424,13 +415,13 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
     static constexpr IData/*31:0*/ top__DOT__pipeline_MW__DOT__WIDTH = 5U;
 
     // CONSTRUCTORS
-    Vtop___024root(Vtop__Syms* symsp, const char* v__name);
+    Vtop___024root(Vtop__Syms* symsp, const char* name);
     ~Vtop___024root();
     VL_UNCOPYABLE(Vtop___024root);
 
     // INTERNAL METHODS
     void __Vconfigure(bool first);
-};
+} VL_ATTR_ALIGNED(VL_CACHE_LINE_BYTES);
 
 
 #endif  // guard
