@@ -1,177 +1,121 @@
-/* verilator lint_off UNOPTFLAT */
-/* verilator lint_off ALWCOMBORDER */
-
 `include "cache_data_structs.sv"
 
 module cache_FSM(
     input logic clk,
     input logic rst,
-    input request_type cpu_req,
-    output response_type cpu_resp,
 
-    input response_type mem_resp,
-    output request_type mem_req,
+    input logic [2:0] modeAddr,
+    input logic [WIDTH-1:0] addr,
+    input logic [WIDTH-1:0] write_data,
+    input logic trigger,
+    input logic WE,
+    input logic RE, //read enable
+    output logic miss_stall,
+    output logic data_out
 
-    //ONLY FOR TESTING ***** 
-    // EXPOSING PORTS because verilator public not supported for typedef struct 
-    output logic [TAG_MSB:TAG_LSB] cache_mem_tag [0:SETS-1],
-    output logic cache_mem_dirty [0:SETS-1],
-    output logic cache_mem_valid [0:SETS-1],
-    output logic [63:0] cache_mem_data [0:SETS-1],
-    
-    output logic [31:0] cpu_req_addr,
-    output logic [31:0] cpu_req_data,
-    output logic [1:0] cpu_req_op,
-    output logic [3:0] cpu_req_mode_addr,
-    output logic cpu_req_valid,
-
-    output logic [31:0] cpu_resp_data,
-    output logic cpu_resp_ready,
-    output logic [31:0] mem_resp_data,
-    output logic mem_resp_ready
 );
+
+    logic [7:0] ram_array [2**17 -1:0];
     cache_block_type cache_mem [0:SETS-1];
-
-    //ONLY FOR TESTING *****
-    assign cpu_req_addr = cpu_req.addr;
-    assign cpu_req_data = cpu_req.data;
-    assign cpu_req_op = cpu_req.op;
-    assign cpu_req_mode_addr = cpu_req.mode_addr;
-    assign cpu_req_valid = cpu_req.valid;
-
-    assign cpu_resp_data = cpu_resp.data;
-    assign cpu_resp_ready = cpu_resp.ready;
-    assign mem_resp_ready = mem_resp.ready;
-    assign mem_resp_ready = mem_resp.ready;
-
-    //ONLY FOR TESTING *****
-    generate
-        for(genvar i=0;i<SETS;i++) begin
-            assign cache_mem_tag[i] = cache_mem[i].tag;
-            assign cache_mem_dirty[i] = cache_mem[i].dirty;
-            assign cache_mem_valid[i] = cache_mem[i].valid;
-            assign cache_mem_data[i] = cache_mem[i].data;
-        end
-    endgenerate
 
     typedef enum {IDLE, COMPARE_TAG, ALLOCATE, WRITE_BACK} cache_state;
     cache_state current_state, next_state;
 
-    response_type next_cpu_resp;
-    request_type next_mem_req;
     cache_block_type cache_line;
 
     logic [7:0] set;
-    logic [31:0] current_addr;
+    logic hit;
+    logic [WIDTH-1:0] mem_data;
 
-    assign set = cpu_req.addr[10:3];
-    assign cpu_resp = next_cpu_resp;
-    assign mem_req = next_mem_req;
+    assign set = addr[10:3];
+ 
+    initial begin
+        $readmemh("../rtl_pipelining/datamem.hex", ram_array, 17'h00000, 17'h1FFFF);
+    end    
+
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst) current_state <= IDLE;
+        else     current_state <= next_state;
+    end
 
     always_comb begin
         next_state = current_state;
-        next_cpu_resp = '{data: '0, ready: 0};
-        next_mem_req = '{addr: '0, data: '0, op: '0, mode_addr: '0, valid:0};
         cache_line = cache_mem[set];
 
         case (current_state)
+            IDLE: begin
+                miss_stall = 0;
+                data_out = 0;
+                next_state = COMPARE_TAG;
+            end
 
-             IDLE: begin
-                if (cpu_req.valid) begin
-                    next_state = COMPARE_TAG;
-                end
-             end
-
-             COMPARE_TAG: begin
-                if( cache_line.valid && (cache_line.tag == cpu_req.addr[TAG_MSB:TAG_LSB])) begin
-                    // cache HIT
-                    next_cpu_resp.ready = 1;
+            COMPARE_TAG: begin
+                //CACHE HIT
+                if (cache_line.valid && (cache_line.tag == addr[TAG_MSB:TAG_LSB])) begin
 
                     // READ LOGIC
-                    if(cpu_req.op == 2'b00) begin
-                        next_cpu_resp.data = (cpu_req.addr[2]) ?
+                    if(RE) begin
+                        data_out = (addr[2]) ?
                             {cache_line.data[63:56], cache_line.data[55:48], cache_line.data[47:40], cache_line.data[39:32]} :
                             {cache_line.data[31:24], cache_line.data[23:16], cache_line.data[15:8], cache_line.data[7:0]};
                     end
-                    
                     // WRITE LOGIC
-                    else if (cpu_req.op == 2'b01) begin
+                    else if (WE) begin
                         cache_line.dirty = 1;
-                        case(cpu_req.mode_addr)
+                        case(modeAddr)
 
                             3'b011, 3'b101: begin // single byte addressing
-                                cache_line.data[(cpu_req.addr[2:0]*8) +: 8] = cpu_req.data[7:0];
+                                cache_line.data[(addr[2:0]*8) +: 8] = write_data[7:0];
                             end
                             default:  // full word
-                                if(cpu_req.addr[2]) begin
-                                    cache_line.data[63:56] = cpu_req.data[31:24];
-                                    cache_line.data[55:48] = cpu_req.data[23:16];
-                                    cache_line.data[47:40] = cpu_req.data[15:8];
-                                    cache_line.data[39:32] = cpu_req.data[7:0];
+                                if(addr[2]) begin
+                                    cache_line.data[63:32] = write_data;
                                 end else begin
-                                    cache_line.data[31:24] = cpu_req.data[31:24];
-                                    cache_line.data[23:16] = cpu_req.data[23:16];
-                                    cache_line.data[15:8] = cpu_req.data[15:8];
-                                    cache_line.data[7:0] = cpu_req.data[7:0];
+                                    cache_line.data[31:0] = write_data;
                                 end
                         endcase
-                        cache_mem[set] = cache_line; 
+                        cache_mem[set] = cache_line;
                     end
-                    
                     next_state = IDLE;
                 end
 
                 else begin
-                    // cache miss
-                    current_addr = {cpu_req.addr[31:3], 3'b000};
-                    next_mem_req = '{addr: cpu_req.addr, data: '0, op: 2'b10, mode_addr: 3'b001, valid: 1};
+                    // CACHE MISS
+                    miss_stall = 1;
                     // if cache_line is clean or bit is invalid then go straight to allocate
-                    next_state = (!cache_line.valid || !cache_line.dirty) ? ALLOCATE : WRITE_BACK;
+                    next_state = (!cache_line.dirty) ? ALLOCATE : WRITE_BACK;
                 end
-             end
+            end
 
-             ALLOCATE: begin
-                if(mem_resp.ready) begin
-                    cache_line.data[31:24] = mem_resp.data[31:24];
-                    cache_line.data[23:16] = mem_resp.data[23:16];
-                    cache_line.data[15:8] = mem_resp.data[15:8];
-                    cache_line.data[7:0] = mem_resp.data[7:0];
+            ALLOCATE: begin
+                miss_stall = 1;
+                cache_line.data[31:0] = { ram_array[{A[16:0]} + 3],
+                                          ram_array[{A[16:0]} + 2],
+                                          ram_array[{A[16:0]} + 1],
+                                          ram_array[{A[16:0]} + 0]};
 
-                    current_addr = current_addr + 4;
-                    next_mem_req = '{addr: current_addr, data: 0, op: 2'b10, mode_addr: 3'b001, valid:1}; //fetching second word
+                cache_line.data[63:32] = {ram_array[{A[16:0]} + 7],
+                                          ram_array[{A[16:0]} + 6],
+                                          ram_array[{A[16:0]} + 5],
+                                          ram_array[{A[16:0]} + 4]};                        
 
-                    cache_line.data[63:56] = mem_resp.data[31:24];
-                    cache_line.data[55:48] = mem_resp.data[23:16];
-                    cache_line.data[47:40] = mem_resp.data[15:8];
-                    cache_line.data[39:32] = mem_resp.data[7:0];
+                cache_line.valid = 1;
+                cache_line.dirty = 0;
+                cache_line.tag = addr[TAG_MSB:TAG_LSB];
+                cache_mem[set] = cache_line;
+                next_state = COMPARE_TAG;
+            end
 
-                    cache_line.valid = 1;
-                    cache_line.dirty = 0;
-                    cache_line.tag = cpu_req.addr[TAG_MSB:TAG_LSB];
-                    cache_mem[set] = cache_line;
-                    next_state = COMPARE_TAG;
-                end       
-             end
+            WRITE_BACK: begin
+                miss_stall = 1;
+                // write back dirty data to main memory
+                ram_array[{cache_line.tag, set, 3'b000}] = cache_line.data[63:32];
+                ram_array[{cache_line.tag, set, 3'b100}] = cache_line.data[31:0];
+                next_state = ALLOCATE;
+            end
+        endcase   
+    end     
 
-             WRITE_BACK: begin
-                if(mem_resp.ready) begin
-                    // writeback first word of cache block
-                    next_mem_req = '{addr: {cache_line.tag, set, 3'b0},
-                                    data: {cache_line.data[63:56], cache_line.data[55:48], cache_line.data[47:40], cache_line.data[39:32]},
-                                    op: 2'b01, mode_addr: 3'b001, valid: 1};
-                    
-                    // writeback second word of cache block
-                    next_mem_req = '{addr: {cache_line.tag, set, 3'b100}, // increments address by 4
-                                    data: {cache_line.data[31:24], cache_line.data[23:16], cache_line.data[15:8], cache_line.data[7:0]},
-                                    op: 2'b01, mode_addr: 3'b001, valid: 1};
-                    next_state = ALLOCATE;
-                end
-             end
-        endcase
-    end
-
-    always_ff @(posedge clk)
-        if (rst)    current_state <= IDLE;
-        else        current_state <= next_state;
 
 endmodule
+        
