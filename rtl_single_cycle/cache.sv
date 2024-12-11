@@ -27,8 +27,10 @@ module cache #(
     logic [7:0] set;
     logic block;
     logic [63:0] cache_line_data;
+    logic cache_line_valid;
 
     assign cache_line_data = cache_line.data;
+    assign cache_line_valid = cache_line.valid;
     assign set = addr[10:3];
  
     initial begin
