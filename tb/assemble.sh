@@ -4,11 +4,11 @@
 
 # Default vars
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
-output_file="$SCRIPT_DIR/F1.hex"
+output_file="$SCRIPT_DIR/pdf.hex"
 
 # Handle terminal arguments
 if [[ $# -eq 0 ]]; then
-    echo "Usage: ./assemble.sh asm/F1pipeline.s"
+    echo "Usage: ./assemble.sh asm/5_pdf.s"
     exit 1
 fi
 
