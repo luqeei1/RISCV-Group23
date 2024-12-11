@@ -54,6 +54,7 @@ VL_ATTR_COLD void Vtop___024root___settle__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__RegWriteE = vlSelf->top__DOT__pipeline_DE__DOT__RegWriteE;
     vlSelf->top__DOT__ResultSrcE = vlSelf->top__DOT__pipeline_DE__DOT__ResultSrcE;
     vlSelf->top__DOT__MemWriteE = vlSelf->top__DOT__pipeline_DE__DOT__MemWriteE;
+    vlSelf->top__DOT__JALRE = vlSelf->top__DOT__pipeline_DE__DOT__JALRE;
     vlSelf->top__DOT__PCPlus4E = vlSelf->top__DOT__pipeline_DE__DOT__PCPlus4E;
     vlSelf->top__DOT__modeAddrE = vlSelf->top__DOT__pipeline_DE__DOT__modeAddrE;
     vlSelf->top__DOT__InstrE = vlSelf->top__DOT__pipeline_DE__DOT__InstrE;
@@ -118,10 +119,9 @@ VL_ATTR_COLD void Vtop___024root___settle__TOP__0(Vtop___024root* vlSelf) {
         [0x1fU];
     vlSelf->top__DOT__MemReadE = vlSelf->top__DOT__pipeline_DE__DOT__MemReadE;
     vlSelf->top__DOT__RdE = vlSelf->top__DOT__pipeline_DE__DOT__RdE;
-    vlSelf->top__DOT__JALRE = vlSelf->top__DOT__pipeline_DE__DOT__JALRE;
+    vlSelf->top__DOT__JumpE = vlSelf->top__DOT__pipeline_DE__DOT__JumpE;
     vlSelf->top__DOT__PCE = vlSelf->top__DOT__pipeline_DE__DOT__PCE;
     vlSelf->top__DOT__BranchE = vlSelf->top__DOT__pipeline_DE__DOT__BranchE;
-    vlSelf->top__DOT__JumpE = vlSelf->top__DOT__pipeline_DE__DOT__JumpE;
     vlSelf->top__DOT__InstrD = vlSelf->top__DOT__pipeline_FD__DOT__InstrD;
     vlSelf->top__DOT__PCF = vlSelf->top__DOT__program_counter__DOT__PCF;
     vlSelf->top__DOT__ALUControlE = vlSelf->top__DOT__pipeline_DE__DOT__ALUControlE;
@@ -159,6 +159,7 @@ VL_ATTR_COLD void Vtop___024root___settle__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__pipeline_EM__DOT__ResultSrcE 
         = vlSelf->top__DOT__ResultSrcE;
     vlSelf->top__DOT__pipeline_EM__DOT__MemWriteE = vlSelf->top__DOT__MemWriteE;
+    vlSelf->top__DOT__PC_mux__DOT__JALRE = vlSelf->top__DOT__JALRE;
     vlSelf->top__DOT__pipeline_EM__DOT__PCPlus4E = vlSelf->top__DOT__PCPlus4E;
     vlSelf->top__DOT__pipeline_EM__DOT__modeAddrE = vlSelf->top__DOT__modeAddrE;
     vlSelf->top__DOT__pipeline_EM__DOT__InstrE = vlSelf->top__DOT__InstrE;
@@ -199,14 +200,13 @@ VL_ATTR_COLD void Vtop___024root___settle__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__pipeline_EM__DOT__MemReadE = vlSelf->top__DOT__MemReadE;
     vlSelf->top__DOT__hazard_unit__DOT__RdE = vlSelf->top__DOT__RdE;
     vlSelf->top__DOT__pipeline_EM__DOT__RdE = vlSelf->top__DOT__RdE;
-    vlSelf->top__DOT__PC_mux__DOT__JALRE = vlSelf->top__DOT__JALRE;
-    vlSelf->top__DOT__branch_prediction_unit__DOT__BranchE 
-        = vlSelf->top__DOT__BranchE;
-    vlSelf->top__DOT__PC_mux__DOT__BranchE = vlSelf->top__DOT__BranchE;
     vlSelf->top__DOT__hazard_unit__DOT__JumpE = vlSelf->top__DOT__JumpE;
     vlSelf->top__DOT__branch_prediction_unit__DOT__JumpE 
         = vlSelf->top__DOT__JumpE;
     vlSelf->top__DOT__PC_mux__DOT__JumpE = vlSelf->top__DOT__JumpE;
+    vlSelf->top__DOT__branch_prediction_unit__DOT__BranchE 
+        = vlSelf->top__DOT__BranchE;
+    vlSelf->top__DOT__PC_mux__DOT__BranchE = vlSelf->top__DOT__BranchE;
     vlSelf->top__DOT__control_unit__DOT__InstrD = vlSelf->top__DOT__InstrD;
     vlSelf->top__DOT__sign_extend__DOT__ImmInput = vlSelf->top__DOT__InstrD;
     vlSelf->top__DOT__pipeline_DE__DOT__InstrD = vlSelf->top__DOT__InstrD;
@@ -768,9 +768,13 @@ VL_ATTR_COLD void Vtop___024root___settle__TOP__0(Vtop___024root* vlSelf) {
                                                                             == 
                                                                             (7U 
                                                                              & (IData)(vlSelf->top__DOT__control_unit__DOT__op))))))));
-    vlSelf->top__DOT__control_unit__DOT__BranchD = (IData)(
-                                                           (0x63U 
-                                                            == (IData)(vlSelf->top__DOT__control_unit__DOT__op)));
+    vlSelf->top__DOT__control_unit__DOT__BranchD = 
+        (1U & (IData)(((0x60U == (0x78U & (IData)(vlSelf->top__DOT__control_unit__DOT__op))) 
+                       & ((4U & (IData)(vlSelf->top__DOT__control_unit__DOT__op))
+                           ? (((IData)(vlSelf->top__DOT__control_unit__DOT__op) 
+                               >> 1U) & (IData)(vlSelf->top__DOT__control_unit__DOT__op))
+                           : (((IData)(vlSelf->top__DOT__control_unit__DOT__op) 
+                               >> 1U) & (IData)(vlSelf->top__DOT__control_unit__DOT__op))))));
     vlSelf->top__DOT__control_unit__DOT__modeAddr = 
         ((IData)(vlSelf->top__DOT__control_unit__DOT__Store)
           ? ((0U == (IData)(vlSelf->top__DOT__control_unit__DOT__funct3))
@@ -1075,15 +1079,14 @@ VL_ATTR_COLD void Vtop___024root___settle__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__PC_mux__DOT__ZeroE = vlSelf->top__DOT__Zero;
     vlSelf->top__DOT__PC_mux__DOT__PC = vlSelf->top__DOT__PCPlus4F;
     if (vlSelf->top__DOT__JumpE) {
-        vlSelf->top__DOT__PC_mux__DOT__PC = ((IData)(vlSelf->top__DOT__JALRE)
+        vlSelf->top__DOT__PC_mux__DOT__PC = ((IData)(vlSelf->top__DOT__BranchE)
                                               ? vlSelf->top__DOT__ALUResultE
                                               : top__DOT____Vcellinp__PC_mux__PCTarget);
     } else if (((IData)(vlSelf->top__DOT__BranchE) 
                 & (IData)(vlSelf->top__DOT__Zero))) {
         vlSelf->top__DOT__PC_mux__DOT__PC = top__DOT____Vcellinp__PC_mux__PCTarget;
     }
-    if (((0x63U == (0x7fU & vlSelf->top__DOT__InstrF)) 
-         & (~ (IData)(vlSelf->top__DOT__JumpE)))) {
+    if ((0x63U == (0x7fU & vlSelf->top__DOT__InstrF))) {
         vlSelf->top__DOT__branch_prediction_unit__DOT__PCBPU 
             = (vlSelf->top__DOT__PCF + (((- (IData)(
                                                     (vlSelf->top__DOT__InstrF 
@@ -1208,8 +1211,7 @@ VL_ATTR_COLD void Vtop___024root___settle__TOP__0(Vtop___024root* vlSelf) {
     }
     vlSelf->top__DOT__hazard_unit__DOT__flushBranch 
         = vlSelf->top__DOT__flushBranch;
-    vlSelf->top__DOT__hazard_unit__DOT__flushDE = ((IData)(vlSelf->top__DOT__flushBranch) 
-                                                   | (IData)(vlSelf->top__DOT__JumpE));
+    vlSelf->top__DOT__hazard_unit__DOT__flushDE = vlSelf->top__DOT__flushBranch;
     vlSelf->top__DOT__hazard_unit__DOT__stall = 0U;
     vlSelf->top__DOT__hazard_unit__DOT__stall = ((IData)(vlSelf->top__DOT__MemReadE) 
                                                  & (((IData)(vlSelf->top__DOT__RdE) 

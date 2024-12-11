@@ -393,7 +393,7 @@ class Vtop___024root final : public VerilatedModule {
         VlUnpacked<IData/*31:0*/, 32> top__DOT__regfile__DOT__registerfile_array;
         VlUnpacked<CData/*7:0*/, 131072> top__DOT__data_memory__DOT__ram_array;
     };
-    VlQueue<VlWide<3>/*65:0*/, 11> top__DOT__branch_prediction_unit__DOT__branch_queue;
+    VlQueue<VlWide<3>/*65:0*/> top__DOT__branch_prediction_unit__DOT__branch_queue;
 
     // INTERNAL VARIABLES
     Vtop__Syms* const vlSymsp;

@@ -35,7 +35,8 @@ end
 
 
 always_comb begin
-    if(RD[6:0] == 7'b1100011 && !JumpE) begin //current instruction is a branch
+    //if(RD[6:0] == 7'b1100011 && !JumpE) begin //current instruction is a branch
+    if(RD[6:0] == 7'b1100011) begin
         PCBPU = PCF + {{20{RD[31]}}, RD[7], RD[30:25], RD[11:8], 1'b0}; //calculate destination address
         newBranch.branchAddr = PCF; 
         newBranch.targetAddr = PCF + {{20{RD[31]}}, RD[7], RD[30:25], RD[11:8], 1'b0};
