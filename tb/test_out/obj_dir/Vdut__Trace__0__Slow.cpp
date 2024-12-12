@@ -211,8 +211,6 @@ VL_ATTR_COLD void Vdut___024root__trace_init_sub__TOP__0(Vdut___024root* vlSelf,
     tracep->declBus(c+112,"queue_count", false,-1, 4,0);
     tracep->declArray(c+168,"newBranch", false,-1, 65,0);
     tracep->declArray(c+203,"oldBranch", false,-1, 65,0);
-    tracep->declBit(c+210,"forwardJumpDecisionCorrect", false,-1);
-    tracep->declBit(c+211,"backwardJumpDecisionCorrect", false,-1);
     tracep->declBus(c+113,"forwardJumpCounter", false,-1, 1,0);
     tracep->declBus(c+114,"backwardJumpCounter", false,-1, 1,0);
     tracep->popNamePrefix(1);
@@ -272,7 +270,7 @@ VL_ATTR_COLD void Vdut___024root__trace_init_sub__TOP__0(Vdut___024root* vlSelf,
     tracep->declBus(c+156,"out", false,-1, 31,0);
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("hazard_unit ");
-    tracep->declBus(c+212,"WIDTH", false,-1, 31,0);
+    tracep->declBus(c+210,"WIDTH", false,-1, 31,0);
     tracep->declBus(c+56,"RdM", false,-1, 4,0);
     tracep->declBus(c+57,"RdW", false,-1, 4,0);
     tracep->declBus(c+55,"RdE", false,-1, 4,0);
@@ -299,7 +297,7 @@ VL_ATTR_COLD void Vdut___024root__trace_init_sub__TOP__0(Vdut___024root* vlSelf,
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("pipeline_DE ");
     tracep->declBus(c+206,"DATA_WIDTH", false,-1, 31,0);
-    tracep->declBus(c+212,"WIDTH", false,-1, 31,0);
+    tracep->declBus(c+210,"WIDTH", false,-1, 31,0);
     tracep->declBit(c+171,"clk", false,-1);
     tracep->declBit(c+161,"flushBranch", false,-1);
     tracep->declBit(c+34,"MemReadD", false,-1);
@@ -343,7 +341,7 @@ VL_ATTR_COLD void Vdut___024root__trace_init_sub__TOP__0(Vdut___024root* vlSelf,
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("pipeline_EM ");
     tracep->declBus(c+206,"DATA_WIDTH", false,-1, 31,0);
-    tracep->declBus(c+212,"WIDTH", false,-1, 31,0);
+    tracep->declBus(c+210,"WIDTH", false,-1, 31,0);
     tracep->declBit(c+171,"clk", false,-1);
     tracep->declBit(c+10,"RegWriteE", false,-1);
     tracep->declBit(c+16,"RegWriteM", false,-1);
@@ -380,7 +378,7 @@ VL_ATTR_COLD void Vdut___024root__trace_init_sub__TOP__0(Vdut___024root* vlSelf,
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("pipeline_MW ");
     tracep->declBus(c+206,"DATA_WIDTH", false,-1, 31,0);
-    tracep->declBus(c+212,"WIDTH", false,-1, 31,0);
+    tracep->declBus(c+210,"WIDTH", false,-1, 31,0);
     tracep->declBit(c+171,"clk", false,-1);
     tracep->declBit(c+16,"RegWriteM", false,-1);
     tracep->declBit(c+21,"RegWriteW", false,-1);
@@ -406,7 +404,7 @@ VL_ATTR_COLD void Vdut___024root__trace_init_sub__TOP__0(Vdut___024root* vlSelf,
     tracep->declBus(c+45,"PCF", false,-1, 31,0);
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("regfile ");
-    tracep->declBus(c+212,"ADDRESS_WIDTH", false,-1, 31,0);
+    tracep->declBus(c+210,"ADDRESS_WIDTH", false,-1, 31,0);
     tracep->declBus(c+206,"DATA_WIDTH", false,-1, 31,0);
     tracep->declBit(c+171,"clk", false,-1);
     tracep->declBus(c+50,"AD1", false,-1, 4,0);
@@ -849,7 +847,5 @@ VL_ATTR_COLD void Vdut___024root__trace_full_sub_0(Vdut___024root* vlSelf, Veril
     bufp->fullIData(oldp+207,(vlSelf->top__DOT__RD),32);
     bufp->fullIData(oldp+208,(4U),32);
     bufp->fullIData(oldp+209,(0x10U),32);
-    bufp->fullBit(oldp+210,(vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpDecisionCorrect));
-    bufp->fullBit(oldp+211,(vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpDecisionCorrect));
-    bufp->fullIData(oldp+212,(5U),32);
+    bufp->fullIData(oldp+210,(5U),32);
 }

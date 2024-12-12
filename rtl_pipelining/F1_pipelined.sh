@@ -23,7 +23,7 @@ verilator   -Wall --trace \
             PC_mux.sv \
             controlUnit.sv \
             ALUDecoder.sv \
-            --exe ../Test4.cpp \
+            --exe ../pdfgen_tb.cpp \
             --prefix "Vtop" \
             -o Vtop
 

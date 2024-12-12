@@ -94,8 +94,6 @@ class Vtop___024root final : public VerilatedModule {
         CData/*3:0*/ top__DOT__branch_prediction_unit__DOT__queue_front;
         CData/*3:0*/ top__DOT__branch_prediction_unit__DOT__queue_back;
         CData/*4:0*/ top__DOT__branch_prediction_unit__DOT__queue_count;
-        CData/*0:0*/ top__DOT__branch_prediction_unit__DOT__forwardJumpDecisionCorrect;
-        CData/*0:0*/ top__DOT__branch_prediction_unit__DOT__backwardJumpDecisionCorrect;
         CData/*1:0*/ top__DOT__branch_prediction_unit__DOT__forwardJumpCounter;
         CData/*1:0*/ top__DOT__branch_prediction_unit__DOT__backwardJumpCounter;
         CData/*0:0*/ top__DOT__PC_mux__DOT__ZeroE;
@@ -145,10 +143,10 @@ class Vtop___024root final : public VerilatedModule {
         CData/*1:0*/ top__DOT__regfile_mux__DOT__sel;
         CData/*0:0*/ top__DOT__pipeline_FD__DOT__clk;
         CData/*0:0*/ top__DOT__pipeline_FD__DOT__flush;
-    };
-    struct {
         CData/*0:0*/ top__DOT__pipeline_FD__DOT__stall;
         CData/*0:0*/ top__DOT__pipeline_DE__DOT__clk;
+    };
+    struct {
         CData/*0:0*/ top__DOT__pipeline_DE__DOT__flushBranch;
         CData/*0:0*/ top__DOT__pipeline_DE__DOT__MemReadD;
         CData/*0:0*/ top__DOT__pipeline_DE__DOT__MemReadE;
@@ -211,10 +209,10 @@ class Vtop___024root final : public VerilatedModule {
         VL_OUT(t3,31,0);
         VL_OUT(t4,31,0);
         VL_OUT(t5,31,0);
-    };
-    struct {
         VL_OUT(t6,31,0);
         VL_OUT(s0,31,0);
+    };
+    struct {
         VL_OUT(s1,31,0);
         VL_OUT(s2,31,0);
         VL_OUT(s3,31,0);
@@ -277,10 +275,10 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__PCPlus4F;
         IData/*31:0*/ top__DOT__PCPlus4D;
         IData/*31:0*/ top__DOT__PCPlus4M;
-    };
-    struct {
         IData/*31:0*/ top__DOT__PCD;
         IData/*31:0*/ top__DOT__RD1;
+    };
+    struct {
         IData/*31:0*/ top__DOT__RD2;
         IData/*31:0*/ top__DOT__RD;
         IData/*31:0*/ top__DOT__ResultW;
@@ -343,10 +341,10 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__forwardBE_mux__DOT__in1;
         IData/*31:0*/ top__DOT__forwardBE_mux__DOT__in2;
         IData/*31:0*/ top__DOT__forwardBE_mux__DOT__in3;
-    };
-    struct {
         IData/*31:0*/ top__DOT__forwardBE_mux__DOT__out;
         IData/*31:0*/ top__DOT__alu__DOT__SrcA;
+    };
+    struct {
         IData/*31:0*/ top__DOT__alu__DOT__SrcB;
         IData/*31:0*/ top__DOT__alu__DOT__ALUResult;
         IData/*31:0*/ top__DOT__data_memory__DOT__A;
