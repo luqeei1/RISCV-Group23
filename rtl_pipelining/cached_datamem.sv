@@ -15,14 +15,8 @@ module cached_datamem #(
 );
 
 logic [DATA_WIDTH-1:0] out_cache;
-logic [7:0] byte3, byte2, byte1, byte0;
 
 always_comb begin
-    byte3 = out_cache[31:24];
-    byte2 = out_cache[23:16];
-    byte1 = out_cache[15:8];
-    byte0 = out_cache[7:0];
-
     // Read logic
     case (modeAddr)
         3'b001: begin  // load entire word
@@ -32,18 +26,18 @@ always_comb begin
 
         3'b011: begin // load signed byte
             case (addr[1:0])
-                2'b00: data_out = {{24{byte0[7]}}, byte0};
-                2'b01: data_out = {{24{byte1[7]}}, byte1};
-                2'b10: data_out = {{24{byte2[7]}}, byte2};
-                2'b11: data_out = {{24{byte3[7]}}, byte3};
+                2'b00: data_out = {{24{out_cache[7:0][7]}}, out_cache[7:0]};
+                2'b01: data_out = {{24{out_cache[15:8][7]}}, out_cache[15:8]};
+                2'b10: data_out = {{24{out_cache[23:16][7]}}, out_cache[23:16]};
+                2'b11: data_out = {{24{out_cache[31:24][7]}}, out_cache[31:24]};
             endcase
         end
         3'b101: begin // load unsigned byte
             case (addr[1:0])
-                2'b00: data_out = {{24'b0}, byte0};
-                2'b01: data_out = {{24'b0}, byte1};
-                2'b10: data_out = {{24'b0}, byte2};
-                2'b11: data_out = {{24'b0}, byte3};
+                2'b00: data_out = {{24'b0}, out_cache[7:0]};
+                2'b01: data_out = {{24'b0}, out_cache[15:8]};
+                2'b10: data_out = {{24'b0}, out_cache[23:16]};
+                2'b11: data_out = {{24'b0}, out_cache[31:24]};
             endcase
         end
         default: data_out = out_cache; //invalid access
