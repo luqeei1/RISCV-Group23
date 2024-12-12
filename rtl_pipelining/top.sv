@@ -102,6 +102,7 @@ module top#(
     logic flush;
     logic flushDE;
     logic stall;
+    logic miss_stall;
 
     // Branch Prediction Unit
     logic flushBranch;
@@ -132,7 +133,8 @@ module top#(
         .ForwardBE(ForwardBE),
         .stall(stall),
         .flush(flush),
-        .flushDE(flushDE)
+        .flushDE(flushDE),
+        .miss_stall(miss_stall)
     );
 
     BPU branch_prediction_unit (
@@ -273,17 +275,31 @@ module top#(
         .ALUctrl(ALUControlE)
     );
 
-    // Data Memory
-    data_memory data_memory (
+    cached_datamem cached_data_memory(
         .clk(clk),
+        .rst(rst),
         .WE(MemWriteM),
+        .RE(MemReadM),
         .modeAddr(modeAddrM),
-        .A(ALUResultM),
-        .WD(WriteDataM),
+        .addr(ALUResultM),
+        .write_data(WriteDataM),
         .trigger(trigger),
 
-        .RD(ReadDataM)
+        .miss_stall(miss_stall),
+        .data_out(ReadDataM)
     );
+
+    // // Data Memory
+    // data_memory data_memory (
+    //     .clk(clk),
+    //     .WE(MemWriteM),
+    //     .modeAddr(modeAddrM),
+    //     .A(ALUResultM),
+    //     .WD(WriteDataM),
+    //     .trigger(trigger),
+
+    //     .RD(ReadDataM)
+    // );
 
     // Result multiplexer for RegFile write data
     mux3 regfile_mux(
