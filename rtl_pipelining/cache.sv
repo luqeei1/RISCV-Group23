@@ -33,14 +33,14 @@ module cache #(
     assign set = addr[10:3];
 
     initial begin
-        //$readmemh("../rtl_pipelining/MemoryFiles/gaussian.mem", ram_array, 32'h00010000);
-        $readmemh("../rtl_pipelining/MemoryFiles/datamem.mem", ram_array, 17'h00000, 17'h1FFFF);
+        $readmemh("../rtl_pipelining/MemoryFiles/gaussian.mem", ram_array, 32'h00010000);
+        //$readmemh("../rtl_pipelining/MemoryFiles/datamem.mem", ram_array, 17'h00000, 17'h1FFFF);
     end    
 
     always_comb begin
-        //if(addr == 32'h1) begin
-            //cache_out = {31'b0, trigger};
-        //end else begin
+        if(addr == 32'h1) begin
+            cache_out = {31'b0, trigger};
+        end else begin
             miss_stall = 0;
             cache_out = 0;
 
@@ -62,9 +62,10 @@ module cache #(
 
             end else if (WE || RE) begin
                 // CACHE MISS
+                cache_out = {ram_array[{addr[16:0]} + 3],ram_array[{addr[16:0]} + 2],ram_array[{addr[16:0]} + 1],ram_array[{addr[16:0]}]};
                 miss_stall = 1;
             end
-        //end
+        end
     end
 
     always_ff @(posedge clk) begin
