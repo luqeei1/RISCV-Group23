@@ -806,18 +806,17 @@ VL_ATTR_COLD void Vtop___024root___initial__TOP__0(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___initial__TOP__0\n"); );
     // Init
-    VlWide<7>/*223:0*/ __Vtemp_h16fb1a01__0;
+    VlWide<6>/*191:0*/ __Vtemp_h765968e3__0;
     VlWide<6>/*191:0*/ __Vtemp_hba55ecef__0;
     // Body
     VL_WRITEF("Loading rom.\n");
-    __Vtemp_h16fb1a01__0[0U] = 0x2e686578U;
-    __Vtemp_h16fb1a01__0[1U] = 0x65737433U;
-    __Vtemp_h16fb1a01__0[2U] = 0x65732f54U;
-    __Vtemp_h16fb1a01__0[3U] = 0x6e46696cU;
-    __Vtemp_h16fb1a01__0[4U] = 0x6374696fU;
-    __Vtemp_h16fb1a01__0[5U] = 0x73747275U;
-    __Vtemp_h16fb1a01__0[6U] = 0x496eU;
-    VL_READMEM_N(true, 8, 65536, 0, VL_CVT_PACK_STR_NW(7, __Vtemp_h16fb1a01__0)
+    __Vtemp_h765968e3__0[0U] = 0x2e686578U;
+    __Vtemp_h765968e3__0[1U] = 0x732f4631U;
+    __Vtemp_h765968e3__0[2U] = 0x46696c65U;
+    __Vtemp_h765968e3__0[3U] = 0x74696f6eU;
+    __Vtemp_h765968e3__0[4U] = 0x74727563U;
+    __Vtemp_h765968e3__0[5U] = 0x496e73U;
+    VL_READMEM_N(true, 8, 65536, 0, VL_CVT_PACK_STR_NW(6, __Vtemp_h765968e3__0)
                  ,  &(vlSelf->top__DOT__instruction_memory__DOT__rom_array)
                  , 0, ~0ULL);
     VL_WRITEF("ROM loaded successfully.\n");
@@ -1101,6 +1100,8 @@ VL_ATTR_COLD void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__branch_prediction_unit__DOT__ZeroE 
         = vlSelf->top__DOT__Zero;
     vlSelf->top__DOT__PC_mux__DOT__ZeroE = vlSelf->top__DOT__Zero;
+    vlSelf->top__DOT__branch_prediction_unit__DOT__PCBPU = 0U;
+    vlSelf->top__DOT__branch_prediction_unit__DOT__PCBPUSrc = 0U;
     if (((0x63U == (0x7fU & vlSelf->top__DOT__InstrF)) 
          & (~ (IData)(vlSelf->top__DOT__JumpE)))) {
         vlSelf->top__DOT__branch_prediction_unit__DOT__PCBPU 
@@ -1232,6 +1233,8 @@ VL_ATTR_COLD void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
     // Body
     Vtop___024root___initial__TOP__0(vlSelf);
     vlSelf->__Vclklast__TOP__clk = vlSelf->clk;
+    vlSelf->__Vclklast__TOP__top__DOT__branch_prediction_unit__DOT__rst 
+        = vlSelf->top__DOT__branch_prediction_unit__DOT__rst;
 }
 
 VL_ATTR_COLD void Vtop___024root___eval_settle(Vtop___024root* vlSelf) {
@@ -1412,6 +1415,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__hazard_unit__DOT__flush = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__hazard_unit__DOT__flushDE = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__branch_prediction_unit__DOT__clk = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__branch_prediction_unit__DOT__rst = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__branch_prediction_unit__DOT__RD = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__branch_prediction_unit__DOT__PCF = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__branch_prediction_unit__DOT__ZeroE = VL_RAND_RESET_I(1);
@@ -1420,12 +1424,12 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__branch_prediction_unit__DOT__flushBranch = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__branch_prediction_unit__DOT__PCBPU = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__branch_prediction_unit__DOT__PCBPUSrc = VL_RAND_RESET_I(1);
-    for (int __Vi0=0; __Vi0<16; ++__Vi0) {
+    for (int __Vi0=0; __Vi0<4; ++__Vi0) {
         VL_RAND_RESET_W(66, vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue[__Vi0]);
     }
-    vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front = VL_RAND_RESET_I(4);
-    vlSelf->top__DOT__branch_prediction_unit__DOT__queue_back = VL_RAND_RESET_I(4);
-    vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count = VL_RAND_RESET_I(5);
+    vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front = VL_RAND_RESET_I(2);
+    vlSelf->top__DOT__branch_prediction_unit__DOT__queue_back = VL_RAND_RESET_I(2);
+    vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count = VL_RAND_RESET_I(3);
     VL_RAND_RESET_W(66, vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch);
     VL_RAND_RESET_W(66, vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch);
     vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter = VL_RAND_RESET_I(2);

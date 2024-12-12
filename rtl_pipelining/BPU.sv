@@ -2,6 +2,7 @@ module BPU #(
     parameter DATA_WIDTH = 32
 )(
     input logic clk,
+    input logic rst,  // Reset signal
     input logic [DATA_WIDTH-1:0] RD,
     input logic [DATA_WIDTH-1:0] PCF,
     input logic ZeroE,
@@ -21,7 +22,7 @@ typedef struct packed {
 } BranchInfo;
 
 // Queue to store branch information
-localparam QUEUE_SIZE = 16;
+localparam QUEUE_SIZE = 4;
 BranchInfo branch_queue[QUEUE_SIZE];
 logic [$clog2(QUEUE_SIZE)-1:0] queue_front;  // Index for front of queue
 logic [$clog2(QUEUE_SIZE)-1:0] queue_back;   // Index for back of queue
@@ -30,6 +31,7 @@ logic [$clog2(QUEUE_SIZE):0] queue_count;    // Count of elements in queue
 BranchInfo newBranch, oldBranch;
 logic [1:0] forwardJumpCounter, backwardJumpCounter;
 
+// Reset logic
 initial begin
     forwardJumpCounter = 2'b10;
     backwardJumpCounter = 2'b10;
@@ -44,6 +46,7 @@ task enqueue(input BranchInfo branch);
         branch_queue[queue_back] <= branch;
         queue_back <= (queue_back + 1) % QUEUE_SIZE;
         queue_count <= queue_count + 1;
+        $display("Enqueue: queue_back=%0d, queue_count=%0d", queue_back, queue_count);
     end else begin
         $display("Error: Branch queue is full");
     end
@@ -55,6 +58,7 @@ task dequeue(output BranchInfo branch);
         branch <= branch_queue[queue_front];
         queue_front <= (queue_front + 1) % QUEUE_SIZE;
         queue_count <= queue_count - 1;
+        $display("Dequeue: queue_front=%0d, queue_count=%0d", queue_front, queue_count);
     end else begin
         $display("Error: Branch queue is empty");
         branch <= 'x;
@@ -63,6 +67,9 @@ endtask
 
 // Combination logic for predictions
 always_comb begin
+    PCBPU = 0;  // Default value
+    PCBPUSrc = 0;
+
     if (RD[6:0] == 7'b1100011 && !JumpE) begin
         PCBPU = PCF + {{20{RD[31]}}, RD[7], RD[30:25], RD[11:8], 1'b0};
         newBranch.branchAddr = PCF;
@@ -93,23 +100,139 @@ always_comb begin
 end
 
 // Sequential logic for counters and queue
-always_ff @(posedge clk) begin
-    if (RD[6:0] == 7'b1100011 && !JumpE)
-        enqueue(newBranch);
+always_ff @(posedge clk or posedge rst) begin
+    if (rst) begin
+        forwardJumpCounter <= 2'b10;
+        backwardJumpCounter <= 2'b10;
+    end else begin
+        // Enqueue new branch if a branch instruction is detected
+        if (RD[6:0] == 7'b1100011 && !JumpE) begin
+            enqueue(newBranch);
+        end
 
-    if (BranchE && queue_count > 0) begin
-        dequeue(oldBranch);
+        // Dequeue branch and adjust counters if a branch event occurs
+        if (BranchE && queue_count > 0) begin
+            dequeue(oldBranch);
 
-        if (oldBranch.direction == 1'b0) begin
-            forwardJumpCounter <= (ZeroE == oldBranch.prediction)
-                ? forwardJumpCounter + 1
-                : forwardJumpCounter - 1;
-        end else begin
-            backwardJumpCounter <= (ZeroE == oldBranch.prediction)
-                ? backwardJumpCounter + 1
-                : backwardJumpCounter - 1;
+            if (oldBranch.direction == 1'b0) begin
+                forwardJumpCounter <= (ZeroE == oldBranch.prediction)
+                    ? forwardJumpCounter + 1
+                    : forwardJumpCounter - 1;
+            end else begin
+                backwardJumpCounter <= (ZeroE == oldBranch.prediction)
+                    ? backwardJumpCounter + 1
+                    : backwardJumpCounter - 1;
+            end
         end
     end
 end
 
 endmodule
+
+// /* verilator lint_off LATCH */
+// module BPU #(
+//     parameter DATA_WIDTH = 32
+// )(
+//     input logic clk,
+//     input logic [DATA_WIDTH-1:0] RD,
+//     input logic [DATA_WIDTH-1:0] PCF,
+//     input logic ZeroE,
+//     input logic JumpE, 
+//     input logic BranchE,
+//     output logic flushBranch,
+//     output logic [DATA_WIDTH-1:0] PCBPU,
+//     output logic PCBPUSrc
+// );
+
+// typedef struct packed{
+//     logic [31:0] branchAddr; //Branch address
+//     logic [31:0] targetAddr; //Branch target address
+//     logic direction; //Branch direction: 0 = forward, 1 = backward
+//     logic prediction; //Predicted outcome: 1 = taken, 0 = not taken
+// } BranchInfo;
+
+// BranchInfo branch_queue[$]; //Queue to store branch information 
+// BranchInfo newBranch;
+// BranchInfo oldBranch;
+// logic forwardJumpDecisionCorrect;
+// logic backwardJumpDecisionCorrect;
+// logic [1:0] forwardJumpCounter; //2 bit forward counter
+// logic [1:0] backwardJumpCounter; //2 bit backward counter
+
+// initial begin
+//     forwardJumpCounter = 2'b10;
+//     backwardJumpCounter = 2'b10;
+// end
+
+
+// always_comb begin
+//     //if(RD[6:0] == 7'b1100011 && !JumpE) begin //current instruction is a branch
+//     if(RD[6:0] == 7'b1100011 && !JumpE) begin
+//         PCBPU = PCF + {{20{RD[31]}}, RD[7], RD[30:25], RD[11:8], 1'b0}; //calculate destination address
+//         newBranch.branchAddr = PCF; 
+//         newBranch.targetAddr = PCF + {{20{RD[31]}}, RD[7], RD[30:25], RD[11:8], 1'b0};
+//         newBranch.direction = RD[31];
+//         if(RD[31] == 1'b0) begin //forward jump
+//             if(forwardJumpCounter >= 2'b10) begin //take forward jump
+//                 PCBPUSrc = 1'b1;
+//                 newBranch.prediction = 1'b1;
+//             end
+//             else begin //don't take forward jump
+//                 PCBPUSrc = 1'b0;
+//                 newBranch.prediction = 1'b0;
+//             end
+//         end
+//         else begin //backward jump
+//             if(backwardJumpCounter >= 2'b10) begin //take backward jump
+//                 PCBPUSrc = 1'b1;
+//                 newBranch.prediction = 1'b1;
+//             end
+//             else begin //don't take backward jump
+//                 PCBPUSrc = 1'b0;
+//                 newBranch.prediction = 1'b0;
+//             end
+//         end
+//         branch_queue.push_back(newBranch);
+//     end
+//     else begin //current instruction is not a branch instruction
+//         PCBPUSrc = 1'b0;
+//     end
+
+//     if(BranchE) begin //Branch instr 2 cycles later
+//         if(oldBranch.prediction == ZeroE) begin //If jump decision was correct
+//             flushBranch = 1'b0;
+//             if(oldBranch.direction == 1'b0)
+//                 forwardJumpDecisionCorrect = 1'b1;
+//             if(oldBranch.direction == 1'b1)
+//                 backwardJumpDecisionCorrect = 1'b1;
+//         end
+//         if(oldBranch.prediction != ZeroE) begin //If jump decision was incorrect
+//             flushBranch = 1'b1; //Flush pipeline
+//             PCBPUSrc = 1'b1;
+//             if(ZeroE == 0) //If jump should've not been taken
+//                 PCBPU = oldBranch.branchAddr + 32'd4; //Jump to following instruction after branch
+//             else //If jump should've been taken
+//                 PCBPU = oldBranch.targetAddr; //Jump to target address of branch
+//         end
+//         branch_queue.pop_front(); //Discard top element in queue 
+//     end
+//     else
+//         flushBranch = 1'b0;
+// end
+
+// always_ff @(negedge clk) begin
+//     if(BranchE) begin 
+//         oldBranch <= branch_queue[0];
+//         if (oldBranch.direction == 1'b0) begin
+//             forwardJumpCounter <= (ZeroE == oldBranch.prediction)
+//                 ? ((forwardJumpCounter == 2'b11) ? 2'b11 : forwardJumpCounter + 1) //Increment forward counter
+//                 : ((forwardJumpCounter == 2'b00) ? 2'b00 : forwardJumpCounter - 1); //Decrement forward counter
+//         end else begin
+//             backwardJumpCounter <= (ZeroE == oldBranch.prediction)
+//                 ? ((backwardJumpCounter == 2'b11) ? 2'b11 : backwardJumpCounter + 1) //Increment backward counter
+//                 : ((backwardJumpCounter == 2'b00) ? 2'b00 : backwardJumpCounter - 1); //Decrement forward counter
+//         end
+//     end
+// end
+
+// endmodule

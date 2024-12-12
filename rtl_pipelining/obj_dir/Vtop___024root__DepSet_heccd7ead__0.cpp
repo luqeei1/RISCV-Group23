@@ -35,12 +35,6 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___sequent__TOP__0\n"); );
     // Init
-    VlWide<3>/*65:0*/ __Vtask_top__DOT__branch_prediction_unit__DOT__enqueue__0__branch;
-    VlWide<3>/*65:0*/ __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch;
-    CData/*4:0*/ __Vdly__top__DOT__branch_prediction_unit__DOT__queue_count;
-    CData/*3:0*/ __Vdlyvdim0__top__DOT__branch_prediction_unit__DOT__branch_queue__v0;
-    VlWide<3>/*65:0*/ __Vdlyvval__top__DOT__branch_prediction_unit__DOT__branch_queue__v0;
-    CData/*0:0*/ __Vdlyvset__top__DOT__branch_prediction_unit__DOT__branch_queue__v0;
     IData/*16:0*/ __Vdlyvdim0__top__DOT__data_memory__DOT__ram_array__v0;
     CData/*0:0*/ __Vdlyvset__top__DOT__data_memory__DOT__ram_array__v0;
     IData/*16:0*/ __Vdlyvdim0__top__DOT__data_memory__DOT__ram_array__v1;
@@ -71,9 +65,6 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
     IData/*16:0*/ __Vdlyvdim0__top__DOT__data_memory__DOT__ram_array__v11;
     CData/*0:0*/ __Vdlyvset__top__DOT__data_memory__DOT__ram_array__v11;
     // Body
-    __Vdly__top__DOT__branch_prediction_unit__DOT__queue_count 
-        = vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count;
-    __Vdlyvset__top__DOT__branch_prediction_unit__DOT__branch_queue__v0 = 0U;
     __Vdlyvset__top__DOT__data_memory__DOT__ram_array__v0 = 0U;
     __Vdlyvset__top__DOT__data_memory__DOT__ram_array__v1 = 0U;
     __Vdlyvset__top__DOT__data_memory__DOT__ram_array__v2 = 0U;
@@ -87,6 +78,30 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__pipeline_EM__DOT__MemWriteM = vlSelf->top__DOT__MemWriteE;
     vlSelf->top__DOT__pipeline_EM__DOT__ResultSrcM 
         = vlSelf->top__DOT__ResultSrcE;
+    if ((1U & (~ (IData)(vlSelf->top__DOT__flushDE)))) {
+        vlSelf->top__DOT__pipeline_DE__DOT__modeAddrE 
+            = vlSelf->top__DOT__modeAddrD;
+        vlSelf->top__DOT__pipeline_DE__DOT__PCPlus4E 
+            = vlSelf->top__DOT__PCPlus4D;
+        vlSelf->top__DOT__pipeline_DE__DOT__ResultSrcE 
+            = vlSelf->top__DOT__ResultSrcD;
+        vlSelf->top__DOT__pipeline_DE__DOT__RdE = vlSelf->top__DOT__RdD;
+        vlSelf->top__DOT__pipeline_DE__DOT__MemReadE 
+            = vlSelf->top__DOT__MemReadD;
+        vlSelf->top__DOT__pipeline_DE__DOT__PCE = vlSelf->top__DOT__PCD;
+        vlSelf->top__DOT__pipeline_DE__DOT__InstrE 
+            = vlSelf->top__DOT__InstrD;
+        vlSelf->top__DOT__pipeline_DE__DOT__ALUControlE 
+            = vlSelf->top__DOT__ALUControlD;
+        vlSelf->top__DOT__pipeline_DE__DOT__ALUSrcE 
+            = vlSelf->top__DOT__ALUSrcD;
+        vlSelf->top__DOT__pipeline_DE__DOT__ExtImmE 
+            = vlSelf->top__DOT__ExtImmD;
+        vlSelf->top__DOT__pipeline_DE__DOT__RD1E = vlSelf->top__DOT__RD1;
+        vlSelf->top__DOT__pipeline_DE__DOT__RD2E = vlSelf->top__DOT__RD2;
+        vlSelf->top__DOT__pipeline_DE__DOT__Rs1E = vlSelf->top__DOT__Rs1D;
+        vlSelf->top__DOT__pipeline_DE__DOT__Rs2E = vlSelf->top__DOT__Rs2D;
+    }
     vlSelf->top__DOT__pipeline_DE__DOT__RegWriteE = 
         ((~ (IData)(vlSelf->top__DOT__flushDE)) & (IData)(vlSelf->top__DOT__RegWriteD));
     vlSelf->top__DOT__pipeline_DE__DOT__MemWriteE = 
@@ -117,102 +132,6 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
     if ((1U & (~ (IData)(vlSelf->top__DOT__stall)))) {
         vlSelf->top__DOT__program_counter__DOT__PCF 
             = ((IData)(vlSelf->rst) ? 0U : vlSelf->top__DOT__PC_next);
-    }
-    if ((1U & (~ (IData)(vlSelf->top__DOT__flushDE)))) {
-        vlSelf->top__DOT__pipeline_DE__DOT__modeAddrE 
-            = vlSelf->top__DOT__modeAddrD;
-        vlSelf->top__DOT__pipeline_DE__DOT__PCPlus4E 
-            = vlSelf->top__DOT__PCPlus4D;
-        vlSelf->top__DOT__pipeline_DE__DOT__ResultSrcE 
-            = vlSelf->top__DOT__ResultSrcD;
-        vlSelf->top__DOT__pipeline_DE__DOT__RdE = vlSelf->top__DOT__RdD;
-        vlSelf->top__DOT__pipeline_DE__DOT__MemReadE 
-            = vlSelf->top__DOT__MemReadD;
-        vlSelf->top__DOT__pipeline_DE__DOT__PCE = vlSelf->top__DOT__PCD;
-        vlSelf->top__DOT__pipeline_DE__DOT__InstrE 
-            = vlSelf->top__DOT__InstrD;
-        vlSelf->top__DOT__pipeline_DE__DOT__ALUControlE 
-            = vlSelf->top__DOT__ALUControlD;
-    }
-    if (((0x63U == (0x7fU & vlSelf->top__DOT__InstrF)) 
-         & (~ (IData)(vlSelf->top__DOT__JumpE)))) {
-        __Vtask_top__DOT__branch_prediction_unit__DOT__enqueue__0__branch[0U] 
-            = vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[0U];
-        __Vtask_top__DOT__branch_prediction_unit__DOT__enqueue__0__branch[1U] 
-            = vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[1U];
-        __Vtask_top__DOT__branch_prediction_unit__DOT__enqueue__0__branch[2U] 
-            = vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[2U];
-        if (VL_LIKELY((0x10U > (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count)))) {
-            __Vdly__top__DOT__branch_prediction_unit__DOT__queue_count 
-                = (0x1fU & ((IData)(1U) + (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count)));
-            __Vdlyvval__top__DOT__branch_prediction_unit__DOT__branch_queue__v0[0U] 
-                = __Vtask_top__DOT__branch_prediction_unit__DOT__enqueue__0__branch[0U];
-            __Vdlyvval__top__DOT__branch_prediction_unit__DOT__branch_queue__v0[1U] 
-                = __Vtask_top__DOT__branch_prediction_unit__DOT__enqueue__0__branch[1U];
-            __Vdlyvval__top__DOT__branch_prediction_unit__DOT__branch_queue__v0[2U] 
-                = __Vtask_top__DOT__branch_prediction_unit__DOT__enqueue__0__branch[2U];
-            __Vdlyvset__top__DOT__branch_prediction_unit__DOT__branch_queue__v0 = 1U;
-            __Vdlyvdim0__top__DOT__branch_prediction_unit__DOT__branch_queue__v0 
-                = vlSelf->top__DOT__branch_prediction_unit__DOT__queue_back;
-            vlSelf->top__DOT__branch_prediction_unit__DOT__queue_back 
-                = (0xfU & ((IData)(1U) + (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_back)));
-        } else {
-            VL_WRITEF("Error: Branch queue is full\n");
-        }
-    }
-    if (((IData)(vlSelf->top__DOT__BranchE) & (0U < (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count)))) {
-        vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[0U] 
-            = __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch[0U];
-        vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[1U] 
-            = __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch[1U];
-        vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[2U] 
-            = __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch[2U];
-        if ((2U & vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[0U])) {
-            vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpCounter 
-                = (3U & (((IData)(vlSelf->top__DOT__Zero) 
-                          == (1U & vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[0U]))
-                          ? ((IData)(1U) + (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpCounter))
-                          : ((IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpCounter) 
-                             - (IData)(1U))));
-        } else {
-            vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter 
-                = (3U & (((IData)(vlSelf->top__DOT__Zero) 
-                          == (1U & vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[0U]))
-                          ? ((IData)(1U) + (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter))
-                          : ((IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter) 
-                             - (IData)(1U))));
-        }
-        if (VL_LIKELY((0U < (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count)))) {
-            __Vdly__top__DOT__branch_prediction_unit__DOT__queue_count 
-                = (0x1fU & ((IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count) 
-                            - (IData)(1U)));
-            __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch[0U] 
-                = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
-                [vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front][0U];
-            __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch[1U] 
-                = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
-                [vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front][1U];
-            __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch[2U] 
-                = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
-                [vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front][2U];
-            vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front 
-                = (0xfU & ((IData)(1U) + (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front)));
-        } else {
-            VL_WRITEF("Error: Branch queue is empty\n");
-            __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch[0U] = 0U;
-            __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch[1U] = 0U;
-            __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch[2U] = 0U;
-        }
-    }
-    if ((1U & (~ (IData)(vlSelf->top__DOT__flushDE)))) {
-        vlSelf->top__DOT__pipeline_DE__DOT__ALUSrcE 
-            = vlSelf->top__DOT__ALUSrcD;
-        vlSelf->top__DOT__pipeline_DE__DOT__ExtImmE 
-            = vlSelf->top__DOT__ExtImmD;
-        vlSelf->top__DOT__pipeline_DE__DOT__RD1E = vlSelf->top__DOT__RD1;
-        vlSelf->top__DOT__pipeline_DE__DOT__RD2E = vlSelf->top__DOT__RD2;
-        vlSelf->top__DOT__pipeline_DE__DOT__Rs1E = vlSelf->top__DOT__Rs1D;
-        vlSelf->top__DOT__pipeline_DE__DOT__Rs2E = vlSelf->top__DOT__Rs2D;
     }
     vlSelf->top__DOT__pipeline_MW__DOT__PCPlus4W = vlSelf->top__DOT__PCPlus4M;
     vlSelf->top__DOT__pipeline_MW__DOT__ResultSrcW 
@@ -297,16 +216,6 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__0(Vtop___024root* vlSelf) {
                 = (0x1ffffU & vlSelf->top__DOT__ALUResultM);
         }
     }
-    if (__Vdlyvset__top__DOT__branch_prediction_unit__DOT__branch_queue__v0) {
-        vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue[__Vdlyvdim0__top__DOT__branch_prediction_unit__DOT__branch_queue__v0][0U] 
-            = __Vdlyvval__top__DOT__branch_prediction_unit__DOT__branch_queue__v0[0U];
-        vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue[__Vdlyvdim0__top__DOT__branch_prediction_unit__DOT__branch_queue__v0][1U] 
-            = __Vdlyvval__top__DOT__branch_prediction_unit__DOT__branch_queue__v0[1U];
-        vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue[__Vdlyvdim0__top__DOT__branch_prediction_unit__DOT__branch_queue__v0][2U] 
-            = __Vdlyvval__top__DOT__branch_prediction_unit__DOT__branch_queue__v0[2U];
-    }
-    vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count 
-        = __Vdly__top__DOT__branch_prediction_unit__DOT__queue_count;
     if (__Vdlyvset__top__DOT__data_memory__DOT__ram_array__v0) {
         vlSelf->top__DOT__data_memory__DOT__ram_array[__Vdlyvdim0__top__DOT__data_memory__DOT__ram_array__v0] = 0U;
     }
@@ -349,6 +258,135 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___sequent__TOP__1\n"); );
+    // Init
+    VlWide<3>/*65:0*/ __Vtask_top__DOT__branch_prediction_unit__DOT__enqueue__0__branch;
+    VlWide<3>/*65:0*/ __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch;
+    CData/*1:0*/ __Vdly__top__DOT__branch_prediction_unit__DOT__forwardJumpCounter;
+    CData/*1:0*/ __Vdly__top__DOT__branch_prediction_unit__DOT__backwardJumpCounter;
+    CData/*1:0*/ __Vdlyvdim0__top__DOT__branch_prediction_unit__DOT__branch_queue__v0;
+    VlWide<3>/*65:0*/ __Vdlyvval__top__DOT__branch_prediction_unit__DOT__branch_queue__v0;
+    CData/*0:0*/ __Vdlyvset__top__DOT__branch_prediction_unit__DOT__branch_queue__v0;
+    CData/*1:0*/ __Vdly__top__DOT__branch_prediction_unit__DOT__queue_back;
+    CData/*2:0*/ __Vdly__top__DOT__branch_prediction_unit__DOT__queue_count;
+    CData/*1:0*/ __Vdly__top__DOT__branch_prediction_unit__DOT__queue_front;
+    // Body
+    __Vdly__top__DOT__branch_prediction_unit__DOT__queue_back 
+        = vlSelf->top__DOT__branch_prediction_unit__DOT__queue_back;
+    __Vdly__top__DOT__branch_prediction_unit__DOT__queue_front 
+        = vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front;
+    __Vdly__top__DOT__branch_prediction_unit__DOT__queue_count 
+        = vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count;
+    __Vdly__top__DOT__branch_prediction_unit__DOT__backwardJumpCounter 
+        = vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpCounter;
+    __Vdly__top__DOT__branch_prediction_unit__DOT__forwardJumpCounter 
+        = vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter;
+    __Vdlyvset__top__DOT__branch_prediction_unit__DOT__branch_queue__v0 = 0U;
+    if (vlSelf->top__DOT__branch_prediction_unit__DOT__rst) {
+        __Vdly__top__DOT__branch_prediction_unit__DOT__forwardJumpCounter = 2U;
+        __Vdly__top__DOT__branch_prediction_unit__DOT__backwardJumpCounter = 2U;
+    } else {
+        if (((0x63U == (0x7fU & vlSelf->top__DOT__InstrF)) 
+             & (~ (IData)(vlSelf->top__DOT__JumpE)))) {
+            __Vtask_top__DOT__branch_prediction_unit__DOT__enqueue__0__branch[0U] 
+                = vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[0U];
+            __Vtask_top__DOT__branch_prediction_unit__DOT__enqueue__0__branch[1U] 
+                = vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[1U];
+            __Vtask_top__DOT__branch_prediction_unit__DOT__enqueue__0__branch[2U] 
+                = vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[2U];
+            if ((4U > (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count))) {
+                __Vdlyvval__top__DOT__branch_prediction_unit__DOT__branch_queue__v0[0U] 
+                    = __Vtask_top__DOT__branch_prediction_unit__DOT__enqueue__0__branch[0U];
+                __Vdlyvval__top__DOT__branch_prediction_unit__DOT__branch_queue__v0[1U] 
+                    = __Vtask_top__DOT__branch_prediction_unit__DOT__enqueue__0__branch[1U];
+                __Vdlyvval__top__DOT__branch_prediction_unit__DOT__branch_queue__v0[2U] 
+                    = __Vtask_top__DOT__branch_prediction_unit__DOT__enqueue__0__branch[2U];
+                __Vdlyvset__top__DOT__branch_prediction_unit__DOT__branch_queue__v0 = 1U;
+                __Vdlyvdim0__top__DOT__branch_prediction_unit__DOT__branch_queue__v0 
+                    = vlSelf->top__DOT__branch_prediction_unit__DOT__queue_back;
+                __Vdly__top__DOT__branch_prediction_unit__DOT__queue_back 
+                    = (3U & ((IData)(1U) + (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_back)));
+                __Vdly__top__DOT__branch_prediction_unit__DOT__queue_count 
+                    = (7U & ((IData)(1U) + (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count)));
+                VL_WRITEF("Enqueue: queue_back=%0#, queue_count=%0#\n",
+                          2,vlSelf->top__DOT__branch_prediction_unit__DOT__queue_back,
+                          3,(IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count));
+            } else {
+                VL_WRITEF("Error: Branch queue is full\n");
+            }
+        }
+        if (((IData)(vlSelf->top__DOT__BranchE) & (0U 
+                                                   < (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count)))) {
+            vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[0U] 
+                = __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch[0U];
+            vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[1U] 
+                = __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch[1U];
+            vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[2U] 
+                = __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch[2U];
+            if ((2U & vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[0U])) {
+                __Vdly__top__DOT__branch_prediction_unit__DOT__backwardJumpCounter 
+                    = (3U & (((IData)(vlSelf->top__DOT__Zero) 
+                              == (1U & vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[0U]))
+                              ? ((IData)(1U) + (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpCounter))
+                              : ((IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpCounter) 
+                                 - (IData)(1U))));
+            } else {
+                __Vdly__top__DOT__branch_prediction_unit__DOT__forwardJumpCounter 
+                    = (3U & (((IData)(vlSelf->top__DOT__Zero) 
+                              == (1U & vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[0U]))
+                              ? ((IData)(1U) + (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter))
+                              : ((IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter) 
+                                 - (IData)(1U))));
+            }
+            if ((0U < (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count))) {
+                __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch[0U] 
+                    = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+                    [vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front][0U];
+                __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch[1U] 
+                    = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+                    [vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front][1U];
+                __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch[2U] 
+                    = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+                    [vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front][2U];
+                __Vdly__top__DOT__branch_prediction_unit__DOT__queue_front 
+                    = (3U & ((IData)(1U) + (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front)));
+                __Vdly__top__DOT__branch_prediction_unit__DOT__queue_count 
+                    = (7U & ((IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count) 
+                             - (IData)(1U)));
+                VL_WRITEF("Dequeue: queue_front=%0#, queue_count=%0#\n",
+                          2,vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front,
+                          3,(IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count));
+            } else {
+                VL_WRITEF("Error: Branch queue is empty\n");
+                __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch[0U] = 0U;
+                __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch[1U] = 0U;
+                __Vtask_top__DOT__branch_prediction_unit__DOT__dequeue__1__branch[2U] = 0U;
+            }
+        }
+    }
+    if (__Vdlyvset__top__DOT__branch_prediction_unit__DOT__branch_queue__v0) {
+        vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue[__Vdlyvdim0__top__DOT__branch_prediction_unit__DOT__branch_queue__v0][0U] 
+            = __Vdlyvval__top__DOT__branch_prediction_unit__DOT__branch_queue__v0[0U];
+        vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue[__Vdlyvdim0__top__DOT__branch_prediction_unit__DOT__branch_queue__v0][1U] 
+            = __Vdlyvval__top__DOT__branch_prediction_unit__DOT__branch_queue__v0[1U];
+        vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue[__Vdlyvdim0__top__DOT__branch_prediction_unit__DOT__branch_queue__v0][2U] 
+            = __Vdlyvval__top__DOT__branch_prediction_unit__DOT__branch_queue__v0[2U];
+    }
+    vlSelf->top__DOT__branch_prediction_unit__DOT__queue_back 
+        = __Vdly__top__DOT__branch_prediction_unit__DOT__queue_back;
+    vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count 
+        = __Vdly__top__DOT__branch_prediction_unit__DOT__queue_count;
+    vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpCounter 
+        = __Vdly__top__DOT__branch_prediction_unit__DOT__backwardJumpCounter;
+    vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter 
+        = __Vdly__top__DOT__branch_prediction_unit__DOT__forwardJumpCounter;
+    vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front 
+        = __Vdly__top__DOT__branch_prediction_unit__DOT__queue_front;
+}
+
+VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
+    if (false && vlSelf) {}  // Prevent unused
+    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___sequent__TOP__2\n"); );
     // Init
     CData/*4:0*/ __Vdlyvdim0__top__DOT__regfile__DOT__registerfile_array__v0;
     IData/*31:0*/ __Vdlyvval__top__DOT__regfile__DOT__registerfile_array__v0;
@@ -395,8 +433,6 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__1(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__JALRE = vlSelf->top__DOT__pipeline_DE__DOT__JALRE;
     vlSelf->top__DOT__PCE = vlSelf->top__DOT__pipeline_DE__DOT__PCE;
     vlSelf->top__DOT__InstrE = vlSelf->top__DOT__pipeline_DE__DOT__InstrE;
-    vlSelf->top__DOT__BranchE = vlSelf->top__DOT__pipeline_DE__DOT__BranchE;
-    vlSelf->top__DOT__JumpE = vlSelf->top__DOT__pipeline_DE__DOT__JumpE;
     vlSelf->top__DOT__PCD = vlSelf->top__DOT__pipeline_FD__DOT__PCD;
     vlSelf->top__DOT__InstrD = vlSelf->top__DOT__pipeline_FD__DOT__InstrD;
     vlSelf->top__DOT__WriteDataM = vlSelf->top__DOT__pipeline_EM__DOT__WriteDataM;
@@ -417,6 +453,8 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__1(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__ReadDataW = vlSelf->top__DOT__pipeline_MW__DOT__ReadDataW;
     vlSelf->top__DOT__ALUResultM = vlSelf->top__DOT__pipeline_EM__DOT__ALUResultM;
     vlSelf->top__DOT__ALUResultW = vlSelf->top__DOT__pipeline_MW__DOT__ALUResultW;
+    vlSelf->top__DOT__BranchE = vlSelf->top__DOT__pipeline_DE__DOT__BranchE;
+    vlSelf->top__DOT__JumpE = vlSelf->top__DOT__pipeline_DE__DOT__JumpE;
     vlSelf->top__DOT__RegWriteW = vlSelf->top__DOT__pipeline_MW__DOT__RegWriteW;
     vlSelf->top__DOT__RdW = vlSelf->top__DOT__pipeline_MW__DOT__RdW;
     vlSelf->top__DOT__regfile__DOT__a5 = vlSelf->top__DOT__regfile__DOT__registerfile_array
@@ -491,13 +529,6 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__1(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__pipeline_EM__DOT__MemReadE = vlSelf->top__DOT__MemReadE;
     vlSelf->top__DOT__PC_mux__DOT__JALRE = vlSelf->top__DOT__JALRE;
     vlSelf->top__DOT__pipeline_EM__DOT__InstrE = vlSelf->top__DOT__InstrE;
-    vlSelf->top__DOT__branch_prediction_unit__DOT__BranchE 
-        = vlSelf->top__DOT__BranchE;
-    vlSelf->top__DOT__PC_mux__DOT__BranchE = vlSelf->top__DOT__BranchE;
-    vlSelf->top__DOT__hazard_unit__DOT__JumpE = vlSelf->top__DOT__JumpE;
-    vlSelf->top__DOT__branch_prediction_unit__DOT__JumpE 
-        = vlSelf->top__DOT__JumpE;
-    vlSelf->top__DOT__PC_mux__DOT__JumpE = vlSelf->top__DOT__JumpE;
     vlSelf->top__DOT__pipeline_DE__DOT__PCD = vlSelf->top__DOT__PCD;
     vlSelf->top__DOT__control_unit__DOT__InstrD = vlSelf->top__DOT__InstrD;
     vlSelf->top__DOT__sign_extend__DOT__ImmInput = vlSelf->top__DOT__InstrD;
@@ -661,6 +692,13 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__1(Vtop___024root* vlSelf) {
                                                      == (IData)(vlSelf->top__DOT__ResultSrcW))
                                                      ? vlSelf->top__DOT__PCPlus4W
                                                      : vlSelf->top__DOT__ALUResultW)));
+    vlSelf->top__DOT__branch_prediction_unit__DOT__BranchE 
+        = vlSelf->top__DOT__BranchE;
+    vlSelf->top__DOT__PC_mux__DOT__BranchE = vlSelf->top__DOT__BranchE;
+    vlSelf->top__DOT__hazard_unit__DOT__JumpE = vlSelf->top__DOT__JumpE;
+    vlSelf->top__DOT__branch_prediction_unit__DOT__JumpE 
+        = vlSelf->top__DOT__JumpE;
+    vlSelf->top__DOT__PC_mux__DOT__JumpE = vlSelf->top__DOT__JumpE;
     vlSelf->top__DOT__hazard_unit__DOT__RegWriteW = vlSelf->top__DOT__RegWriteW;
     vlSelf->top__DOT__regfile__DOT__WE3 = vlSelf->top__DOT__RegWriteW;
     vlSelf->top__DOT__hazard_unit__DOT__RdW = vlSelf->top__DOT__RdW;
@@ -1403,6 +1441,8 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__1(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__branch_prediction_unit__DOT__ZeroE 
         = vlSelf->top__DOT__Zero;
     vlSelf->top__DOT__PC_mux__DOT__ZeroE = vlSelf->top__DOT__Zero;
+    vlSelf->top__DOT__branch_prediction_unit__DOT__PCBPU = 0U;
+    vlSelf->top__DOT__branch_prediction_unit__DOT__PCBPUSrc = 0U;
     if (((0x63U == (0x7fU & vlSelf->top__DOT__InstrF)) 
          & (~ (IData)(vlSelf->top__DOT__JumpE)))) {
         vlSelf->top__DOT__branch_prediction_unit__DOT__PCBPU 
@@ -1536,12 +1576,19 @@ void Vtop___024root___eval(Vtop___024root* vlSelf) {
     if (((IData)(vlSelf->clk) & (~ (IData)(vlSelf->__Vclklast__TOP__clk)))) {
         Vtop___024root___sequent__TOP__0(vlSelf);
     }
-    if (((~ (IData)(vlSelf->clk)) & (IData)(vlSelf->__Vclklast__TOP__clk))) {
+    if ((((IData)(vlSelf->clk) & (~ (IData)(vlSelf->__Vclklast__TOP__clk))) 
+         | ((IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__rst) 
+            & (~ (IData)(vlSelf->__Vclklast__TOP__top__DOT__branch_prediction_unit__DOT__rst))))) {
         Vtop___024root___sequent__TOP__1(vlSelf);
+    }
+    if (((~ (IData)(vlSelf->clk)) & (IData)(vlSelf->__Vclklast__TOP__clk))) {
+        Vtop___024root___sequent__TOP__2(vlSelf);
     }
     Vtop___024root___combo__TOP__1(vlSelf);
     // Final
     vlSelf->__Vclklast__TOP__clk = vlSelf->clk;
+    vlSelf->__Vclklast__TOP__top__DOT__branch_prediction_unit__DOT__rst 
+        = vlSelf->top__DOT__branch_prediction_unit__DOT__rst;
 }
 
 #ifdef VL_DEBUG
