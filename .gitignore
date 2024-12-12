@@ -3,7 +3,6 @@ rtl_pipelining/obj_dir/
 *.bin
 *.dis
 *.vcd
-*.hex
 *.d
 *.o
 *.sh

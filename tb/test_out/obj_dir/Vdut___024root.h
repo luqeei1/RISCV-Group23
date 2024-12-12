@@ -51,6 +51,7 @@ class Vdut___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__flush;
         CData/*0:0*/ top__DOT__flushDE;
         CData/*0:0*/ top__DOT__stall;
+        CData/*0:0*/ top__DOT__miss_stall;
         CData/*0:0*/ top__DOT__flushBranch;
         CData/*0:0*/ top__DOT__BPU_Src;
         CData/*3:0*/ top__DOT__branch_prediction_unit__DOT__queue_front;
@@ -78,9 +79,9 @@ class Vdut___024root final : public VerilatedModule {
         VL_OUT(t5,31,0);
         VL_OUT(t6,31,0);
         VL_OUT(s0,31,0);
-        VL_OUT(s1,31,0);
     };
     struct {
+        VL_OUT(s1,31,0);
         VL_OUT(s2,31,0);
         VL_OUT(s3,31,0);
         VL_OUT(s4,31,0);

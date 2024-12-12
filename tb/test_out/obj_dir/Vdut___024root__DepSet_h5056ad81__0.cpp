@@ -1185,13 +1185,14 @@ VL_INLINE_OPT void Vdut___024root___combo__TOP__0(Vdut___024root* vlSelf) {
     }
     vlSelf->top__DOT__flushDE = ((IData)(vlSelf->top__DOT__flushBranch) 
                                  | (IData)(vlSelf->top__DOT__JumpE));
-    vlSelf->top__DOT__stall = ((IData)(vlSelf->top__DOT__MemReadE) 
-                               & (((IData)(vlSelf->top__DOT__RdE) 
-                                   == (0x1fU & (vlSelf->top__DOT__InstrD 
-                                                >> 0xfU))) 
-                                  | ((IData)(vlSelf->top__DOT__RdE) 
-                                     == (0x1fU & (vlSelf->top__DOT__InstrD 
-                                                  >> 0x14U)))));
+    vlSelf->top__DOT__stall = (((IData)(vlSelf->top__DOT__MemReadE) 
+                                & (((IData)(vlSelf->top__DOT__RdE) 
+                                    == (0x1fU & (vlSelf->top__DOT__InstrD 
+                                                 >> 0xfU))) 
+                                   | ((IData)(vlSelf->top__DOT__RdE) 
+                                      == (0x1fU & (vlSelf->top__DOT__InstrD 
+                                                   >> 0x14U))))) 
+                               | (IData)(vlSelf->top__DOT__miss_stall));
     vlSelf->top__DOT__flush = (((IData)(vlSelf->top__DOT__stall) 
                                 | (IData)(vlSelf->top__DOT__flushBranch)) 
                                | (IData)(vlSelf->top__DOT__JumpE));
