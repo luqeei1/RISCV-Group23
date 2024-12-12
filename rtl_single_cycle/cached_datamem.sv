@@ -50,7 +50,7 @@ always_comb begin
     endcase
 end
 
-cache cache (
+write_through_cache write_through_cache (
     .clk(clk),
     .rst(rst),
     .WE(WE),
