@@ -6,7 +6,6 @@ rtl_pipelining/obj_dir/
 *.hex
 *.d
 *.o
-*.sh
 *.dat
 a.out
 a.out.reloc
