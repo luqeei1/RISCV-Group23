@@ -13,7 +13,7 @@ module data_memory #(
     logic [7:0] ram_array [2**17 -1:0];
 
 initial begin
-    $readmemh("gaussian.mem", ram_array, 32'h00010000);
+    $readmemh("MemoryFiles/noisy.mem", ram_array, 32'h00010000);
     //$readmemh("data_memory.hex", ram_array, 32'h010000);
 end 
 
