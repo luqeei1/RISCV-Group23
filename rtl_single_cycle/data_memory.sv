@@ -23,7 +23,7 @@ module data_memory #(
 
 initial begin
     // Read the contents of "gaussian.mem" into the data_array up to the size of the array
-    $readmemh("gaussian.mem", ram_array, 32'h00010000);
+    $readmemh("data_memory.hex", ram_array, 32'h00010000);
 end 
 
 

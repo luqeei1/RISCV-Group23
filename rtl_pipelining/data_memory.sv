@@ -14,7 +14,7 @@ module data_memory #(
 
 initial begin
     //$readmemh("../rtl_pipelining/MemoryFiles/gaussian.mem", ram_array, 32'h00010000);
-    $readmemh("../rtl_pipelining/MemoryFiles/datamem.mem", ram_array, 17'h00000, 17'h1FFFF);
+    $readmemh("data_memory.hex", ram_array, 32'h010000);
 end 
 
 always_ff @(posedge clk) begin
