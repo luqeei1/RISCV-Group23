@@ -44,8 +44,8 @@ module cache #(
             miss_stall = 0;
             cache_out = 0;
 
-            hit0 = cache_mem[set].way[0].valid && (cache_mem[set].way[0].tag == addr[TAG_MSB:TAG_LSB]);
-            hit1 = cache_mem[set].way[1].valid && (cache_mem[set].way[1].tag == addr[TAG_MSB:TAG_LSB]);
+            hit0 = (cache_mem[set].way[0].valid && (cache_mem[set].way[0].tag == addr[TAG_MSB:TAG_LSB]));
+            hit1 = (cache_mem[set].way[1].valid && (cache_mem[set].way[1].tag == addr[TAG_MSB:TAG_LSB]));
 
             if (hit0 || hit1) begin
                 if(RE) begin

@@ -159,6 +159,7 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
         __Vscope_top.varInsert(__Vfinal,"flush", &(TOP.top__DOT__flush), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top.varInsert(__Vfinal,"flushBranch", &(TOP.top__DOT__flushBranch), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top.varInsert(__Vfinal,"flushDE", &(TOP.top__DOT__flushDE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
+        __Vscope_top.varInsert(__Vfinal,"miss_stall", &(TOP.top__DOT__miss_stall), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top.varInsert(__Vfinal,"modeAddrD", &(TOP.top__DOT__modeAddrD), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,2,0);
         __Vscope_top.varInsert(__Vfinal,"modeAddrE", &(TOP.top__DOT__modeAddrE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,2,0);
         __Vscope_top.varInsert(__Vfinal,"modeAddrM", &(TOP.top__DOT__modeAddrM), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,2,0);
@@ -289,6 +290,7 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
         __Vscope_top__hazard_unit.varInsert(__Vfinal,"flush", &(TOP.top__DOT__hazard_unit__DOT__flush), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__hazard_unit.varInsert(__Vfinal,"flushBranch", &(TOP.top__DOT__hazard_unit__DOT__flushBranch), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__hazard_unit.varInsert(__Vfinal,"flushDE", &(TOP.top__DOT__hazard_unit__DOT__flushDE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
+        __Vscope_top__hazard_unit.varInsert(__Vfinal,"miss_stall", &(TOP.top__DOT__hazard_unit__DOT__miss_stall), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__hazard_unit.varInsert(__Vfinal,"stall", &(TOP.top__DOT__hazard_unit__DOT__stall), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__instruction_memory.varInsert(__Vfinal,"PC", &(TOP.top__DOT__instruction_memory__DOT__PC), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top__instruction_memory.varInsert(__Vfinal,"WIDTH", const_cast<void*>(static_cast<const void*>(&(TOP.top__DOT__instruction_memory__DOT__WIDTH))), true, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
