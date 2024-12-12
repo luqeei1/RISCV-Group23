@@ -12,6 +12,7 @@
 constexpr IData/*31:0*/ Vtop___024root::top__DOT__WIDTH;
 constexpr IData/*31:0*/ Vtop___024root::top__DOT__hazard_unit__DOT__WIDTH;
 constexpr IData/*31:0*/ Vtop___024root::top__DOT__branch_prediction_unit__DOT__DATA_WIDTH;
+constexpr IData/*31:0*/ Vtop___024root::top__DOT__branch_prediction_unit__DOT__QUEUE_SIZE;
 constexpr IData/*31:0*/ Vtop___024root::top__DOT__PC_mux__DOT__WIDTH;
 constexpr IData/*31:0*/ Vtop___024root::top__DOT__BPU_mux__DOT__WIDTH;
 constexpr IData/*31:0*/ Vtop___024root::top__DOT__program_counter__DOT__WIDTH;

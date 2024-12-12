@@ -91,6 +91,9 @@ class Vtop___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__branch_prediction_unit__DOT__BranchE;
         CData/*0:0*/ top__DOT__branch_prediction_unit__DOT__flushBranch;
         CData/*0:0*/ top__DOT__branch_prediction_unit__DOT__PCBPUSrc;
+        CData/*3:0*/ top__DOT__branch_prediction_unit__DOT__queue_front;
+        CData/*3:0*/ top__DOT__branch_prediction_unit__DOT__queue_back;
+        CData/*4:0*/ top__DOT__branch_prediction_unit__DOT__queue_count;
         CData/*0:0*/ top__DOT__branch_prediction_unit__DOT__forwardJumpDecisionCorrect;
         CData/*0:0*/ top__DOT__branch_prediction_unit__DOT__backwardJumpDecisionCorrect;
         CData/*1:0*/ top__DOT__branch_prediction_unit__DOT__forwardJumpCounter;
@@ -142,11 +145,11 @@ class Vtop___024root final : public VerilatedModule {
         CData/*1:0*/ top__DOT__regfile_mux__DOT__sel;
         CData/*0:0*/ top__DOT__pipeline_FD__DOT__clk;
         CData/*0:0*/ top__DOT__pipeline_FD__DOT__flush;
+    };
+    struct {
         CData/*0:0*/ top__DOT__pipeline_FD__DOT__stall;
         CData/*0:0*/ top__DOT__pipeline_DE__DOT__clk;
         CData/*0:0*/ top__DOT__pipeline_DE__DOT__flushBranch;
-    };
-    struct {
         CData/*0:0*/ top__DOT__pipeline_DE__DOT__MemReadD;
         CData/*0:0*/ top__DOT__pipeline_DE__DOT__MemReadE;
         CData/*0:0*/ top__DOT__pipeline_DE__DOT__RegWriteD;
@@ -208,11 +211,11 @@ class Vtop___024root final : public VerilatedModule {
         VL_OUT(t3,31,0);
         VL_OUT(t4,31,0);
         VL_OUT(t5,31,0);
+    };
+    struct {
         VL_OUT(t6,31,0);
         VL_OUT(s0,31,0);
         VL_OUT(s1,31,0);
-    };
-    struct {
         VL_OUT(s2,31,0);
         VL_OUT(s3,31,0);
         VL_OUT(s4,31,0);
@@ -274,11 +277,11 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__PCPlus4F;
         IData/*31:0*/ top__DOT__PCPlus4D;
         IData/*31:0*/ top__DOT__PCPlus4M;
+    };
+    struct {
         IData/*31:0*/ top__DOT__PCD;
         IData/*31:0*/ top__DOT__RD1;
         IData/*31:0*/ top__DOT__RD2;
-    };
-    struct {
         IData/*31:0*/ top__DOT__RD;
         IData/*31:0*/ top__DOT__ResultW;
         IData/*31:0*/ top__DOT__SrcAE;
@@ -340,11 +343,11 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__forwardBE_mux__DOT__in1;
         IData/*31:0*/ top__DOT__forwardBE_mux__DOT__in2;
         IData/*31:0*/ top__DOT__forwardBE_mux__DOT__in3;
+    };
+    struct {
         IData/*31:0*/ top__DOT__forwardBE_mux__DOT__out;
         IData/*31:0*/ top__DOT__alu__DOT__SrcA;
         IData/*31:0*/ top__DOT__alu__DOT__SrcB;
-    };
-    struct {
         IData/*31:0*/ top__DOT__alu__DOT__ALUResult;
         IData/*31:0*/ top__DOT__data_memory__DOT__A;
         IData/*31:0*/ top__DOT__data_memory__DOT__WD;
@@ -389,11 +392,11 @@ class Vtop___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__InstrW;
         VlWide<3>/*65:0*/ top__DOT__branch_prediction_unit__DOT__newBranch;
         VlWide<3>/*65:0*/ top__DOT__branch_prediction_unit__DOT__oldBranch;
+        VlUnpacked<VlWide<3>/*65:0*/, 16> top__DOT__branch_prediction_unit__DOT__branch_queue;
         VlUnpacked<CData/*7:0*/, 65536> top__DOT__instruction_memory__DOT__rom_array;
         VlUnpacked<IData/*31:0*/, 32> top__DOT__regfile__DOT__registerfile_array;
         VlUnpacked<CData/*7:0*/, 131072> top__DOT__data_memory__DOT__ram_array;
     };
-    VlQueue<VlWide<3>/*65:0*/> top__DOT__branch_prediction_unit__DOT__branch_queue;
 
     // INTERNAL VARIABLES
     Vtop__Syms* const vlSymsp;
@@ -402,6 +405,7 @@ class Vtop___024root final : public VerilatedModule {
     static constexpr IData/*31:0*/ top__DOT__WIDTH = 0x00000020U;
     static constexpr IData/*31:0*/ top__DOT__hazard_unit__DOT__WIDTH = 5U;
     static constexpr IData/*31:0*/ top__DOT__branch_prediction_unit__DOT__DATA_WIDTH = 0x00000020U;
+    static constexpr IData/*31:0*/ top__DOT__branch_prediction_unit__DOT__QUEUE_SIZE = 0x00000010U;
     static constexpr IData/*31:0*/ top__DOT__PC_mux__DOT__WIDTH = 0x00000020U;
     static constexpr IData/*31:0*/ top__DOT__BPU_mux__DOT__WIDTH = 0x00000020U;
     static constexpr IData/*31:0*/ top__DOT__program_counter__DOT__WIDTH = 0x00000020U;
