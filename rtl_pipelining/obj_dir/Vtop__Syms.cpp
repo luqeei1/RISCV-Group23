@@ -239,10 +239,6 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
         __Vscope_top__cached_data_memory.varInsert(__Vfinal,"RE", &(TOP.top__DOT__cached_data_memory__DOT__RE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__cached_data_memory.varInsert(__Vfinal,"WE", &(TOP.top__DOT__cached_data_memory__DOT__WE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__cached_data_memory.varInsert(__Vfinal,"addr", &(TOP.top__DOT__cached_data_memory__DOT__addr), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
-        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"byte0", &(TOP.top__DOT__cached_data_memory__DOT__byte0), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,7,0);
-        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"byte1", &(TOP.top__DOT__cached_data_memory__DOT__byte1), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,7,0);
-        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"byte2", &(TOP.top__DOT__cached_data_memory__DOT__byte2), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,7,0);
-        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"byte3", &(TOP.top__DOT__cached_data_memory__DOT__byte3), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,7,0);
         __Vscope_top__cached_data_memory.varInsert(__Vfinal,"clk", &(TOP.top__DOT__cached_data_memory__DOT__clk), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__cached_data_memory.varInsert(__Vfinal,"data_out", &(TOP.top__DOT__cached_data_memory__DOT__data_out), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top__cached_data_memory.varInsert(__Vfinal,"miss_stall", &(TOP.top__DOT__cached_data_memory__DOT__miss_stall), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);

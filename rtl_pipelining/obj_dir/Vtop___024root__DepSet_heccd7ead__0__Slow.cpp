@@ -508,10 +508,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__cached_data_memory__DOT__miss_stall = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__cached_data_memory__DOT__data_out = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__cached_data_memory__DOT__out_cache = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__cached_data_memory__DOT__byte3 = VL_RAND_RESET_I(8);
-    vlSelf->top__DOT__cached_data_memory__DOT__byte2 = VL_RAND_RESET_I(8);
-    vlSelf->top__DOT__cached_data_memory__DOT__byte1 = VL_RAND_RESET_I(8);
-    vlSelf->top__DOT__cached_data_memory__DOT__byte0 = VL_RAND_RESET_I(8);
     vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__clk = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__rst = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__modeAddr = VL_RAND_RESET_I(3);

@@ -34,5 +34,26 @@
 
 # 5/12
 - Added support for single byte addressing in FSM
-- Integrated data memory and cache into top memory module
+- Integrated data memory into top memory module
 - Fixed error where trying $readmem file addresses beyond bounds of ram array - base address should have been 17 bits not 32 bits
+
+# 7/12
+- Created top file for pipelined cpu, integration of all modules
+- Integrated hazard handling and word forwarding logic
+- Integrated branch prediction unit with the program counter
+- Created a new signal MemRead for the hazard unit
+
+# 8/12
+- Simplified PCnext logic, use jump and branch signals rather than hardcode PcSrc
+- Debugging pipelined cpu and conflicting signals
+- For stalls, insert nop instruction 0x0007013 andi 0x 0x 0 in fetch/decode stage
+- Cleaned up data memory: moved RD select logic out of the data memory and corrected logic to properly handle byte addressing
+- Changed regfile to write on the negative edge - passes Test3
+
+# 9/12
+- Debug pipeline for lw dependencies
+- Fixed flushing logic - only have to flush DE flipflop when branch prediction is wrong
+- Added flush for whenever a JAL occurs
+- Added new logic to forward from the memory stage 
+
+# 10

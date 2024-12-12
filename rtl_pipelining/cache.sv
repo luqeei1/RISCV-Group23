@@ -67,14 +67,14 @@ module cache #(
             // replace way 1 (least recently used)
             if (cache_mem[set].lru) begin 
                 cache_mem[set].way[1].data[31:0] <= {ram_array[addr[16:0] + 3],
-                                            ram_array[addr[16:0] + 2],
-                                            ram_array[addr[16:0] + 1],
-                                            ram_array[addr[16:0] + 0]};
+                                                    ram_array[addr[16:0] + 2],
+                                                    ram_array[addr[16:0] + 1],
+                                                    ram_array[addr[16:0] + 0]};
 
                 cache_mem[set].way[1].data[63:32] <= {ram_array[addr[16:0] + 7],
-                                            ram_array[addr[16:0] + 6],
-                                            ram_array[addr[16:0] + 5],
-                                            ram_array[addr[16:0] + 4]};
+                                                    ram_array[addr[16:0] + 6],
+                                                    ram_array[addr[16:0] + 5],
+                                                    ram_array[addr[16:0] + 4]};
                 
                 cache_mem[set].way[1].tag <= addr[TAG_MSB:TAG_LSB];
                 cache_mem[set].way[1].valid <= 1;
@@ -84,14 +84,14 @@ module cache #(
             // replace way 0
             else begin
                 cache_mem[set].way[0].data[31:0] <= {ram_array[addr[16:0] + 3],
-                                            ram_array[addr[16:0] + 2],
-                                            ram_array[addr[16:0] + 1],
-                                            ram_array[addr[16:0] + 0]};
+                                                    ram_array[addr[16:0] + 2],
+                                                    ram_array[addr[16:0] + 1],
+                                                    ram_array[addr[16:0] + 0]};
 
                 cache_mem[set].way[0].data[63:32] <= {ram_array[addr[16:0] + 7],
-                                            ram_array[addr[16:0] + 6],
-                                            ram_array[addr[16:0] + 5],
-                                            ram_array[addr[16:0] + 4]};
+                                                    ram_array[addr[16:0] + 6],
+                                                    ram_array[addr[16:0] + 5],
+                                                    ram_array[addr[16:0] + 4]};
                 
                 cache_mem[set].way[0].tag <= addr[TAG_MSB:TAG_LSB];
                 cache_mem[set].way[0].valid <= 1;
