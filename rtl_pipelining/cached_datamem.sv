@@ -45,7 +45,7 @@ always_comb begin
     endcase
 end
 
-cache cache (
+cache2 cache (
     .clk(clk),
     .rst(rst),
     .WE(WE),

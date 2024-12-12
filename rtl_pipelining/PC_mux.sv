@@ -1,9 +1,7 @@
 module PC_mux #(
     parameter WIDTH = 32
 )(
-    input logic ZeroE,
     input logic JumpE,
-    input logic BranchE,
     input JALRE,
     input logic [WIDTH-1:0] PCPlus4F,   // input as [PCF + 4]
     input logic [WIDTH-1:0] ALUResult, //for JALR instruction

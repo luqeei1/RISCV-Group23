@@ -137,7 +137,7 @@ module top#(
         .miss_stall(miss_stall)
     );
 
-    BPU branch_prediction_unit (
+    static_branch branch_prediction_unit (
         .clk(clk),
         .RD(InstrF),
         .PCF(PCF),
@@ -155,9 +155,7 @@ module top#(
         .PCPlus4F(PCPlus4F),
         .PCTarget(PCE + ExtImmE),  // Branch/Jump target from Execute stage
         .JumpE(JumpE),
-        .BranchE(BranchE),
         .JALRE(JALRE),
-        .ZeroE(Zero),
         .ALUResult(ALUResultE),
         .PC(PC)
     );
@@ -289,7 +287,7 @@ module top#(
         .data_out(ReadDataM)
     );
 
-    // // Data Memory
+    // Data Memory
     // data_memory data_memory (
     //     .clk(clk),
     //     .WE(MemWriteM),

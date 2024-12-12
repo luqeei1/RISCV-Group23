@@ -34,7 +34,7 @@ module controlUnit #(
             7'b0110111: begin RegWriteD = 1'b1; ImmSrcD = 3'b011; ALUSrcD = 1'b1; MemWriteD = 1'b0; JumpD = 1'b0; BranchD = 1'b0; JALRD = 1'b0; ResultSrcD = 2'b00; Store = 1'b0; Load = 1'b0; ALUOp = 2'b00; MemReadD = 0; end //U-type (lui)
             7'b0010111: begin RegWriteD = 1'b1; ImmSrcD = 3'b011; ALUSrcD = 1'b1; MemWriteD = 1'b0; JumpD = 1'b0; BranchD = 1'b0; JALRD = 1'b0; ResultSrcD = 2'b00; Store = 1'b0; Load = 1'b0; ALUOp = 2'b00; MemReadD = 0; end //U-type (auipc)
             7'b1101111: begin RegWriteD = 1'b1; ImmSrcD = 3'b100; ALUSrcD = 1'b0; MemWriteD = 1'b0; JumpD = 1'b1; BranchD = 1'b0; JALRD = 1'b0; ResultSrcD = 2'b10; Store = 1'b0; Load = 1'b0; ALUOp = 2'b11; MemReadD = 0; end //J-type (jal)
-            7'b1100111: begin RegWriteD = 1'b1; ImmSrcD = 3'b100; ALUSrcD = 1'b0; MemWriteD = 1'b0; JumpD = 1'b1; BranchD = 1'b1; JALRD = 1'b1; ResultSrcD = 2'b10; Store = 1'b0; Load = 1'b0; ALUOp = 2'b00; MemReadD = 0; end //I-type (jalr)
+            7'b1100111: begin RegWriteD = 1'b1; ImmSrcD = 3'b100; ALUSrcD = 1'b0; MemWriteD = 1'b0; JumpD = 1'b1; BranchD = 1'b0; JALRD = 1'b1; ResultSrcD = 2'b10; Store = 1'b0; Load = 1'b0; ALUOp = 2'b00; MemReadD = 0; end //I-type (jalr)
             default: begin RegWriteD = 1'b0; ImmSrcD = 3'b111; ALUSrcD = 1'b1; MemWriteD = 1'b0; JumpD = 1'b0; BranchD = 1'b0; JALRD = 1'b0; ResultSrcD = 2'b11; Store = 1'b0; Load = 1'b0; ALUOp = 2'b11; MemReadD = 0; end //Invalid
         endcase
 
