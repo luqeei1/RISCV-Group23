@@ -7,29 +7,29 @@
 
 #include "Vtop___024root.h"
 
-extern const VlWide<11>/*351:0*/ Vtop__ConstPool__CONST_h814b10ff_0;
+extern const VlWide<11>/*351:0*/ Vtop__ConstPool__CONST_h8b56fb1a_0;
 
 VL_ATTR_COLD void Vtop___024root___initial__TOP__0(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___initial__TOP__0\n"); );
     // Init
-    VlWide<6>/*191:0*/ __Vtemp_h765968e3__0;
+    VlWide<6>/*191:0*/ __Vtemp_hc4683f0f__0;
     // Body
     VL_WRITEF("Loading rom.\n");
-    __Vtemp_h765968e3__0[0U] = 0x2e686578U;
-    __Vtemp_h765968e3__0[1U] = 0x732f4631U;
-    __Vtemp_h765968e3__0[2U] = 0x46696c65U;
-    __Vtemp_h765968e3__0[3U] = 0x74696f6eU;
-    __Vtemp_h765968e3__0[4U] = 0x74727563U;
-    __Vtemp_h765968e3__0[5U] = 0x496e73U;
-    VL_READMEM_N(true, 8, 65536, 0, VL_CVT_PACK_STR_NW(6, __Vtemp_h765968e3__0)
+    __Vtemp_hc4683f0f__0[0U] = 0x2e686578U;
+    __Vtemp_hc4683f0f__0[1U] = 0x2f706466U;
+    __Vtemp_hc4683f0f__0[2U] = 0x696c6573U;
+    __Vtemp_hc4683f0f__0[3U] = 0x696f6e46U;
+    __Vtemp_hc4683f0f__0[4U] = 0x72756374U;
+    __Vtemp_hc4683f0f__0[5U] = 0x496e7374U;
+    VL_READMEM_N(true, 8, 65536, 0, VL_CVT_PACK_STR_NW(6, __Vtemp_hc4683f0f__0)
                  ,  &(vlSelf->top__DOT__instruction_memory__DOT__rom_array)
                  , 0, ~0ULL);
     VL_WRITEF("ROM loaded successfully.\n");
-    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(11, Vtop__ConstPool__CONST_h814b10ff_0)
+    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(11, Vtop__ConstPool__CONST_h8b56fb1a_0)
                  ,  &(vlSelf->top__DOT__data_memory__DOT__ram_array)
-                 , 0U, 0x1ffffU);
+                 , 0x10000U, ~0ULL);
     vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter = 2U;
     vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpCounter = 2U;
 }
