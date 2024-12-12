@@ -53,6 +53,9 @@ class Vdut___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__stall;
         CData/*0:0*/ top__DOT__flushBranch;
         CData/*0:0*/ top__DOT__BPU_Src;
+        CData/*3:0*/ top__DOT__branch_prediction_unit__DOT__queue_front;
+        CData/*3:0*/ top__DOT__branch_prediction_unit__DOT__queue_back;
+        CData/*4:0*/ top__DOT__branch_prediction_unit__DOT__queue_count;
         CData/*0:0*/ top__DOT__branch_prediction_unit__DOT__forwardJumpDecisionCorrect;
         CData/*0:0*/ top__DOT__branch_prediction_unit__DOT__backwardJumpDecisionCorrect;
         CData/*1:0*/ top__DOT__branch_prediction_unit__DOT__forwardJumpCounter;
@@ -76,11 +79,11 @@ class Vdut___024root final : public VerilatedModule {
         VL_OUT(t4,31,0);
         VL_OUT(t5,31,0);
         VL_OUT(t6,31,0);
+    };
+    struct {
         VL_OUT(s0,31,0);
         VL_OUT(s1,31,0);
         VL_OUT(s2,31,0);
-    };
-    struct {
         VL_OUT(s3,31,0);
         VL_OUT(s4,31,0);
         VL_OUT(s5,31,0);
@@ -121,12 +124,12 @@ class Vdut___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT____Vcellinp__alu__SrcB;
         VlWide<3>/*65:0*/ top__DOT__branch_prediction_unit__DOT__newBranch;
         VlWide<3>/*65:0*/ top__DOT__branch_prediction_unit__DOT__oldBranch;
+        VlUnpacked<VlWide<3>/*65:0*/, 16> top__DOT__branch_prediction_unit__DOT__branch_queue;
         VlUnpacked<CData/*7:0*/, 65536> top__DOT__instruction_memory__DOT__rom_array;
         VlUnpacked<IData/*31:0*/, 32> top__DOT__regfile__DOT__registerfile_array;
         VlUnpacked<CData/*7:0*/, 131072> top__DOT__data_memory__DOT__ram_array;
         VlUnpacked<CData/*0:0*/, 4> __Vm_traceActivity;
     };
-    VlQueue<VlWide<3>/*65:0*/> top__DOT__branch_prediction_unit__DOT__branch_queue;
 
     // INTERNAL VARIABLES
     Vdut__Syms* const vlSymsp;

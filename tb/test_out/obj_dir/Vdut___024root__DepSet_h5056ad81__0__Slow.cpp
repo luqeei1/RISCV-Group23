@@ -27,6 +27,9 @@ VL_ATTR_COLD void Vdut___024root___initial__TOP__0(Vdut___024root* vlSelf) {
                  , 0x10000U, ~0ULL);
     vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter = 2U;
     vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpCounter = 2U;
+    vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front = 0U;
+    vlSelf->top__DOT__branch_prediction_unit__DOT__queue_back = 0U;
+    vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count = 0U;
 }
 
 extern const VlUnpacked<CData/*3:0*/, 128> Vdut__ConstPool__TABLE_h2f1e8d19_0;
@@ -761,84 +764,58 @@ VL_ATTR_COLD void Vdut___024root___settle__TOP__0(Vdut___024root* vlSelf) {
                                                  | (0x1eU 
                                                     & (vlSelf->top__DOT__InstrF 
                                                        >> 7U))))));
+        vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[0U] 
+            = ((1U & vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[0U]) 
+               | (((IData)((((QData)((IData)(vlSelf->top__DOT__PCF)) 
+                             << 0x20U) | (QData)((IData)(vlSelf->top__DOT__PC_predict)))) 
+                   << 2U) | (2U & (vlSelf->top__DOT__InstrF 
+                                   >> 0x1eU))));
         vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[1U] 
-            = ((3U & vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[1U]) 
-               | (vlSelf->top__DOT__PCF << 2U));
+            = ((1U & ((IData)((((QData)((IData)(vlSelf->top__DOT__PCF)) 
+                                << 0x20U) | (QData)((IData)(vlSelf->top__DOT__PC_predict)))) 
+                      >> 0x1eU)) | ((2U & ((IData)(
+                                                   (((QData)((IData)(vlSelf->top__DOT__PCF)) 
+                                                     << 0x20U) 
+                                                    | (QData)((IData)(vlSelf->top__DOT__PC_predict)))) 
+                                           >> 0x1eU)) 
+                                    | ((IData)(((((QData)((IData)(vlSelf->top__DOT__PCF)) 
+                                                  << 0x20U) 
+                                                 | (QData)((IData)(vlSelf->top__DOT__PC_predict))) 
+                                                >> 0x20U)) 
+                                       << 2U)));
         vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[2U] 
-            = (vlSelf->top__DOT__PCF >> 0x1eU);
-        vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[0U] 
-            = ((3U & vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[0U]) 
-               | ((vlSelf->top__DOT__PCF + (((- (IData)(
-                                                        (vlSelf->top__DOT__InstrF 
-                                                         >> 0x1fU))) 
-                                             << 0xcU) 
-                                            | ((0x800U 
-                                                & (vlSelf->top__DOT__InstrF 
-                                                   << 4U)) 
-                                               | ((0x7e0U 
-                                                   & (vlSelf->top__DOT__InstrF 
-                                                      >> 0x14U)) 
-                                                  | (0x1eU 
-                                                     & (vlSelf->top__DOT__InstrF 
-                                                        >> 7U)))))) 
-                  << 2U));
-        vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[1U] 
-            = ((0xfffffffcU & vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[1U]) 
-               | ((vlSelf->top__DOT__PCF + (((- (IData)(
-                                                        (vlSelf->top__DOT__InstrF 
-                                                         >> 0x1fU))) 
-                                             << 0xcU) 
-                                            | ((0x800U 
-                                                & (vlSelf->top__DOT__InstrF 
-                                                   << 4U)) 
-                                               | ((0x7e0U 
-                                                   & (vlSelf->top__DOT__InstrF 
-                                                      >> 0x14U)) 
-                                                  | (0x1eU 
-                                                     & (vlSelf->top__DOT__InstrF 
-                                                        >> 7U)))))) 
-                  >> 0x1eU));
-        vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[0U] 
-            = ((0xfffffffdU & vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[0U]) 
-               | (2U & (vlSelf->top__DOT__InstrF >> 0x1eU)));
+            = (3U & ((1U & ((IData)(((((QData)((IData)(vlSelf->top__DOT__PCF)) 
+                                       << 0x20U) | (QData)((IData)(vlSelf->top__DOT__PC_predict))) 
+                                     >> 0x20U)) >> 0x1eU)) 
+                     | (2U & ((IData)(((((QData)((IData)(vlSelf->top__DOT__PCF)) 
+                                         << 0x20U) 
+                                        | (QData)((IData)(vlSelf->top__DOT__PC_predict))) 
+                                       >> 0x20U)) >> 0x1eU))));
         if ((vlSelf->top__DOT__InstrF >> 0x1fU)) {
-            if ((2U <= (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpCounter))) {
-                vlSelf->top__DOT__BPU_Src = 1U;
-                vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[0U] 
-                    = (1U | vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[0U]);
-            } else {
-                vlSelf->top__DOT__BPU_Src = 0U;
-                vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[0U] 
-                    = (0xfffffffeU & vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[0U]);
-            }
-        } else if ((2U <= (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter))) {
-            vlSelf->top__DOT__BPU_Src = 1U;
+            vlSelf->top__DOT__BPU_Src = (2U <= (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpCounter));
             vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[0U] 
-                = (1U | vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[0U]);
+                = ((0xfffffffeU & vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[0U]) 
+                   | (IData)(vlSelf->top__DOT__BPU_Src));
         } else {
-            vlSelf->top__DOT__BPU_Src = 0U;
+            vlSelf->top__DOT__BPU_Src = (2U <= (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter));
             vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[0U] 
-                = (0xfffffffeU & vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[0U]);
+                = ((0xfffffffeU & vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch[0U]) 
+                   | (IData)(vlSelf->top__DOT__BPU_Src));
         }
-        vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue.push_back(
-                                                                              VL_CVT_W_A(vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch, vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
-                                                                                .atDefault()));
     } else {
         vlSelf->top__DOT__BPU_Src = 0U;
     }
-    if (vlSelf->top__DOT__BranchE) {
-        if (((1U & vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[0U]) 
-             == (IData)(vlSelf->top__DOT__Zero))) {
-            vlSelf->top__DOT__flushBranch = 0U;
-            if ((1U & (~ (vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[0U] 
-                          >> 1U)))) {
-                vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpDecisionCorrect = 1U;
-            }
-            if ((2U & vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[0U])) {
-                vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpDecisionCorrect = 1U;
-            }
-        }
-        vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue.pop_front();
+    vlSelf->top__DOT__flushBranch = 0U;
+    if (((IData)(vlSelf->top__DOT__BranchE) & (0U < (IData)(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count)))) {
+        vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[0U] 
+            = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front][0U];
+        vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[1U] 
+            = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front][1U];
+        vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[2U] 
+            = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front][2U];
         if (((1U & vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[0U]) 
              != (IData)(vlSelf->top__DOT__Zero))) {
             vlSelf->top__DOT__flushBranch = 1U;
@@ -855,8 +832,6 @@ VL_ATTR_COLD void Vdut___024root___settle__TOP__0(Vdut___024root* vlSelf) {
                                                    | (vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch[1U] 
                                                       >> 2U))));
         }
-    } else {
-        vlSelf->top__DOT__flushBranch = 0U;
     }
     vlSelf->top__DOT__flushDE = ((IData)(vlSelf->top__DOT__flushBranch) 
                                  | (IData)(vlSelf->top__DOT__JumpE));
@@ -1002,7 +977,12 @@ VL_ATTR_COLD void Vdut___024root___ctor_var_reset(Vdut___024root* vlSelf) {
     vlSelf->top__DOT__BPU_Src = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__PC_predict = VL_RAND_RESET_I(32);
     vlSelf->top__DOT____Vcellinp__alu__SrcB = VL_RAND_RESET_I(32);
-    VL_RAND_RESET_W(66, vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue.atDefault().data());
+    for (int __Vi0=0; __Vi0<16; ++__Vi0) {
+        VL_RAND_RESET_W(66, vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue[__Vi0]);
+    }
+    vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front = VL_RAND_RESET_I(4);
+    vlSelf->top__DOT__branch_prediction_unit__DOT__queue_back = VL_RAND_RESET_I(4);
+    vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count = VL_RAND_RESET_I(5);
     VL_RAND_RESET_W(66, vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch);
     VL_RAND_RESET_W(66, vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch);
     vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpDecisionCorrect = VL_RAND_RESET_I(1);

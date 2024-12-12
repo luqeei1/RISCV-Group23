@@ -22,6 +22,22 @@ void Vdut___024root__trace_chg_sub_0(Vdut___024root* vlSelf, VerilatedVcd::Buffe
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vdut___024root__trace_chg_sub_0\n"); );
     // Init
     uint32_t* const oldp VL_ATTR_UNUSED = bufp->oldp(vlSymsp->__Vm_baseCode + 1);
+    VlWide<3>/*95:0*/ __Vtemp_ha8dc2164__0;
+    VlWide<3>/*95:0*/ __Vtemp_ha8dc1e26__0;
+    VlWide<3>/*95:0*/ __Vtemp_ha8dc1deb__0;
+    VlWide<3>/*95:0*/ __Vtemp_ha8dc20a8__0;
+    VlWide<3>/*95:0*/ __Vtemp_ha8dc2065__0;
+    VlWide<3>/*95:0*/ __Vtemp_ha8dc2135__0;
+    VlWide<3>/*95:0*/ __Vtemp_ha8dc20f8__0;
+    VlWide<3>/*95:0*/ __Vtemp_ha8dc1b7b__0;
+    VlWide<3>/*95:0*/ __Vtemp_ha8dc1b76__0;
+    VlWide<3>/*95:0*/ __Vtemp_ha8dc2034__0;
+    VlWide<3>/*95:0*/ __Vtemp_ha8dc1ff1__0;
+    VlWide<3>/*95:0*/ __Vtemp_ha8dc52b2__0;
+    VlWide<3>/*95:0*/ __Vtemp_ha8dc5277__0;
+    VlWide<3>/*95:0*/ __Vtemp_ha8dc1b33__0;
+    VlWide<3>/*95:0*/ __Vtemp_ha8dc1aee__0;
+    VlWide<3>/*95:0*/ __Vtemp_ha8dc1dad__0;
     // Body
     if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[1U])) {
         bufp->chgIData(oldp+0,(vlSelf->top__DOT__InstrD),32);
@@ -146,111 +162,224 @@ void Vdut___024root__trace_chg_sub_0(Vdut___024root* vlSelf, VerilatedVcd::Buffe
         bufp->chgCData(oldp+59,(vlSelf->top__DOT__ForwardBE),2);
         bufp->chgIData(oldp+60,((vlSelf->top__DOT__PCE 
                                  + vlSelf->top__DOT__ExtImmE)),32);
-        bufp->chgCData(oldp+61,((0x7fU & vlSelf->top__DOT__InstrD)),7);
-        bufp->chgCData(oldp+62,((7U & (vlSelf->top__DOT__InstrD 
-                                       >> 0xcU))),3);
-        bufp->chgBit(oldp+63,((1U & (vlSelf->top__DOT__InstrD 
-                                     >> 0x1eU))));
-        bufp->chgCData(oldp+64,(vlSelf->top__DOT__control_unit__DOT__ALUOp),2);
-        bufp->chgBit(oldp+65,(vlSelf->top__DOT__control_unit__DOT__Store));
-        bufp->chgBit(oldp+66,(vlSelf->top__DOT__control_unit__DOT__Load));
-        bufp->chgBit(oldp+67,((1U & (vlSelf->top__DOT__InstrD 
-                                     >> 5U))));
+        __Vtemp_ha8dc2164__0[0U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0U][0U];
+        __Vtemp_ha8dc2164__0[1U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0U][1U];
+        __Vtemp_ha8dc2164__0[2U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0U][2U];
+        bufp->chgWData(oldp+61,(__Vtemp_ha8dc2164__0),66);
+        __Vtemp_ha8dc1e26__0[0U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [1U][0U];
+        __Vtemp_ha8dc1e26__0[1U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [1U][1U];
+        __Vtemp_ha8dc1e26__0[2U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [1U][2U];
+        bufp->chgWData(oldp+64,(__Vtemp_ha8dc1e26__0),66);
+        __Vtemp_ha8dc1deb__0[0U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [2U][0U];
+        __Vtemp_ha8dc1deb__0[1U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [2U][1U];
+        __Vtemp_ha8dc1deb__0[2U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [2U][2U];
+        bufp->chgWData(oldp+67,(__Vtemp_ha8dc1deb__0),66);
+        __Vtemp_ha8dc20a8__0[0U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [3U][0U];
+        __Vtemp_ha8dc20a8__0[1U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [3U][1U];
+        __Vtemp_ha8dc20a8__0[2U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [3U][2U];
+        bufp->chgWData(oldp+70,(__Vtemp_ha8dc20a8__0),66);
+        __Vtemp_ha8dc2065__0[0U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [4U][0U];
+        __Vtemp_ha8dc2065__0[1U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [4U][1U];
+        __Vtemp_ha8dc2065__0[2U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [4U][2U];
+        bufp->chgWData(oldp+73,(__Vtemp_ha8dc2065__0),66);
+        __Vtemp_ha8dc2135__0[0U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [5U][0U];
+        __Vtemp_ha8dc2135__0[1U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [5U][1U];
+        __Vtemp_ha8dc2135__0[2U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [5U][2U];
+        bufp->chgWData(oldp+76,(__Vtemp_ha8dc2135__0),66);
+        __Vtemp_ha8dc20f8__0[0U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [6U][0U];
+        __Vtemp_ha8dc20f8__0[1U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [6U][1U];
+        __Vtemp_ha8dc20f8__0[2U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [6U][2U];
+        bufp->chgWData(oldp+79,(__Vtemp_ha8dc20f8__0),66);
+        __Vtemp_ha8dc1b7b__0[0U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [7U][0U];
+        __Vtemp_ha8dc1b7b__0[1U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [7U][1U];
+        __Vtemp_ha8dc1b7b__0[2U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [7U][2U];
+        bufp->chgWData(oldp+82,(__Vtemp_ha8dc1b7b__0),66);
+        __Vtemp_ha8dc1b76__0[0U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [8U][0U];
+        __Vtemp_ha8dc1b76__0[1U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [8U][1U];
+        __Vtemp_ha8dc1b76__0[2U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [8U][2U];
+        bufp->chgWData(oldp+85,(__Vtemp_ha8dc1b76__0),66);
+        __Vtemp_ha8dc2034__0[0U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [9U][0U];
+        __Vtemp_ha8dc2034__0[1U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [9U][1U];
+        __Vtemp_ha8dc2034__0[2U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [9U][2U];
+        bufp->chgWData(oldp+88,(__Vtemp_ha8dc2034__0),66);
+        __Vtemp_ha8dc1ff1__0[0U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0xaU][0U];
+        __Vtemp_ha8dc1ff1__0[1U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0xaU][1U];
+        __Vtemp_ha8dc1ff1__0[2U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0xaU][2U];
+        bufp->chgWData(oldp+91,(__Vtemp_ha8dc1ff1__0),66);
+        __Vtemp_ha8dc52b2__0[0U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0xbU][0U];
+        __Vtemp_ha8dc52b2__0[1U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0xbU][1U];
+        __Vtemp_ha8dc52b2__0[2U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0xbU][2U];
+        bufp->chgWData(oldp+94,(__Vtemp_ha8dc52b2__0),66);
+        __Vtemp_ha8dc5277__0[0U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0xcU][0U];
+        __Vtemp_ha8dc5277__0[1U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0xcU][1U];
+        __Vtemp_ha8dc5277__0[2U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0xcU][2U];
+        bufp->chgWData(oldp+97,(__Vtemp_ha8dc5277__0),66);
+        __Vtemp_ha8dc1b33__0[0U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0xdU][0U];
+        __Vtemp_ha8dc1b33__0[1U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0xdU][1U];
+        __Vtemp_ha8dc1b33__0[2U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0xdU][2U];
+        bufp->chgWData(oldp+100,(__Vtemp_ha8dc1b33__0),66);
+        __Vtemp_ha8dc1aee__0[0U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0xeU][0U];
+        __Vtemp_ha8dc1aee__0[1U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0xeU][1U];
+        __Vtemp_ha8dc1aee__0[2U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0xeU][2U];
+        bufp->chgWData(oldp+103,(__Vtemp_ha8dc1aee__0),66);
+        __Vtemp_ha8dc1dad__0[0U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0xfU][0U];
+        __Vtemp_ha8dc1dad__0[1U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0xfU][1U];
+        __Vtemp_ha8dc1dad__0[2U] = vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue
+            [0xfU][2U];
+        bufp->chgWData(oldp+106,(__Vtemp_ha8dc1dad__0),66);
+        bufp->chgCData(oldp+109,(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_front),4);
+        bufp->chgCData(oldp+110,(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_back),4);
+        bufp->chgCData(oldp+111,(vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count),5);
+        bufp->chgCData(oldp+112,(vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter),2);
+        bufp->chgCData(oldp+113,(vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpCounter),2);
+        bufp->chgCData(oldp+114,((0x7fU & vlSelf->top__DOT__InstrD)),7);
+        bufp->chgCData(oldp+115,((7U & (vlSelf->top__DOT__InstrD 
+                                        >> 0xcU))),3);
+        bufp->chgBit(oldp+116,((1U & (vlSelf->top__DOT__InstrD 
+                                      >> 0x1eU))));
+        bufp->chgCData(oldp+117,(vlSelf->top__DOT__control_unit__DOT__ALUOp),2);
+        bufp->chgBit(oldp+118,(vlSelf->top__DOT__control_unit__DOT__Store));
+        bufp->chgBit(oldp+119,(vlSelf->top__DOT__control_unit__DOT__Load));
+        bufp->chgBit(oldp+120,((1U & (vlSelf->top__DOT__InstrD 
+                                      >> 5U))));
     }
     if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[2U])) {
-        bufp->chgWData(oldp+68,(vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch),66);
-        bufp->chgCData(oldp+71,(vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter),2);
-        bufp->chgCData(oldp+72,(vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpCounter),2);
-        bufp->chgIData(oldp+73,(vlSelf->top__DOT__regfile__DOT__registerfile_array[0]),32);
-        bufp->chgIData(oldp+74,(vlSelf->top__DOT__regfile__DOT__registerfile_array[1]),32);
-        bufp->chgIData(oldp+75,(vlSelf->top__DOT__regfile__DOT__registerfile_array[2]),32);
-        bufp->chgIData(oldp+76,(vlSelf->top__DOT__regfile__DOT__registerfile_array[3]),32);
-        bufp->chgIData(oldp+77,(vlSelf->top__DOT__regfile__DOT__registerfile_array[4]),32);
-        bufp->chgIData(oldp+78,(vlSelf->top__DOT__regfile__DOT__registerfile_array[5]),32);
-        bufp->chgIData(oldp+79,(vlSelf->top__DOT__regfile__DOT__registerfile_array[6]),32);
-        bufp->chgIData(oldp+80,(vlSelf->top__DOT__regfile__DOT__registerfile_array[7]),32);
-        bufp->chgIData(oldp+81,(vlSelf->top__DOT__regfile__DOT__registerfile_array[8]),32);
-        bufp->chgIData(oldp+82,(vlSelf->top__DOT__regfile__DOT__registerfile_array[9]),32);
-        bufp->chgIData(oldp+83,(vlSelf->top__DOT__regfile__DOT__registerfile_array[10]),32);
-        bufp->chgIData(oldp+84,(vlSelf->top__DOT__regfile__DOT__registerfile_array[11]),32);
-        bufp->chgIData(oldp+85,(vlSelf->top__DOT__regfile__DOT__registerfile_array[12]),32);
-        bufp->chgIData(oldp+86,(vlSelf->top__DOT__regfile__DOT__registerfile_array[13]),32);
-        bufp->chgIData(oldp+87,(vlSelf->top__DOT__regfile__DOT__registerfile_array[14]),32);
-        bufp->chgIData(oldp+88,(vlSelf->top__DOT__regfile__DOT__registerfile_array[15]),32);
-        bufp->chgIData(oldp+89,(vlSelf->top__DOT__regfile__DOT__registerfile_array[16]),32);
-        bufp->chgIData(oldp+90,(vlSelf->top__DOT__regfile__DOT__registerfile_array[17]),32);
-        bufp->chgIData(oldp+91,(vlSelf->top__DOT__regfile__DOT__registerfile_array[18]),32);
-        bufp->chgIData(oldp+92,(vlSelf->top__DOT__regfile__DOT__registerfile_array[19]),32);
-        bufp->chgIData(oldp+93,(vlSelf->top__DOT__regfile__DOT__registerfile_array[20]),32);
-        bufp->chgIData(oldp+94,(vlSelf->top__DOT__regfile__DOT__registerfile_array[21]),32);
-        bufp->chgIData(oldp+95,(vlSelf->top__DOT__regfile__DOT__registerfile_array[22]),32);
-        bufp->chgIData(oldp+96,(vlSelf->top__DOT__regfile__DOT__registerfile_array[23]),32);
-        bufp->chgIData(oldp+97,(vlSelf->top__DOT__regfile__DOT__registerfile_array[24]),32);
-        bufp->chgIData(oldp+98,(vlSelf->top__DOT__regfile__DOT__registerfile_array[25]),32);
-        bufp->chgIData(oldp+99,(vlSelf->top__DOT__regfile__DOT__registerfile_array[26]),32);
-        bufp->chgIData(oldp+100,(vlSelf->top__DOT__regfile__DOT__registerfile_array[27]),32);
-        bufp->chgIData(oldp+101,(vlSelf->top__DOT__regfile__DOT__registerfile_array[28]),32);
-        bufp->chgIData(oldp+102,(vlSelf->top__DOT__regfile__DOT__registerfile_array[29]),32);
-        bufp->chgIData(oldp+103,(vlSelf->top__DOT__regfile__DOT__registerfile_array[30]),32);
-        bufp->chgIData(oldp+104,(vlSelf->top__DOT__regfile__DOT__registerfile_array[31]),32);
+        bufp->chgIData(oldp+121,(vlSelf->top__DOT__regfile__DOT__registerfile_array[0]),32);
+        bufp->chgIData(oldp+122,(vlSelf->top__DOT__regfile__DOT__registerfile_array[1]),32);
+        bufp->chgIData(oldp+123,(vlSelf->top__DOT__regfile__DOT__registerfile_array[2]),32);
+        bufp->chgIData(oldp+124,(vlSelf->top__DOT__regfile__DOT__registerfile_array[3]),32);
+        bufp->chgIData(oldp+125,(vlSelf->top__DOT__regfile__DOT__registerfile_array[4]),32);
+        bufp->chgIData(oldp+126,(vlSelf->top__DOT__regfile__DOT__registerfile_array[5]),32);
+        bufp->chgIData(oldp+127,(vlSelf->top__DOT__regfile__DOT__registerfile_array[6]),32);
+        bufp->chgIData(oldp+128,(vlSelf->top__DOT__regfile__DOT__registerfile_array[7]),32);
+        bufp->chgIData(oldp+129,(vlSelf->top__DOT__regfile__DOT__registerfile_array[8]),32);
+        bufp->chgIData(oldp+130,(vlSelf->top__DOT__regfile__DOT__registerfile_array[9]),32);
+        bufp->chgIData(oldp+131,(vlSelf->top__DOT__regfile__DOT__registerfile_array[10]),32);
+        bufp->chgIData(oldp+132,(vlSelf->top__DOT__regfile__DOT__registerfile_array[11]),32);
+        bufp->chgIData(oldp+133,(vlSelf->top__DOT__regfile__DOT__registerfile_array[12]),32);
+        bufp->chgIData(oldp+134,(vlSelf->top__DOT__regfile__DOT__registerfile_array[13]),32);
+        bufp->chgIData(oldp+135,(vlSelf->top__DOT__regfile__DOT__registerfile_array[14]),32);
+        bufp->chgIData(oldp+136,(vlSelf->top__DOT__regfile__DOT__registerfile_array[15]),32);
+        bufp->chgIData(oldp+137,(vlSelf->top__DOT__regfile__DOT__registerfile_array[16]),32);
+        bufp->chgIData(oldp+138,(vlSelf->top__DOT__regfile__DOT__registerfile_array[17]),32);
+        bufp->chgIData(oldp+139,(vlSelf->top__DOT__regfile__DOT__registerfile_array[18]),32);
+        bufp->chgIData(oldp+140,(vlSelf->top__DOT__regfile__DOT__registerfile_array[19]),32);
+        bufp->chgIData(oldp+141,(vlSelf->top__DOT__regfile__DOT__registerfile_array[20]),32);
+        bufp->chgIData(oldp+142,(vlSelf->top__DOT__regfile__DOT__registerfile_array[21]),32);
+        bufp->chgIData(oldp+143,(vlSelf->top__DOT__regfile__DOT__registerfile_array[22]),32);
+        bufp->chgIData(oldp+144,(vlSelf->top__DOT__regfile__DOT__registerfile_array[23]),32);
+        bufp->chgIData(oldp+145,(vlSelf->top__DOT__regfile__DOT__registerfile_array[24]),32);
+        bufp->chgIData(oldp+146,(vlSelf->top__DOT__regfile__DOT__registerfile_array[25]),32);
+        bufp->chgIData(oldp+147,(vlSelf->top__DOT__regfile__DOT__registerfile_array[26]),32);
+        bufp->chgIData(oldp+148,(vlSelf->top__DOT__regfile__DOT__registerfile_array[27]),32);
+        bufp->chgIData(oldp+149,(vlSelf->top__DOT__regfile__DOT__registerfile_array[28]),32);
+        bufp->chgIData(oldp+150,(vlSelf->top__DOT__regfile__DOT__registerfile_array[29]),32);
+        bufp->chgIData(oldp+151,(vlSelf->top__DOT__regfile__DOT__registerfile_array[30]),32);
+        bufp->chgIData(oldp+152,(vlSelf->top__DOT__regfile__DOT__registerfile_array[31]),32);
     }
     if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[3U])) {
-        bufp->chgIData(oldp+105,(vlSelf->top__DOT__ReadDataM),32);
-        bufp->chgBit(oldp+106,(vlSelf->top__DOT__Zero));
-        bufp->chgIData(oldp+107,(vlSelf->top__DOT__WriteDataE),32);
-        bufp->chgIData(oldp+108,(vlSelf->top__DOT__ALUResultE),32);
-        bufp->chgIData(oldp+109,(vlSelf->top__DOT__PC),32);
-        bufp->chgIData(oldp+110,(vlSelf->top__DOT__SrcAE),32);
-        bufp->chgBit(oldp+111,(vlSelf->top__DOT__flush));
-        bufp->chgBit(oldp+112,(vlSelf->top__DOT__flushDE));
-        bufp->chgBit(oldp+113,(vlSelf->top__DOT__stall));
-        bufp->chgBit(oldp+114,(vlSelf->top__DOT__flushBranch));
-        bufp->chgBit(oldp+115,(vlSelf->top__DOT__BPU_Src));
-        bufp->chgIData(oldp+116,(vlSelf->top__DOT__PC_predict),32);
-        bufp->chgIData(oldp+117,(((IData)(vlSelf->top__DOT__BPU_Src)
+        bufp->chgIData(oldp+153,(vlSelf->top__DOT__ReadDataM),32);
+        bufp->chgBit(oldp+154,(vlSelf->top__DOT__Zero));
+        bufp->chgIData(oldp+155,(vlSelf->top__DOT__WriteDataE),32);
+        bufp->chgIData(oldp+156,(vlSelf->top__DOT__ALUResultE),32);
+        bufp->chgIData(oldp+157,(vlSelf->top__DOT__PC),32);
+        bufp->chgIData(oldp+158,(vlSelf->top__DOT__SrcAE),32);
+        bufp->chgBit(oldp+159,(vlSelf->top__DOT__flush));
+        bufp->chgBit(oldp+160,(vlSelf->top__DOT__flushDE));
+        bufp->chgBit(oldp+161,(vlSelf->top__DOT__stall));
+        bufp->chgBit(oldp+162,(vlSelf->top__DOT__flushBranch));
+        bufp->chgBit(oldp+163,(vlSelf->top__DOT__BPU_Src));
+        bufp->chgIData(oldp+164,(vlSelf->top__DOT__PC_predict),32);
+        bufp->chgIData(oldp+165,(((IData)(vlSelf->top__DOT__BPU_Src)
                                    ? vlSelf->top__DOT__PC_predict
                                    : vlSelf->top__DOT__PC)),32);
-        bufp->chgIData(oldp+118,(vlSelf->top__DOT____Vcellinp__alu__SrcB),32);
-        bufp->chgWData(oldp+119,(vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch),66);
-        bufp->chgBit(oldp+122,(vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpDecisionCorrect));
-        bufp->chgBit(oldp+123,(vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpDecisionCorrect));
+        bufp->chgIData(oldp+166,(vlSelf->top__DOT____Vcellinp__alu__SrcB),32);
+        bufp->chgWData(oldp+167,(vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch),66);
     }
-    bufp->chgBit(oldp+124,(vlSelf->clk));
-    bufp->chgBit(oldp+125,(vlSelf->rst));
-    bufp->chgBit(oldp+126,(vlSelf->trigger));
-    bufp->chgIData(oldp+127,(vlSelf->a0),32);
-    bufp->chgIData(oldp+128,(vlSelf->a1),32);
-    bufp->chgIData(oldp+129,(vlSelf->a2),32);
-    bufp->chgIData(oldp+130,(vlSelf->a3),32);
-    bufp->chgIData(oldp+131,(vlSelf->a4),32);
-    bufp->chgIData(oldp+132,(vlSelf->a5),32);
-    bufp->chgIData(oldp+133,(vlSelf->a6),32);
-    bufp->chgIData(oldp+134,(vlSelf->a7),32);
-    bufp->chgIData(oldp+135,(vlSelf->t0),32);
-    bufp->chgIData(oldp+136,(vlSelf->t1),32);
-    bufp->chgIData(oldp+137,(vlSelf->t2),32);
-    bufp->chgIData(oldp+138,(vlSelf->t3),32);
-    bufp->chgIData(oldp+139,(vlSelf->t4),32);
-    bufp->chgIData(oldp+140,(vlSelf->t5),32);
-    bufp->chgIData(oldp+141,(vlSelf->t6),32);
-    bufp->chgIData(oldp+142,(vlSelf->s0),32);
-    bufp->chgIData(oldp+143,(vlSelf->s1),32);
-    bufp->chgIData(oldp+144,(vlSelf->s2),32);
-    bufp->chgIData(oldp+145,(vlSelf->s3),32);
-    bufp->chgIData(oldp+146,(vlSelf->s4),32);
-    bufp->chgIData(oldp+147,(vlSelf->s5),32);
-    bufp->chgIData(oldp+148,(vlSelf->s6),32);
-    bufp->chgIData(oldp+149,(vlSelf->s7),32);
-    bufp->chgIData(oldp+150,(vlSelf->s8),32);
-    bufp->chgIData(oldp+151,(vlSelf->s9),32);
-    bufp->chgIData(oldp+152,(vlSelf->s10),32);
-    bufp->chgIData(oldp+153,(vlSelf->s11),32);
-    bufp->chgIData(oldp+154,(vlSelf->top__DOT__regfile__DOT__registerfile_array
+    bufp->chgBit(oldp+170,(vlSelf->clk));
+    bufp->chgBit(oldp+171,(vlSelf->rst));
+    bufp->chgBit(oldp+172,(vlSelf->trigger));
+    bufp->chgIData(oldp+173,(vlSelf->a0),32);
+    bufp->chgIData(oldp+174,(vlSelf->a1),32);
+    bufp->chgIData(oldp+175,(vlSelf->a2),32);
+    bufp->chgIData(oldp+176,(vlSelf->a3),32);
+    bufp->chgIData(oldp+177,(vlSelf->a4),32);
+    bufp->chgIData(oldp+178,(vlSelf->a5),32);
+    bufp->chgIData(oldp+179,(vlSelf->a6),32);
+    bufp->chgIData(oldp+180,(vlSelf->a7),32);
+    bufp->chgIData(oldp+181,(vlSelf->t0),32);
+    bufp->chgIData(oldp+182,(vlSelf->t1),32);
+    bufp->chgIData(oldp+183,(vlSelf->t2),32);
+    bufp->chgIData(oldp+184,(vlSelf->t3),32);
+    bufp->chgIData(oldp+185,(vlSelf->t4),32);
+    bufp->chgIData(oldp+186,(vlSelf->t5),32);
+    bufp->chgIData(oldp+187,(vlSelf->t6),32);
+    bufp->chgIData(oldp+188,(vlSelf->s0),32);
+    bufp->chgIData(oldp+189,(vlSelf->s1),32);
+    bufp->chgIData(oldp+190,(vlSelf->s2),32);
+    bufp->chgIData(oldp+191,(vlSelf->s3),32);
+    bufp->chgIData(oldp+192,(vlSelf->s4),32);
+    bufp->chgIData(oldp+193,(vlSelf->s5),32);
+    bufp->chgIData(oldp+194,(vlSelf->s6),32);
+    bufp->chgIData(oldp+195,(vlSelf->s7),32);
+    bufp->chgIData(oldp+196,(vlSelf->s8),32);
+    bufp->chgIData(oldp+197,(vlSelf->s9),32);
+    bufp->chgIData(oldp+198,(vlSelf->s10),32);
+    bufp->chgIData(oldp+199,(vlSelf->s11),32);
+    bufp->chgIData(oldp+200,(vlSelf->top__DOT__regfile__DOT__registerfile_array
                              [(0x1fU & (vlSelf->top__DOT__InstrD 
                                         >> 0xfU))]),32);
-    bufp->chgIData(oldp+155,(vlSelf->top__DOT__regfile__DOT__registerfile_array
+    bufp->chgIData(oldp+201,(vlSelf->top__DOT__regfile__DOT__registerfile_array
                              [(0x1fU & (vlSelf->top__DOT__InstrD 
                                         >> 0x14U))]),32);
+    bufp->chgWData(oldp+202,(vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch),66);
 }
 
 void Vdut___024root__trace_cleanup(void* voidSelf, VerilatedVcd* /*unused*/) {
