@@ -14,6 +14,7 @@ module cache #(
     input logic [WIDTH-1:0] write_data,
     input logic WE,
     input logic RE, //read enable
+    input logic trigger,
     output logic miss_stall,
     output logic [WIDTH-1:0] cache_out
 
@@ -32,33 +33,38 @@ module cache #(
     assign set = addr[10:3];
 
     initial begin
-        $readmemh("../rtl_single_cycle/data_memory.hex", ram_array, 17'h00000, 17'h1FFFF);
+        //$readmemh("../rtl_pipelining/MemoryFiles/gaussian.mem", ram_array, 32'h00010000);
+        $readmemh("../rtl_pipelining/MemoryFiles/datamem.mem", ram_array, 17'h00000, 17'h1FFFF);
     end    
 
     always_comb begin
-        miss_stall = 0;
-        cache_out = 0;
+        //if(addr == 32'h1) begin
+            //cache_out = {31'b0, trigger};
+        //end else begin
+            miss_stall = 0;
+            cache_out = 0;
 
-        hit0 = cache_mem[set].way[0].valid && (cache_mem[set].way[0].tag == addr[TAG_MSB:TAG_LSB]);
-        hit1 = cache_mem[set].way[1].valid && (cache_mem[set].way[1].tag == addr[TAG_MSB:TAG_LSB]);
+            hit0 = cache_mem[set].way[0].valid && (cache_mem[set].way[0].tag == addr[TAG_MSB:TAG_LSB]);
+            hit1 = cache_mem[set].way[1].valid && (cache_mem[set].way[1].tag == addr[TAG_MSB:TAG_LSB]);
 
-        if (hit0 || hit1) begin
-            if(RE) begin
-                if(hit0) begin
-                    cache_out = (addr[2]) ? {cache_mem[set].way[0].data[63:32]} :{cache_mem[set].way[0].data[31:0]};
-                    cache_mem[set].lru = 0;
-                end else begin
-                    cache_out = (addr[2]) ? {cache_mem[set].way[1].data[63:32]} :{cache_mem[set].way[1].data[31:0]};
-                    cache_mem[set].lru = 1;
+            if (hit0 || hit1) begin
+                if(RE) begin
+                    if(hit0) begin
+                        cache_out = (addr[2]) ? {cache_mem[set].way[0].data[63:32]} :{cache_mem[set].way[0].data[31:0]};
+                        cache_mem[set].lru = 0;
+                    end else begin
+                        cache_out = (addr[2]) ? {cache_mem[set].way[1].data[63:32]} :{cache_mem[set].way[1].data[31:0]};
+                        cache_mem[set].lru = 1;
+                    end
                 end
+
+                if(WE) miss_stall = 0; // write-through no need to stall
+
+            end else if (WE || RE) begin
+                // CACHE MISS
+                miss_stall = 1;
             end
-
-            if(WE) miss_stall = 0; // write-through no need to stall
-
-        end else if (WE || RE) begin
-            // CACHE MISS
-            miss_stall = 1;
-        end
+        //end
     end
 
     always_ff @(posedge clk) begin

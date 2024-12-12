@@ -30,7 +30,7 @@ VL_ATTR_COLD void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
         = vlSelfRef.top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem;
 }
 
-extern const VlWide<9>/*287:0*/ Vtop__ConstPool__CONST_h27b19929_0;
+extern const VlWide<11>/*351:0*/ Vtop__ConstPool__CONST_h814b10ff_0;
 
 VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
     (void)vlSelf;  // Prevent unused variable warning
@@ -38,23 +38,22 @@ VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_initial__TOP\n"); );
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Init
-    VlWide<7>/*223:0*/ __Vtemp_1;
+    VlWide<6>/*191:0*/ __Vtemp_1;
     // Body
     vlSelfRef.top__DOT__branch_prediction_unit__DOT__forwardJumpCounter = 2U;
     vlSelfRef.top__DOT__branch_prediction_unit__DOT__backwardJumpCounter = 2U;
     VL_WRITEF_NX("Loading rom.\n",0);
     __Vtemp_1[0U] = 0x2e686578U;
-    __Vtemp_1[1U] = 0x65737433U;
-    __Vtemp_1[2U] = 0x65732f54U;
-    __Vtemp_1[3U] = 0x6e46696cU;
-    __Vtemp_1[4U] = 0x6374696fU;
-    __Vtemp_1[5U] = 0x73747275U;
-    __Vtemp_1[6U] = 0x496eU;
-    VL_READMEM_N(true, 8, 65536, 0, VL_CVT_PACK_STR_NW(7, __Vtemp_1)
+    __Vtemp_1[1U] = 0x2f706466U;
+    __Vtemp_1[2U] = 0x696c6573U;
+    __Vtemp_1[3U] = 0x696f6e46U;
+    __Vtemp_1[4U] = 0x72756374U;
+    __Vtemp_1[5U] = 0x496e7374U;
+    VL_READMEM_N(true, 8, 4096, 0, VL_CVT_PACK_STR_NW(6, __Vtemp_1)
                  ,  &(vlSelfRef.top__DOT__instruction_memory__DOT__rom_array)
                  , 0, ~0ULL);
     VL_WRITEF_NX("ROM loaded successfully.\n",0);
-    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(9, Vtop__ConstPool__CONST_h27b19929_0)
+    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(11, Vtop__ConstPool__CONST_h814b10ff_0)
                  ,  &(vlSelfRef.top__DOT__cached_data_memory__DOT__cache__DOT__ram_array)
                  , 0U, 0x1ffffU);
 }
@@ -414,7 +413,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__program_counter__DOT__PCF = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__instruction_memory__DOT__PC = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__instruction_memory__DOT__instr = VL_RAND_RESET_I(32);
-    for (int __Vi0 = 0; __Vi0 < 65536; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 4096; ++__Vi0) {
         vlSelf->top__DOT__instruction_memory__DOT__rom_array[__Vi0] = VL_RAND_RESET_I(8);
     }
     vlSelf->top__DOT__regfile__DOT__clk = VL_RAND_RESET_I(1);
@@ -505,6 +504,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__cached_data_memory__DOT__modeAddr = VL_RAND_RESET_I(3);
     vlSelf->top__DOT__cached_data_memory__DOT__addr = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__cached_data_memory__DOT__write_data = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT__cached_data_memory__DOT__trigger = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__cached_data_memory__DOT__miss_stall = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__cached_data_memory__DOT__data_out = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__cached_data_memory__DOT__out_cache = VL_RAND_RESET_I(32);
@@ -515,6 +515,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__write_data = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__WE = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__RE = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__trigger = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__miss_stall = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__cache_out = VL_RAND_RESET_I(32);
     for (int __Vi0 = 0; __Vi0 < 131072; ++__Vi0) {

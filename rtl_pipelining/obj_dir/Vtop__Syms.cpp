@@ -20,7 +20,7 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
     , TOP____024unit{this, Verilated::catName(namep, "$unit")}
 {
         // Check resources
-        Verilated::stackCheck(143);
+        Verilated::stackCheck(139);
     // Configure time unit / time precision
     _vm_contextp__->timeunit(-12);
     _vm_contextp__->timeprecision(-12);
@@ -245,6 +245,7 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
         __Vscope_top__cached_data_memory.varInsert(__Vfinal,"modeAddr", &(TOP.top__DOT__cached_data_memory__DOT__modeAddr), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,2,0);
         __Vscope_top__cached_data_memory.varInsert(__Vfinal,"out_cache", &(TOP.top__DOT__cached_data_memory__DOT__out_cache), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top__cached_data_memory.varInsert(__Vfinal,"rst", &(TOP.top__DOT__cached_data_memory__DOT__rst), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
+        __Vscope_top__cached_data_memory.varInsert(__Vfinal,"trigger", &(TOP.top__DOT__cached_data_memory__DOT__trigger), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__cached_data_memory.varInsert(__Vfinal,"write_data", &(TOP.top__DOT__cached_data_memory__DOT__write_data), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"RE", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__RE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"WE", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__WE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
@@ -262,6 +263,7 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
         __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"replace_way", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__replace_way), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"rst", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__rst), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"set", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__set), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,7,0);
+        __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"trigger", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__trigger), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__cached_data_memory__cache.varInsert(__Vfinal,"write_data", &(TOP.top__DOT__cached_data_memory__DOT__cache__DOT__write_data), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top__control_unit.varInsert(__Vfinal,"ALUControlD", &(TOP.top__DOT__control_unit__DOT__ALUControlD), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,3,0);
         __Vscope_top__control_unit.varInsert(__Vfinal,"ALUOp", &(TOP.top__DOT__control_unit__DOT__ALUOp), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,1,0);
@@ -324,7 +326,7 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
         __Vscope_top__instruction_memory.varInsert(__Vfinal,"PC", &(TOP.top__DOT__instruction_memory__DOT__PC), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top__instruction_memory.varInsert(__Vfinal,"WIDTH", const_cast<void*>(static_cast<const void*>(&(TOP.top__DOT__instruction_memory__DOT__WIDTH))), true, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top__instruction_memory.varInsert(__Vfinal,"instr", &(TOP.top__DOT__instruction_memory__DOT__instr), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
-        __Vscope_top__instruction_memory.varInsert(__Vfinal,"rom_array", &(TOP.top__DOT__instruction_memory__DOT__rom_array), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,2 ,7,0 ,65535,0);
+        __Vscope_top__instruction_memory.varInsert(__Vfinal,"rom_array", &(TOP.top__DOT__instruction_memory__DOT__rom_array), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,2 ,7,0 ,4095,0);
         __Vscope_top__pipeline_DE.varInsert(__Vfinal,"ALUControlD", &(TOP.top__DOT__pipeline_DE__DOT__ALUControlD), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,3,0);
         __Vscope_top__pipeline_DE.varInsert(__Vfinal,"ALUControlE", &(TOP.top__DOT__pipeline_DE__DOT__ALUControlE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,3,0);
         __Vscope_top__pipeline_DE.varInsert(__Vfinal,"ALUSrcD", &(TOP.top__DOT__pipeline_DE__DOT__ALUSrcD), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);

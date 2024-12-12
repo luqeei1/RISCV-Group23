@@ -9,6 +9,7 @@ module cached_datamem #(
     input logic [2:0] modeAddr,
     input logic [ADDR_WIDTH-1:0] addr,
     input logic [DATA_WIDTH-1:0] write_data,
+    input logic trigger,
 
     output logic miss_stall,
     output logic [DATA_WIDTH-1:0] data_out
@@ -52,6 +53,7 @@ cache cache (
     .modeAddr(modeAddr),
     .addr(addr),
     .write_data(write_data),
+    .trigger(trigger),
 
     .miss_stall(miss_stall),
     .cache_out(out_cache)

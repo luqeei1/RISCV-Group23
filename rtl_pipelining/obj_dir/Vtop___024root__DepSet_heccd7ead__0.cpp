@@ -33,7 +33,6 @@ VL_INLINE_OPT void Vtop___024root___ico_sequent__TOP__0(Vtop___024root* vlSelf) 
     CData/*6:0*/ __Vtableidx1;
     __Vtableidx1 = 0;
     // Body
-    vlSelfRef.top__DOT__trigger = vlSelfRef.trigger;
     vlSelfRef.top__DOT__control_unit__DOT__alu_decoder__DOT__op 
         = (1U & (vlSelfRef.top__DOT__pipeline_FD__DOT__InstrD 
                  >> 5U));
@@ -54,6 +53,7 @@ VL_INLINE_OPT void Vtop___024root___ico_sequent__TOP__0(Vtop___024root* vlSelf) 
     vlSelfRef.top__DOT__ResultSrcM = vlSelfRef.top__DOT__pipeline_EM__DOT__ResultSrcM;
     vlSelfRef.top__DOT__PCPlus4M = vlSelfRef.top__DOT__pipeline_EM__DOT__PCPlus4M;
     vlSelfRef.top__DOT__InstrM = vlSelfRef.top__DOT__pipeline_EM__DOT__InstrM;
+    vlSelfRef.top__DOT__trigger = vlSelfRef.trigger;
     vlSelfRef.top__DOT__regfile__DOT__a5 = vlSelfRef.top__DOT__regfile__DOT__registerfile_array
         [0xfU];
     vlSelfRef.top__DOT__regfile__DOT__a4 = vlSelfRef.top__DOT__regfile__DOT__registerfile_array
@@ -132,18 +132,18 @@ VL_INLINE_OPT void Vtop___024root___ico_sequent__TOP__0(Vtop___024root* vlSelf) 
     vlSelfRef.top__DOT__BranchE = vlSelfRef.top__DOT__pipeline_DE__DOT__BranchE;
     vlSelfRef.top__DOT__PCF = vlSelfRef.top__DOT__program_counter__DOT__PCF;
     vlSelfRef.top__DOT__InstrF = (((vlSelfRef.top__DOT__instruction_memory__DOT__rom_array
-                                    [(0xffffU & ((IData)(3U) 
-                                                 + vlSelfRef.top__DOT__program_counter__DOT__PCF))] 
+                                    [(0xfffU & ((IData)(3U) 
+                                                + vlSelfRef.top__DOT__program_counter__DOT__PCF))] 
                                     << 0x18U) | (vlSelfRef.top__DOT__instruction_memory__DOT__rom_array
-                                                 [(0xffffU 
+                                                 [(0xfffU 
                                                    & ((IData)(2U) 
                                                       + vlSelfRef.top__DOT__program_counter__DOT__PCF))] 
                                                  << 0x10U)) 
                                   | ((vlSelfRef.top__DOT__instruction_memory__DOT__rom_array
-                                      [(0xffffU & ((IData)(1U) 
-                                                   + vlSelfRef.top__DOT__program_counter__DOT__PCF))] 
+                                      [(0xfffU & ((IData)(1U) 
+                                                  + vlSelfRef.top__DOT__program_counter__DOT__PCF))] 
                                       << 8U) | vlSelfRef.top__DOT__instruction_memory__DOT__rom_array
-                                     [(0xffffU & vlSelfRef.top__DOT__program_counter__DOT__PCF)]));
+                                     [(0xfffU & vlSelfRef.top__DOT__program_counter__DOT__PCF)]));
     vlSelfRef.top__DOT__control_unit__DOT__op = (0x7fU 
                                                  & vlSelfRef.top__DOT__pipeline_FD__DOT__InstrD);
     vlSelfRef.top__DOT__ALUControlE = vlSelfRef.top__DOT__pipeline_DE__DOT__ALUControlE;
@@ -187,6 +187,8 @@ VL_INLINE_OPT void Vtop___024root___ico_sequent__TOP__0(Vtop___024root* vlSelf) 
     vlSelfRef.top__DOT__pipeline_MW__DOT__PCPlus4M 
         = vlSelfRef.top__DOT__PCPlus4M;
     vlSelfRef.top__DOT__pipeline_MW__DOT__InstrM = vlSelfRef.top__DOT__InstrM;
+    vlSelfRef.top__DOT__cached_data_memory__DOT__trigger 
+        = vlSelfRef.top__DOT__trigger;
     vlSelfRef.a5 = vlSelfRef.top__DOT__regfile__DOT__a5;
     vlSelfRef.top__DOT__a5 = vlSelfRef.top__DOT__regfile__DOT__a5;
     vlSelfRef.a4 = vlSelfRef.top__DOT__regfile__DOT__a4;
@@ -871,6 +873,8 @@ VL_INLINE_OPT void Vtop___024root___ico_sequent__TOP__0(Vtop___024root* vlSelf) 
         = vlSelfRef.top__DOT__ALUResultM;
     vlSelfRef.top__DOT__cached_data_memory__DOT__addr 
         = vlSelfRef.top__DOT__ALUResultM;
+    vlSelfRef.top__DOT__cached_data_memory__DOT__cache__DOT__trigger 
+        = vlSelfRef.top__DOT__cached_data_memory__DOT__trigger;
     vlSelfRef.top__DOT__cached_data_memory__DOT__cache__DOT__write_data 
         = vlSelfRef.top__DOT__cached_data_memory__DOT__write_data;
     vlSelfRef.top__DOT__cached_data_memory__DOT__cache__DOT__rst 

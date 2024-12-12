@@ -282,6 +282,7 @@ module top#(
         .modeAddr(modeAddrM),
         .addr(ALUResultM),
         .write_data(WriteDataM),
+        .trigger(trigger),
 
         .miss_stall(miss_stall),
         .data_out(ReadDataM)
