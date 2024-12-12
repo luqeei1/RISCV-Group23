@@ -9,7 +9,7 @@ This repo contains all components, testing and results for the RV32I single-cycl
 | Akarsh     | 02395592       |   [Akarsh's Log](./docs/logs/Akarsh_log.md)  |      |
 | Lucas     |   |  [Lucas's Log](./docs/logs/Lucas_log.md)    |   |
 | Sid   |    02382743    |   [Sid's Log](./docs/logs/Sid_log.md)   |    |
-| Theo     |        |  [Theo's Log](./docs/logs/Theo_log.md)    |    |
+| Theo     |  02380127      |  [Theo's Log](./docs/logs/Theo_log.md)    |    |
 
 <br />
 
