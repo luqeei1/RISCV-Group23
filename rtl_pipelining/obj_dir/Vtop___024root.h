@@ -161,7 +161,8 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         CData/*0:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__miss_stall;
         CData/*7:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__set;
         CData/*0:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__block;
-        CData/*0:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__cache_line_valid;
+        CData/*0:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__test;
+        CData/*0:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__valid;
         CData/*1:0*/ top__DOT__regfile_mux__DOT__sel;
         CData/*0:0*/ top__DOT__pipeline_FD__DOT__clk;
         CData/*0:0*/ top__DOT__pipeline_FD__DOT__flush;
@@ -214,9 +215,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         CData/*1:0*/ top__DOT__pipeline_MW__DOT__ResultSrcW;
         CData/*4:0*/ top__DOT__pipeline_MW__DOT__RdM;
         CData/*4:0*/ top__DOT__pipeline_MW__DOT__RdW;
-        CData/*0:0*/ __VstlFirstIteration;
     };
     struct {
+        CData/*0:0*/ __VstlFirstIteration;
         CData/*0:0*/ __VicoFirstIteration;
         CData/*0:0*/ __Vtrigprevexpr___TOP__clk__0;
         CData/*0:0*/ __VactContinue;
@@ -280,9 +281,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__InstrM;
         IData/*31:0*/ top__DOT__InstrW;
         IData/*31:0*/ top__DOT__RD1E;
-        IData/*31:0*/ top__DOT__RD2E;
     };
     struct {
+        IData/*31:0*/ top__DOT__RD2E;
         IData/*31:0*/ top__DOT__PCE;
         IData/*31:0*/ top__DOT__PCPlus4E;
         IData/*31:0*/ top__DOT__ReadDataW;
@@ -346,9 +347,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__regfile__DOT__s3;
         IData/*31:0*/ top__DOT__regfile__DOT__s4;
         IData/*31:0*/ top__DOT__regfile__DOT__s5;
-        IData/*31:0*/ top__DOT__regfile__DOT__s6;
     };
     struct {
+        IData/*31:0*/ top__DOT__regfile__DOT__s6;
         IData/*31:0*/ top__DOT__regfile__DOT__s7;
         IData/*31:0*/ top__DOT__regfile__DOT__s8;
         IData/*31:0*/ top__DOT__regfile__DOT__s9;
@@ -377,8 +378,8 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__addr;
         IData/*31:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__write_data;
         IData/*31:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__cache_out;
-        IData/*31:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__current_state;
-        IData/*31:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__next_state;
+        IData/*31:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__read_data;
+        IData/*20:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__tag;
         IData/*31:0*/ top__DOT__regfile_mux__DOT__in0;
         IData/*31:0*/ top__DOT__regfile_mux__DOT__in1;
         IData/*31:0*/ top__DOT__regfile_mux__DOT__in2;
@@ -412,9 +413,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__ALUResultM;
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__ALUResultW;
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__ReadDataM;
-        IData/*31:0*/ top__DOT__pipeline_MW__DOT__ReadDataW;
     };
     struct {
+        IData/*31:0*/ top__DOT__pipeline_MW__DOT__ReadDataW;
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__PCPlus4M;
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__PCPlus4W;
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__InstrM;
@@ -422,8 +423,6 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ __VactIterCount;
         VlWide<3>/*65:0*/ top__DOT__branch_prediction_unit__DOT__newBranch;
         VlWide<3>/*65:0*/ top__DOT__branch_prediction_unit__DOT__oldBranch;
-        VlWide<3>/*86:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__cache_line;
-        QData/*63:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__cache_line_data;
         VlUnpacked<CData/*7:0*/, 65536> top__DOT__instruction_memory__DOT__rom_array;
         VlUnpacked<IData/*31:0*/, 32> top__DOT__regfile__DOT__registerfile_array;
         VlUnpacked<CData/*7:0*/, 131072> top__DOT__cached_data_memory__DOT__cache__DOT__ram_array;

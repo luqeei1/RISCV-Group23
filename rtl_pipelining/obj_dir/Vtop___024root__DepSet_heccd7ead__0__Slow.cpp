@@ -38,7 +38,7 @@ VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
     vlSelfRef.top__DOT__branch_prediction_unit__DOT__backwardJumpCounter = 2U;
     VL_WRITEF_NX("Loading rom.\n",0);
     __Vtemp_1[0U] = 0x2e686578U;
-    __Vtemp_1[1U] = 0x65737434U;
+    __Vtemp_1[1U] = 0x65737433U;
     __Vtemp_1[2U] = 0x65732f54U;
     __Vtemp_1[3U] = 0x6e46696cU;
     __Vtemp_1[4U] = 0x6374696fU;
@@ -504,13 +504,12 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
         VL_RAND_RESET_W(87, vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem[__Vi0]);
     }
-    vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__current_state = 0;
-    vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__next_state = 0;
-    VL_RAND_RESET_W(87, vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__cache_line);
     vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__set = VL_RAND_RESET_I(8);
+    vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__read_data = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__block = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__cache_line_data = VL_RAND_RESET_Q(64);
-    vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__cache_line_valid = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__test = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__valid = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__tag = VL_RAND_RESET_I(21);
     vlSelf->top__DOT__regfile_mux__DOT__sel = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__regfile_mux__DOT__in0 = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__regfile_mux__DOT__in1 = VL_RAND_RESET_I(32);
