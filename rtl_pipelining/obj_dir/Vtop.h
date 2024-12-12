@@ -14,7 +14,7 @@
 class Vtop__Syms;
 class Vtop___024root;
 class VerilatedVcdC;
-class Vtop___024unit;
+#include "Vtop___024unit.h"
 
 
 // This class is the main interface to the Verilated model

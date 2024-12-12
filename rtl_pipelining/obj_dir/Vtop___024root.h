@@ -6,7 +6,7 @@
 #define VERILATED_VTOP___024ROOT_H_  // guard
 
 #include "verilated.h"
-class Vtop___024unit;
+#include "Vtop___024unit.h"
 
 
 class Vtop__Syms;
@@ -160,9 +160,9 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         CData/*0:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__RE;
         CData/*0:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__miss_stall;
         CData/*7:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__set;
-        CData/*0:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__block;
-        CData/*0:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__test;
-        CData/*0:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__valid;
+        CData/*0:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__hit0;
+        CData/*0:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__hit1;
+        CData/*0:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__replace_way;
         CData/*1:0*/ top__DOT__regfile_mux__DOT__sel;
         CData/*0:0*/ top__DOT__pipeline_FD__DOT__clk;
         CData/*0:0*/ top__DOT__pipeline_FD__DOT__flush;
@@ -217,9 +217,12 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         CData/*4:0*/ top__DOT__pipeline_MW__DOT__RdW;
     };
     struct {
+        CData/*0:0*/ __VstlDidInit;
         CData/*0:0*/ __VstlFirstIteration;
+        CData/*0:0*/ __VicoDidInit;
         CData/*0:0*/ __VicoFirstIteration;
         CData/*0:0*/ __Vtrigprevexpr___TOP__clk__0;
+        CData/*0:0*/ __VactDidInit;
         CData/*0:0*/ __VactContinue;
         VL_OUT(a0,31,0);
         VL_OUT(a1,31,0);
@@ -278,11 +281,11 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__InstrD;
         IData/*31:0*/ top__DOT__InstrF;
         IData/*31:0*/ top__DOT__InstrE;
+    };
+    struct {
         IData/*31:0*/ top__DOT__InstrM;
         IData/*31:0*/ top__DOT__InstrW;
         IData/*31:0*/ top__DOT__RD1E;
-    };
-    struct {
         IData/*31:0*/ top__DOT__RD2E;
         IData/*31:0*/ top__DOT__PCE;
         IData/*31:0*/ top__DOT__PCPlus4E;
@@ -309,6 +312,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__SrcAE;
         IData/*31:0*/ top__DOT__PC_predict;
         IData/*31:0*/ top__DOT__PC_next;
+        IData/*31:0*/ top__DOT____Vcellinp__PC_mux__PCTarget;
         IData/*31:0*/ top__DOT__branch_prediction_unit__DOT__RD;
         IData/*31:0*/ top__DOT__branch_prediction_unit__DOT__PCF;
         IData/*31:0*/ top__DOT__branch_prediction_unit__DOT__PCBPU;
@@ -343,12 +347,12 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__regfile__DOT__t6;
         IData/*31:0*/ top__DOT__regfile__DOT__s0;
         IData/*31:0*/ top__DOT__regfile__DOT__s1;
+    };
+    struct {
         IData/*31:0*/ top__DOT__regfile__DOT__s2;
         IData/*31:0*/ top__DOT__regfile__DOT__s3;
         IData/*31:0*/ top__DOT__regfile__DOT__s4;
         IData/*31:0*/ top__DOT__regfile__DOT__s5;
-    };
-    struct {
         IData/*31:0*/ top__DOT__regfile__DOT__s6;
         IData/*31:0*/ top__DOT__regfile__DOT__s7;
         IData/*31:0*/ top__DOT__regfile__DOT__s8;
@@ -379,7 +383,6 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__write_data;
         IData/*31:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__cache_out;
         IData/*31:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__read_data;
-        IData/*20:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__tag;
         IData/*31:0*/ top__DOT__regfile_mux__DOT__in0;
         IData/*31:0*/ top__DOT__regfile_mux__DOT__in1;
         IData/*31:0*/ top__DOT__regfile_mux__DOT__in2;
@@ -410,11 +413,11 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         IData/*31:0*/ top__DOT__pipeline_EM__DOT__PCPlus4M;
         IData/*31:0*/ top__DOT__pipeline_EM__DOT__InstrE;
         IData/*31:0*/ top__DOT__pipeline_EM__DOT__InstrM;
+    };
+    struct {
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__ALUResultM;
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__ALUResultW;
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__ReadDataM;
-    };
-    struct {
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__ReadDataW;
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__PCPlus4M;
         IData/*31:0*/ top__DOT__pipeline_MW__DOT__PCPlus4W;
@@ -426,13 +429,18 @@ class alignas(VL_CACHE_LINE_BYTES) Vtop___024root final : public VerilatedModule
         VlUnpacked<CData/*7:0*/, 65536> top__DOT__instruction_memory__DOT__rom_array;
         VlUnpacked<IData/*31:0*/, 32> top__DOT__regfile__DOT__registerfile_array;
         VlUnpacked<CData/*7:0*/, 131072> top__DOT__cached_data_memory__DOT__cache__DOT__ram_array;
-        VlUnpacked<VlWide<3>/*86:0*/, 256> top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem;
     };
     VlQueue<VlWide<3>/*65:0*/> top__DOT__branch_prediction_unit__DOT__branch_queue;
-    VlTriggerVec<1> __VstlTriggered;
-    VlTriggerVec<1> __VicoTriggered;
-    VlTriggerVec<2> __VactTriggered;
-    VlTriggerVec<2> __VnbaTriggered;
+    VlTriggerVec<2> __VstlTriggered;
+    VlTriggerVec<2> __VicoTriggered;
+    VlTriggerVec<3> __VactTriggered;
+    VlTriggerVec<3> __VpreTriggered;
+    VlTriggerVec<3> __VnbaTriggered;
+    VlUnpacked<Vtop_cache_set_type__struct__0, 256> top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem;
+    VlUnpacked<Vtop_cache_set_type__struct__0, 256> __Vdly__top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem;
+    VlUnpacked<Vtop_cache_set_type__struct__0, 256> __Vtrigprevexpr___TOP__top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem__0;
+    VlUnpacked<Vtop_cache_set_type__struct__0, 256> __Vtrigprevexpr___TOP__top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem__1;
+    VlUnpacked<Vtop_cache_set_type__struct__0, 256> __Vtrigprevexpr___TOP__top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem__2;
 
     // INTERNAL VARIABLES
     Vtop__Syms* const vlSymsp;

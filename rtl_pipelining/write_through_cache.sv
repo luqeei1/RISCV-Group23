@@ -1,3 +1,6 @@
+/* verilator lint_off UNOPTFLAT */
+/* verilator lint_off UNUSED */
+/* verilator lint_off CASEINCOMPLETE */
 `include "cache_data_structs.sv"
 
 module write_through_cache #(
@@ -17,19 +20,24 @@ module write_through_cache #(
 );
 
     logic [7:0] ram_array [2**17 -1:0];
-    cache_block_type cache_mem [0:SETS-1];
+    cache_set_type cache_mem [0:SETS-1];
 
     logic [7:0] set;
     logic [WIDTH-1:0] read_data;
-    logic block;
-    logic test;
-    logic valid;
-    logic [TAG_MSB:TAG_LSB] tag;
+
+    //for debugging only
+    // logic block;
+    // logic valid;
+    // logic [TAG_MSB:TAG_LSB] tag;
+
+    logic hit0; // hit for way 0
+    logic hit1; // hit for way 1
+    logic replace_way;
 
     assign set = addr[10:3];
-    assign block = addr[2];
-    assign valid = cache_mem[set].valid;
-    assign tag = cache_mem[set].tag;
+    // assign block = addr[2];
+    // assign valid = cache_mem[set].valid;
+    // assign tag = cache_mem[set].tag;
 
     initial begin
         $readmemh("../rtl_single_cycle/data_memory.hex", ram_array, 17'h00000, 17'h1FFFF);
@@ -39,16 +47,22 @@ module write_through_cache #(
         miss_stall = 0;
         cache_out = 0;
 
-        if (cache_mem[set].valid && (cache_mem[set].tag == addr[TAG_MSB:TAG_LSB])) begin
+        hit0 = cache_mem[set].way[0].valid && (cache_mem[set].way[0].tag == addr[TAG_MSB:TAG_LSB]);
+        hit1 = cache_mem[set].way[1].valid && (cache_mem[set].way[1].tag == addr[TAG_MSB:TAG_LSB]);
+
+        if (hit0 || hit1) begin
             if(RE) begin
-                test = 1;
-                cache_out = (addr[2]) ?
-                            {cache_mem[set].data[63:32]} :
-                            {cache_mem[set].data[31:0]};
+                if(hit0) begin
+                    cache_out = (addr[2]) ? {cache_mem[set].way[0].data[63:32]} :{cache_mem[set].way[0].data[31:0]};
+                    cache_mem[set].lru = 0;
+                end else begin
+                    cache_out = (addr[2]) ? {cache_mem[set].way[1].data[63:32]} :{cache_mem[set].way[1].data[31:0]};
+                    cache_mem[set].lru = 1;
+                end
             end
 
-            if(WE) 
-                mis_stall = 0; // write-through no need to stall
+            if(WE) miss_stall = 0; // write-through no need to stall
+
         end else if (WE || RE) begin
             // CACHE MISS
             miss_stall = 1;
@@ -58,31 +72,64 @@ module write_through_cache #(
     always_ff @(posedge clk) begin
         if(miss_stall) begin
             // populate cache
-            cache_mem[set].data[31:0] <= {ram_array[addr[16:0] + 3],
-                                          ram_array[addr[16:0] + 2],
-                                          ram_array[addr[16:0] + 1],
-                                          ram_array[addr[16:0] + 0]};
+            // replace way 1 (least recently used)
+            if (cache_mem[set].lru) begin 
+                cache_mem[set].way[1].data[31:0] <= {ram_array[addr[16:0] + 3],
+                                            ram_array[addr[16:0] + 2],
+                                            ram_array[addr[16:0] + 1],
+                                            ram_array[addr[16:0] + 0]};
 
-            cache_mem[set].data[63:32] <= {ram_array[addr[16:0] + 7],
-                                           ram_array[addr[16:0] + 6],
-                                           ram_array[addr[16:0] + 5],
-                                           ram_array[addr[16:0] + 4]};
-            
-            cache_mem[set].tag <= addr[TAG_MSB:TAG_LSB];
-            cache_mem[set].valid <= 1;
+                cache_mem[set].way[1].data[63:32] <= {ram_array[addr[16:0] + 7],
+                                            ram_array[addr[16:0] + 6],
+                                            ram_array[addr[16:0] + 5],
+                                            ram_array[addr[16:0] + 4]};
+                
+                cache_mem[set].way[1].tag <= addr[TAG_MSB:TAG_LSB];
+                cache_mem[set].way[1].valid <= 1;
+                cache_mem[set].lru <= 0;
+            end
+
+            // replace way 0
+            else begin
+                cache_mem[set].way[0].data[31:0] <= {ram_array[addr[16:0] + 3],
+                                            ram_array[addr[16:0] + 2],
+                                            ram_array[addr[16:0] + 1],
+                                            ram_array[addr[16:0] + 0]};
+
+                cache_mem[set].way[0].data[63:32] <= {ram_array[addr[16:0] + 7],
+                                            ram_array[addr[16:0] + 6],
+                                            ram_array[addr[16:0] + 5],
+                                            ram_array[addr[16:0] + 4]};
+                
+                cache_mem[set].way[0].tag <= addr[TAG_MSB:TAG_LSB];
+                cache_mem[set].way[0].valid <= 1;
+                cache_mem[set].lru <= 1;
+            end
         end
 
         else if(WE) begin
             // write to both mem and cache
             case (modeAddr)
                 3'b011, 3'b101: begin
-                    cache_mem[set].data[(addr[2:0] * 8) +: 8] <= write_data[7:0];
+                    if(hit0) begin
+                        cache_mem[set].way[0].data[(addr[2:0] * 8) +: 8] <= write_data[7:0];
+                    end else if (hit1) begin
+                        cache_mem[set].way[1].data[(addr[2:0] * 8) +: 8] <= write_data[7:0];
+                    end
                 end
                 default: begin
                     if(addr[2]) begin
-                        cache_mem[set].data[63:32] <= write_data;
+                        if(hit0) begin
+                            cache_mem[set].way[0].data[63:32] <= write_data;
+                        end else if (hit1) begin
+                            cache_mem[set].way[1].data[63:32] <= write_data;
+                        end
                     end else begin
-                        cache_mem[set].data[31:0] <= write_data;
+                        if(hit0) begin
+                            cache_mem[set].way[0].data[31:0] <= write_data;
+                        end else if (hit1) begin
+                            cache_mem[set].way[1].data[31:0] <= write_data;
+                        end
                     end
                 end
             endcase

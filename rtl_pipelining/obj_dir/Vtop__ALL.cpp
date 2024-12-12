@@ -3,6 +3,8 @@
 #include "Vtop.cpp"
 #include "Vtop___024root__DepSet_h84412442__0.cpp"
 #include "Vtop___024root__DepSet_heccd7ead__0.cpp"
+#include "Vtop___024root__DepSet_h8167ab7a__0.cpp"
+#include "Vtop___024unit__DepSet_hff17caec__0.cpp"
 #include "Vtop__Dpi.cpp"
 #include "Vtop__Trace__0.cpp"
 #include "Vtop__ConstPool_0.cpp"

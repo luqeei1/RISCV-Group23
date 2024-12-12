@@ -18,4 +18,9 @@ typedef struct packed {
     logic [63:0] data;
 } cache_block_type;
 
+typedef struct{
+    cache_block_type way[2];
+    logic lru;      // if 0: way[0] least recently used 
+} cache_set_type;
+
 `endif 

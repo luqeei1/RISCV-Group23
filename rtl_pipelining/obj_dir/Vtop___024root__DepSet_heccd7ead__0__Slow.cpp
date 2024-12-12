@@ -21,7 +21,13 @@ VL_ATTR_COLD void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
     Vtop___024root___eval_initial__TOP(vlSelf);
+    vlSelfRef.__Vtrigprevexpr___TOP__top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem__0 
+        = vlSelfRef.top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem;
+    vlSelfRef.__Vtrigprevexpr___TOP__top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem__1 
+        = vlSelfRef.top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem;
     vlSelfRef.__Vtrigprevexpr___TOP__clk__0 = vlSelfRef.clk;
+    vlSelfRef.__Vtrigprevexpr___TOP__top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem__2 
+        = vlSelfRef.top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem;
 }
 
 extern const VlWide<9>/*287:0*/ Vtop__ConstPool__CONST_h27b19929_0;
@@ -106,10 +112,14 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__stl(Vtop___024root* vlSelf) {
     if ((1ULL & vlSelfRef.__VstlTriggered.word(0U))) {
         VL_DBG_MSGF("         'stl' region trigger index 0 is active: Internal 'stl' trigger - first iteration\n");
     }
+    if ((2ULL & vlSelfRef.__VstlTriggered.word(0U))) {
+        VL_DBG_MSGF("         'stl' region trigger index 1 is active: @([hybrid] top.cached_data_memory.cache.cache_mem)\n");
+    }
 }
 #endif  // VL_DEBUG
 
 void Vtop___024root___ico_sequent__TOP__0(Vtop___024root* vlSelf);
+void Vtop___024root___ico_comb__TOP__0(Vtop___024root* vlSelf);
 
 VL_ATTR_COLD void Vtop___024root___eval_stl(Vtop___024root* vlSelf) {
     (void)vlSelf;  // Prevent unused variable warning
@@ -119,6 +129,9 @@ VL_ATTR_COLD void Vtop___024root___eval_stl(Vtop___024root* vlSelf) {
     // Body
     if ((1ULL & vlSelfRef.__VstlTriggered.word(0U))) {
         Vtop___024root___ico_sequent__TOP__0(vlSelf);
+    }
+    if ((3ULL & vlSelfRef.__VstlTriggered.word(0U))) {
+        Vtop___024root___ico_comb__TOP__0(vlSelf);
     }
 }
 
@@ -153,6 +166,9 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__ico(Vtop___024root* vlSelf) {
     if ((1ULL & vlSelfRef.__VicoTriggered.word(0U))) {
         VL_DBG_MSGF("         'ico' region trigger index 0 is active: Internal 'ico' trigger - first iteration\n");
     }
+    if ((2ULL & vlSelfRef.__VicoTriggered.word(0U))) {
+        VL_DBG_MSGF("         'ico' region trigger index 1 is active: @([hybrid] top.cached_data_memory.cache.cache_mem)\n");
+    }
 }
 #endif  // VL_DEBUG
 
@@ -167,10 +183,13 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__act(Vtop___024root* vlSelf) {
         VL_DBG_MSGF("         No triggers active\n");
     }
     if ((1ULL & vlSelfRef.__VactTriggered.word(0U))) {
-        VL_DBG_MSGF("         'act' region trigger index 0 is active: @(negedge clk)\n");
+        VL_DBG_MSGF("         'act' region trigger index 0 is active: @(posedge clk)\n");
     }
     if ((2ULL & vlSelfRef.__VactTriggered.word(0U))) {
-        VL_DBG_MSGF("         'act' region trigger index 1 is active: @(posedge clk)\n");
+        VL_DBG_MSGF("         'act' region trigger index 1 is active: @([hybrid] top.cached_data_memory.cache.cache_mem)\n");
+    }
+    if ((4ULL & vlSelfRef.__VactTriggered.word(0U))) {
+        VL_DBG_MSGF("         'act' region trigger index 2 is active: @(negedge clk)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -186,10 +205,13 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__nba(Vtop___024root* vlSelf) {
         VL_DBG_MSGF("         No triggers active\n");
     }
     if ((1ULL & vlSelfRef.__VnbaTriggered.word(0U))) {
-        VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(negedge clk)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(posedge clk)\n");
     }
     if ((2ULL & vlSelfRef.__VnbaTriggered.word(0U))) {
-        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @(posedge clk)\n");
+        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @([hybrid] top.cached_data_memory.cache.cache_mem)\n");
+    }
+    if ((4ULL & vlSelfRef.__VnbaTriggered.word(0U))) {
+        VL_DBG_MSGF("         'nba' region trigger index 2 is active: @(negedge clk)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -337,6 +359,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__BPU_Src = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__PC_predict = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__PC_next = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT____Vcellinp__PC_mux__PCTarget = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__hazard_unit__DOT__RdM = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__hazard_unit__DOT__RdW = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__hazard_unit__DOT__RdE = VL_RAND_RESET_I(5);
@@ -502,14 +525,16 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__ram_array[__Vi0] = VL_RAND_RESET_I(8);
     }
     for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
-        VL_RAND_RESET_W(87, vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem[__Vi0]);
+        for (int __Vi2 = 0; __Vi2 < 2; ++__Vi2) {
+            VL_RAND_RESET_W(87, vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem[__Vi0].__PVT__way[__Vi2]);
+        }
+        vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem[__Vi0].__PVT__lru = VL_RAND_RESET_I(1);
     }
     vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__set = VL_RAND_RESET_I(8);
     vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__read_data = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__block = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__test = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__valid = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__tag = VL_RAND_RESET_I(21);
+    vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__hit0 = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__hit1 = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__cached_data_memory__DOT__cache__DOT__replace_way = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__regfile_mux__DOT__sel = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__regfile_mux__DOT__in0 = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__regfile_mux__DOT__in1 = VL_RAND_RESET_I(32);
@@ -600,5 +625,32 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__pipeline_MW__DOT__PCPlus4W = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__pipeline_MW__DOT__InstrM = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__pipeline_MW__DOT__InstrW = VL_RAND_RESET_I(32);
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        for (int __Vi2 = 0; __Vi2 < 2; ++__Vi2) {
+            VL_RAND_RESET_W(87, vlSelf->__Vdly__top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem[__Vi0].__PVT__way[__Vi2]);
+        }
+        vlSelf->__Vdly__top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem[__Vi0].__PVT__lru = VL_RAND_RESET_I(1);
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        for (int __Vi2 = 0; __Vi2 < 2; ++__Vi2) {
+            VL_RAND_RESET_W(87, vlSelf->__Vtrigprevexpr___TOP__top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem__0[__Vi0].__PVT__way[__Vi2]);
+        }
+        vlSelf->__Vtrigprevexpr___TOP__top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem__0[__Vi0].__PVT__lru = VL_RAND_RESET_I(1);
+    }
+    vlSelf->__VstlDidInit = 0;
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        for (int __Vi2 = 0; __Vi2 < 2; ++__Vi2) {
+            VL_RAND_RESET_W(87, vlSelf->__Vtrigprevexpr___TOP__top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem__1[__Vi0].__PVT__way[__Vi2]);
+        }
+        vlSelf->__Vtrigprevexpr___TOP__top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem__1[__Vi0].__PVT__lru = VL_RAND_RESET_I(1);
+    }
+    vlSelf->__VicoDidInit = 0;
     vlSelf->__Vtrigprevexpr___TOP__clk__0 = VL_RAND_RESET_I(1);
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        for (int __Vi2 = 0; __Vi2 < 2; ++__Vi2) {
+            VL_RAND_RESET_W(87, vlSelf->__Vtrigprevexpr___TOP__top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem__2[__Vi0].__PVT__way[__Vi2]);
+        }
+        vlSelf->__Vtrigprevexpr___TOP__top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem__2[__Vi0].__PVT__lru = VL_RAND_RESET_I(1);
+    }
+    vlSelf->__VactDidInit = 0;
 }
