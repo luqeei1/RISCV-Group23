@@ -46,7 +46,7 @@ VM_USER_CLASSES = \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
-	/root/RISCV-Group23/tb/tests \
+	/home/theoshah04/Documents/RISCV-Group23/tb/tests \
 
 
 ### Default rules...
@@ -58,7 +58,7 @@ include $(VERILATOR_ROOT)/include/verilated.mk
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
-verify.o: /root/RISCV-Group23/tb/tests/verify.cpp
+verify.o: /home/theoshah04/Documents/RISCV-Group23/tb/tests/verify.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)

@@ -1,5 +1,5 @@
-verify.o: /root/RISCV-Group23/tb/tests/verify.cpp \
- /root/RISCV-Group23/tb/tests/cpu_testbench.h Vdut.h \
+verify.o: /home/theoshah04/Documents/RISCV-Group23/tb/tests/verify.cpp \
+ /home/theoshah04/Documents/RISCV-Group23/tb/tests/cpu_testbench.h Vdut.h \
  /usr/local/share/verilator/include/verilated.h \
  /usr/local/share/verilator/include/verilatedos.h \
  /usr/local/share/verilator/include/verilated_config.h \
