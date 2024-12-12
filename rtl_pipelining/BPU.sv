@@ -28,7 +28,6 @@ logic [$clog2(QUEUE_SIZE)-1:0] queue_back;   // Index for back of queue
 logic [$clog2(QUEUE_SIZE):0] queue_count;    // Count of elements in queue
 
 BranchInfo newBranch, oldBranch;
-logic forwardJumpDecisionCorrect, backwardJumpDecisionCorrect;
 logic [1:0] forwardJumpCounter, backwardJumpCounter;
 
 initial begin

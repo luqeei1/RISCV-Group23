@@ -56,8 +56,6 @@ class Vdut___024root final : public VerilatedModule {
         CData/*3:0*/ top__DOT__branch_prediction_unit__DOT__queue_front;
         CData/*3:0*/ top__DOT__branch_prediction_unit__DOT__queue_back;
         CData/*4:0*/ top__DOT__branch_prediction_unit__DOT__queue_count;
-        CData/*0:0*/ top__DOT__branch_prediction_unit__DOT__forwardJumpDecisionCorrect;
-        CData/*0:0*/ top__DOT__branch_prediction_unit__DOT__backwardJumpDecisionCorrect;
         CData/*1:0*/ top__DOT__branch_prediction_unit__DOT__forwardJumpCounter;
         CData/*1:0*/ top__DOT__branch_prediction_unit__DOT__backwardJumpCounter;
         CData/*1:0*/ top__DOT__control_unit__DOT__ALUOp;
@@ -79,10 +77,10 @@ class Vdut___024root final : public VerilatedModule {
         VL_OUT(t4,31,0);
         VL_OUT(t5,31,0);
         VL_OUT(t6,31,0);
-    };
-    struct {
         VL_OUT(s0,31,0);
         VL_OUT(s1,31,0);
+    };
+    struct {
         VL_OUT(s2,31,0);
         VL_OUT(s3,31,0);
         VL_OUT(s4,31,0);

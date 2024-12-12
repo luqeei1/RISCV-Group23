@@ -7,33 +7,27 @@
 
 #include "Vtop___024root.h"
 
+extern const VlWide<11>/*351:0*/ Vtop__ConstPool__CONST_h8b56fb1a_0;
+
 VL_ATTR_COLD void Vtop___024root___initial__TOP__0(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___initial__TOP__0\n"); );
     // Init
-    VlWide<7>/*223:0*/ __Vtemp_hcdec8308__0;
-    VlWide<6>/*191:0*/ __Vtemp_hba55ecef__0;
+    VlWide<6>/*191:0*/ __Vtemp_hc4683f0f__0;
     // Body
     VL_WRITEF("Loading rom.\n");
-    __Vtemp_hcdec8308__0[0U] = 0x2e686578U;
-    __Vtemp_hcdec8308__0[1U] = 0x65737434U;
-    __Vtemp_hcdec8308__0[2U] = 0x65732f54U;
-    __Vtemp_hcdec8308__0[3U] = 0x6e46696cU;
-    __Vtemp_hcdec8308__0[4U] = 0x6374696fU;
-    __Vtemp_hcdec8308__0[5U] = 0x73747275U;
-    __Vtemp_hcdec8308__0[6U] = 0x496eU;
-    VL_READMEM_N(true, 8, 65536, 0, VL_CVT_PACK_STR_NW(7, __Vtemp_hcdec8308__0)
+    __Vtemp_hc4683f0f__0[0U] = 0x2e686578U;
+    __Vtemp_hc4683f0f__0[1U] = 0x2f706466U;
+    __Vtemp_hc4683f0f__0[2U] = 0x696c6573U;
+    __Vtemp_hc4683f0f__0[3U] = 0x696f6e46U;
+    __Vtemp_hc4683f0f__0[4U] = 0x72756374U;
+    __Vtemp_hc4683f0f__0[5U] = 0x496e7374U;
+    VL_READMEM_N(true, 8, 65536, 0, VL_CVT_PACK_STR_NW(6, __Vtemp_hc4683f0f__0)
                  ,  &(vlSelf->top__DOT__instruction_memory__DOT__rom_array)
                  , 0, ~0ULL);
     VL_WRITEF("ROM loaded successfully.\n");
-    __Vtemp_hba55ecef__0[0U] = 0x2e6d656dU;
-    __Vtemp_hba55ecef__0[1U] = 0x616d656dU;
-    __Vtemp_hba55ecef__0[2U] = 0x2f646174U;
-    __Vtemp_hba55ecef__0[3U] = 0x696c6573U;
-    __Vtemp_hba55ecef__0[4U] = 0x6f727946U;
-    __Vtemp_hba55ecef__0[5U] = 0x4d656dU;
-    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(6, __Vtemp_hba55ecef__0)
+    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(11, Vtop__ConstPool__CONST_h8b56fb1a_0)
                  ,  &(vlSelf->top__DOT__data_memory__DOT__ram_array)
                  , 0x10000U, ~0ULL);
     vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter = 2U;
@@ -1414,8 +1408,6 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__branch_prediction_unit__DOT__queue_count = VL_RAND_RESET_I(5);
     VL_RAND_RESET_W(66, vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch);
     VL_RAND_RESET_W(66, vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch);
-    vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpDecisionCorrect = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpDecisionCorrect = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpCounter = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__PC_mux__DOT__ZeroE = VL_RAND_RESET_I(1);

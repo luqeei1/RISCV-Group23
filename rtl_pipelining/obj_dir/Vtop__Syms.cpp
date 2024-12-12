@@ -215,12 +215,10 @@ Vtop__Syms::Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* mode
         __Vscope_top__branch_prediction_unit.varInsert(__Vfinal,"RD", &(TOP.top__DOT__branch_prediction_unit__DOT__RD), false, VLVT_UINT32,VLVD_NODIR|VLVF_PUB_RW,1 ,31,0);
         __Vscope_top__branch_prediction_unit.varInsert(__Vfinal,"ZeroE", &(TOP.top__DOT__branch_prediction_unit__DOT__ZeroE), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__branch_prediction_unit.varInsert(__Vfinal,"backwardJumpCounter", &(TOP.top__DOT__branch_prediction_unit__DOT__backwardJumpCounter), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,1,0);
-        __Vscope_top__branch_prediction_unit.varInsert(__Vfinal,"backwardJumpDecisionCorrect", &(TOP.top__DOT__branch_prediction_unit__DOT__backwardJumpDecisionCorrect), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__branch_prediction_unit.varInsert(__Vfinal,"branch_queue", &(TOP.top__DOT__branch_prediction_unit__DOT__branch_queue), false, VLVT_WDATA,VLVD_NODIR|VLVF_PUB_RW,2 ,65,0 ,0,15);
         __Vscope_top__branch_prediction_unit.varInsert(__Vfinal,"clk", &(TOP.top__DOT__branch_prediction_unit__DOT__clk), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__branch_prediction_unit.varInsert(__Vfinal,"flushBranch", &(TOP.top__DOT__branch_prediction_unit__DOT__flushBranch), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__branch_prediction_unit.varInsert(__Vfinal,"forwardJumpCounter", &(TOP.top__DOT__branch_prediction_unit__DOT__forwardJumpCounter), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,1,0);
-        __Vscope_top__branch_prediction_unit.varInsert(__Vfinal,"forwardJumpDecisionCorrect", &(TOP.top__DOT__branch_prediction_unit__DOT__forwardJumpDecisionCorrect), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,0);
         __Vscope_top__branch_prediction_unit.varInsert(__Vfinal,"newBranch", &(TOP.top__DOT__branch_prediction_unit__DOT__newBranch), false, VLVT_WDATA,VLVD_NODIR|VLVF_PUB_RW,1 ,65,0);
         __Vscope_top__branch_prediction_unit.varInsert(__Vfinal,"oldBranch", &(TOP.top__DOT__branch_prediction_unit__DOT__oldBranch), false, VLVT_WDATA,VLVD_NODIR|VLVF_PUB_RW,1 ,65,0);
         __Vscope_top__branch_prediction_unit.varInsert(__Vfinal,"queue_back", &(TOP.top__DOT__branch_prediction_unit__DOT__queue_back), false, VLVT_UINT8,VLVD_NODIR|VLVF_PUB_RW,1 ,3,0);
