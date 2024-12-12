@@ -1,3 +1,6 @@
+/* verilator lint_off UNOPTFLAT */
+/* verilator lint_off UNUSED */
+/* verilator lint_off CASEINCOMPLETE */
 `include "cache_data_structs.sv"
 
 module cache #(
@@ -17,114 +20,117 @@ module cache #(
 );
 
     logic [7:0] ram_array [2**17 -1:0];
-    cache_block_type cache_mem [0:SETS-1];
-
-    typedef enum {COMPARE_TAG, ALLOCATE, WRITE_BACK} cache_state;
-    cache_state current_state, next_state;
-
-    cache_block_type cache_line;
+    cache_set_type cache_mem [0:SETS-1];
 
     logic [7:0] set;
-    logic block;
-    logic [63:0] cache_line_data;
-    logic cache_line_valid;
+    logic [WIDTH-1:0] read_data;
 
-    assign cache_line_data = cache_line.data;
-    assign cache_line_valid = cache_line.valid;
+    logic hit0; // hit for way 0
+    logic hit1; // hit for way 1
+    logic replace_way;
+
     assign set = addr[10:3];
- 
+
     initial begin
         $readmemh("../rtl_single_cycle/data_memory.hex", ram_array, 17'h00000, 17'h1FFFF);
     end    
 
     always_comb begin
+        miss_stall = 0;
         cache_out = 0;
-        next_state = current_state;
 
-        case (current_state)
-            COMPARE_TAG: begin
-                if (cache_line.valid && (cache_line.tag == addr[TAG_MSB:TAG_LSB])) begin
-                    if (RE) begin
-                        cache_out = (addr[2]) ?
-                            {cache_line.data[63:32]} :
-                            {cache_line.data[31:0]};
+        hit0 = cache_mem[set].way[0].valid && (cache_mem[set].way[0].tag == addr[TAG_MSB:TAG_LSB]);
+        hit1 = cache_mem[set].way[1].valid && (cache_mem[set].way[1].tag == addr[TAG_MSB:TAG_LSB]);
+
+        if (hit0 || hit1) begin
+            if(RE) begin
+                if(hit0) begin
+                    cache_out = (addr[2]) ? {cache_mem[set].way[0].data[63:32]} :{cache_mem[set].way[0].data[31:0]};
+                    cache_mem[set].lru = 0;
+                end else begin
+                    cache_out = (addr[2]) ? {cache_mem[set].way[1].data[63:32]} :{cache_mem[set].way[1].data[31:0]};
+                    cache_mem[set].lru = 1;
+                end
+            end
+
+            if(WE) miss_stall = 0; // write-through no need to stall
+
+        end else if (WE || RE) begin
+            // CACHE MISS
+            miss_stall = 1;
+        end
+    end
+
+    always_ff @(posedge clk) begin
+        if(miss_stall) begin
+            // populate cache
+            // replace way 1 (least recently used)
+            if (cache_mem[set].lru) begin 
+                cache_mem[set].way[1].data[31:0] <= {ram_array[addr[16:0] + 3],
+                                            ram_array[addr[16:0] + 2],
+                                            ram_array[addr[16:0] + 1],
+                                            ram_array[addr[16:0] + 0]};
+
+                cache_mem[set].way[1].data[63:32] <= {ram_array[addr[16:0] + 7],
+                                            ram_array[addr[16:0] + 6],
+                                            ram_array[addr[16:0] + 5],
+                                            ram_array[addr[16:0] + 4]};
+                
+                cache_mem[set].way[1].tag <= addr[TAG_MSB:TAG_LSB];
+                cache_mem[set].way[1].valid <= 1;
+                cache_mem[set].lru <= 0;
+            end
+
+            // replace way 0
+            else begin
+                cache_mem[set].way[0].data[31:0] <= {ram_array[addr[16:0] + 3],
+                                            ram_array[addr[16:0] + 2],
+                                            ram_array[addr[16:0] + 1],
+                                            ram_array[addr[16:0] + 0]};
+
+                cache_mem[set].way[0].data[63:32] <= {ram_array[addr[16:0] + 7],
+                                            ram_array[addr[16:0] + 6],
+                                            ram_array[addr[16:0] + 5],
+                                            ram_array[addr[16:0] + 4]};
+                
+                cache_mem[set].way[0].tag <= addr[TAG_MSB:TAG_LSB];
+                cache_mem[set].way[0].valid <= 1;
+                cache_mem[set].lru <= 1;
+            end
+        end
+
+        else if(WE) begin
+            // write to both mem and cache
+            case (modeAddr)
+                3'b011, 3'b101: begin
+                    if(hit0) begin
+                        cache_mem[set].way[0].data[(addr[2:0] * 8) +: 8] <= write_data[7:0];
+                    end else if (hit1) begin
+                        cache_mem[set].way[1].data[(addr[2:0] * 8) +: 8] <= write_data[7:0];
                     end
-                    
-                    miss_stall = 0;
-                    next_state = COMPARE_TAG;
-                end else if (RE || WE) begin
-                    miss_stall = 1;
-                    next_state = (!cache_line.dirty) ? ALLOCATE : WRITE_BACK;
                 end
-            end
-
-            ALLOCATE: begin
-                miss_stall = 1;
-                next_state = COMPARE_TAG;
-            end
-
-            WRITE_BACK: begin
-                miss_stall = 1;
-                next_state = ALLOCATE;
-            end
-        endcase
-    end
-
-always_ff @(posedge clk) begin
-    if (rst) begin
-        current_state <= COMPARE_TAG;
-    end else begin
-        cache_line <= cache_mem[set];
-        current_state <= next_state;
-
-        case (current_state)
-            COMPARE_TAG: begin
-                if (WE && cache_line.valid && (cache_line.tag == addr[TAG_MSB:TAG_LSB])) begin
-                    cache_line.dirty <= 1;
-                    case (modeAddr)
-                        3'b011, 3'b101: begin
-                            cache_line.data[(addr[2:0] * 8) +: 8] <= write_data[7:0];
+                default: begin
+                    if(addr[2]) begin
+                        if(hit0) begin
+                            cache_mem[set].way[0].data[63:32] <= write_data;
+                        end else if (hit1) begin
+                            cache_mem[set].way[1].data[63:32] <= write_data;
                         end
-                        default: begin
-                            if (addr[2]) begin
-                                cache_line.data[63:32] <= write_data;
-                            end else begin
-                                cache_line.data[31:0] <= write_data;
-                            end
+                    end else begin
+                        if(hit0) begin
+                            cache_mem[set].way[0].data[31:0] <= write_data;
+                        end else if (hit1) begin
+                            cache_mem[set].way[1].data[31:0] <= write_data;
                         end
-                    endcase
-                    cache_mem[set] <= cache_line;
+                    end
                 end
-            end
+            endcase
 
-            ALLOCATE: begin
-                cache_line.data[31:0] <= {ram_array[addr[16:0] + 3],
-                                          ram_array[addr[16:0] + 2],
-                                          ram_array[addr[16:0] + 1],
-                                          ram_array[addr[16:0] + 0]};
-                cache_line.data[63:32] <= {ram_array[addr[16:0] + 7],
-                                           ram_array[addr[16:0] + 6],
-                                           ram_array[addr[16:0] + 5],
-                                           ram_array[addr[16:0] + 4]};
-                block <= 1;
-                cache_line.valid <= 1;
-                cache_line.dirty <= 0;
-                cache_line.tag <= addr[TAG_MSB:TAG_LSB];
-                cache_mem[set] <= cache_line;
-            end
-
-            WRITE_BACK: begin
-                ram_array[{cache_line.tag, set, 3'b000}] <= cache_line.data[63:56];
-                ram_array[{cache_line.tag, set, 3'b001}] <= cache_line.data[55:48];
-                ram_array[{cache_line.tag, set, 3'b010}] <= cache_line.data[47:40];
-                ram_array[{cache_line.tag, set, 3'b011}] <= cache_line.data[39:32];
-                ram_array[{cache_line.tag, set, 3'b100}] <= cache_line.data[31:24];
-                ram_array[{cache_line.tag, set, 3'b101}] <= cache_line.data[23:16];
-                ram_array[{cache_line.tag, set, 3'b110}] <= cache_line.data[15:8];
-                ram_array[{cache_line.tag, set, 3'b111}] <= cache_line.data[7:0];
-            end
-        endcase
+            // writing to memory
+            ram_array[addr[16:0]] <= write_data[31:24];
+            ram_array[addr[16:0] + 1] <= write_data[23:16];
+            ram_array[addr[16:0] + 2] <= write_data[15:8];
+            ram_array[addr[16:0] + 3] <= write_data[7:0];
+        end
     end
-end
-
 endmodule
