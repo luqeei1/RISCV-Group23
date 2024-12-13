@@ -82,7 +82,7 @@ To run this specific code, the instruction memory would need to read the program
 
 ### Testing the probability density function tests
 
-There were three files: gaussian.mem, noisy.mem, and triangle.mem , which could be run by running the ```./pdf.sh``` command on terminal, ensuring it was being tested via the pdfgen_tb.cpp testbench. 
+There were three files: gaussian.mem, noisy.mem, and triangle.mem , which could be run by running the ```./pdf.sh``` command on terminal, ensuring it was being tested via the pdfgen_tb.cpp testbench. We ensured that the pdf would plot very fast, we decided to ignore when a0 was zero. This change was made in the test bench. The full explanation can be found in Akarsh's logbook. Videos can be shown below. 
 
 ### Tests 1-4:
 
