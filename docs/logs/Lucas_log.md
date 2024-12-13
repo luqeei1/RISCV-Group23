@@ -56,4 +56,24 @@
 - Added flush for whenever a JAL occurs
 - Added new logic to forward from the memory stage 
 
-# 10
+# 10/12
+- Tried debugging write-back cache
+- Synchronization issues with clocked and synchronous logic, COMPARE_TAG state was changing to the ALLOCATE state (to populate cache) even when there is a cache hit, because it takes a cycle before computing cache hit. 
+- Unable to move logic to always_comb block because of synchronization issues 
+
+# 11/12
+- Changed cache to direct-mapped, write-through with 32-bit cachelines. 
+- Fixed how stalls are executed when there is a cache miss
+- Fixed single-byte addresing, and byte overwriting issues
+- 32-bit cache was working, so increased block size to 8 bytes.
+- Got 64-bit cacheline working for Test3.
+
+# 12/12 - 13/12
+- Pipelined processor with branch prediction unit with write-through cache passes Test3 but fails pdf program. For some reason cache was affecting the synchronization logic in the branch prediction unit, and the oldBranch variable was not being properly written to from the first element of the queue, leading to an incorrect jump. Error only occured in one cycle.
+- Theo changed branch prediction to static branch, which solved the previous issue, and PC is now jumping correctly. 
+- But introduced another non-obvious issue, and could only see a deviation from normal datamemory output in the ~300k cycle. Seems to be an addressing issue.
+- Error happened to be mistake with LRU synchronization, leading to really inconsistent outputs in the cache out.
+- After removing LRU policy and changes in branch prediction logic finally passed all tests, including the pdf program.
+
+# 14/12
+- Working on personal statement and team statement.
