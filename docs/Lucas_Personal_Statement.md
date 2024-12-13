@@ -83,10 +83,6 @@ end else if (hit1) begin
     cache_mem[set].way[1].data[(addr[2:0] * 8) +: 8] <= write_data[7:0];
 end
 ```
-<div align = "centre">
-  <img src = "docs/images/gtkwave_cache.png"> </img>
-</div>
-**Writing byte to correct place in cacheline**
 
 - After ensuring the basic cache would function, I changed the data structure of the cache memory to include **2 ways**, and implemented **spatial locality** by increasing the **block size to 8 bytes** (2 words).
 
