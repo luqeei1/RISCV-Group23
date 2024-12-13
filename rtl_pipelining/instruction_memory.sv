@@ -10,7 +10,7 @@ logic [7:0] rom_array [2**16 - 1 : 0];
 
 initial begin
     $display("Loading rom.");
-    $readmemh("pdf.hex", rom_array);     
+    $readmemh("Test4.hex", rom_array);     
     $display("ROM loaded successfully.");
 end
 
