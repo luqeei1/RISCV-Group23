@@ -4,12 +4,8 @@ This branch contains the primary deliverable of this coursework, which is the fu
 
 For details on this and any test results, refer to the main branch as well as our individual logbooks and personal statements.
 
-To run these files:
 
-
-## IMPORTANT: HOW TO RUN THE SCRIPTS (read this before running any scripts !)
-
-To run scripts on the ```main``` branch (which contains the functional pipelined processor with two-way cache and a branch prediction unit), you need to upgrade to the **latest version** of Verilator, which is ```Verilator 5.0231```. 
+## IMPORTANT: HOW TO RUN THE SCRIPTS (read this before running any scripts)
 
 please connect VBUDDY:
 
@@ -22,7 +18,7 @@ These instructions are suitable if running from Windows. the first command shoul
 ls /dev/ttyU*
 ```
 
-### Running the Tests 1-4 
+### Running the Tests 1-5
 
 Use ``` cd tb ``` to make sure you are in the ``` tb ``` directory and run the script as follows:
 
