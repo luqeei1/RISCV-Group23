@@ -74,24 +74,32 @@ My main contribution to the pipelined processor was the branch predictor unit. A
 </br>
 ![image](https://github.com/user-attachments/assets/55262e90-8c63-4587-8cd1-78b72544bde4)
 ***Inputs***
+</br>
 RD: The output from instruction memory, the most fastest way to access what instruction is going to be decoded next
+</br>
 PCF: The input into instruction memory, used to log the branch address
+</br>
 ZeroE: The output from ALU, that goes high if the branch condition is met and low otherwise
+</br>
 JumpE: The output from the DE flip flop, indicating if a jump instruction is being executed
+</br>
 BranchE: The output from the DE flip flop
 <br>
 ***Outputs***
+</br>
 flushBranch: The input into the hazard unit to tell it to flush the flip flops
+</br>
 PCBPU: The input into the BPU_mux
+</br>
 PCSrc: The input into the BPU_mux
 <br>
 
 The static branch predictor works by first identifying if a branch instruction is going to be decoded next, by reading the output from the instruction memory, also can be named as InstrF. If the fetched instruction is a branch instruction, then we calculate the target address of the branch by adding the current fetched program counter, PCF, and the immediate offset of the branch instruction. The immediate offset had to be sign extended before being able to be added with the program counter. We also set our internal signal "branchAddr" to the current program counter, so that we can remember the address of the branch instruction. Lastly, we set the signal PCBPUSrc to high. PCBPUSrc is a mux select signal that controls the two input mux "BPU_mux". BPU_mux takes in two options, PCBPU and the output from the program counter, and outputs PCF, the next address. This makes it so that the BPU can "override" the next instruction address with it's own address if it wants to. This makes deciding on whether to take a branch or not, and what to do if it's decision is incorrect much easier as it is responsive. 
 <br>
 Therefore, if the current fetched instruction is a branch, the static branch unit, calulates the branch target address and makes sure the next instruction address is the branch destination address. Else, the PCBPUSrc is low, and the next address is calulated from the program counter instead. Once the branch has been executed, the static branch unit waits for the branch decicion to be determined, indicated by the signal BranchE, which tells the unit if the branch instruction is being executed or not. If it is, we look at whether the branch condition was met or not, by looking at the ZeroE signal, which comes from the ALU. If the ZeroE signal is high, then the branch condition was met and so the unit doesn't have to do anything and so doesn't flush the flip flops as the correct instructions are going to be executed. However, the signal is low, indicating that the branch condition was not met, the unit must instead revert it's changes and jump back to the original branch address (+4) to execute the correct next instruction. This is why it stores the branch address. Therefore, PCBPU is set to the branch address + 4, and PCBPSrc is set high to make sure the branch unit's address is the next instruciton address. We also set the flush signal high, so that we can flush the wrong signals from being executed. After testing, we realised that the static branch unit would not work as intended if the instruction being executed was a jump instruction while the branch unit was decoding a branch instruction and setting the next instruction address. This was because the BPU_mux, which takes an input from the program counter, has a larger priority than the program counter, so that if a jump were to be executed while a branch was being fetched, the jump would not execute. We solved this by adding the condition that for the branch unit to decode a branch, the current instruction being executed would not be a jump. 
-
+</br>
 ### Branch Prediciton Unit
-
+</br>
 After the static branch unit was completed and we had a working pipelined processor, I started work on the branch prediciton unit. Following the lecture slide given, I decided to follow the branch prediction algorithmn of a 2 bit state machine. This branch prediciton unit would make decisions on whether to take a forward or backward jump or not. I decided to make the decision to have two state machines for forward and backward branches, as this would be easy to implement but still effective. A more effective solution would've been having a table of all different branches encountered, and having a separate state machine counter for all of them, but I decided this would've been too difficult to implement. The following states of the counter are shown below:
 </br>
 o  00 - Don't take the branch (Strong)
@@ -112,5 +120,14 @@ o If the decision is right - Increment the respective counter by one
 o If the state is 00, and the decision is wrong - Keep the counter at 00
 </br>
 o If the state is 11, and the decision is right - Keep the counter at 11
+</br>
+
+For the branch predicition unit, the inputs and outputs are the same as the static branch unit, and the general logic is the same. The main change is that the branch prediction unit has to use the state machine to make it's decision, and that when the decision has been made, the respective counter for the forward or the backward jump has to be updated. This also means adding synchronous logic to the branch predictor, so that the counters are updating with reference to the clock. 
+</br>
+To account for the possibility of having 2 or more branches sequentially, I decided to implement a queue data structure. A queue is a special type of data structure similar to a stack, but instead of being a FIFO (First In, First Out) logic, it is a FILO (First In, Last Out). This makes it so that the unit can store multiple branch information in a queue and access them in order when their decision has been made. A queue can be initialised as so in System Verilog: 
+</br> 
+![image](https://github.com/user-attachments/assets/ca2df7dc-14d2-4b11-a772-cd29a01467fc)
+</br>
+The [$] indicates a queue data structure. Within the queue, I create my own data structure called "Branch Info", comprised of 32 bits of the branch address, 32 bits of the branch target address, 1 bit to indicate the branch direction (0 for forward, 1 for backward), and 1 bit for the prediciton (0 if branch not taken, 1 if branch taken). This makes it easier to store information when the unit fetches a branch instruction, and to access it when it's decision has been made up. We can interpret the direction of the branch by looking at the MSB, or sign bit of the immediate constant of the branch instruction. After calculating all the branch information and making the decision on whether to jump or not, we store the branch information with the command ".push_back". The unit follows similar logic when it comes to receiving the branch decision, in terms of updating the counters and flushing. We also have to "pop the front" element when we are done with that branch, by using the "pop_front" command. After doing some debugging when testing, I also changed the BPU to operate on the negative edge of the clock cycle so that it doesn't interfere with jump instructions. I worked with Lucas to link the BPU with the hazard unit to make sure the hazard unit flushes the flip flops when the branch prediction wants to. 
 </br>
 
