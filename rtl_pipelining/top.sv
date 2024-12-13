@@ -57,6 +57,7 @@ module top#(
     logic RegWriteW;
     logic [1:0] ResultSrcW;
     logic [WIDTH-1:0] PCPlus4W;
+    logic MemWriteW;
 
     // Control signals
     logic [WIDTH-1:0] ExtImmD;
@@ -102,6 +103,7 @@ module top#(
     logic flush;
     logic flushDE;
     logic stall;
+    logic miss_stall;
 
     // Branch Prediction Unit
     logic flushBranch;
@@ -131,6 +133,7 @@ module top#(
         .ForwardAE(ForwardAE),
         .ForwardBE(ForwardBE),
         .stall(stall),
+        .miss_stall(miss_stall),
         .flush(flush),
         .flushDE(flushDE)
     );
@@ -273,17 +276,31 @@ module top#(
         .ALUctrl(ALUControlE)
     );
 
-    // Data Memory
-    data_memory data_memory (
+    cached_datamem cached_data_memory(
         .clk(clk),
+        .rst(rst),
         .WE(MemWriteM),
+        .RE(MemReadM),
         .modeAddr(modeAddrM),
-        .A(ALUResultM),
-        .WD(WriteDataM),
+        .addr(ALUResultM),
+        .write_data(WriteDataM),
         .trigger(trigger),
 
-        .RD(ReadDataM)
+        .miss_stall(miss_stall),
+        .data_out(ReadDataM)
     );
+
+    // Data Memory
+    // data_memory data_memory (
+    //     .clk(clk),
+    //     .WE(MemWriteM),
+    //     .modeAddr(modeAddrM),
+    //     .A(ALUResultM),
+    //     .WD(WriteDataM),
+    //     .trigger(trigger),
+
+    //     .RD(ReadDataM)
+    // );
 
     // Result multiplexer for RegFile write data
     mux3 regfile_mux(
@@ -385,6 +402,7 @@ module top#(
         .RdM(RdM),
         .PCPlus4M(PCPlus4M),
         .InstrM(InstrM), //for debugging
+        .MemWriteM(MemWriteM),
 
         .RegWriteW(RegWriteW),
         .ResultSrcW(ResultSrcW),
@@ -392,6 +410,7 @@ module top#(
         .ReadDataW(ReadDataW),
         .RdW(RdW),
         .PCPlus4W(PCPlus4W),
+        .MemWriteW(MemWriteW),
         .InstrW(InstrW) //for debugging
     );
 

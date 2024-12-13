@@ -16,8 +16,6 @@
 // INCLUDE MODULE CLASSES
 #include "Vtop___024root.h"
 
-// DPI TYPES for DPI Export callbacks (Internal use)
-
 // SYMS CLASS (contains all model state)
 class Vtop__Syms final : public VerilatedSyms {
   public:
@@ -29,29 +27,6 @@ class Vtop__Syms final : public VerilatedSyms {
 
     // MODULE INSTANCE STATE
     Vtop___024root                 TOP;
-
-    // SCOPE NAMES
-    VerilatedScope __Vscope_TOP;
-    VerilatedScope __Vscope_top;
-    VerilatedScope __Vscope_top__BPU_mux;
-    VerilatedScope __Vscope_top__PC_mux;
-    VerilatedScope __Vscope_top__alu;
-    VerilatedScope __Vscope_top__branch_prediction_unit;
-    VerilatedScope __Vscope_top__control_unit;
-    VerilatedScope __Vscope_top__control_unit__alu_decoder;
-    VerilatedScope __Vscope_top__data_memory;
-    VerilatedScope __Vscope_top__forwardAE_mux;
-    VerilatedScope __Vscope_top__forwardBE_mux;
-    VerilatedScope __Vscope_top__hazard_unit;
-    VerilatedScope __Vscope_top__instruction_memory;
-    VerilatedScope __Vscope_top__pipeline_DE;
-    VerilatedScope __Vscope_top__pipeline_EM;
-    VerilatedScope __Vscope_top__pipeline_FD;
-    VerilatedScope __Vscope_top__pipeline_MW;
-    VerilatedScope __Vscope_top__program_counter;
-    VerilatedScope __Vscope_top__regfile;
-    VerilatedScope __Vscope_top__regfile_mux;
-    VerilatedScope __Vscope_top__sign_extend;
 
     // CONSTRUCTORS
     Vtop__Syms(VerilatedContext* contextp, const char* namep, Vtop* modelp);

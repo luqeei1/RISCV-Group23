@@ -13,22 +13,13 @@ parameter SETS = 256;
 
 typedef struct packed {
     logic valid;    // valid bit
-    logic dirty;    // dirty bit
     logic [TAG_MSB:TAG_LSB] tag;
     logic [63:0] data;
 } cache_block_type;
 
-typedef struct packed {
-    logic [31:0] addr;
-    logic [31:0] data;
-    logic [1:0] op;     // 00 = read, 01 = write, 10 = allocate
-    logic [2:0] mode_addr;  
-    logic valid;
-} request_type;
-
-typedef struct packed{
-    logic [31:0] data;
-    logic ready;
-} response_type;
+typedef struct{
+    cache_block_type way[2];
+    //logic lru;      // if 0: way[0] least recently used 
+} cache_set_type;
 
 `endif 
