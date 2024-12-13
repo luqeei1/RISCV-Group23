@@ -84,7 +84,7 @@ end else if (hit1) begin
 end
 ```
 <div align = "centre">
-  <img src = "docs/images/Screenshot 2024-12-14 004243.png"> </img>
+  <img src = "docs/images/gtkwave_cache.png"> </img>
 </div>
 **Writing byte to correct place in cacheline**
 
