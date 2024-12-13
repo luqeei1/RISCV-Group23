@@ -43,3 +43,8 @@
 ## 8/12
 - modified F1.s code to generate values randomly by using LFSR method instead of LCG --> much more reliable
 - uploaded images of testing onto Github and started README writeup for assembly code
+
+## 9/12 - 13/12
+- helped with debugging
+- cleaned up files and updated README
+- simulated waves on GTKWave to assist with debugging, organised meetups as a group 
