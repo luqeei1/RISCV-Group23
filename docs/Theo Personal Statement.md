@@ -68,18 +68,18 @@ o   Created the pipeline FF required, including adding stall and flush functiona
 
 For a pipelined processor, you need to have clocked FF's to be able to run multiple instructions in each of the 5 stages: Fetch, Decode, Execute, Memory, and Write(back). As a team, we discussed early on what signals we wanted to implement, what to call them and how wide they should be. This made it easier to implement all the FF required, although it did prove to a laborious task. For each signal going through the FF's, we named with a letter at the end with the stage it was found in. We also did this for signals that were not particularly needed in certain stages of the CPU, but were useful for debugging. For example, we passed the instruction signal through the DE, EM, and MW flip flop's as we wanted to see which instructions were in each stage of the processor. 
 
-**Static Branch Unit and Branch Prediciton Unit**
+### Static Branch Unit and Branch Prediciton Unit
 
 My main contribution to the pipelined processor was the branch predictor unit. After learning about the branch prediction state machine/algorithmn, I was eager to implement this into our own RISCV CPU. Before I started work on the branch predictor unit, I quickly designed a static branch unit, which identifies a branch instruction and overiddes the program counter with it's own signal "PCBPU". The static branch unit will always decide to take the branch, calculating the target address of the branch and making sure the next instruction fetched is the instruction at the target address of the branch. This was done as I didn't want to hold up my teammates who may want to test their designs, and I didn't want them to test them with a unfinished and faulty branch prediction unit. The static branch unit is shown below: 
 ![image](https://github.com/user-attachments/assets/55262e90-8c63-4587-8cd1-78b72544bde4)
-### Inputs
+***Inputs***
 RD: The output from instruction memory, the most fastest way to access what instruction is going to be decoded next
 PCF: The input into instruction memory, used to log the branch address
 ZeroE: The output from ALU, that goes high if the branch condition is met and low otherwise
 JumpE: The output from the DE flip flop, indicating if a jump instruction is being executed
 BranchE: The output from the DE flip flop
 <br>
-### Outputs
+***Outputs***
 flushBranch: The input into the hazard unit to tell it to flush the flip flops
 PCBPU: The input into the BPU_mux
 PCSrc: The input into the BPU_mux
@@ -89,6 +89,6 @@ The static branch predictor works by first identifying if a branch instruction i
 <br>
 Therefore, if the current fetched instruction is a branch, the static branch unit, calulates the branch target address and makes sure the next instruction address is the branch destination address. Else, the PCBPUSrc is low, and the next address is calulated from the program counter instead. Once the branch has been executed, the static branch unit waits for the branch decicion to be determined, indicated by the signal BranchE, which tells the unit if the branch instruction is being executed or not. If it is, we look at whether the branch condition was met or not, by looking at the ZeroE signal, which comes from the ALU. If the ZeroE signal is high, then the branch condition was met and so the unit doesn't have to do anything and so doesn't flush the flip flops as the correct instructions are going to be executed. However, the signal is low, indicating that the branch condition was not met, the unit must instead revert it's changes and jump back to the original branch address (+4) to execute the correct next instruction. This is why it stores the branch address. Therefore, PCBPU is set to the branch address + 4, and PCBPSrc is set high to make sure the branch unit's address is the next instruciton address. We also set the flush signal high, so that we can flush the wrong signals from being executed. After testing, we realised that the static branch unit would not work as intended if the instruction being executed was a jump instruction while the branch unit was decoding a branch instruction and setting the next instruction address. This was because the BPU_mux, which takes an input from the program counter, has a larger priority than the program counter, so that if a jump were to be executed while a branch was being fetched, the jump would not execute. We solved this by adding the condition that for the branch unit to decode a branch, the current instruction being executed would not be a jump. 
 
-**Branch Prediciton Unit**
+### Branch Prediciton Unit
 
 After the static branch unit was completed and we had a working pipelined processor, I started work on the branch prediciton unit. Following the lecture slide given, I decided to follow the branch prediction algorithmn of a 2 bit state machine. This branch prediciton unit would make decisions on whether to take a forward or backward jump or not. I decided to make the decision to have two state machines for forward and backward branches, as this would be easy to implement but still effective. A more effective solution would've been having a table of all different branches encountered, and having a separate state machine counter for all of them, but I decided this would've been too difficult to implement. The following states of the counter are shown below:
