@@ -118,7 +118,7 @@ There were three files: gaussian.mem, noisy.mem, and triangle.mem , which could 
 
 ### F1 Lights (Pipelined)
 
-[![](https://img.youtube.com/vi/=hqBxMIpIb7w/0.jpg)](https://www.youtube.com/watch?v=hqBxMIpIb7w)
+[![](https://img.youtube.com/vi/hqBxMIpIb7w/0.jpg)](https://www.youtube.com/watch?v=hqBxMIpIb7w)
 
 ### Triangle PDF
 
