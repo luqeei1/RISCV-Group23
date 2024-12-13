@@ -59,7 +59,7 @@ led_sequence:
     ori     a2, a2, 1                    
     mv      a1, a2                       
 ```
-This is the main function that creates the actual sequence of LEDs baesd on the operations above. ```a1``` contains the curernt LED state and copies this to ```a2``` to store the original value. It then conducts a shift right operation by 2, and then this value undergoes an XOR operation, followed by another set of ```srli``` and ```xor``` operations and then 
+This is the main function that creates the actual sequence of LEDs baesd on the operations above. ```a1``` contains the curernt LED state and copies this to ```a2``` to store the original value. It then conducts a shift right operation by 2, and then this value undergoes an XOR operation, followed by another set of ```srli``` and ```xor``` operations and then comducts an ```or``` operation and stores it back into ```a1```. This allows new bit patterns to be generated everytime the loop is run, as the value of ```a1``` changes with every cycle.
 
 ```
 pattern_complete:
@@ -68,9 +68,17 @@ pattern_complete:
 
         j       wait_trigger  
 ```
+The pattern_complete subroutine starts with the ```li a3, 50``` instruction, which loads 50 into register ```a3```. This is the base delay at the end of the delay routine, meaning that it will always be at least this value before it resets. The ```jal``` instruction jumps and links register ```ra``` and executes the delay_routine, which is shown below. The ```j wait_trigger``` instruction is an unconditional jump to wait_trigger.
+
+So ultimately, I have added this so that when the pattern is complete, a delay is introduced and it will jump back to waiting for the trigger.
 
 ```
+delay_routine:
+        addi    a3, a3, -1                  
+        bne     a3, zero, delay_routine     
+        ret
 ```
+The delay_routine subroutine is the subroutine which is responsible for the delay. ```addi a3, a3, -1``` decrements the value in the register by 1 and reduces the counter in ```a3``` to track how many iterations are left prior to the delay ending. The next line is responsible for checking if ```a3``` is equal to 0 or not via a ```bne``` instruction, and if it is, the loop exits and it returns back to the start. It not, it jumps back to the start of this subroutine and restarts the loop. 
 
 ## ALU
 The ALU performs arithmetic and logic operations on two operands. Every arithmetic instruction specified on the RISC-V 32I instruction set are implemented, even if not every instruction has been used. 
@@ -189,7 +197,7 @@ I enjoyed this project deeply and I obtained a number of skills in the process, 
 -   Improved perseverance while debugging
 ## Things I would do differently
 - Ensuring the whole team had a complete working understanding of the whole architecture, even if they were only responsible for a few components. I could have understood cache more deeply as this was a limiting factor when trying to debug this    
-- I would have understood and employed GTKWave as a potential debugging solution earlier, as I hadn't used this to its full extent during Labs 1-4, which led to a  
+- I would have understood and employed GTKWave as a potential debugging solution earlier, as I hadn't used this to its full extent during Labs 1-4, which led to me needing to learn this and utilise this properly during the coursework. Next time, I would make sure to be on top of the tools 
 - While debugging, Akarsh and I spent an all-nighter trying to fix issues with the pipelined processor however our productivity declined later into the night. In the future, we would not repeat this and focus on more organised and systematic approaches to debugging 
 -  We should have worked in smaller more focused sessions rather than long sessions without breaks. 
 
