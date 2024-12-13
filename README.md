@@ -33,4 +33,14 @@ make sure that ``` data_memory.sv ``` contains ``` data_memory.hex ``` and that 
 
 There were three files: gaussian.mem, noisy.mem, and triangle.mem , which could be run by running the ```./pdf.sh``` command on terminal, ensuring it was being tested via the ```pdfgen_tb.cpp``` testbench. To ensure that the pdf would plot very fast, we decided to ignore when a0 was zero. This change was made in the test bench. The full explanation can be found in Akarsh's logbook.
 
+To test PDF, ensure that the Data Memory contains your memory file of interest with the right path
+
+The ```instruction_memory.sv``` file should always contain ```pdf.hex```
+
+For a gaussian PDF test, the ```data_memory.sv``` file should contain ```gaussian.mem```
+
+For a noisy PDF test, the ```data_memory.sv``` file should contain ```noisy.mem```
+
+For a triangle PDF test, the ```data_memory.sv``` file should contain ```triangle.mem```
+
 
