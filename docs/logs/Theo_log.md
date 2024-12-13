@@ -70,3 +70,6 @@
 
 ## 13/12
 - Cleaned up the folder and got rid of redundant signals used for debugging
+- Added extra tests to test all RV32I Btype instructions and R/Itype instructions
+- Added tests to calculate fibonacci number and a binary to decimal converter
+- Made it easier to run the F1 test program
