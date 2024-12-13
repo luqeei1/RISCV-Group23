@@ -112,6 +112,27 @@ To run this specific code, the instruction memory would need to read the program
 
 There were three files: gaussian.mem, noisy.mem, and triangle.mem , which could be run by running the ```./pdf.sh``` command on terminal, ensuring it was being tested via the pdfgen_tb.cpp testbench. We ensured that the pdf would plot very fast, we decided to ignore when a0 was zero. This change was made in the test bench. The full explanation can be found in Akarsh's logbook. Videos can be shown below. 
 
+### F1 Lights (Single Cycle)
+
+[![](https://img.youtube.com/vi/kvJkfpa182A/0.jpg)](https://www.youtube.com/watch?v=kvJkfpa182A)
+
+### F1 Lights (Pipelined)
+
+[![](https://img.youtube.com/vi/=hqBxMIpIb7w/0.jpg)](https://www.youtube.com/watch?v==hqBxMIpIb7w)
+
+### Triangle PDF
+
+[![](https://img.youtube.com/vi/jg93zmgKeUM/0.jpg)](https://www.youtube.com/watch?v=jg93zmgKeUM)
+
+### Noisy PDF
+
+[![](https://img.youtube.com/vi/Xb7KfGf_f7Y/0.jpg)](https://www.youtube.com/watch?v=Xb7KfGf_f7Y)
+
+### Gaussian PDF
+
+[![](https://img.youtube.com/vi/1BHme1be_hA/0.jpg)](https://www.youtube.com/watch?v=1BHme1be_hA)
+
+
 ### Tests 1-4:
 
 ## RV32I Pipelined Design
