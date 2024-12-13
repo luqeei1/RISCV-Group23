@@ -88,11 +88,21 @@ end
     <img src= "images/gtkwave_cache.png"> </img>
 </div>
 <br> </br>
-**Writing to correct byte within cacheline**
 
 - After ensuring the basic cache would function, I changed the data structure of the cache memory to include **2 ways**, and implemented **spatial locality** by increasing the **block size to 8 bytes** (2 words).
 
-- Using data structures significantly simplified the logic, and allowed for easy scaling if we wanted to add more ways to the cache.
+- Using data structures significantly simplified the logic, and allowed for easy scaling if we wanted to add more ways to the cache, and would not require change to the logic itself.
+  ```
+  typedef struct packed {
+    logic valid;    // valid bit
+    logic [TAG_MSB:TAG_LSB] tag;
+    logic [63:0] data;
+    } cache_block_type;
+
+    typedef struct {
+        cache_block_type way[2];
+    } cache_set_type;
+  ```
 
 |Contribution | Commits |
 |-|-|
