@@ -24,4 +24,8 @@
 
 # 10/12 - 12/12
 
-- Helped with general testing and debugging with pipelining processor
+- Helped with general testing and debugging with pipelining processor. 
+
+# 13/12
+
+- Finished checking if all tests work and completed read me. 
