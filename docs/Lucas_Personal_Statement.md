@@ -27,6 +27,7 @@
 - I also helped set up the initial test infrastructure, including individual unit tests for modules
 
 | Contribution | Commits |
+|-|-|
 | `Program Counter` | [Commit](https://github.com/luqeei1/RISCV-Group23/commit/755ed7813b33a644026b0deda876ae2c68cfc9c1) |
 | Debugging | [Commit](https://github.com/luqeei1/RISCV-Group23/commit/9f427e58ae6ae3840bc6875a63f09edbf07651ee) |
 | Debugging | [Commit](https://github.com/luqeei1/RISCV-Group23/commit/087b27cf13a0f797ae4fa0255668e86eddaeac05) |
@@ -51,6 +52,7 @@
 - A `miss_stall` also has to be executed if there is a cache miss, as the main memory has to be accessed and write the new data to the cache. 
 
 |Contribution | Commits |
+|-|-|
 |`Hazard Unit` | [Commit](https://github.com/luqeei1/RISCV-Group23/commit/cbee762ebbada6378e3faca397ba29c0ae3e2323) |
 |`LW hazard`| [Commit](https://github.com/luqeei1/RISCV-Group23/commit/e550bce4151987d3dbec5c434b290fdd7e1c3b48) |
 |`Forwarding from Memory`| [Commit](https://github.com/luqeei1/RISCV-Group23/commit/0755f43210b30e945e93fe01002802459061148b) |
@@ -61,6 +63,7 @@
 - Most of my time was spent debugging the pipelined processor with Theo, with most of the bugs stemming from incorrect `hazard handling`, handling `branch predictions` and overwriting issues in the `cache`.
 
 |Contribution | Commits |
+|-|-|
 |`Top`| [Commit](https://github.com/luqeei1/RISCV-Group23/commit/0dedeea5d73900a4cc7295610d8979dea3bba555) |
 |`D/E Flipflop flush`| [Commit](https://github.com/luqeei1/RISCV-Group23/commit/2f0ce5f364fdd10c8c6b06caf411388df8b1209c) |
 |`Jump flush`| [Commit](https://github.com/luqeei1/RISCV-Group23/commit/defb919e0c6cfb1dc47ed30b71e4dde8ad865ef5) |
@@ -86,6 +89,7 @@ end
 - Using data structures significantly simplified the logic, and allowed for easy scaling if we wanted to add more ways to the cache.
 
 |Contribution | Commits |
+|-|-|
 |`Write-back Cache (FSM)` | [Commit](https://github.com/luqeei1/RISCV-Group23/commit/30313ff45b0eac8fd8f73171f29b6bf520916298) |
 |`Write-through Cache` | [Commit](https://github.com/luqeei1/RISCV-Group23/commit/66653bef6dede9d1e3954f9afa9e7e5931289e8a) |
 |`Cache data struct`| [Commit](https://github.com/luqeei1/RISCV-Group23/commit/6dba5f8259aff036dff6878b9e785631525f1b46) |
