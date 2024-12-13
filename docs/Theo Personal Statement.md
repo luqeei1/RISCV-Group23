@@ -52,64 +52,43 @@ o   Wrote unit tests for the control unit/alu decoder and for the sign extension
 o   Edited other modules to align with signal naming and signal values (mode BU at some point had to be altered as the control unit and data memory had different signals for loading and storing bytes
 </br>
 
-As part of the single cycle CPU, we were tasked to expand our instruction set to accomodate byte addressing. We agreed on adding a signal, named "modeAddr", which would decide whether to load a word, half-word or a byte and likewise for storing. Due to the impossibility of loading and storing on the same cycle, we could get away with reusing the signal for the load and store functions. 
+As part of the single cycle CPU, we were tasked to expand our instruction set to accomodate byte addressing. We agreed on adding a signal, named "modeAddr", which would decide whether to load a word, half-word or a byte and likewise for storing. Due to the impossibility of loading and storing on the same cycle, we could get away with reusing the signal for the load and store functions. As there are 5 different laod instructions, we decided to make the modeAddr signal 3 bits wide to accomodate them all, even though the assembly programs don't require half-word addressing. The modeAddr signal is set in the control unit, set by the func3 signal of the input instruction, and is shown in the following image: 
+<br>
 ![image](https://github.com/user-attachments/assets/c9755cf0-5743-4a7c-888f-261a85f05487)
-
+<br>
+Once the top file was finished and the testbenches created, we were ready to start testing some of the assembly language programs. I collaborated with others in debugging the errors, and we were soon to get all the tests running for single cycle with little effort. 
 
 **rtl_pipelining:**
 
-o   Worked on the ALU
+o   Worked on the branch prediction unit
 </br>
-o   Worked on the Register File
+o   Collaborated on the hazard unit to make sure the branch prediction unit and hazard unit worked together
 </br>
-o   Worked on the Top File
-o   Helped to debug the Branch Prediction Unit (BPU) and also the top files
+o   Created the pipeline FF required, including adding stall and flush functionality
 
-# Explanations of Contributions to the RV32I Processors 
-## F1.s Assembly Code
-I was the main contributor to this assembly code and planned and tested this. The program was split into various parts, which I explain below.
+For a pipelined processor, you need to have clocked FF's to be able to run multiple instructions in each of the 5 stages: Fetch, Decode, Execute, Memory, and Write(back). As a team, we discussed early on what signals we wanted to implement, what to call them and how wide they should be. This made it easier to implement all the FF required, although it did prove to a laborious task. For each signal going through the FF's, we named with a letter at the end with the stage it was found in. We also did this for signals that were not particularly needed in certain stages of the CPU, but were useful for debugging. For example, we passed the instruction signal through the DE, EM, and MW flip flop's as we wanted to see which instructions were in each stage of the processor. 
 
-```
-main:
-        addi    a0, zero, 0                  
-        li      a4, 0xff                     
-        li      a1, 0xABC
-```
-The main function involved loading ```0xff``` into register ```a4```, and ```0xABC``` into register ```a1```. Prior to this, ```addi``` initialises ```a0``` as zero. 
+**Static Branch Unit and Branch Prediciton Unit**
 
-```
-wait_trigger:
-        addi    a0, zero, 0                  
-        lw      a5, 0x100(zero)              
-        andi    a5, a5, 1                    
-        beq     a5, zero, wait_trigger       
+My main contribution to the pipelined processor was the branch predictor unit. After learning about the branch prediction state machine/algorithmn, I was eager to implement this into our own RISCV CPU. Before I started work on the branch predictor unit, I quickly designed a static branch unit, which identifies a branch instruction and overiddes the program counter with it's own signal "PCBPU". The static branch unit will always decide to take the branch, calculating the target address of the branch and making sure the next instruction fetched is the instruction at the target address of the branch. This was done as I didn't want to hold up my teammates who may want to test their designs, and I didn't want them to test them with a unfinished and faulty branch prediction unit. The static branch unit is shown below: 
+![image](https://github.com/user-attachments/assets/55262e90-8c63-4587-8cd1-78b72544bde4)
+### Inputs
+RD: The output from instruction memory, the most fastest way to access what instruction is going to be decoded next
+PCF: The input into instruction memory, used to log the branch address
+ZeroE: The output from ALU, that goes high if the branch condition is met and low otherwise
+JumpE: The output from the DE flip flop, indicating if a jump instruction is being executed
+BranchE: The output from the DE flip flop
+<br>
+### Outputs
+flushBranch: The input into the hazard unit to tell it to flush the flip flops
+PCBPU: The input into the BPU_mux
+PCSrc: The input into the BPU_mux
+<br>
 
-        addi    a0, zero, 1 
-```
-The wait_trigger function was responsible for waiting for the trigger. As good practice, ```a0``` was once again initialised to 0, and this was followed by loading the word from the value stored at the memory address ```0x100``` into the register ```a5```. The value at this memory address represents the trigger. This is followed by the instructions ```andi a5, a5, 1``` and ```beq a5, zero, wait_trigger```, which check if the LSB of a5 is 1, and if not it loops back to the start of this function. 
-We check if the LSB is 1, and this is the condition to activate the trigger condition. The program then exits the loop and sets ```a0``` to 1 to indicate this. 
+The static branch predictor works by first identifying if a branch instruction is going to be decoded next, by reading the output from the instruction memory, also can be named as InstrF. If the fetched instruction is a branch instruction, then we calculate the target address of the branch by adding the current fetched program counter, PCF, and the immediate offset of the branch instruction. The immediate offset had to be sign extended before being able to be added with the program counter. We also set our internal signal "branchAddr" to the current program counter, so that we can remember the address of the branch instruction. Lastly, we set the signal PCBPUSrc to high. PCBPUSrc is a mux select signal that controls the two input mux "BPU_mux". BPU_mux takes in two options, PCBPU and the output from the program counter, and outputs PCF, the next address. This makes it so that the BPU can "override" the next instruction address with it's own address if it wants to. This makes deciding on whether to take a branch or not, and what to do if it's decision is incorrect much easier as it is responsive. 
+<br>
+Therefore, if the current fetched instruction is a branch, the static branch unit, calulates the branch target address and makes sure the next instruction address is the branch destination address. Else, the PCBPUSrc is low, and the next address is calulated from the program counter instead. Once the branch has been executed, the static branch unit waits for the branch decicion to be determined, indicated by the signal BranchE, which tells the unit if the branch instruction is being executed or not. If it is, we look at whether the branch condition was met or not, by looking at the ZeroE signal, which comes from the ALU. If the ZeroE signal is high, then the branch condition was met and so the unit doesn't have to do anything and so doesn't flush the flip flops as the correct instructions are going to be executed. However, the signal is low, indicating that the branch condition was not met, the unit must instead revert it's changes and jump back to the original branch address (+4) to execute the correct next instruction. This is why it stores the branch address. Therefore, PCBPU is set to the branch address + 4, and PCBPSrc is set high to make sure the branch unit's address is the next instruciton address. We also set the flush signal high, so that we can flush the wrong signals from being executed. After testing, we realised that the static branch unit would not work as intended if the instruction being executed was a jump instruction while the branch unit was decoding a branch instruction and setting the next instruction address. This was because the BPU_mux, which takes an input from the program counter, has a larger priority than the program counter, so that if a jump were to be executed while a branch was being fetched, the jump would not execute. We solved this by adding the condition that for the branch unit to decode a branch, the current instruction being executed would not be a jump. 
 
-```
-led_sequence:
-    mv      a2, a1                       
-    srli    a3, a2, 2                    
-    xor     a2, a2, a3                   
-    srli    a3, a2, 1                    
-    xor     a2, a2, a3                   
-    slli    a2, a2, 1                    
-    ori     a2, a2, 1                    
-    mv      a1, a2                       
-```
-This is the main function that creates the actual sequence of LEDs baesd on the operations above. ```a1``` contains the curernt LED state and copies this to ```a2``` to store the original value. It then conducts a shift right operation by 2, and then this value undergoes an XOR operation, followed by another set of ```srli``` and ```xor``` operations and then comducts an ```or``` operation and stores it back into ```a1```. This allows new bit patterns to be generated everytime the loop is run, as the value of ```a1``` changes with every cycle.
+**Branch Prediciton Unit**
 
-```
-pattern_complete:
-        li      a3, 50                      
-        jal     ra, delay_routine           
-
-        j       wait_trigger  
-```
-The pattern_complete subroutine starts with the ```li a3, 50``` instruction, which loads 50 into register ```a3```. This is the base delay at the end of the delay routine, meaning that it will always be at least this value before it resets. The ```jal``` instruction jumps and links register ```ra``` and executes the delay_routine, which is shown below. The ```j wait_trigger``` instruction is an unconditional jump to wait_trigger.
-
-So ultimately, I have added this so that when the pattern is complete, a delay is introduced and it will jump back to waiting for the trigger.
-
+After the static branch unit was completed and we had a working pipelined processor, I started work on the branch prediciton unit. Following the lecture slide given, I decided to follow the branch prediction algorithmn of a 2 bit state machine. This branch prediciton unit would make decisions on whether to take a forward or backward jump or not. I decided to make the decision to have two state machines for forward and backward branches, as this would be easy to implement but still effective. A more effective solution would've been having a table of all different branches encountered, and having a separate state machine counter for all of them, but I decided this would've been too difficult to implement. The following states of the counter are shown below:
