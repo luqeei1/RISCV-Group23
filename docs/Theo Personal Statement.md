@@ -41,17 +41,20 @@ For the sign extension unit, I followed the instruction set information given by
 
  **rtl_single_cycle:**  
  </br>
+o   Collaborated on the instruction memory and built on top of the Lab4 version 
+</br>
+o   Worked on extending the control unit to accomodate all signals in the RV32I instruction set
+</br>
+o   Added my units to the top file
+</br>
+o   Wrote unit tests for the control unit/alu decoder and for the sign extension unit, and passed them
+</br>
+o   Edited other modules to align with signal naming and signal values (mode BU at some point had to be altered as the control unit and data memory had different signals for loading and storing bytes
+</br>
 
-o   Worked on the ALU 
-</br>
-o   Worked on the Register File 
-</br>
-o   Worked on the Top File
-</br>
-o   I also helped to debug many files (discovering errors especially when writing the top.sv files and running tests), primarily Instruction Memory and Control Unit
-</br>
-o   Also made changes to every other module at different points, a full summary of which can be found in my commit history
-</br>
+As part of the single cycle CPU, we were tasked to expand our instruction set to accomodate byte addressing. We agreed on adding a signal, named "modeAddr", which would decide whether to load a word, half-word or a byte and likewise for storing. Due to the impossibility of loading and storing on the same cycle, we could get away with reusing the signal for the load and store functions. 
+![image](https://github.com/user-attachments/assets/c9755cf0-5743-4a7c-888f-261a85f05487)
+
 
 **rtl_pipelining:**
 
