@@ -100,13 +100,9 @@ Broadly speaking, the program:
 
 The delay has been "randomised" through a simple LFSR process, with an initial seed of ```0xABC``` being modified repeatedly using shifts and XOR operations, with the new value used to determine the delay before turning on the subsequent LED. We limited the range of delay by only extracting the lower 5 bits, allowing us to keep any delays reasonable. 
 
-[The complete F1.s assembly code can be seen here](./rtl_single_cycle/F1.s)
+Screenshots of waveforms showing the working F1.s script and specific signals can be viewed [here](./Test_Results/Images/F1_single_cycle). Also can be referenced in Siddharth's personal statement. 
 
-[The video of working lights can be seen here](./Test_Results/Videos/F1_lights_video.mp4)
-
-Screenshots of waveforms showing the working F1.s script and specific signals can be viewed [here](./Test_Results/Images/F1_single_cycle)
-
-To run this specific code, the instruction memory would need to read the program.hex file and the data memory would read 
+To run this specific code, the instruction memory would need to read the ```program.hex``` file. 
 
 ### Testing the probability density function tests
 
@@ -133,7 +129,21 @@ There were three files: gaussian.mem, noisy.mem, and triangle.mem , which could 
 [![](https://img.youtube.com/vi/1BHme1be_hA/0.jpg)](https://www.youtube.com/watch?v=1BHme1be_hA)
 
 
-### Tests 1-4:
+### Tests 1-5:
+
+Running Tests 1-5 can be done by running the ```./doit.sh``` script after navigating to the ```tb``` directory, and modifying ```instruction_memory.sv``` in the lines shown:
+
+
+<div align = "centre">
+  <img src = "images/passed
+
+Then modify ```data_memory.sv``` as shown:
+
+// inesrt image
+
+The results should be as follows:
+
+// insert image 
 
 ## RV32I Pipelined Design
 
