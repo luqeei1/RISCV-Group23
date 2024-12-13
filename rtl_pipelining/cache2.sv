@@ -28,13 +28,13 @@ module cache2 #(
 
     logic hit0; // hit for way 0
     logic hit1; // hit for way 1
-    logic replace_way;
+    logic replace_bit;
 
     assign set = addr[10:3];
 
     initial begin
-        $readmemh("MemoryFiles/gaussian.mem", ram_array, 32'h00010000);
-        //$readmemh("datamem.mem", ram_array, 32'h010000);
+        //$readmemh("MemoryFiles/gaussian.mem", ram_array, 32'h00010000);
+        $readmemh("data_memory.hex", ram_array, 32'h010000);
     end    
 
     always_comb begin
@@ -51,10 +51,10 @@ module cache2 #(
                 if(RE) begin
                     if(hit0) begin
                         cache_out = (addr[2]) ? {cache_mem[set].way[0].data[63:32]} :{cache_mem[set].way[0].data[31:0]};
-                        cache_mem[set].lru = 0;
+                        //cache_mem[set].lru = 0;
                     end else begin
                         cache_out = (addr[2]) ? {cache_mem[set].way[1].data[63:32]} :{cache_mem[set].way[1].data[31:0]};
-                        cache_mem[set].lru = 1;
+                        //cache_mem[set].lru = 1;
                     end
                 end
 
@@ -72,7 +72,7 @@ module cache2 #(
         if(miss_stall) begin
             // populate cache
             // replace way 1 (least recently used)
-            if (cache_mem[set].lru) begin 
+            if (replace_bit) begin 
                 cache_mem[set].way[1].data[31:0] <= {ram_array[addr[16:0] + 3],
                                                     ram_array[addr[16:0] + 2],
                                                     ram_array[addr[16:0] + 1],
@@ -85,7 +85,7 @@ module cache2 #(
                 
                 cache_mem[set].way[1].tag <= addr[TAG_MSB:TAG_LSB];
                 cache_mem[set].way[1].valid <= 1;
-                cache_mem[set].lru <= 0;
+                //cache_mem[set].lru <= 0;
             end
 
             // replace way 0
@@ -102,8 +102,9 @@ module cache2 #(
                 
                 cache_mem[set].way[0].tag <= addr[TAG_MSB:TAG_LSB];
                 cache_mem[set].way[0].valid <= 1;
-                cache_mem[set].lru <= 1;
+                //cache_mem[set].lru <= 1;
             end
+            replace_bit <= ~replace_bit;
         end
 
         else if(WE) begin

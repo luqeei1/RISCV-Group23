@@ -137,7 +137,7 @@ module top#(
         .miss_stall(miss_stall)
     );
 
-    static_branch branch_prediction_unit (
+    BPU branch_prediction_unit (
         .clk(clk),
         .RD(InstrF),
         .PCF(PCF),
