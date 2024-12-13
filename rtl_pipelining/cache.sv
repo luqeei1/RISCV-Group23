@@ -34,6 +34,7 @@ module cache #(
 
     initial begin
         //$readmemh("MemoryFiles/gaussian.mem", ram_array, 32'h00010000);
+        //$readmemh("MemoryFiles/datamem.mem", ram_array, 32'h010000);
         $readmemh("data_memory.hex", ram_array, 32'h010000);
     end    
 

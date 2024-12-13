@@ -57,7 +57,6 @@ module top#(
     logic RegWriteW;
     logic [1:0] ResultSrcW;
     logic [WIDTH-1:0] PCPlus4W;
-    logic MemWriteW;
 
     // Control signals
     logic [WIDTH-1:0] ExtImmD;
@@ -402,7 +401,6 @@ module top#(
         .RdM(RdM),
         .PCPlus4M(PCPlus4M),
         .InstrM(InstrM), //for debugging
-        .MemWriteM(MemWriteM),
 
         .RegWriteW(RegWriteW),
         .ResultSrcW(ResultSrcW),
@@ -410,7 +408,6 @@ module top#(
         .ReadDataW(ReadDataW),
         .RdW(RdW),
         .PCPlus4W(PCPlus4W),
-        .MemWriteW(MemWriteW),
         .InstrW(InstrW) //for debugging
     );
 
