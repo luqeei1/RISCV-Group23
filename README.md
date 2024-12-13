@@ -7,7 +7,7 @@ This repo contains all components, testing and results for the RV32I single-cycl
 | Name       | CID | Link to Logbook | Personal Statement |
 |------------|--------|-----|------|
 | Akarsh Gopalam     | 02395592       |   [Akarsh's Log](./docs/logs/Akarsh_log.md)  |   [Akarsh's Personal Statement](./docs/Akarsh_Personal_Statement.md)   |
-| Lucas Venetez     |  02387237 |  [Lucas's Log](./docs/logs/Lucas_log.md)    |   |
+| Lucas Venetez     |  02387237 |  [Lucas's Log](./docs/logs/Lucas_log.md)    |   |  [Lucas' Personal Statement](./docs/Lucas_Personal_Statement.md) |
 | Siddharth Mishra   |    02382743    |   [Sid's Log](./docs/logs/Sid_log.md)   |  [Sid's Personal Statement](./docs/Siddharth_Personal_Statement.md)  |
 | Theodore Shah     |  02380127      |  [Theo's Log](./docs/logs/Theo_log.md)    |    |
 
