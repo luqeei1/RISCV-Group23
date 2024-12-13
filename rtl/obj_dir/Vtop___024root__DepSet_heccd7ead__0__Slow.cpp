@@ -24,6 +24,8 @@ VL_ATTR_COLD void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
     vlSelfRef.__Vtrigprevexpr___TOP__clk__0 = vlSelfRef.clk;
 }
 
+extern const VlWide<9>/*287:0*/ Vtop__ConstPool__CONST_hdc5b14f5_0;
+
 VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
     (void)vlSelf;  // Prevent unused variable warning
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
@@ -31,26 +33,21 @@ VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Init
     VlWide<6>/*191:0*/ __Vtemp_1;
-    VlWide<4>/*127:0*/ __Vtemp_2;
     // Body
     vlSelfRef.top__DOT__branch_prediction_unit__DOT__forwardJumpCounter = 2U;
     vlSelfRef.top__DOT__branch_prediction_unit__DOT__backwardJumpCounter = 2U;
     VL_WRITEF_NX("Loading rom.\n",0);
-    __Vtemp_1[0U] = 0x2e686578U;
-    __Vtemp_1[1U] = 0x732f4631U;
-    __Vtemp_1[2U] = 0x46696c65U;
-    __Vtemp_1[3U] = 0x74696f6eU;
-    __Vtemp_1[4U] = 0x74727563U;
-    __Vtemp_1[5U] = 0x496e73U;
-    VL_READMEM_N(true, 8, 65536, 0, VL_CVT_PACK_STR_NW(6, __Vtemp_1)
+    VL_READMEM_N(true, 8, 65536, 0, VL_CVT_PACK_STR_NW(9, Vtop__ConstPool__CONST_hdc5b14f5_0)
                  ,  &(vlSelfRef.top__DOT__instruction_memory__DOT__rom_array)
                  , 0, ~0ULL);
     VL_WRITEF_NX("ROM loaded successfully.\n",0);
-    __Vtemp_2[0U] = 0x2e686578U;
-    __Vtemp_2[1U] = 0x6d6f7279U;
-    __Vtemp_2[2U] = 0x615f6d65U;
-    __Vtemp_2[3U] = 0x646174U;
-    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(4, __Vtemp_2)
+    __Vtemp_1[0U] = 0x2e6d656dU;
+    __Vtemp_1[1U] = 0x7369616eU;
+    __Vtemp_1[2U] = 0x67617573U;
+    __Vtemp_1[3U] = 0x6c65732fU;
+    __Vtemp_1[4U] = 0x72794669U;
+    __Vtemp_1[5U] = 0x4d656d6fU;
+    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(6, __Vtemp_1)
                  ,  &(vlSelfRef.top__DOT__cached_data_memory__DOT__cache__DOT__ram_array)
                  , 0x10000U, ~0ULL);
 }

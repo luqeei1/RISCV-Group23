@@ -70,7 +70,7 @@ TEST_F(CpuTestbench, BinaryToDecimalConverter)
     EXPECT_EQ(top_->a0, 21852);
 }
 
-TEST_F(CpuTestbench, 30thFibonacci)
+TEST_F(CpuTestbench, 30thFibonacciNumber)
 {
     setupTest("Fibonacci");
     initSimulation();
