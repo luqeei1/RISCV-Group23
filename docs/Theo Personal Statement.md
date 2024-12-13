@@ -131,3 +131,18 @@ To account for the possibility of having 2 or more branches sequentially, I deci
 The [$] indicates a queue data structure. Within the queue, I create my own data structure called "Branch Info", comprised of 32 bits of the branch address, 32 bits of the branch target address, 1 bit to indicate the branch direction (0 for forward, 1 for backward), and 1 bit for the prediciton (0 if branch not taken, 1 if branch taken). This makes it easier to store information when the unit fetches a branch instruction, and to access it when it's decision has been made up. We can interpret the direction of the branch by looking at the MSB, or sign bit of the immediate constant of the branch instruction. After calculating all the branch information and making the decision on whether to jump or not, we store the branch information with the command ".push_back". The unit follows similar logic when it comes to receiving the branch decision, in terms of updating the counters and flushing. We also have to "pop the front" element when we are done with that branch, by using the "pop_front" command. After doing some debugging when testing, I also changed the BPU to operate on the negative edge of the clock cycle so that it doesn't interfere with jump instructions. I worked with Lucas to link the BPU with the hazard unit to make sure the hazard unit flushes the flip flops when the branch prediction wants to. 
 </br>
 
+### Debugging the pipelined processor with cache and BPU / Adding extra tests
+</br>
+Our team worked for many days to debug all errors with the pipelined processor. We spent many hours tracing instructions and how they interacting with the cache and BPU, and eventually after many changes, such as adding forwarding straight from data memory and writing to the registers on the negative edge of the clock, we were able to manage to get all tests working. I was also responsible for fixing the error associated with our F1 test program. 
+</br>
+To showcase our processor's ability to fulfill all the RV32I set, I have added some extra tests that use all of the instructions. The RV32I tests I-type and R-type instructions not tested in the original tests, and the AllBranch tests all the different branch instructions. I also added some programs such as calculating a specific Fibonacci number and a Binary To Decimal converter, which uses RV32I instructions to replicate a multiplication process. 
+</br> 
+You can run these tests, as part of the ./doit.sh file, as I added the test cases to the verify.cpp file. A photo below shows them all passing the tests:
+</br>
+![Screenshot 2024-12-13 213336](https://github.com/user-attachments/assets/1fd0218b-4a9f-4eb7-8311-4ff82633c94a)
+</br>
+
+### What I would do better / Reflection
+</br> 
+Overall, I believe that our end processor with working BPU and Cache was very successful and worth the time. The ability to add extra tests to showcase the processor's ability was enjoyable. To improve on our project, perhaps we could've learned to use the .gitignore file better. As none of us had properly used git before, none of us established the ignore file properly, which meant while we were testing and producing folders of files such as VCD files and OBJDIR files, we came across many merge conflicts that were hard to solve and merge. This cost us large amounts of time. In terms of our design, I think we could've the cache to work on all versions of verilator, and as mentioned before, changed the BPU so that it keeps a table of every branch encountered and has each own's respective counter. This would've made branch prediciton very accurate and minimise branch hazards and flushing. 
+
