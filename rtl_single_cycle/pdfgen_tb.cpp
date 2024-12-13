@@ -41,8 +41,10 @@ int main(int argc, char **argv, char **env) {
     
     // plot ROM output and print cycle count
     if( top->a0 != 0){
+      if(top->a0 % 4 == 0){
       vbdPlot(int (top->a0), 0, 255);
       vbdCycle(simcyc);
+      }
     }
     
 

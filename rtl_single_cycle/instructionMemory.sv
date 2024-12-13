@@ -11,7 +11,7 @@ logic [7:0] rom_array [2**12 - 1 : 0];
 
 initial begin
     $display("Loading rom.");
-    $readmemh("pdf.hex", rom_array);     
+    $readmemh("pdf.hex", rom_array);                //replace with "program.hex" if attempting to run the F1 program 
     $display("ROM loaded successfully.");
 end
 

@@ -22,8 +22,8 @@ module data_memory #(
     logic [7:0] ram_array [2**17 -1:0];
 
 initial begin
-    // Read the contents of "gaussian.mem" into the data_array up to the size of the array
-    $readmemh("gaussian.mem", ram_array, 32'h00010000);
+    $readmemh("data_memory.hex", ram_array, 32'h00010000);      // run data_memory.hex if trying to pass tests 1-4
+    //$readmemh("gaussian.mem", ram_array, 32'h00010000);       // replace gaussian.mem with any other .mem file if trying to run the pdf functions for triangle and noisy
 end 
 
 
