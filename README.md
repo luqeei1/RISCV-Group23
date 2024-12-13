@@ -93,12 +93,13 @@ P - Partial Contributor
 | Sign Extend     |        |     |      |       |
 | Register File     |   P     |   M  |      |       |
 | Control Unit     |        |  P   |   M   |   P    |
-| Top (single-cycle)     |       |  M  |     |       |
+| Top (single-cycle)     |   P    |  M  |  P   |    P   |
 | Branch Prediction     |       |  P  |  M  |       |
-| Pipeline Flip Flops     |       |    |  M  |       |
-| Hazard Unit     |       |    |  P  |   M    |
-| Cache     |       |    |    |   M    |
-| Top (pipelining)     |       |  P  |     |   M    |
+| Pipeline Flip Flops     |       |  P  |  M  |    P   |
+| Hazard Unit     |       |  P  |  P  |   M    |
+| Cache     |       |    |  P  |   M    |
+| Top (pipelining)     |   P    |  P  |     |   M    |
+
 
 
 M - Main Contributor
@@ -130,11 +131,13 @@ Broadly speaking, the program:
 
 The delay has been "randomised" through a simple LFSR process, with an initial seed of ```0xABC``` being modified repeatedly using shifts and XOR operations, with the new value used to determine the delay before turning on the subsequent LED. We limited the range of delay by only extracting the lower 5 bits, allowing us to keep any delays reasonable. 
 
-Screenshots of waveforms showing the working F1.s script and specific signals can be viewed [here](./Test_Results/Images/F1_single_cycle). Also can be referenced in Siddharth's personal statement. To run this script, enter ```./F1.sh``` into the terminal.
+Screenshots of waveforms showing the working F1.s script and specific signals can be viewed [here](./Test_Results/Images/F1_single_cycle). Also can be referenced in Siddharth's personal statement. To run this script, enter ```./F1.sh``` into the terminal, and ensure that ```instruction_memory.sv``` is reading from ```InstructionFiles/F1.hex``` andd ```data_memory.sv``` is reading from ```data_memory.hex```.
 
 ### Testing the probability density function tests
 
-There were three files: gaussian.mem, noisy.mem, and triangle.mem , which could be run by running the ```./pdf.sh``` command on terminal, ensuring it was being tested via the pdfgen_tb.cpp testbench. We ensured that the pdf would plot very fast, we decided to ignore when a0 was zero. This change was made in the test bench. The full explanation can be found in Akarsh's logbook. Videos can be shown below. 
+There were three files: gaussian.mem, noisy.mem, and triangle.mem , which could be run by running the ```./pdf.sh``` command on terminal, ensuring it was being tested via the ```pdfgen_tb.cpp``` testbench. We ensured that the pdf would plot very fast, we decided to ignore when a0 was zero. This change was made in the test bench. The full explanation can be found in Akarsh's logbook. Videos can be shown below.
+
+To run the pdf functions, ensure that ```instruction_memory.sv``` is always reading from ```pdf.hex```. Depending on which function you want plotted, update the contents of ```data_memory.sv``` to read either ```MemoryFiles/gaussian.mem```, ```MemoryFiles/noisy.mem``` or ```MemoryFiles/triangle.mem``` . Take care to note that you are reading from the correct folder and have this path, not just the file name. 
 
 ### F1 Lights (Single Cycle)
 
@@ -159,7 +162,7 @@ There were three files: gaussian.mem, noisy.mem, and triangle.mem , which could 
 
 ### Tests 1-5:
 
-Running Tests 1-5 can be done by running the ```./doit.sh``` script after navigating to the ```tb``` directory, and modifying ```instruction_memory.sv``` in the lines shown so that pdf.hex is the file that is being read.
+Running Tests 1-5 can be done by running the ```./doit.sh``` script after navigating to the ```tb``` directory, and modifying ```instruction_memory.sv``` in the lines shown so that ```pdf.hex``` is the file that is being read.
 
 
 <div align = "centre">
@@ -179,26 +182,4 @@ The results should be as follows:
 </div>
 
 It is clear from this that all test cases should be passed, and this should work regardless of whether you are trying to test the single-cycle, pipelined (without cache) and the main pipelined, cached processor (the one in the ```rtl``` folder in this branch). 
-
-## RV32I Pipelined Design
-
-| Component       | Akarsh | Sid | Theo | Lucas |
-|------------|--------|-----|------|-------|
-| ALU     |        |  M   |      |       |
-| Data Memory     |  M |     |      |   P    |
-| Program Counter   |        |     |      |    M   |
-| Instruction Memory     |    P    |  P   |    M  |       |
-| Sign Extend     |        |     |      |       |
-| Register File     |   P     |   M  |      |       |
-| Control Unit     |        |  P   |   M   |   P    |
-| Top (single-cycle)     |       |  M  |     |       |
-| Branch Prediction     |       |  P  |  M  |       |
-| Pipeline Flip Flops     |       |    |  M  |       |
-| Hazard Unit     |       |    |  P  |   M    |
-| Cache     |       |    |    |   M    |
-| Top (pipelining)     |       |  P  |     |   M    |
-
-
-M - Main Contributor
-P - Partial Contributor
 
