@@ -11,20 +11,20 @@ VL_ATTR_COLD void Vtop___024root___initial__TOP__0(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___initial__TOP__0\n"); );
     // Init
-    VlWide<6>/*191:0*/ __Vtemp_h73fb902b__0;
+    VlWide<6>/*191:0*/ __Vtemp_hce99d909__0;
     // Body
     VL_WRITEF("Loading rom.\n");
     VL_READMEM_N(true, 8, 65536, 0, std::string{"pdf.hex"}
                  ,  &(vlSelf->top__DOT__instruction_memory__DOT__rom_array)
                  , 0, ~0ULL);
     VL_WRITEF("ROM loaded successfully.\n");
-    __Vtemp_h73fb902b__0[0U] = 0x2e6d656dU;
-    __Vtemp_h73fb902b__0[1U] = 0x6f697379U;
-    __Vtemp_h73fb902b__0[2U] = 0x65732f6eU;
-    __Vtemp_h73fb902b__0[3U] = 0x7946696cU;
-    __Vtemp_h73fb902b__0[4U] = 0x656d6f72U;
-    __Vtemp_h73fb902b__0[5U] = 0x4dU;
-    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(6, __Vtemp_h73fb902b__0)
+    __Vtemp_hce99d909__0[0U] = 0x2e6d656dU;
+    __Vtemp_hce99d909__0[1U] = 0x6e676c65U;
+    __Vtemp_hce99d909__0[2U] = 0x74726961U;
+    __Vtemp_hce99d909__0[3U] = 0x6c65732fU;
+    __Vtemp_hce99d909__0[4U] = 0x72794669U;
+    __Vtemp_hce99d909__0[5U] = 0x4d656d6fU;
+    VL_READMEM_N(true, 8, 131072, 0, VL_CVT_PACK_STR_NW(6, __Vtemp_hce99d909__0)
                  ,  &(vlSelf->top__DOT__data_memory__DOT__ram_array)
                  , 0x10000U, ~0ULL);
     vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter = 2U;
