@@ -22,7 +22,8 @@ o   Worked on the ALU
 o   Worked on the Register File
 </br>
 o   Worked on the Top File
-o   Helped to debug the Branch Prediction Unit (BPU) and also the top files
+</br>
+o   Helped to debug the Branch Prediction Unit (BPU) and also the top files. Had to also make some updates to the hazard_unit.
 
 # Explanations of Contributions to the RV32I Processors 
 ## F1.s Assembly Code
@@ -171,14 +172,16 @@ When conducting tests on the triangle.mem plot on the Vbuddy, I discovered that 
 
 ## F1_pipelined. s assembly code
 
-I adapted the code from the single-cycle to fit the pipelined processor, and whilst the assembly remained the same, there was a consistent problem with the hazard detection which caused us to only get 2 LEDs displaying at any point. This led to us needing to update the hazard_unit.sv file 
+I adapted the code from the single-cycle to fit the pipelined processor, and whilst the assembly remained the same, there was a consistent problem with the hazard detection which caused us to only get 2 LEDs displaying at any point. This led to us needing to update the hazard_unit.sv file, and we modified it by adding a flush given a certain condition.
 
 ## Miscallenous Changes 
 
 In addition to the above, I also helped Akarsh with the ```/doit.sh``` file to run all the tests using the same script, and I also learnt some commands which I had to implement to properly run the pipelined scripts.
 
 For example, in the ```F1_pipelined.sh``` file, there were a number of components which were instantiated in other .sv files, which were then in turn instantiated in the ```top.sv``` file. This caused an issue, which was rectified by adding the line:
-```--top-module top \``` into the ```F1_pipelined.sh``` file. This explicitly declared that ```top.sv``` 
+```--top-module top \``` into the ```F1_pipelined.sh``` file. This explicitly declared that ```top.sv``` was the top file, and solved the changes.
+
+I also conducted a lot of debugging using GTKWave for the pipelined and cached processors, involving a lot of updating and debugging. This meant I have commits in most modules and across branches. 
 
 # Reflections
 I enjoyed this project deeply and I obtained a number of skills in the process, which are outlined below.
