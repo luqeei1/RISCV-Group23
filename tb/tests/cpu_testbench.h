@@ -42,9 +42,9 @@ public:
 
         // Initialise inputs
         top_->clk = 1;
-        top_->rst = 0;
+        top_->rst = 1;
         top_->trigger = 0;
-        // runSimulation(10);  // Process reset
+        runSimulation(10);  // Process reset
         top_->rst = 0;
     }
 

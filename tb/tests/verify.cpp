@@ -46,6 +46,38 @@ TEST_F(CpuTestbench, TestPdf)
     EXPECT_EQ(top_->a0, 15363);
 }
 
+TEST_F(CpuTestbench, TestRV32I)
+{
+    setupTest("RV32I");
+    initSimulation();
+    runSimulation(CYCLES);
+    EXPECT_EQ(top_->a0, 15);
+}
+
+TEST_F(CpuTestbench, AllBranchInstructions)
+{
+    setupTest("AllBranch");
+    initSimulation();
+    runSimulation(CYCLES);
+    EXPECT_EQ(top_->a0, 6);
+}
+
+TEST_F(CpuTestbench, BinaryToDecimalConverter)
+{
+    setupTest("BinToDecimal");
+    initSimulation();
+    runSimulation(CYCLES);
+    EXPECT_EQ(top_->a0, 21852);
+}
+
+TEST_F(CpuTestbench, 30thFibonacci)
+{
+    setupTest("Fibonacci");
+    initSimulation();
+    runSimulation(CYCLES);
+    EXPECT_EQ(top_->a0, 832040);
+}
+
 int main(int argc, char **argv)
 {
     testing::InitGoogleTest(&argc, argv);
