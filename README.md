@@ -6,12 +6,40 @@ This repo contains all components, testing and results for the RV32I single-cycl
 
 | Name       | CID | Link to Logbook | Personal Statement |
 |------------|--------|-----|------|
-| Akarsh     | 02395592       |   [Akarsh's Log](./docs/logs/Akarsh_log.md)  |      |
-| Lucas     |   |  [Lucas's Log](./docs/logs/Lucas_log.md)    |   |
-| Sid   |    02382743    |   [Sid's Log](./docs/logs/Sid_log.md)   |    |
-| Theo     |  02380127      |  [Theo's Log](./docs/logs/Theo_log.md)    |    |
+| Akarsh Gopalam     | 02395592       |   [Akarsh's Log](./docs/logs/Akarsh_log.md)  |   [Akarsh's Personal Statement](./docs/Akarsh_Personal_Statement.md)   |
+| Lucas Venetez     |  02387237 |  [Lucas's Log](./docs/logs/Lucas_log.md)    |   |
+| Siddharth Mishra   |    02382743    |   [Sid's Log](./docs/logs/Sid_log.md)   |  [Sid's Personal Statement](./docs/Siddharth_Personal_Statement.md)  |
+| Theodore Shah     |  02380127      |  [Theo's Log](./docs/logs/Theo_log.md)    |    |
 
 <br />
+
+## IMPORTANT: How to run scripts
+
+To run scripts on the ```main``` branch (which contains the functional pipelined processor with two-way cache and a branch prediction unit), you need to upgrade to the **latest version** of Verilator, which is ```Verilator 5.0231```. 
+
+please connect VBUDDY:
+
+```
+~/Documents/iac/lab0-devtools/tools/attach_usb.sh
+```
+These instructions are suitable if running from Windows. the first command should connect the Vbuddy, and the second command lets you know what the name of the port that Vbuddy is connected to. if this is different from the ```vbuddy.cfg``` file, then update this and check the name via: 
+
+```
+ls /dev/ttyU*
+```
+
+### Running the Tests 1-4 
+
+Use ``` cd tb ``` to make sure you are in the ``` tb ``` directory and run the script as follows:
+
+```
+./doit.sh
+```
+
+make sure that ``` data_memory.sv ``` contains ``` data_memory.hex ``` and that ```instruction_memory.sv ``` contains ```pdf.hex```. 
+
+
+This can be repeated for all versions of our RISCV-32I cpu. 
 
 [See the single-cycle processor here](./rtl_single_cycle)
 
