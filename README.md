@@ -74,6 +74,28 @@ We met up as a team and based on the tasks we had each done during Lab4, we deci
 M - Main Contributor
 P - Partial Contributor
 
+## RV32I Pipelined Design
+
+| Component       | Akarsh | Sid | Theo | Lucas |
+|------------|--------|-----|------|-------|
+| ALU     |        |  M   |      |       |
+| Data Memory     |  M |     |      |   P    |
+| Program Counter   |        |     |      |    M   |
+| Instruction Memory     |    P    |  P   |    M  |       |
+| Sign Extend     |        |     |      |       |
+| Register File     |   P     |   M  |      |       |
+| Control Unit     |        |  P   |   M   |   P    |
+| Top (single-cycle)     |       |  M  |     |       |
+| Branch Prediction     |       |  P  |  M  |       |
+| Pipeline Flip Flops     |       |    |  M  |       |
+| Hazard Unit     |       |    |  P  |   M    |
+| Cache     |       |    |    |   M    |
+| Top (pipelining)     |       |  P  |     |   M    |
+
+
+M - Main Contributor
+P - Partial Contributor
+
 <br />
 
 ### Creating the F1.s assembly code
