@@ -28,6 +28,23 @@ Use ``` cd tb ``` to make sure you are in the ``` tb ``` directory and run the s
 
 make sure that ``` data_memory.sv ``` contains ``` data_memory.hex ``` and that ```instruction_memory.sv ``` contains ```pdf.hex```. 
 
+## How to run F1 lights
+For the F1 lights, ensure that:
+- the ```instruction_memory.sv``` file is always reading ```program.hex```. It should be as follows within this initialisation:
+
+```
+initial begin
+    $display("Loading rom.");
+    $readmemh("program.hex", rom_array);     
+    $display("ROM loaded successfully.");
+end
+```
+
+- ```Data_memory.sv``` needs to read ```data_memory.hex```
+- Also ensure that the Vbuddy is properly connected and to the correct port name specified in the ```vbuddy.cfg``` file
+
+- ```note``` Trigger may need to be clicked a few times before lights begin. This is dependant on the Vbuddy. 
+
 
 ### Testing the probability density function tests
 
@@ -35,12 +52,14 @@ There were three files: gaussian.mem, noisy.mem, and triangle.mem , which could 
 
 To test PDF, ensure that the Data Memory contains your memory file of interest with the right path
 
-The ```instruction_memory.sv``` file should always contain ```pdf.hex```
+The ```instruction_memory.sv``` file should always contain ```pdf.hex```.
 
-For a gaussian PDF test, the ```data_memory.sv``` file should contain ```gaussian.mem```
+the following ```.mem``` files are found in the sub-folder ```MemoryFiles``` : 
 
-For a noisy PDF test, the ```data_memory.sv``` file should contain ```noisy.mem```
-
-For a triangle PDF test, the ```data_memory.sv``` file should contain ```triangle.mem```
+ - For a gaussian PDF test, the ```data_memory.sv``` file should contain ```gaussian.mem```
+  
+ - For a noisy PDF test, the ```data_memory.sv``` file should contain ```noisy.mem```
+  
+ - For a triangle PDF test, the ```data_memory.sv``` file should contain ```triangle.mem```
 
 
