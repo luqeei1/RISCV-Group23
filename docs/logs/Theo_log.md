@@ -59,3 +59,14 @@
 - Added a JALR signal to properly differentiate between JAL and JALR
 - Altered the queue logic in the BPU logic to load on the negative edge of the clock
 - Passed the F1 test with trigger intialisation/reset and random delays between the lights 
+
+## 12/12
+- Debugged errors with the PDF function with the BPU and data memory
+- Changed BPU logic to not make a decision to whether to branch or not when an jump is executing
+- Passed the PDF test with the BPU and data memory
+- Worked with Lucas to try and debug the cache and get it working with the BPU and tests
+- Upgraded Verilator to version 5.031 so that I could test the cache without errors
+- Passed all tests, including the F1 light sequence and PDF
+
+## 13/12
+- Cleaned up the folder and got rid of redundant signals used for debugging
