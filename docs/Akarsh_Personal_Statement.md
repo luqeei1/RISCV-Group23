@@ -8,7 +8,7 @@ Following the release of the project, I took over the task to create the data me
 
 <br> </br>
 <div align = "centre"> 
-    <img src= "ram_array.png"> </img>
+    <img src= "images/ram_array.png"> </img>
 </div>
 
 <br> </br>
@@ -16,7 +16,7 @@ I also included [7:0] to define the size of the data stored at each location - a
 
 <br> </br>
 <div align = "centre"> 
-    <img src= "we.png"> </img>
+    <img src= "images/we.png"> </img>
 </div>
 <br> </br>
 
@@ -24,7 +24,7 @@ If we take a look at the way I have implemented both load and store, we can see 
 
 <br> </br>
 <div align = "centre"> 
-    <img src= "littleendian.png"> </img>
+    <img src= "images/littleendian.png"> </img>
 </div>
 <br> </br>
 
@@ -39,7 +39,7 @@ Within the load instructions (in the single cycle version of data memory), we ca
 
 <br> </br>
 <div align = "centre"> 
-    <img src= "resultsrc.png"> </img>
+    <img src= "images/resultsrc.png"> </img>
 </div>
 <br> </br>
 
@@ -68,14 +68,14 @@ Here we can see that I have updated the values of PC + i by allowing for the ent
 
 
 <div align = "centre"> 
-    <img src= "instr.png"> </img>
+    <img src= "images/instr.png"> </img>
 </div>
 
 
 which is later changed to 
 
 <div align = "centre"> 
-    <img src= "instrchange.png"> </img>
+    <img src= "images/instrchange.png"> </img>
 </div>
 <br> </br>
 
@@ -113,7 +113,7 @@ During the testing of the probability density function generation, I was the mai
 In addition to this, I made it so the program would only plot when a0 was not equal to zero meaning that this would skip approximately 250,000 cycles (in single cycle) where a0 was zero, enabling us to start the plotting almost instantly. Following this, I decided to implement the condition that if the cycle we are currently on is divisible by 3, plot the value to reduce the number of samples we would have to plot. This was carried forward to the pipelining case.
 
 <div align = "centre"> 
-    <img src= "a0.png" width = 500px> </img>
+    <img src= "images/a0.png" width = 500px> </img>
 </div>
 
 
@@ -125,19 +125,19 @@ This reduced the size of the pdf plot and allowed it to be fully displayed on on
 
 
 <div align = "centre"> 
-    <img src= "gaussian.png" width = 500px> </img>
+    <img src= "images/gaussian.png" width = 500px> </img>
 </div>
 gaussian
 <br> </br>
 
 <div align = "centre"> 
-    <img src= "noisy.png" width = 500px> </img>
+    <img src= "images/noisy.png" width = 500px> </img>
 </div>
 noisy
 <br> </br>
 
 <div align = "centre"> 
-    <img src= "triangle.png" width = 500px> </img>
+    <img src= "images/triangle.png" width = 500px> </img>
 </div>
 triangle
 <br> </br>
