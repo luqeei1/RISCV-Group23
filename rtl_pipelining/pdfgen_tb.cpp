@@ -44,7 +44,7 @@ int main(int argc, char **argv, char **env) {
       if (top->a0 % 4 == 0){
         vbdPlot(int (top->a0), 0, 255);
         vbdCycle(simcyc);
-    }
+      }
     }
     
 
