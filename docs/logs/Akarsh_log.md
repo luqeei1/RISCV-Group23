@@ -113,7 +113,7 @@ During the testing of the probability density function generation, I was the mai
 In addition to this, I made it so the program would only plot when a0 was not equal to zero meaning that this would skip approximately 250,000 cycles (in single cycle) where a0 was zero, enabling us to start the plotting almost instantly. Following this, I decided to implement the condition that if the cycle we are currently on is divisible by 3, plot the value to reduce the number of samples we would have to plot. This was carried forward to the pipelining case.
 
 <div align = "centre"> 
-    <img src= "a0.png" width = 2000px> </img>
+    <img src= "a0.png" width = 500px> </img>
 </div>
 
 
@@ -125,19 +125,19 @@ This reduced the size of the pdf plot and allowed it to be fully displayed on on
 
 
 <div align = "centre"> 
-    <img src= "gaussian.png" width = 2000px> </img>
+    <img src= "gaussian.png" width = 500px> </img>
 </div>
 gaussian
 <br> </br>
 
 <div align = "centre"> 
-    <img src= "noisy.png" width = 2000px> </img>
+    <img src= "noisy.png" width = 500px> </img>
 </div>
 noisy
 <br> </br>
 
 <div align = "centre"> 
-    <img src= "triangle.png" width = 2000px> </img>
+    <img src= "triangle.png" width = 500px> </img>
 </div>
 triangle
 <br> </br>
