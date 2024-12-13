@@ -11,6 +11,16 @@ This repo contains all components, testing and results for the RV32I single-cycl
 | Siddharth Mishra   |    02382743    |   [Sid's Log](./docs/logs/Sid_log.md)   |  [Sid's Personal Statement](./docs/Siddharth_Personal_Statement.md)  |
 | Theodore Shah     |  02380127      |  [Theo's Log](./docs/logs/Theo_log.md)    |    |
 
+</br>
+
+There are 3 branches of interest:
+- ```main``` is the current branch which contains the fully functional and verified pipelined processor with hazard handling, 2-way cache and branch prediction (in the ```rtl``` folder). To run this, the newest version of Verilator ***MUST*** be downloaded, otherwise it will not function as intended.
+  This branch also contains instructions in this README.md document on how to: run the tests, including F1 and pdf. It also contains videos of these working and a brief explanation of the assembly code, the contributions table and a brief outline of which components were made by who and how they work (although more details of these can be found in our personal statements and logbooks in this branch). It also contains screenshots of simulations, 
+- ```final_pipeline``` contains the fully functional and verified pipelined processor with hazard handling. This branch contains a folder called rtl_pipelining which can be run and verified, and it will work on the older version of Verilator as well as the new one.
+- ```final_single_cycle``` contains the fully functional and verified single-cycle processor and contains a folder called rtl_single_cycle which can be run and verified. It will work on the older version of Verilator as well as the new one.
+
+
+
 <br />
 
 ## IMPORTANT: HOW TO RUN THE SCRIPTS (read this before running any scripts !)
@@ -153,19 +163,26 @@ There were three files: gaussian.mem, noisy.mem, and triangle.mem , which could 
 
 ### Tests 1-5:
 
-Running Tests 1-5 can be done by running the ```./doit.sh``` script after navigating to the ```tb``` directory, and modifying ```instruction_memory.sv``` in the lines shown:
+Running Tests 1-5 can be done by running the ```./doit.sh``` script after navigating to the ```tb``` directory, and modifying ```instruction_memory.sv``` in the lines shown so that pdf.hex is the file that is being read.
 
 
 <div align = "centre">
-  <img src = "images/passed
+  <img src = "Test_Results/Images/single_cycle_instructions_to_run_instruction_memory.png"> </img>
+</div>
 
 Then modify ```data_memory.sv``` as shown:
 
-// inesrt image
+<div align = "centre">
+  <img src = "Test_Results/Images/single_cycle_instructions_to_run_data_memory.png"> </img>
+</div>
 
 The results should be as follows:
 
-// insert image 
+<div align = "centre">
+  <img src = "Test_Results/Images/pipelined_datamemory.png"> </img>
+</div>
+
+It is clear from this that all test cases should be passed, and this should work regardless of whether you are trying to test the single-cycle, pipelined (without cache) and the main pipelined, cached processor (the one in the ```rtl``` folder in this branch). 
 
 ## RV32I Pipelined Design
 
