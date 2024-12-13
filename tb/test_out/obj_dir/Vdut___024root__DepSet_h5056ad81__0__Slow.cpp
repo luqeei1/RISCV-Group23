@@ -79,7 +79,7 @@ VL_ATTR_COLD void Vdut___024root___eval_settle(Vdut___024root* vlSelf) {
 #ifdef VL_DEBUG
             Vdut___024root___dump_triggers__stl(vlSelf);
 #endif
-            VL_FATAL_MT("/home/theoshah04/Documents/RISCV-Group23/rtl_pipelining/top.sv", 4, "", "Settle region did not converge.");
+            VL_FATAL_MT("/home/theoshah04/Documents/RISCV-Group23/rtl/top.sv", 4, "", "Settle region did not converge.");
         }
         __VstlIterCount = ((IData)(1U) + __VstlIterCount);
         __VstlContinue = 0U;
