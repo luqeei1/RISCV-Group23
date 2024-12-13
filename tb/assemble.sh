@@ -8,7 +8,7 @@ output_file="$SCRIPT_DIR/pdf.hex"
 
 # Handle terminal arguments
 if [[ $# -eq 0 ]]; then
-    echo "Usage: ./assemble.sh asm/5_pdf.s"
+    echo "Usage: ./assemble.sh references/pdf.s"
     exit 1
 fi
 

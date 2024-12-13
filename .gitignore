@@ -5,7 +5,6 @@ rtl_pipelining/obj_dir/
 *.vcd
 *.d
 *.o
-*.sh
 *.dat
 a.out
 a.out.reloc

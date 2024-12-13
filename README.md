@@ -5,7 +5,7 @@ This branch contains the ```rtl_pipelining``` folder that we had initially worke
 For the final version of pipelined (which includes the cache too, refer to the ```main``` branch). This branch does NOT contain cache. 
 
 ## How to run Tests 1-5
-To run the Tests 1-5, navigate to the ```tb``` directory, and run ```./doit.sh```. This should pass all testcases. It should also pass the tests for every pdf function. Ensure that the ```data_memory.sv``` is reading ```data_memory.hex``` and the ```instruction_memory.sv``` file is reading ```InstructionFiles/pdf.hex```
+To run the Tests 1-5, navigate to the ```tb``` directory, and run ```./doit.sh```. This should pass all testcases. It should also pass the tests for every pdf function. Ensure that the ```data_memory.sv``` is reading ```data_memory.hex``` and the ```instruction_memory.sv``` file is reading ```pdf.hex```
 
 ## How to run F1 lights
 For the F1 lights, ensure that:
