@@ -309,8 +309,6 @@ VL_ATTR_COLD void Vdut___024root___ctor_var_reset(Vdut___024root* vlSelf) {
     VL_RAND_RESET_W(66, vlSelf->top__DOT__branch_prediction_unit__DOT__branch_queue.atDefault().data());
     VL_RAND_RESET_W(66, vlSelf->top__DOT__branch_prediction_unit__DOT__newBranch);
     VL_RAND_RESET_W(66, vlSelf->top__DOT__branch_prediction_unit__DOT__oldBranch);
-    vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpDecisionCorrect = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpDecisionCorrect = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__branch_prediction_unit__DOT__forwardJumpCounter = VL_RAND_RESET_I(2);
     vlSelf->top__DOT__branch_prediction_unit__DOT__backwardJumpCounter = VL_RAND_RESET_I(2);
     for (int __Vi0 = 0; __Vi0 < 65536; ++__Vi0) {

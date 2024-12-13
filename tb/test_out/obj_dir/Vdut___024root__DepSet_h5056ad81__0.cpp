@@ -54,11 +54,11 @@ void Vdut___024root___eval_nba(Vdut___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vdut___024root___eval_nba\n"); );
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
-    if ((2ULL & vlSelfRef.__VnbaTriggered.word(0U))) {
+    if ((1ULL & vlSelfRef.__VnbaTriggered.word(0U))) {
         Vdut___024root___nba_sequent__TOP__0(vlSelf);
         vlSelfRef.__Vm_traceActivity[2U] = 1U;
     }
-    if ((1ULL & vlSelfRef.__VnbaTriggered.word(0U))) {
+    if ((2ULL & vlSelfRef.__VnbaTriggered.word(0U))) {
         Vdut___024root___nba_sequent__TOP__1(vlSelf);
         vlSelfRef.__Vm_traceActivity[3U] = 1U;
     }
@@ -68,10 +68,10 @@ void Vdut___024root___eval_nba(Vdut___024root* vlSelf) {
     }
 }
 
-VL_INLINE_OPT void Vdut___024root___nba_sequent__TOP__1(Vdut___024root* vlSelf) {
+VL_INLINE_OPT void Vdut___024root___nba_sequent__TOP__0(Vdut___024root* vlSelf) {
     (void)vlSelf;  // Prevent unused variable warning
     Vdut__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vdut___024root___nba_sequent__TOP__1\n"); );
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vdut___024root___nba_sequent__TOP__0\n"); );
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Init
     IData/*31:0*/ __VdlyVal__top__DOT__regfile__DOT__registerfile_array__v0;
@@ -264,13 +264,6 @@ VL_INLINE_OPT void Vdut___024root___nba_comb__TOP__0(Vdut___024root* vlSelf) {
         if (((1U & vlSelfRef.top__DOT__branch_prediction_unit__DOT__oldBranch[0U]) 
              == (IData)(vlSelfRef.top__DOT__Zero))) {
             vlSelfRef.top__DOT__flushBranch = 0U;
-            if ((1U & (~ (vlSelfRef.top__DOT__branch_prediction_unit__DOT__oldBranch[0U] 
-                          >> 1U)))) {
-                vlSelfRef.top__DOT__branch_prediction_unit__DOT__forwardJumpDecisionCorrect = 1U;
-            }
-            if ((2U & vlSelfRef.top__DOT__branch_prediction_unit__DOT__oldBranch[0U])) {
-                vlSelfRef.top__DOT__branch_prediction_unit__DOT__backwardJumpDecisionCorrect = 1U;
-            }
         }
         vlSelfRef.top__DOT__branch_prediction_unit__DOT__branch_queue.pop_front();
         if (((1U & vlSelfRef.top__DOT__branch_prediction_unit__DOT__oldBranch[0U]) 

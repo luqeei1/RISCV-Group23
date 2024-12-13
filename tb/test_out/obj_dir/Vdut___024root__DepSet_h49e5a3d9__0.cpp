@@ -350,13 +350,6 @@ VL_INLINE_OPT void Vdut___024root___ico_sequent__TOP__0(Vdut___024root* vlSelf) 
         if (((1U & vlSelfRef.top__DOT__branch_prediction_unit__DOT__oldBranch[0U]) 
              == (IData)(vlSelfRef.top__DOT__Zero))) {
             vlSelfRef.top__DOT__flushBranch = 0U;
-            if ((1U & (~ (vlSelfRef.top__DOT__branch_prediction_unit__DOT__oldBranch[0U] 
-                          >> 1U)))) {
-                vlSelfRef.top__DOT__branch_prediction_unit__DOT__forwardJumpDecisionCorrect = 1U;
-            }
-            if ((2U & vlSelfRef.top__DOT__branch_prediction_unit__DOT__oldBranch[0U])) {
-                vlSelfRef.top__DOT__branch_prediction_unit__DOT__backwardJumpDecisionCorrect = 1U;
-            }
         }
         vlSelfRef.top__DOT__branch_prediction_unit__DOT__branch_queue.pop_front();
         if (((1U & vlSelfRef.top__DOT__branch_prediction_unit__DOT__oldBranch[0U]) 
@@ -397,10 +390,10 @@ VL_INLINE_OPT void Vdut___024root___ico_sequent__TOP__0(Vdut___024root* vlSelf) 
 
 extern const VlUnpacked<CData/*3:0*/, 128> Vdut__ConstPool__TABLE_h45f37922_0;
 
-VL_INLINE_OPT void Vdut___024root___nba_sequent__TOP__0(Vdut___024root* vlSelf) {
+VL_INLINE_OPT void Vdut___024root___nba_sequent__TOP__1(Vdut___024root* vlSelf) {
     (void)vlSelf;  // Prevent unused variable warning
     Vdut__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vdut___024root___nba_sequent__TOP__0\n"); );
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vdut___024root___nba_sequent__TOP__1\n"); );
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Init
     CData/*6:0*/ __Vtableidx1;
@@ -425,7 +418,6 @@ VL_INLINE_OPT void Vdut___024root___nba_sequent__TOP__0(Vdut___024root* vlSelf) 
     __VdlyDim0__top__DOT__cached_data_memory__DOT__cache__DOT__ram_array__v3 = 0;
     // Body
     __VdlySet__top__DOT__cached_data_memory__DOT__cache__DOT__ram_array__v0 = 0U;
-    vlSelfRef.top__DOT__InstrW = vlSelfRef.top__DOT__InstrW;
     if ((1U & (~ (IData)(vlSelfRef.top__DOT__miss_stall)))) {
         if (vlSelfRef.top__DOT__MemWriteM) {
             __VdlyVal__top__DOT__cached_data_memory__DOT__cache__DOT__ram_array__v0 
@@ -469,7 +461,6 @@ VL_INLINE_OPT void Vdut___024root___nba_sequent__TOP__0(Vdut___024root* vlSelf) 
                                                              >> 1U)) 
                                                          && (1U 
                                                              & vlSelfRef.top__DOT__InstrD))))))));
-    vlSelfRef.top__DOT__InstrM = vlSelfRef.top__DOT__InstrE;
     vlSelfRef.top__DOT__ResultSrcW = vlSelfRef.top__DOT__ResultSrcM;
     vlSelfRef.top__DOT__ReadDataW = vlSelfRef.top__DOT__ReadDataM;
     vlSelfRef.top__DOT__JumpE = ((1U & (~ (IData)(vlSelfRef.top__DOT__flushDE))) 
@@ -773,7 +764,6 @@ VL_INLINE_OPT void Vdut___024root___nba_sequent__TOP__0(Vdut___024root* vlSelf) 
             [(0x1fU & (vlSelfRef.top__DOT__InstrD >> 0xfU))];
         vlSelfRef.top__DOT__RD2E = vlSelfRef.top__DOT__regfile__DOT__registerfile_array
             [(0x1fU & (vlSelfRef.top__DOT__InstrD >> 0x14U))];
-        vlSelfRef.top__DOT__InstrE = vlSelfRef.top__DOT__InstrD;
         vlSelfRef.top__DOT__MemReadE = ((1U & (~ (vlSelfRef.top__DOT__InstrD 
                                                   >> 6U))) 
                                         && ((1U & (~ 

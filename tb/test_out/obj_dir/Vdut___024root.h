@@ -58,8 +58,6 @@ class alignas(VL_CACHE_LINE_BYTES) Vdut___024root final : public VerilatedModule
         CData/*0:0*/ top__DOT__miss_stall;
         CData/*0:0*/ top__DOT__flushBranch;
         CData/*0:0*/ top__DOT__BPU_Src;
-        CData/*0:0*/ top__DOT__branch_prediction_unit__DOT__forwardJumpDecisionCorrect;
-        CData/*0:0*/ top__DOT__branch_prediction_unit__DOT__backwardJumpDecisionCorrect;
         CData/*1:0*/ top__DOT__branch_prediction_unit__DOT__forwardJumpCounter;
         CData/*1:0*/ top__DOT__branch_prediction_unit__DOT__backwardJumpCounter;
         CData/*1:0*/ top__DOT__control_unit__DOT__ALUOp;
@@ -83,10 +81,10 @@ class alignas(VL_CACHE_LINE_BYTES) Vdut___024root final : public VerilatedModule
         VL_OUT(t0,31,0);
         VL_OUT(t1,31,0);
         VL_OUT(t2,31,0);
-    };
-    struct {
         VL_OUT(t3,31,0);
         VL_OUT(t4,31,0);
+    };
+    struct {
         VL_OUT(t5,31,0);
         VL_OUT(t6,31,0);
         VL_OUT(s0,31,0);
