@@ -3,7 +3,7 @@
 
 #include "cpu_testbench.h"
 
-#define CYCLES 10000
+#define CYCLES 100000
 
 TEST_F(CpuTestbench, TestAddiBne)
 {
@@ -42,7 +42,7 @@ TEST_F(CpuTestbench, TestPdf)
     setupTest("5_pdf");
     setData("reference/gaussian.mem");
     initSimulation();
-    runSimulation(CYCLES * 100);
+    runSimulation(CYCLES * 10);
     EXPECT_EQ(top_->a0, 15363);
 }
 

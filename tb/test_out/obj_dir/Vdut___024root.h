@@ -6,11 +6,15 @@
 #define VERILATED_VDUT___024ROOT_H_  // guard
 
 #include "verilated.h"
+#include "Vdut___024unit.h"
+
 
 class Vdut__Syms;
 
-class Vdut___024root final : public VerilatedModule {
+class alignas(VL_CACHE_LINE_BYTES) Vdut___024root final : public VerilatedModule {
   public:
+    // CELLS
+    Vdut___024unit* __PVT____024unit;
 
     // DESIGN SPECIFIC STATE
     // Anonymous structures to workaround compiler member-count bugs
@@ -51,6 +55,7 @@ class Vdut___024root final : public VerilatedModule {
         CData/*0:0*/ top__DOT__flush;
         CData/*0:0*/ top__DOT__flushDE;
         CData/*0:0*/ top__DOT__stall;
+        CData/*0:0*/ top__DOT__miss_stall;
         CData/*0:0*/ top__DOT__flushBranch;
         CData/*0:0*/ top__DOT__BPU_Src;
         CData/*0:0*/ top__DOT__branch_prediction_unit__DOT__forwardJumpDecisionCorrect;
@@ -60,7 +65,13 @@ class Vdut___024root final : public VerilatedModule {
         CData/*1:0*/ top__DOT__control_unit__DOT__ALUOp;
         CData/*0:0*/ top__DOT__control_unit__DOT__Store;
         CData/*0:0*/ top__DOT__control_unit__DOT__Load;
-        CData/*0:0*/ __Vclklast__TOP__clk;
+        CData/*0:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__hit0;
+        CData/*0:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__hit1;
+        CData/*0:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__replace_bit;
+        CData/*0:0*/ __VstlFirstIteration;
+        CData/*0:0*/ __VicoFirstIteration;
+        CData/*0:0*/ __Vtrigprevexpr___TOP__clk__0;
+        CData/*0:0*/ __VactContinue;
         VL_OUT(a0,31,0);
         VL_OUT(a1,31,0);
         VL_OUT(a2,31,0);
@@ -72,6 +83,8 @@ class Vdut___024root final : public VerilatedModule {
         VL_OUT(t0,31,0);
         VL_OUT(t1,31,0);
         VL_OUT(t2,31,0);
+    };
+    struct {
         VL_OUT(t3,31,0);
         VL_OUT(t4,31,0);
         VL_OUT(t5,31,0);
@@ -79,8 +92,6 @@ class Vdut___024root final : public VerilatedModule {
         VL_OUT(s0,31,0);
         VL_OUT(s1,31,0);
         VL_OUT(s2,31,0);
-    };
-    struct {
         VL_OUT(s3,31,0);
         VL_OUT(s4,31,0);
         VL_OUT(s5,31,0);
@@ -119,26 +130,34 @@ class Vdut___024root final : public VerilatedModule {
         IData/*31:0*/ top__DOT__SrcAE;
         IData/*31:0*/ top__DOT__PC_predict;
         IData/*31:0*/ top__DOT____Vcellinp__alu__SrcB;
+        IData/*31:0*/ top__DOT__cached_data_memory__DOT__out_cache;
+        IData/*31:0*/ top__DOT__cached_data_memory__DOT__cache__DOT__read_data;
+        IData/*31:0*/ __VactIterCount;
         VlWide<3>/*65:0*/ top__DOT__branch_prediction_unit__DOT__newBranch;
         VlWide<3>/*65:0*/ top__DOT__branch_prediction_unit__DOT__oldBranch;
         VlUnpacked<CData/*7:0*/, 65536> top__DOT__instruction_memory__DOT__rom_array;
         VlUnpacked<IData/*31:0*/, 32> top__DOT__regfile__DOT__registerfile_array;
-        VlUnpacked<CData/*7:0*/, 131072> top__DOT__data_memory__DOT__ram_array;
-        VlUnpacked<CData/*0:0*/, 4> __Vm_traceActivity;
+        VlUnpacked<CData/*7:0*/, 131072> top__DOT__cached_data_memory__DOT__cache__DOT__ram_array;
+        VlUnpacked<CData/*0:0*/, 5> __Vm_traceActivity;
     };
     VlQueue<VlWide<3>/*65:0*/> top__DOT__branch_prediction_unit__DOT__branch_queue;
+    VlTriggerVec<1> __VstlTriggered;
+    VlTriggerVec<1> __VicoTriggered;
+    VlTriggerVec<2> __VactTriggered;
+    VlTriggerVec<2> __VnbaTriggered;
+    VlUnpacked<Vdut_cache_set_type__struct__0, 256> top__DOT__cached_data_memory__DOT__cache__DOT__cache_mem;
 
     // INTERNAL VARIABLES
     Vdut__Syms* const vlSymsp;
 
     // CONSTRUCTORS
-    Vdut___024root(Vdut__Syms* symsp, const char* name);
+    Vdut___024root(Vdut__Syms* symsp, const char* v__name);
     ~Vdut___024root();
     VL_UNCOPYABLE(Vdut___024root);
 
     // INTERNAL METHODS
     void __Vconfigure(bool first);
-} VL_ATTR_ALIGNED(VL_CACHE_LINE_BYTES);
+};
 
 
 #endif  // guard
