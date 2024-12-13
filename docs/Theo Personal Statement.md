@@ -71,6 +71,7 @@ For a pipelined processor, you need to have clocked FF's to be able to run multi
 ### Static Branch Unit and Branch Prediciton Unit
 
 My main contribution to the pipelined processor was the branch predictor unit. After learning about the branch prediction state machine/algorithmn, I was eager to implement this into our own RISCV CPU. Before I started work on the branch predictor unit, I quickly designed a static branch unit, which identifies a branch instruction and overiddes the program counter with it's own signal "PCBPU". The static branch unit will always decide to take the branch, calculating the target address of the branch and making sure the next instruction fetched is the instruction at the target address of the branch. This was done as I didn't want to hold up my teammates who may want to test their designs, and I didn't want them to test them with a unfinished and faulty branch prediction unit. The static branch unit is shown below: 
+</br>
 ![image](https://github.com/user-attachments/assets/55262e90-8c63-4587-8cd1-78b72544bde4)
 ***Inputs***
 RD: The output from instruction memory, the most fastest way to access what instruction is going to be decoded next
@@ -92,3 +93,24 @@ Therefore, if the current fetched instruction is a branch, the static branch uni
 ### Branch Prediciton Unit
 
 After the static branch unit was completed and we had a working pipelined processor, I started work on the branch prediciton unit. Following the lecture slide given, I decided to follow the branch prediction algorithmn of a 2 bit state machine. This branch prediciton unit would make decisions on whether to take a forward or backward jump or not. I decided to make the decision to have two state machines for forward and backward branches, as this would be easy to implement but still effective. A more effective solution would've been having a table of all different branches encountered, and having a separate state machine counter for all of them, but I decided this would've been too difficult to implement. The following states of the counter are shown below:
+</br>
+o  00 - Don't take the branch (Strong)
+</br>
+o  01 - Don't take the branch (Weak)
+</br>
+o  10 - Take the branch (Weak)
+</br>
+o  11 - Take the branch (Strong)
+</br>
+
+I decided to implement the state machine as a 2 bit counter, as it simplified the logic in the branch prediction unit. The state machine works as follows:
+</br>
+o If the decision is wrong - Decrement the respective counter by one
+</br>
+o If the decision is right - Increment the respective counter by one
+</br>
+o If the state is 00, and the decision is wrong - Keep the counter at 00
+</br>
+o If the state is 11, and the decision is right - Keep the counter at 11
+</br>
+
