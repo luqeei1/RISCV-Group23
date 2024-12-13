@@ -121,7 +121,8 @@ o If the state is 00, and the decision is wrong - Keep the counter at 00
 </br>
 o If the state is 11, and the decision is right - Keep the counter at 11
 </br>
-
+![image](https://github.com/user-attachments/assets/a69fe19f-3099-45f5-97f6-2678ce434f1b)
+</br>
 For the branch predicition unit, the inputs and outputs are the same as the static branch unit, and the general logic is the same. The main change is that the branch prediction unit has to use the state machine to make it's decision, and that when the decision has been made, the respective counter for the forward or the backward jump has to be updated. This also means adding synchronous logic to the branch predictor, so that the counters are updating with reference to the clock. 
 </br>
 To account for the possibility of having 2 or more branches sequentially, I decided to implement a queue data structure. A queue is a special type of data structure similar to a stack, but instead of being a FIFO (First In, First Out) logic, it is a FILO (First In, Last Out). This makes it so that the unit can store multiple branch information in a queue and access them in order when their decision has been made. A queue can be initialised as so in System Verilog: 
