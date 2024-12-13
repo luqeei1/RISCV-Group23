@@ -140,7 +140,6 @@ To showcase our processor's ability to fulfill all the RV32I set, I have added s
 You can run these tests, as part of the ./doit.sh file, as I added the test cases to the verify.cpp file. A photo below shows them all passing the tests:
 </br>
 ![Screenshot 2024-12-13 213336](https://github.com/user-attachments/assets/68f9abf1-7c94-4993-99eb-aa077cd294b2)
-</br>
 
 ### What I would do better / Reflection
 </br> 
