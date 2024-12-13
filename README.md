@@ -13,7 +13,7 @@ This repo contains all components, testing and results for the RV32I single-cycl
 
 <br />
 
-## IMPORTANT: How to run scripts
+## IMPORTANT: HOW TO RUN THE SCRIPTS (read this before running any scripts !)
 
 To run scripts on the ```main``` branch (which contains the functional pipelined processor with two-way cache and a branch prediction unit), you need to upgrade to the **latest version** of Verilator, which is ```Verilator 5.0231```. 
 
