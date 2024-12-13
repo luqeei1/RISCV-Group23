@@ -38,6 +38,9 @@ Use ``` cd tb ``` to make sure you are in the ``` tb ``` directory and run the s
 
 make sure that ``` data_memory.sv ``` contains ``` data_memory.hex ``` and that ```instruction_memory.sv ``` contains ```pdf.hex```. 
 
+
+This can be repeated for all versions of our RISCV-32I cpu. 
+
 [See the single-cycle processor here](./rtl_single_cycle)
 
 [See the pipelined processor here](./rtl_pipelining)
