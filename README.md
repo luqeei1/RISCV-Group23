@@ -15,9 +15,13 @@ This repo contains all components, testing and results for the RV32I single-cycl
 
 There are 3 branches of interest:
 - ```main``` is the current branch which contains the fully functional and verified pipelined processor with hazard handling, 2-way cache and branch prediction (in the ```rtl``` folder). To run this, the newest version of Verilator ***MUST*** be downloaded, otherwise it will not function as intended.
-  This branch also contains instructions in this README.md document on how to: run the tests, including F1 and pdf. It also contains videos of these working and a brief explanation of the assembly code, the contributions table and a brief outline of which components were made by who and how they work (although more details of these can be found in our personal statements and logbooks in this branch). It also contains screenshots of simulations, 
-- ```final_pipeline``` contains the fully functional and verified pipelined processor with hazard handling. This branch contains a folder called rtl_pipelining which can be run and verified, and it will work on the older version of Verilator as well as the new one.
+  This branch also contains instructions in this README.md document on how to: run the tests, including F1 and pdf. It also contains videos of these working and a brief explanation of the assembly code, the contributions table and a brief outline of which components were made by who and how they work (although more details of these can be found in our personal statements and logbooks in this branch). It also contains screenshots of simulations and videos located in the ```Test_Results``` folder and a ```tb``` folder with the assembly files and the ```./doit.sh``` script to run Tests 1-5. ```docs``` also contains our logbooks and our personal statements. 
+- ```final_pipeline``` contains the fully functional and verified pipelined processor with hazard handling (including a branch prediction unit). This branch contains a folder called rtl_pipelining which can be run and verified, and it will work on the older version of Verilator as well as the new one.
 - ```final_single_cycle``` contains the fully functional and verified single-cycle processor and contains a folder called rtl_single_cycle which can be run and verified. It will work on the older version of Verilator as well as the new one.
+
+There are also other branches, which were primarily made for debugging and testing purposes when trying to implement pipelining and cache, but only the above 3 are to be assessed properly.
+
+Note that debugging was often done as a group with multiple people working on a single laptop, so some people's work may be committed through another person's laptop. Work was evenly divided among the group but everybody contributed to debugging and this often meant making edits to files that we didn't contribute directly to. 
 
 
 
@@ -27,7 +31,7 @@ There are 3 branches of interest:
 
 To run scripts on the ```main``` branch (which contains the functional pipelined processor with two-way cache and a branch prediction unit), you need to upgrade to the **latest version** of Verilator, which is ```Verilator 5.0231```. 
 
-please connect VBUDDY:
+Please connect Vbuddy using the following command:
 
 ```
 ~/Documents/iac/lab0-devtools/tools/attach_usb.sh
@@ -38,7 +42,7 @@ These instructions are suitable if running from Windows. the first command shoul
 ls /dev/ttyU*
 ```
 
-### Running the Tests 1-4 
+### Running the Tests 1-5
 
 Use ``` cd tb ``` to make sure you are in the ``` tb ``` directory and run the script as follows:
 
@@ -49,15 +53,9 @@ Use ``` cd tb ``` to make sure you are in the ``` tb ``` directory and run the s
 make sure that ``` data_memory.sv ``` contains ``` data_memory.hex ``` and that ```instruction_memory.sv ``` contains ```pdf.hex```. 
 
 
-This can be repeated for all versions of our RISCV-32I cpu. 
-
-[See the single-cycle processor here](./rtl_single_cycle)
-
-[See the pipelined processor here](./rtl_pipelining)
+This can be repeated for all versions of our RISCV-32I CPU. 
 
 <br />
-
-Our group decided to maintain a single branch and push any changes to main to simplfy the process and mitigate the effects of merge conflicts that would arise if separate branches were maintained (as we had experienced in Lab4). Also note that debugging was often done as a group with multiple people working on a single laptop, so some people's work may be committed through another person's laptop. Work was evenly divided among the group but everybody contributed to debugging and this often meant making edits to files that we didn't contribute directly to. 
 
 <br />
 
@@ -132,9 +130,7 @@ Broadly speaking, the program:
 
 The delay has been "randomised" through a simple LFSR process, with an initial seed of ```0xABC``` being modified repeatedly using shifts and XOR operations, with the new value used to determine the delay before turning on the subsequent LED. We limited the range of delay by only extracting the lower 5 bits, allowing us to keep any delays reasonable. 
 
-Screenshots of waveforms showing the working F1.s script and specific signals can be viewed [here](./Test_Results/Images/F1_single_cycle). Also can be referenced in Siddharth's personal statement. 
-
-To run this specific code, the instruction memory would need to read the ```program.hex``` file. 
+Screenshots of waveforms showing the working F1.s script and specific signals can be viewed [here](./Test_Results/Images/F1_single_cycle). Also can be referenced in Siddharth's personal statement. To run this script, enter ```./F1.sh``` into the terminal.
 
 ### Testing the probability density function tests
 
